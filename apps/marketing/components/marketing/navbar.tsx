@@ -26,10 +26,10 @@ export function Navbar() {
   }, [isMenuOpen]);
 
   const navLinks = [
-    { label: "What's Inside", href: "#whats-inside" },
-    { label: "How It Works", href: "#solution" },
-    { label: "Testimonials", href: "#testimonials" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "The guide", href: "#solution" },
+    { label: "Locations", href: "#whats-inside" },
+    { label: "Stories", href: "#testimonials" },
+    { label: "Access", href: "#pricing" },
   ];
 
   return (
@@ -38,32 +38,32 @@ export function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500 pt-[env(safe-area-inset-top)]",
           isMenuOpen
-            ? "bg-trail-950 shadow-[0_2px_40px_rgba(0,0,0,0.4)]"
+            ? "bg-trail-950"
             : hasScrolled
-              ? "bg-trail-950/85 backdrop-blur-xl shadow-[0_2px_40px_rgba(0,0,0,0.4)]"
+              ? "border-b border-white/[0.08] bg-trail-950/88 backdrop-blur-2xl"
               : "bg-transparent"
         )}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+          <div className="flex h-20 items-center justify-between lg:h-24">
             {/* Logo */}
             <Link href="/" className="group">
               <Logo
-                iconClassName="text-alpine-500 group-hover:text-alpine-400 transition-colors"
+                iconClassName="text-gold-200 group-hover:text-gold-100 transition-colors"
                 wordmarkClassName="text-fg"
               />
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden items-center gap-9 lg:flex">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-fg-muted hover:text-fg text-sm transition-colors duration-150"
+                  className="text-sm text-stone-200 transition-colors duration-200 hover:text-white"
                 >
                   {link.label}
                 </a>
@@ -71,15 +71,15 @@ export function Navbar() {
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden items-center gap-5 lg:flex">
               <a
                 href={`${APP_URL}/login`}
-                className="text-fg-muted hover:text-fg text-sm transition-colors"
+                className="text-sm text-stone-200 transition-colors hover:text-white"
               >
                 Log in
               </a>
               <Button asChild size="sm" variant="gold">
-                <a href="#pricing">Get Access →</a>
+                <a href="#pricing">Get the guide</a>
               </Button>
             </div>
 
@@ -104,12 +104,12 @@ export function Navbar() {
         transition={{ duration: 0.2 }}
       >
         <div
-          className="absolute inset-0 bg-trail-950/95 backdrop-blur-xl"
+          className="absolute inset-0 bg-trail-950/96 backdrop-blur-2xl"
           onClick={() => setIsMenuOpen(false)}
         />
         <motion.div
-          className="absolute left-0 right-0 bg-trail-900 p-6"
-          style={{ top: "calc(env(safe-area-inset-top) + 4rem)" }}
+          className="absolute left-0 right-0 border-b border-white/[0.08] bg-trail-950 px-5 pb-8 pt-5"
+          style={{ top: "calc(env(safe-area-inset-top) + 5rem)" }}
           initial={{ y: -20, opacity: 0 }}
           animate={isMenuOpen ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -119,7 +119,7 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-fg-muted hover:text-fg py-3 px-2 -mx-2 text-base transition-colors"
+                className="-mx-2 px-2 py-3 font-heading text-3xl text-stone-200 transition-colors hover:text-fg"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
@@ -129,7 +129,7 @@ export function Navbar() {
           <div className="flex flex-col gap-3">
             <Button asChild variant="gold" size="lg" className="w-full">
               <a href="#pricing" onClick={() => setIsMenuOpen(false)}>
-                Unlock the Map — CHF 29
+                Get lifetime access — CHF 29
               </a>
             </Button>
             <a

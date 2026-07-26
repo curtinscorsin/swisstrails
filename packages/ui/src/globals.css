@@ -5,53 +5,53 @@
 ───────────────────────────────────────────── */
 @theme {
   --font-heading: "Alcyone", Georgia, "Times New Roman", serif;
-  --font-body: var(--font-sans), -apple-system, "Helvetica Neue", sans-serif;
+  --font-body: "Aeonik Pro", var(--font-sans), -apple-system, "Helvetica Neue", sans-serif;
 
-  /* ── TRAIL (near-black navy backgrounds) ── */
-  --color-trail-950: #06080F;
-  --color-trail-900: #0B0F1C;
-  --color-trail-800: #121828;
-  --color-trail-700: #1A2235;
-  --color-trail-600: #232E4A;
+  /* ── TRAIL (fir, bark and deep shadow) ── */
+  --color-trail-950: #0B0D0A;
+  --color-trail-900: #11140F;
+  --color-trail-800: #181C16;
+  --color-trail-700: #22281F;
+  --color-trail-600: #30382B;
 
-  /* ── BRAND BLUE (primary accent) ── */
-  --color-alpine-950: #050A66;
-  --color-alpine-900: #0A1099;
-  --color-alpine-800: #1219CC;
-  --color-alpine-700: #2030E0;
-  --color-alpine-600: #3447F0;
-  --color-alpine-500: #515EFF;
-  --color-alpine-400: #7078FF;
-  --color-alpine-300: #9899FF;
-  --color-alpine-200: #BEBFFF;
-  --color-alpine-100: #DCDEFF;
-  --color-alpine-50:  #EEEEFF;
+  /* ── ALPINE (moss, lichen and high meadow) ── */
+  --color-alpine-950: #121A12;
+  --color-alpine-900: #1E2A1D;
+  --color-alpine-800: #2F412E;
+  --color-alpine-700: #435A3F;
+  --color-alpine-600: #5C7555;
+  --color-alpine-500: #78916E;
+  --color-alpine-400: #98AA8B;
+  --color-alpine-300: #B7C4AA;
+  --color-alpine-200: #D2DACB;
+  --color-alpine-100: #E5E9E0;
+  --color-alpine-50:  #F2F4EF;
 
-  /* ── GOLD (CTAs, highlights) ── */
-  --color-gold-950: #1A1200;
-  --color-gold-900: #352500;
-  --color-gold-800: #5E4000;
-  --color-gold-700: #8A5D00;
-  --color-gold-600: #B87C00;
-  --color-gold-500: #E09C00;
-  --color-gold-400: #F5B828;
-  --color-gold-300: #FAC95A;
-  --color-gold-200: #FDDB8C;
-  --color-gold-100: #FEF0C5;
-  --color-gold-50:  #FFFBF0;
+  /* ── SUNSTONE (warm CTA and summit-light accent) ── */
+  --color-gold-950: #21170D;
+  --color-gold-900: #3A2817;
+  --color-gold-800: #5B3E22;
+  --color-gold-700: #7C5631;
+  --color-gold-600: #A27545;
+  --color-gold-500: #C4935B;
+  --color-gold-400: #D7AA70;
+  --color-gold-300: #E5C08D;
+  --color-gold-200: #EFD4AF;
+  --color-gold-100: #F6E6D0;
+  --color-gold-50:  #FCF6EC;
 
-  /* ── STONE (neutral grays) ── */
-  --color-stone-950: #0B0A09;
-  --color-stone-900: #181715;
-  --color-stone-800: #2C2B27;
-  --color-stone-700: #44423D;
-  --color-stone-600: #625F58;
-  --color-stone-500: #837F77;
-  --color-stone-400: #A8A49C;
-  --color-stone-300: #C8C4BC;
-  --color-stone-200: #E1DDD8;
-  --color-stone-100: #EFEAE5;
-  --color-stone-50:  #F7F4F1;
+  /* ── STONE (warm mineral neutrals) ── */
+  --color-stone-950: #0D0D0B;
+  --color-stone-900: #1B1B17;
+  --color-stone-800: #302F29;
+  --color-stone-700: #4A4840;
+  --color-stone-600: #6B685F;
+  --color-stone-500: #8E8A80;
+  --color-stone-400: #B0ACA2;
+  --color-stone-300: #CCC7BD;
+  --color-stone-200: #DFDAD0;
+  --color-stone-100: #EEE9DF;
+  --color-stone-50:  #F7F3EA;
 
   /* ── SEMANTIC ALIASES ── */
   --color-bg:             var(--color-trail-950);
@@ -59,20 +59,20 @@
   --color-bg-overlay:     var(--color-trail-800);
   --color-bg-surface:     var(--color-trail-700);
 
-  --color-border:         rgba(255,255,255,0.08);
-  --color-border-subtle:  rgba(255,255,255,0.04);
-  --color-border-strong:  rgba(255,255,255,0.14);
+  --color-border:         rgba(241,236,224,0.10);
+  --color-border-subtle:  rgba(241,236,224,0.055);
+  --color-border-strong:  rgba(241,236,224,0.20);
 
   /* ── SURFACE ELEVATION (white overlays on the dark base) ──
      A 3-step ramp replacing ~150 ad-hoc bg-white/[0.0x] fills. Generates
      bg-surface-1/2/3, border-surface-*, etc. surface-hover is the +1 step
      a row/chip moves to on hover. */
-  --color-surface-1:      rgba(255,255,255,0.03);
-  --color-surface-2:      rgba(255,255,255,0.05);
-  --color-surface-3:      rgba(255,255,255,0.08);
-  --color-surface-hover:  rgba(255,255,255,0.07);
+  --color-surface-1:      rgba(247,243,234,0.035);
+  --color-surface-2:      rgba(247,243,234,0.065);
+  --color-surface-3:      rgba(247,243,234,0.105);
+  --color-surface-hover:  rgba(247,243,234,0.085);
 
-  --color-fg:             #F0EDE6;
+  --color-fg:             #F3EFE5;
   --color-fg-muted:       var(--color-stone-400);
   --color-fg-subtle:      var(--color-stone-600);
   --color-fg-faint:       var(--color-stone-700);
@@ -80,35 +80,35 @@
   --color-accent:         var(--color-alpine-500);
   --color-accent-dim:     var(--color-alpine-700);
   --color-accent-deep:    var(--color-alpine-900);
-  --color-accent-glow:    rgba(81, 94, 255, 0.25);
+  --color-accent-glow:    rgba(120, 145, 110, 0.28);
 
   --color-gold:           var(--color-gold-400);
   --color-gold-dim:       var(--color-gold-600);
-  --color-gold-glow:      rgba(245, 184, 40, 0.3);
+  --color-gold-glow:      rgba(215, 170, 112, 0.28);
 
   /* ── SHADOWS ── */
-  --shadow-sm:   0 1px 4px rgba(0,0,0,0.35);
-  --shadow-md:   0 4px 20px rgba(0,0,0,0.5);
-  --shadow-lg:   0 8px 40px rgba(0,0,0,0.65);
-  --shadow-xl:   0 16px 64px rgba(0,0,0,0.75);
-  --shadow-glow-alpine: 0 0 30px rgba(81, 94, 255, 0.25);
-  --shadow-glow-gold:   0 0 30px rgba(245, 184, 40, 0.3);
+  --shadow-sm:   0 2px 8px rgba(0,0,0,0.28);
+  --shadow-md:   0 12px 32px rgba(0,0,0,0.34);
+  --shadow-lg:   0 24px 56px rgba(0,0,0,0.42);
+  --shadow-xl:   0 36px 96px rgba(0,0,0,0.55);
+  --shadow-glow-alpine: 0 16px 48px rgba(63, 82, 57, 0.22);
+  --shadow-glow-gold:   0 16px 48px rgba(164, 117, 69, 0.22);
 
   /* ── RADIUS ── */
   --radius-sm:   4px;
   --radius-md:   8px;
-  --radius-lg:   12px;
-  --radius-xl:   16px;
-  --radius-2xl:  24px;
-  --radius-3xl:  32px;
+  --radius-lg:   10px;
+  --radius-xl:   14px;
+  --radius-2xl:  20px;
+  --radius-3xl:  28px;
   --radius-full: 9999px;
 
   /* ── MOTION ── */
   --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
   --duration-fast:   150ms;
-  --duration-normal: 300ms;
-  --duration-slow:   500ms;
+  --duration-normal: 260ms;
+  --duration-slow:   440ms;
 
   /* ── GLASS ── */
   --blur: 20px;
@@ -159,6 +159,7 @@
     font-family: var(--font-body);
     overflow-x: hidden;
     overscroll-behavior-y: none;
+    letter-spacing: -0.005em;
   }
 
   /* App-shell lock — applied only on the fixed-shell tab routes (explore/map/
@@ -178,8 +179,8 @@
   }
 
   ::selection {
-    background-color: var(--color-accent);
-    color: #ffffff;
+    background-color: var(--color-alpine-300);
+    color: var(--color-trail-950);
   }
 
   :focus-visible {
@@ -189,42 +190,42 @@
   }
 
   ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: var(--color-trail-900); }
+  ::-webkit-scrollbar-track { background: var(--color-trail-950); }
   ::-webkit-scrollbar-thumb {
     background: var(--color-trail-600);
     border-radius: var(--radius-full);
   }
-  ::-webkit-scrollbar-thumb:hover { background: var(--color-alpine-700); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-alpine-600); }
 }
 
 @layer components {
   .t-display {
     font-family: var(--font-heading);
     font-weight: 500;
-    font-size: clamp(52px, 8vw, 96px);
-    line-height: 88%;
-    letter-spacing: -0.03em;
+    font-size: clamp(54px, 8.5vw, 118px);
+    line-height: 86%;
+    letter-spacing: -0.045em;
   }
   .t-h1 {
     font-family: var(--font-heading);
     font-weight: 500;
     font-size: clamp(36px, 5vw, 64px);
-    line-height: 92%;
-    letter-spacing: -0.025em;
+    line-height: 94%;
+    letter-spacing: -0.035em;
   }
   .t-h2 {
     font-family: var(--font-heading);
     font-weight: 500;
     font-size: clamp(28px, 3.5vw, 48px);
-    line-height: 96%;
-    letter-spacing: -0.02em;
+    line-height: 100%;
+    letter-spacing: -0.03em;
   }
   .t-h3 {
     font-family: var(--font-body);
     font-weight: 600;
     font-size: clamp(20px, 2.5vw, 28px);
     line-height: 108%;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
   .t-h4 {
     font-family: var(--font-body);
@@ -245,7 +246,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 162%;
-    letter-spacing: 0.005em;
+    letter-spacing: -0.005em;
   }
   .t-sm {
     font-family: var(--font-body);
@@ -280,9 +281,9 @@
     font-weight: 500;
     font-size: 11px;
     line-height: 150%;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--color-alpine-300);
   }
   .t-label {
     font-family: var(--font-body);
@@ -298,14 +299,14 @@
   }
 
   .card-glass {
-    background: rgba(10, 15, 28, 0.7);
+    background: rgba(17, 20, 15, 0.72);
     backdrop-filter: blur(var(--blur));
     -webkit-backdrop-filter: blur(var(--blur));
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
   }
   .card-glass-strong {
-    background: rgba(10, 15, 28, 0.9);
+    background: rgba(17, 20, 15, 0.91);
     backdrop-filter: blur(calc(var(--blur) * 1.6));
     -webkit-backdrop-filter: blur(calc(var(--blur) * 1.6));
     border: 1px solid var(--color-border-strong);
@@ -341,7 +342,7 @@
   .card-solid {
     background: var(--color-bg-raised);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-2xl);
   }
   .card-hover {
     transition: border-color var(--duration-normal) var(--ease-out-expo),
@@ -351,23 +352,23 @@
   .card-hover:hover {
     border-color: var(--color-border-strong);
     box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
   }
 
   .text-gradient-alpine {
-    background: linear-gradient(135deg, var(--color-alpine-300), var(--color-alpine-500));
+    background: linear-gradient(135deg, var(--color-alpine-100), var(--color-alpine-400));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .text-gradient-gold {
-    background: linear-gradient(135deg, var(--color-gold-300), var(--color-gold-500));
+    background: linear-gradient(135deg, var(--color-gold-100), var(--color-gold-400));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .text-gradient-hero {
-    background: linear-gradient(160deg, #FFFFFF 0%, #C5C9FF 40%, var(--color-alpine-300) 100%);
+    background: linear-gradient(155deg, #FFFFFF 0%, #F1EAD9 48%, var(--color-gold-200) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -375,10 +376,9 @@
 
   .hero-gradient {
     background:
-      radial-gradient(ellipse 80% 60% at 30% 70%, rgba(81, 94, 255, 0.15) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(40, 55, 210, 0.10) 0%, transparent 55%),
-      radial-gradient(ellipse 100% 100% at 50% 100%, rgba(6, 8, 15, 0.9) 0%, transparent 70%),
-      linear-gradient(180deg, #06080F 0%, #0B0F1C 40%, #06080F 100%);
+      linear-gradient(180deg, rgba(7, 9, 7, 0.12) 0%, rgba(7, 9, 7, 0.16) 36%, rgba(7, 9, 7, 0.90) 100%),
+      linear-gradient(90deg, rgba(7, 9, 7, 0.52) 0%, rgba(7, 9, 7, 0.06) 58%, rgba(7, 9, 7, 0.18) 100%),
+      url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=88") center 58% / cover no-repeat;
   }
 
   .focus-ring {

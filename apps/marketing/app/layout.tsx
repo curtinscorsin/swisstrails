@@ -1,12 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans } from "next/font/google";
 import "./globals.css";
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://swiss-trails.com"),
@@ -35,13 +28,13 @@ export const metadata: Metadata = {
     title: "Swiss Trails — Your Best Summer, Already Planned",
     description:
       "500+ handpicked locations across Switzerland. Hidden lakes, secret viewpoints, and weekends you'll remember forever.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Swiss Trails — Hidden gems across Switzerland" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Swiss Trails — Your wildest weekends, found" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Swiss Trails — Your Best Summer, Already Planned",
     description: "500+ handpicked locations across Switzerland. One payment. Lifetime access.",
-    images: ["/og-image.jpg"],
+    images: ["/og.png"],
   },
   robots: { index: true, follow: true },
   icons: {
@@ -56,7 +49,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#06080F",
+  themeColor: "#0B0D0A",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -64,7 +57,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={dmSans.variable}>
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-trail-950 text-fg antialiased">
         {children}
       </body>

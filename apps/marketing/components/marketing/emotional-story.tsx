@@ -1,97 +1,63 @@
 "use client";
 
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Reveal } from "@/components/shared/reveal";
 
-const STORY_MOMENTS = [
+const MOMENTS = [
   "The sunrise you nearly missed",
   "The lake no one else knew about",
-  "The drive that made you realize Switzerland is something else",
-  "The night sky that made you go quiet",
-  "The view that stopped the conversation mid-sentence",
+  "The night sky that made everyone quiet",
 ];
 
 export function EmotionalStory() {
   const reduce = useReducedMotion();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const yRaw = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
-  // No parallax drift under reduced motion.
-  const y = reduce ? undefined : yRaw;
 
   return (
-    <section
-      ref={containerRef}
-      className="relative py-24 lg:py-40 overflow-hidden"
-    >
-      {/* Atmospheric background */}
-      <div className="absolute inset-0">
-        <motion.div
-          className="absolute inset-0"
-          style={{ y }}
-        >
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `
-                radial-gradient(ellipse 70% 80% at 60% 50%, rgba(81, 94, 255, 0.12) 0%, transparent 60%),
-                radial-gradient(ellipse 50% 60% at 20% 60%, rgba(6, 8, 15, 0.8) 0%, transparent 50%),
-                linear-gradient(180deg, var(--color-trail-950) 0%, rgba(11, 15, 28, 0.95) 50%, var(--color-trail-950) 100%)
-              `,
-            }}
-          />
-        </motion.div>
-      </div>
+    <section className="relative min-h-[85svh] overflow-hidden border-y border-white/[0.08]">
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2400&q=88')",
+        }}
+        initial={reduce ? false : { scale: 1.06 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: reduce ? 0 : 1.4, ease: [0.16, 1, 0.3, 1] }}
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,8,0.86)_0%,rgba(8,10,8,0.58)_48%,rgba(8,10,8,0.2)_100%)]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-trail-950/70 via-transparent to-trail-950/20" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center">
-        <Reveal>
-          <p className="t-eyebrow mb-8">The experience</p>
-        </Reveal>
+      <div className="relative mx-auto flex min-h-[85svh] max-w-[1440px] items-center px-5 py-24 sm:px-8 lg:px-12 lg:py-36">
+        <div className="max-w-3xl">
+          <Reveal>
+            <p className="t-eyebrow mb-7 text-gold-200">The reason to go</p>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h2 className="font-heading text-[clamp(3.2rem,7vw,7rem)] leading-[0.88] tracking-[-0.045em] text-white">
+              Collect stories,
+              <br />
+              not bookmarks.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/72">
+              The best places are not items on a list. They are cold swims, wrong turns,
+              shared flasks and the view that stopped the conversation.
+            </p>
+          </Reveal>
 
-        <Reveal delay={0.1}>
-          <h2 className="t-display text-fg mb-8 max-w-3xl mx-auto">
-            The places you&apos;ll still
-            <br />
-            talk about in{" "}
-            <span className="text-alpine-300">ten years.</span>
-          </h2>
-        </Reveal>
-
-        <Reveal delay={0.25}>
-          <p className="t-xl text-fg-muted max-w-2xl mx-auto mb-16 leading-relaxed">
-            You know that feeling — standing somewhere so beautiful it&apos;s almost unreal.
-            The kind of moment that makes you want to freeze time.
-            <br /><br />
-            These aren&apos;t just locations.
-            They&apos;re the raw material of your best memories.
-          </p>
-        </Reveal>
-
-        {/* Moments list */}
-        <div className="flex flex-col max-w-lg mx-auto mb-16">
-          {STORY_MOMENTS.map((text, i) => (
-            <Reveal key={text} delay={0.35 + i * 0.1} direction="left">
-              <div className="flex items-center gap-5 py-4 text-left">
-                <span className="font-mono text-alpine-600 flex-shrink-0 tabular-nums" style={{ fontSize: 11 }}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="text-fg text-sm">{text}</p>
-              </div>
-            </Reveal>
-          ))}
+          <div className="mt-12 max-w-xl divide-y divide-white/15 border-y border-white/15">
+            {MOMENTS.map((moment, index) => (
+              <Reveal key={moment} delay={0.22 + index * 0.08} direction="left">
+                <div className="grid grid-cols-[34px_1fr] gap-4 py-4 text-white">
+                  <span className="font-mono text-xs text-gold-200">0{index + 1}</span>
+                  <p className="text-sm sm:text-base">{moment}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
-
-        <Reveal delay={0.9}>
-          <p className="t-h3 text-stone-500 italic">
-            &ldquo;Swiss Trails was the best summer of my life.&rdquo;
-          </p>
-          <p className="text-fg-subtle text-sm mt-3">— Noah K., Bern</p>
-        </Reveal>
       </div>
     </section>
   );

@@ -30,28 +30,29 @@ export function ProblemSection() {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section id="problem" className="py-24 lg:py-36 relative overflow-hidden scroll-mt-20 lg:scroll-mt-24">
+    <section id="problem" className="relative scroll-mt-20 overflow-hidden py-24 lg:scroll-mt-24 lg:py-40">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-stone-800 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         {/* Header */}
-        <div className="max-w-2xl mb-16 lg:mb-24">
+        <div className="mb-16 grid gap-6 lg:mb-24 lg:grid-cols-[1fr_0.7fr] lg:items-end">
+          <div>
           <Reveal>
-            <p className="t-eyebrow mb-4">The problem</p>
+            <p className="t-eyebrow mb-5">Why Swiss Trails</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="t-h1 mb-6 text-fg">
-              Every weekend
+              Switzerland is vast.
               <br />
-              <span className="text-stone-500">feels the same.</span>
+              <span className="text-stone-500">Free time is not.</span>
             </h2>
           </Reveal>
+          </div>
           <Reveal delay={0.2}>
-            <p className="t-xl text-fg-muted max-w-lg">
-              You know Switzerland is extraordinary. But somehow, you end up at the
-              same crowded spots — scrolling through Instagram for inspiration that
-              never comes.
+            <p className="max-w-lg text-lg leading-relaxed text-fg-muted lg:justify-self-end">
+              Good weekends should not begin with three hours of tabs, vague pins and
+              crowded “secret” spots. We did the scouting so you can simply go.
             </p>
           </Reveal>
         </div>
@@ -59,12 +60,12 @@ export function ProblemSection() {
         {/* Pain point grid */}
         <div
           ref={ref}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6"
+          className="grid grid-cols-1 border-t border-white/10 md:grid-cols-2"
         >
           {PAIN_POINTS.map((point, i) => (
             <motion.div
               key={point.title}
-              className="card-solid p-8 card-hover group"
+              className="group border-b border-white/10 px-0 py-8 md:px-8 md:odd:pl-0 md:even:border-l md:even:pr-0 lg:py-10"
               initial={reduce ? false : { opacity: 0, y: 32 }}
               animate={reduce || isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
@@ -73,25 +74,26 @@ export function ProblemSection() {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              <span className="font-mono text-alpine-600 tracking-wider mb-5 block" style={{ fontSize: 11 }}>
+              <span className="mb-7 block font-mono text-xs tracking-[0.18em] text-gold-300">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="t-h4 text-fg mb-3">{point.title}</h3>
-              <p className="t-body text-fg-muted leading-relaxed">{point.body}</p>
+              <h3 className="font-heading text-3xl leading-none text-fg">{point.title}</h3>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-fg-muted">{point.body}</p>
             </motion.div>
           ))}
         </div>
 
         {/* Stat callout */}
         <Reveal delay={0.5}>
-          <div className="mt-16 p-8 lg:p-12 rounded-xl bg-trail-900/50 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] text-center">
-            <p className="t-h2 text-fg mb-4">
-              83% of people visit the{" "}
-              <span className="text-stone-500">same 10 tourist spots</span>{" "}
-              their entire lives.
+          <div className="mt-16 grid gap-6 rounded-[24px] border border-white/10 bg-stone-50 p-7 text-trail-950 sm:grid-cols-[1fr_auto] sm:items-center lg:p-10">
+            <p className="font-heading text-3xl leading-[1.02] sm:text-4xl">
+              500+ researched places.
+              <span className="text-stone-600"> One calm decision.</span>
             </p>
-            <p className="t-body text-fg-muted">
-              Switzerland has <span className="text-alpine-400 font-medium">500+ hidden gems</span> that most locals have never found.
+            <p className="text-sm text-stone-600 sm:text-right">
+              CHF 29 once
+              <br />
+              Lifetime access
             </p>
           </div>
         </Reveal>

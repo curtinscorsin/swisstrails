@@ -72,7 +72,7 @@ export const TESTIMONIALS: Testimonial[] = [
     city: "Lucerne",
     country: "Switzerland",
     content:
-      "Summer 2024 was the best summer of my life because of this. We planned 8 weekends using Swiss Trails and every single one was incredible. Worth every franc.",
+      "That summer was the best one we had in Switzerland. We planned 8 weekends using Swiss Trails and every single one was incredible. Worth every franc.",
     rating: 5,
     date: "2024-09-15",
     verified: true,
@@ -82,7 +82,7 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const SOCIAL_PROOF_STATS = [
   { label: "Explorers", value: "3,200+" },
-  { label: "Locations", value: "50+" },
+  { label: "Locations", value: "500+" },
   { label: "Rating", value: "★ 4.9" },
   { label: "New locations", value: "Monthly" },
 ];

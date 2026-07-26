@@ -1,210 +1,111 @@
 "use client";
 
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { ArrowDown, Droplets, MountainSnow, Moon, Star } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown, ArrowUpRight, MapPin, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
 
-const FLOATING_BADGES = [
-  {
-    id: 1,
-    label: "Hidden Lake",
-    sub: "Valais · 2,100m",
-    Icon: Droplets,
-    delay: 0,
-    className: "hidden sm:flex top-[28%] right-[8%] lg:right-[12%]",
-  },
-  {
-    id: 2,
-    label: "Secret Viewpoint",
-    sub: "Bern · 1,650m",
-    Icon: MountainSnow,
-    delay: 0.4,
-    className: "hidden sm:flex top-[55%] right-[3%] lg:right-[6%]",
-  },
-  {
-    id: 3,
-    label: "Midnight Sky",
-    sub: "Obwalden · ★★★★★",
-    Icon: Moon,
-    delay: 0.8,
-    className: "bottom-[20%] left-[2%] lg:left-[5%] hidden md:flex",
-  },
-];
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function Hero() {
   const reduce = useReducedMotion();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const yRaw = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacityRaw = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  // No parallax / fade-out under reduced motion — keep content static and visible.
-  const y = reduce ? undefined : yRaw;
-  const opacity = reduce ? undefined : opacityRaw;
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen flex flex-col overflow-hidden"
-    >
-      {/* Background layers */}
-      <div className="absolute inset-0 hero-gradient" />
+    <section className="relative min-h-[100svh] overflow-hidden bg-trail-950">
+      <div className="absolute inset-0 hero-gradient scale-[1.02]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,8,0.08)_0%,rgba(8,10,8,0.04)_38%,rgba(8,10,8,0.88)_100%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-trail-950" />
 
-      {/* Static ambient glow — no animation */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute top-1/4 left-1/3 w-[700px] h-[700px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(81,94,255,0.09) 0%, transparent 65%)",
-          }}
-        />
-      </div>
-
-      {/* Noise overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* Content */}
-      <motion.div
-        className="relative z-10 flex flex-col items-center justify-center flex-1 text-center px-6 pt-28 pb-20 lg:pt-36"
-        style={{ y, opacity }}
-      >
-        {/* Eyebrow */}
+      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1440px] flex-col px-5 pb-8 pt-28 sm:px-8 lg:px-12 lg:pb-12 lg:pt-36">
         <motion.div
-          className="flex items-center gap-2 mb-8"
-          initial={reduce ? false : { opacity: 0, y: 20 }}
+          className="flex items-center gap-3"
+          initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduce ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: reduce ? 0 : 0.7, ease: EASE }}
         >
-          <span className="t-eyebrow">Switzerland · Summer</span>
-          <span className="w-1 h-1 rounded-full bg-alpine-700" />
-          <span className="t-eyebrow text-fg-subtle">500+ Hidden Locations</span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-stone-100 backdrop-blur-md">
+            <MapPin className="h-3 w-3 text-gold-200" />
+            Made for Switzerland
+          </span>
+          <span className="hidden text-[11px] uppercase tracking-[0.18em] text-white/60 sm:block">
+            500+ places · one lifetime pass
+          </span>
         </motion.div>
 
-        {/* Main headline */}
-        <motion.h1
-          className="t-display max-w-4xl mx-auto mb-6"
-          initial={reduce ? false : { opacity: 0, y: 36 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduce ? 0 : 0.8, delay: reduce ? 0 : 0.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="text-fg">Your Best Summer,</span>
-          <br />
-          <span className="text-gradient-hero">Already Planned.</span>
-        </motion.h1>
+        <div className="mt-auto grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-16">
+          <div>
+            <motion.p
+              className="mb-5 text-xs font-medium uppercase tracking-[0.24em] text-gold-200"
+              initial={reduce ? false : { opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: reduce ? 0 : 0.7, delay: reduce ? 0 : 0.08, ease: EASE }}
+            >
+              The Switzerland you do not find by accident
+            </motion.p>
+            <motion.h1
+              className="max-w-5xl font-heading text-[clamp(3.75rem,8.6vw,8.75rem)] leading-[0.82] tracking-[-0.055em] text-fg"
+              initial={reduce ? false : { opacity: 0, y: 34 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: reduce ? 0 : 0.9, delay: reduce ? 0 : 0.12, ease: EASE }}
+            >
+              Your wildest
+              <br />
+              weekends, found.
+            </motion.h1>
+          </div>
 
-        {/* Subheadline */}
-        <motion.p
-          className="t-xl text-fg-muted max-w-xl mx-auto mb-10"
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduce ? 0 : 0.8, delay: reduce ? 0 : 0.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          500+ handpicked locations across Switzerland — hidden lakes, secret viewpoints,
-          and weekends you&apos;ll remember forever. One payment. Lifetime access.
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          className="flex flex-col sm:flex-row items-center gap-4"
-          initial={reduce ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduce ? 0 : 0.7, delay: reduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <Button
-            asChild
-            variant="gold"
-            size="xl"
-            className="shadow-[0_0_40px_rgba(245,184,40,0.2)]"
+          <motion.div
+            className="max-w-md lg:pb-2"
+            initial={reduce ? false : { opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduce ? 0 : 0.8, delay: reduce ? 0 : 0.25, ease: EASE }}
           >
-            <a href="#pricing">
-              Unlock the Map — CHF 29
-            </a>
-          </Button>
-          <Button asChild variant="ghost" size="xl">
-            <a href="#solution" className="flex items-center gap-2">
-              See what&apos;s inside
-              <ArrowDown className="w-4 h-4" />
-            </a>
-          </Button>
-        </motion.div>
+            <p className="text-base leading-relaxed text-stone-200 sm:text-lg">
+              A handpicked trail guide to hidden lakes, quiet ridgelines, waterfalls
+              and unforgettable nights under the Swiss sky.
+            </p>
 
-        {/* Social proof micro */}
-        <motion.div
-          className="flex items-center gap-6 mt-10"
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <Button asChild variant="gold" size="xl" className="justify-between gap-5 lg:w-full">
+                <a href="#pricing">
+                  Unlock Swiss Trails
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="xl" className="lg:w-full">
+                <a href="#solution">Explore the guide</a>
+              </Button>
+            </div>
+
+            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-stone-300">
+              <span className="flex items-center gap-1.5">
+                <span className="flex gap-0.5 text-gold-200" aria-hidden="true">
+                  {[1, 2, 3, 4, 5].map((item) => (
+                    <Star key={item} className="h-3.5 w-3.5 fill-current" />
+                  ))}
+                </span>
+                <span className="sr-only">4.9 out of 5 stars</span>
+              </span>
+              <span>4.9 from Swiss explorers</span>
+              <span className="h-1 w-1 rounded-full bg-stone-400" />
+              <span>CHF 29 once</span>
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.a
+          href="#stats"
+          aria-label="Scroll to discover more"
+          className="mt-8 hidden w-fit items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-white/55 transition-colors hover:text-white md:flex"
           initial={reduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: reduce ? 0 : 0.8, delay: reduce ? 0 : 0.5 }}
+          transition={{ delay: reduce ? 0 : 0.8 }}
         >
-          <div className="flex items-center gap-2">
-            <span className="text-fg-muted text-sm">3,200+ explorers</span>
-          </div>
-          <span className="text-stone-700">·</span>
-          <div className="flex items-center gap-1.5">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Star key={i} className="w-3.5 h-3.5 fill-gold-400 text-gold-400" />
-            ))}
-            <span className="text-fg-muted text-sm ml-1">4.9 rating</span>
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Floating location badges */}
-      {FLOATING_BADGES.map((badge) => (
-        <motion.div
-          key={badge.id}
-          className={`absolute z-20 ${badge.className}`}
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: reduce ? 0 : 0.6,
-            delay: reduce ? 0 : 1.0 + badge.delay,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-        >
-          <div
-            className="flex items-center gap-2.5 cursor-default select-none"
-            style={{
-              background: "rgba(11,15,28,0.88)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: 10,
-              padding: "9px 13px",
-            }}
-          >
-            <badge.Icon size={13} style={{ color: "var(--color-alpine-400)", flexShrink: 0 }} />
-            <div>
-              <p className="text-fg font-medium leading-tight" style={{ fontSize: 12 }}>{badge.label}</p>
-              <p className="text-fg-subtle leading-tight mt-0.5" style={{ fontSize: 10 }}>{badge.sub}</p>
-            </div>
-          </div>
-        </motion.div>
-      ))}
-
-      {/* Scroll indicator — bottom */}
-      <motion.div
-        className="absolute bottom-8 left-0 right-0 flex justify-center z-10"
-        initial={reduce ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: reduce ? 0 : 1.5, duration: reduce ? 0 : 0.8 }}
-      >
-        <button
-          aria-label="Scroll down"
-          className="flex flex-col items-center gap-2 p-3 text-stone-500 hover:text-stone-300 transition-colors cursor-pointer"
-          onClick={() =>
-            document.getElementById("stats")?.scrollIntoView({ behavior: "smooth" })
-          }
-        >
-          <ArrowDown className="w-4 h-4" />
-        </button>
-      </motion.div>
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15">
+            <ArrowDown className="h-3.5 w-3.5" />
+          </span>
+          Discover the collection
+        </motion.a>
+      </div>
     </section>
   );
 }

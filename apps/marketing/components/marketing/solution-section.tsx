@@ -1,167 +1,132 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
-import { Reveal, Stagger } from "@/components/shared/reveal";
-import { MapPin, Search, Heart, Smartphone, Droplets } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Heart, MapPin, Navigation, Search, Smartphone } from "lucide-react";
+import { Reveal } from "@/components/shared/reveal";
 
 const FEATURES = [
   {
     icon: MapPin,
-    title: "Every location researched",
-    body: "Months of exploration distilled into precise coordinates, tips, and everything you need to make the trip perfect.",
+    title: "Field-noted places",
+    body: "Coordinates, approach notes, season, light and practical details for every location.",
   },
   {
     icon: Search,
-    title: "Filter by what you want",
-    body: "Hidden lakes, viewpoints, waterfalls, night sky spots — filter by category, difficulty, season, and region.",
+    title: "Find the right day out",
+    body: "Filter by region, difficulty, season and the kind of landscape you want to experience.",
   },
   {
     icon: Heart,
-    title: "Save your favourites",
-    body: "Build your personal adventure list. Plan multi-day trips. Never lose a spot you love.",
+    title: "Build your own Switzerland",
+    body: "Save favourites, collect visited places and shape them into a weekend itinerary.",
   },
   {
     icon: Smartphone,
-    title: "Add to your home screen",
-    body: "Mobile-first and installable as a web app — open it in your browser and tap 'Add to Home Screen' for one-tap access on the trail.",
+    title: "Ready on the trail",
+    body: "A focused mobile experience you can add to your home screen for one-tap access.",
   },
 ];
 
 export function SolutionSection() {
   const reduce = useReducedMotion();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section id="solution" className="py-24 lg:py-36 bg-trail-900/40 scroll-mt-20 lg:scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Text side */}
+    <section
+      id="solution"
+      className="scroll-mt-20 border-y border-white/[0.07] bg-trail-900 py-24 lg:scroll-mt-24 lg:py-40"
+    >
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="grid gap-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-24">
           <div>
             <Reveal>
-              <p className="t-eyebrow mb-4">The solution</p>
+              <p className="t-eyebrow mb-5">The guide</p>
             </Reveal>
             <Reveal delay={0.1}>
-              <h2 className="t-h1 mb-6">
-                Everything you need.
+              <h2 className="t-h1 max-w-xl text-fg">
+                Less planning.
                 <br />
-                <span className="text-alpine-300">Nothing you don&apos;t.</span>
+                <span className="text-stone-500">More outside.</span>
               </h2>
             </Reveal>
-            <Reveal delay={0.2}>
-              <p className="t-xl text-fg-muted mb-10 max-w-lg">
-                Swiss Trails gives you instant access to the locations worth finding
-                — without the research, without the crowded trails, without wasting
-                another perfect weekend.
+            <Reveal delay={0.18}>
+              <p className="mt-7 max-w-lg text-lg leading-relaxed text-fg-muted">
+                Swiss Trails turns years of scouting into one calm, beautifully
+                organised guide. Open it, choose your mood, and know exactly where to go.
               </p>
             </Reveal>
 
-            <div className="space-y-6">
-              <Stagger initialDelay={0.3} staggerDelay={0.1} direction="left">
-                {FEATURES.map((feature) => (
-                  <div key={feature.title} className="flex gap-4">
-                    <div className="w-9 h-9 rounded-lg bg-white/[0.04] flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <feature.icon className="w-4 h-4 text-stone-500" />
-                    </div>
+            <div className="mt-12 divide-y divide-white/[0.08] border-y border-white/[0.08]">
+              {FEATURES.map((feature, index) => (
+                <Reveal key={feature.title} delay={0.08 * index} direction="left">
+                  <div className="grid grid-cols-[42px_1fr] gap-4 py-5">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.035]">
+                      <feature.icon className="h-4 w-4 text-alpine-300" />
+                    </span>
                     <div>
-                      <h3 className="t-label text-fg mb-1">{feature.title}</h3>
-                      <p className="t-sm text-fg-muted">{feature.body}</p>
+                      <h3 className="text-base font-medium text-fg">{feature.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-fg-muted">{feature.body}</p>
                     </div>
                   </div>
-                ))}
-              </Stagger>
+                </Reveal>
+              ))}
             </div>
           </div>
 
-          {/* Visual side — app mockup */}
-          <div ref={ref}>
-            <motion.div
-              className="relative"
-              initial={reduce ? false : { opacity: 0, x: 40 }}
-              animate={reduce || isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: reduce ? 0 : 0.9, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Phone mockup */}
-              <div className="relative mx-auto max-w-sm">
-                {/* Glow */}
-                <div className="absolute inset-0 rounded-[40px] bg-alpine-900/20 blur-3xl scale-110" />
+          <motion.div
+            className="relative min-h-[560px] overflow-hidden rounded-[28px] border border-white/10 bg-trail-800 shadow-xl sm:min-h-[680px]"
+            initial={reduce ? false : { opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: reduce ? 0 : 0.85, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-[1.025]"
+              style={{
+                backgroundImage:
+                  "url('https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1600&q=88')",
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/10 to-black/80" />
 
-                {/* Phone frame */}
-                <div className="relative bg-trail-800 rounded-[40px] border border-white/[0.1] shadow-2xl overflow-hidden aspect-[9/19]">
-                  {/* Status bar */}
-                  <div className="flex items-center justify-between px-6 pt-5 pb-3">
-                    <span className="text-fg text-xs font-medium">9:41</span>
-                    <div className="w-24 h-5 bg-trail-700 rounded-full" />
-                    <div className="flex items-center gap-1">
-                      <div className="w-3 h-1.5 bg-fg rounded-sm" />
-                    </div>
-                  </div>
+            <div className="absolute left-5 right-5 top-5 flex items-center justify-between sm:left-8 sm:right-8 sm:top-8">
+              <span className="rounded-full border border-white/20 bg-black/25 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white backdrop-blur-lg">
+                In season now
+              </span>
+              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/25 text-white backdrop-blur-lg">
+                <Heart className="h-4 w-4" />
+              </span>
+            </div>
 
-                  {/* Map area */}
-                  <div className="mx-3 rounded-2xl overflow-hidden" style={{ height: "55%" }}>
-                    <div
-                      className="w-full h-full relative"
-                      style={{
-                        background: "linear-gradient(145deg, #0a1f0e 0%, #0d2918 30%, #112214 60%, #081008 100%)",
-                      }}
-                    >
-                      {/* Simulated map roads */}
-                      <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 300 280">
-                        <path d="M30 60 Q90 80 150 60 T270 90" stroke="#47A462" strokeWidth="1.5" fill="none" />
-                        <path d="M0 140 Q60 120 120 150 T280 130" stroke="#47A462" strokeWidth="1" fill="none" />
-                        <path d="M60 0 Q80 70 90 140 T110 280" stroke="#47A462" strokeWidth="1" fill="none" />
-                        <path d="M180 0 Q170 80 165 140 T160 280" stroke="#47A462" strokeWidth="1" fill="none" />
-                        <circle cx="150" cy="90" r="3" fill="#47A462" opacity="0.8" />
-                        <circle cx="90" cy="140" r="3" fill="#47A462" opacity="0.8" />
-                        <circle cx="200" cy="160" r="3" fill="#47A462" opacity="0.8" />
-                      </svg>
-
-                      {/* Simulated pins */}
-                      {[
-                        { x: "50%", y: "35%", active: true },
-                        { x: "30%", y: "55%", active: false },
-                        { x: "68%", y: "60%", active: false },
-                      ].map((pos, i) => (
-                        <div
-                          key={i}
-                          className="absolute"
-                          style={{ left: pos.x, top: pos.y, transform: "translate(-50%, -50%)" }}
-                        >
-                          <div className={`w-2.5 h-2.5 rounded-full shadow ${pos.active ? "bg-alpine-400" : "bg-stone-600/70"}`} />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Bottom sheet preview */}
-                  <div className="mt-3 mx-3 card-glass-strong rounded-xl p-4">
-                    <div className="w-6 h-0.5 bg-stone-700 rounded-full mx-auto mb-3" />
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-white/[0.04] flex items-center justify-center">
-                        <Droplets className="w-4 h-4 text-stone-500" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-fg text-sm font-medium">Hidden Alpine Lake</p>
-                        <p className="text-stone-600 text-xs mt-0.5">Valais · 2,100m · Moderate</p>
-                      </div>
-                      <button className="w-7 h-7 rounded-lg bg-white/[0.05] flex items-center justify-center">
-                        <Heart className="w-3.5 h-3.5 text-stone-600" />
-                      </button>
-                    </div>
-                    <div className="mt-3 flex gap-1.5">
-                      {["2h hike", "Swimming", "Photography"].map((tag) => (
-                        <span key={tag} className="text-xs bg-white/[0.04] text-stone-500 px-2 py-0.5 rounded">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+            <div className="absolute inset-x-5 bottom-5 rounded-[22px] border border-white/15 bg-trail-950/82 p-5 backdrop-blur-2xl sm:inset-x-8 sm:bottom-8 sm:p-7">
+              <div className="flex items-start justify-between gap-5">
+                <div>
+                  <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-alpine-300">
+                    Valais · Moderate
+                  </p>
+                  <h3 className="mt-2 font-heading text-3xl leading-none text-fg sm:text-4xl">
+                    Arolla’s quiet side
+                  </h3>
+                </div>
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold-200 text-trail-950">
+                  <Navigation className="h-4 w-4" />
+                </span>
+              </div>
+              <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-5 text-sm">
+                <div>
+                  <p className="text-stone-500">Walk</p>
+                  <p className="mt-1 text-fg">1h 45m</p>
+                </div>
+                <div>
+                  <p className="text-stone-500">Elevation</p>
+                  <p className="mt-1 text-fg">2,150 m</p>
+                </div>
+                <div>
+                  <p className="text-stone-500">Best light</p>
+                  <p className="mt-1 text-fg">Morning</p>
                 </div>
               </div>
-
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -7,7 +7,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Alpine lakes so clear they'll make you question reality. Most tourists will never find them.",
     icon: "💧",
-    count: 12,
+    count: 82,
     gradient: "from-sky-900/40 to-blue-950/40",
   },
   {
@@ -16,7 +16,7 @@ export const CATEGORIES: Category[] = [
     description:
       "The perspectives that make Switzerland look like a painting. Never crowded.",
     icon: "🏔",
-    count: 10,
+    count: 95,
     gradient: "from-alpine-900/40 to-trail-900/40",
   },
   {
@@ -25,7 +25,7 @@ export const CATEGORIES: Category[] = [
     description:
       "From gentle cascades to thundering falls — Switzerland hides its most spectacular ones.",
     icon: "🌊",
-    count: 8,
+    count: 54,
     gradient: "from-teal-900/40 to-trail-900/40",
   },
   {
@@ -34,7 +34,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Position yourself perfectly for the golden hour every photographer dreams of.",
     icon: "🌅",
-    count: 7,
+    count: 63,
     gradient: "from-orange-950/50 to-trail-900/40",
   },
   {
@@ -43,7 +43,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Ancient geological wonders carved through rock over millions of years.",
     icon: "🪨",
-    count: 5,
+    count: 46,
     gradient: "from-stone-900/60 to-trail-900/40",
   },
   {
@@ -52,7 +52,7 @@ export const CATEGORIES: Category[] = [
     description:
       "The darkest corners of Switzerland, where the Milky Way is impossible to miss.",
     icon: "✨",
-    count: 4,
+    count: 38,
     gradient: "from-indigo-950/60 to-trail-900/40",
   },
   {
@@ -61,7 +61,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Curated routes through Switzerland's most dramatic landscapes.",
     icon: "🚗",
-    count: 6,
+    count: 51,
     gradient: "from-gold-950/50 to-trail-900/40",
   },
   {
@@ -70,7 +70,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Every spot chosen for maximum visual impact. For cameras and phones alike.",
     icon: "📸",
-    count: 9,
+    count: 71,
     gradient: "from-rose-950/50 to-trail-900/40",
   },
 ];
@@ -80,7 +80,7 @@ export const PRICING = {
   currency: "CHF",
   period: "one-time" as const,
   features: [
-    "Instant access to all 50+ locations",
+    "Instant access to all 500+ locations",
     "Detailed descriptions, tips & coordinates",
     "New locations added every month",
     "Works on all devices — mobile & desktop",

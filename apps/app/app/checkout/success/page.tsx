@@ -100,7 +100,7 @@ export default function CheckoutSuccessPage() {
 
         {/* Success icon */}
         <motion.div
-          className="w-24 h-24 rounded-full bg-alpine-900 border-2 border-alpine-600 flex items-center justify-center mx-auto mb-8 shadow-[0_0_40px_rgba(81,94,255,0.3)]"
+          className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-full border-2 border-alpine-600 bg-alpine-900 shadow-[0_0_40px_rgba(120,145,110,0.28)]"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 300, damping: 20 }}

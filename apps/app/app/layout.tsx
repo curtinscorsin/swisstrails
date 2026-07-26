@@ -1,13 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans } from "next/font/google";
 import { MockBanner } from "@/components/shared/mock-banner";
 import "./globals.css";
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://app.swiss-trails.com"),
@@ -16,6 +9,21 @@ export const metadata: Metadata = {
     template: "%s | Swiss Trails",
   },
   description: "500+ hidden gems across Switzerland — explore the map, save your favourites.",
+  openGraph: {
+    type: "website",
+    locale: "en_CH",
+    url: "https://app.swiss-trails.com",
+    siteName: "Swiss Trails",
+    title: "Swiss Trails — Your wildest weekends, found",
+    description: "Explore 500+ field-noted places across Switzerland and build your next adventure.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Swiss Trails — Your wildest weekends, found" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Swiss Trails — Your wildest weekends, found",
+    description: "Explore 500+ field-noted places across Switzerland.",
+    images: ["/og.png"],
+  },
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -36,7 +44,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#06080F",
+  themeColor: "#0B0D0A",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -49,7 +57,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={dmSans.variable}>
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-trail-950 text-fg antialiased">
         {children}
         <MockBanner />

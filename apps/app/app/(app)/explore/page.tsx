@@ -120,17 +120,26 @@ export default function ExplorePage() {
   const hasMore = visibleCount < filteredLocations.length;
 
   return (
-    <div className="relative w-full h-full flex flex-col">
-      {/* Search bar — no border, bg shift handles separation */}
-      <div className="flex-shrink-0 flex items-center gap-2 px-3 pb-2.5 pt-[max(0.625rem,env(safe-area-inset-top))] lg:pt-2.5 bg-trail-950/90 backdrop-blur-xl z-20">
+    <div className="relative flex h-full w-full flex-col">
+      <div className="z-20 flex-shrink-0 border-b border-white/[0.07] bg-trail-950/92 px-3 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur-2xl sm:px-5 lg:px-7 lg:pb-4 lg:pt-5">
+        <div className="mb-4 hidden items-end justify-between lg:flex">
+          <div>
+            <p className="t-eyebrow mb-2">Curated Switzerland</p>
+            <h1 className="font-heading text-4xl leading-none text-fg">Find your next trail.</h1>
+          </div>
+          <p className="max-w-sm text-right text-sm leading-relaxed text-fg-muted">
+            Field notes, precise access details and quiet places worth the walk.
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
         <div className="relative flex-1 min-w-0">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-500 pointer-events-none" />
           <input
             type="search"
-            placeholder="Search locations…"
+            placeholder="Search lakes, regions, viewpoints…"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-11 bg-white/[0.05] rounded-lg text-base text-fg placeholder:text-stone-500 outline-none transition-colors focus:bg-white/[0.09]"
+            className="h-12 w-full rounded-full border border-white/[0.08] bg-white/[0.055] text-base text-fg outline-none transition-colors placeholder:text-stone-500 focus:border-white/[0.16] focus:bg-white/[0.085]"
             style={{ paddingLeft: "2.5rem", paddingRight: searchQuery ? "2.5rem" : "0.875rem" }}
           />
           <AnimatePresence>
@@ -157,10 +166,10 @@ export default function ExplorePage() {
           }}
           aria-label="Filters"
           className={cn(
-            "pressable flex items-center gap-1.5 h-11 px-3.5 rounded-lg text-sm font-medium transition-colors flex-shrink-0",
+            "pressable flex h-12 flex-shrink-0 items-center gap-1.5 rounded-full border border-white/[0.08] px-4 text-sm font-medium transition-colors",
             activeFilterCount > 0
               ? "bg-alpine-900/50 text-alpine-300"
-              : "text-fg-muted hover:text-fg"
+              : "bg-white/[0.035] text-fg-muted hover:bg-white/[0.07] hover:text-fg"
           )}
         >
           <SlidersHorizontal className="w-4 h-4" />
@@ -171,11 +180,10 @@ export default function ExplorePage() {
             </span>
           )}
         </button>
-      </div>
-
-      {/* Sort strip */}
-      <div className="flex-shrink-0 px-3 pb-2 bg-trail-950/90 backdrop-blur-xl z-10">
-        <SortControl value={sortMode} onChange={setSortMode} />
+        </div>
+        <div className="mt-2.5">
+          <SortControl value={sortMode} onChange={setSortMode} />
+        </div>
       </div>
 
       {/* Active filter strip */}
@@ -215,8 +223,8 @@ export default function ExplorePage() {
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="pt-2 pb-1">
-                <div className="flex items-center justify-between px-3 mb-2">
+              <div className="pb-3 pt-4">
+                <div className="mb-3 flex items-center justify-between px-3 sm:px-5 lg:px-7">
                   <p className="flex items-center gap-1.5 text-[11px] font-medium tracking-[0.12em] uppercase text-fg-muted">
                     <Sparkles className="w-3 h-3 text-gold-400" />
                     In season now
@@ -241,14 +249,14 @@ export default function ExplorePage() {
                   </button>
                 </div>
                 <div
-                  className="flex gap-2 overflow-x-auto px-3 pb-2"
+                  className="flex gap-3 overflow-x-auto px-3 pb-2 sm:px-5 lg:px-7"
                   style={{ scrollbarWidth: "none" }}
                 >
                   {inSeasonLocations.map((loc) => (
                     <button
                       key={loc.id}
                       onClick={() => setSelectedLocation(loc)}
-                      className="group relative flex-shrink-0 w-36 h-24 rounded-lg overflow-hidden bg-white/[0.04] text-left active:scale-[0.98] transition-transform"
+                      className="group relative h-28 w-44 flex-shrink-0 overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04] text-left shadow-sm transition-transform active:scale-[0.98]"
                     >
                       <img
                         src={loc.heroImage.url}
@@ -290,7 +298,7 @@ export default function ExplorePage() {
             </p>
           </div>
         ) : (
-            <div className="columns-2 lg:columns-3 xl:columns-4 [column-gap:4px] lg:[column-gap:6px] px-1 pt-1 pb-20 lg:px-1.5 lg:pt-1.5 lg:pb-8">
+            <div className="columns-2 px-3 pb-24 pt-3 [column-gap:10px] sm:px-5 sm:[column-gap:14px] lg:columns-3 lg:px-7 lg:pb-10 xl:columns-4">
             {visibleLocations.map((loc, i) => (
               <MasonryCard
                 key={loc.id}
@@ -339,23 +347,20 @@ function MasonryCard({ location, aspectRatio, onClick }: MasonryCardProps) {
 
   return (
     <motion.button
-      className="relative w-full rounded-md overflow-hidden bg-surface-1 block break-inside-avoid mb-1 lg:mb-1.5"
+      className="relative mb-2.5 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/[0.07] bg-surface-1 shadow-sm sm:mb-3.5"
       style={{ aspectRatio }}
       onClick={onClick}
       whileTap={{ scale: 0.97 }}
     >
       {/* Shimmer placeholder until the image decodes — no grey-box→snap. */}
       {!loaded && !imgError && (
-        <div className="absolute inset-0 skeleton rounded-none" />
+        <div className="skeleton absolute inset-0 z-0 rounded-none" />
       )}
       {!imgError ? (
         <img
           src={src}
           alt={location.name}
-          className={cn(
-            "w-full h-full object-cover transition-opacity duration-500",
-            loaded ? "opacity-100" : "opacity-0"
-          )}
+          className="relative z-[1] h-full w-full object-cover opacity-100 transition-[opacity,transform] duration-700 hover:scale-[1.025]"
           loading="lazy"
           decoding="async"
           onLoad={() => setLoaded(true)}
@@ -367,11 +372,11 @@ function MasonryCard({ location, aspectRatio, onClick }: MasonryCardProps) {
         </div>
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent" />
+      <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/85 via-black/5 to-transparent" />
 
-      <div className="absolute bottom-0 left-0 right-0 p-2.5 text-left">
-        <p className="text-white text-xs font-medium leading-tight line-clamp-2">{location.name}</p>
-        <p className="text-white/70 t-2xs mt-0.5">{regionConfig[location.region].label}</p>
+      <div className="absolute bottom-0 left-0 right-0 z-[3] p-3 text-left sm:p-4">
+        <p className="line-clamp-2 text-sm font-medium leading-tight text-white sm:text-base">{location.name}</p>
+        <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.12em] text-gold-200/85">{regionConfig[location.region].label}</p>
       </div>
     </motion.button>
   );

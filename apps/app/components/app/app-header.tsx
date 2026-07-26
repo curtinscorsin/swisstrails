@@ -21,15 +21,15 @@ export function AppHeader() {
   return (
     <>
       {/* Top bar — desktop */}
-      <header className="hidden lg:flex fixed top-0 left-0 right-0 z-40 h-14 bg-trail-950/95 backdrop-blur-xl items-center px-6 gap-6" style={{ boxShadow: "0 1px 0 rgba(255,255,255,0.04)" }}>
+      <header className="fixed left-0 right-0 top-0 z-40 hidden h-16 items-center gap-7 border-b border-white/[0.07] bg-trail-950/92 px-7 backdrop-blur-2xl lg:flex">
         <Link href="/explore" className="mr-2">
           <Logo
-            iconClassName="h-5 text-alpine-500"
+            iconClassName="h-5 text-gold-300"
             wordmarkClassName="h-3.5 text-fg"
           />
         </Link>
 
-        <nav className="flex items-center gap-1">
+        <nav className="flex items-center gap-1 rounded-full border border-white/[0.07] bg-white/[0.025] p-1">
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href || (item.href === "/explore" && pathname === "/");
             return (
@@ -37,11 +37,11 @@ export function AppHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "pressable flex items-center gap-1.5 px-3 py-1.5 text-sm transition-colors duration-150 rounded-lg",
-                  isActive ? "text-fg bg-surface-1" : "text-fg-muted hover:text-fg"
+                  "pressable flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm transition-colors duration-200",
+                  isActive ? "bg-stone-100 text-trail-950" : "text-fg-muted hover:bg-white/[0.04] hover:text-fg"
                 )}
               >
-                <item.icon className={cn("w-4 h-4", isActive ? "text-alpine-400" : "")} />
+                <item.icon className={cn("h-4 w-4", isActive ? "text-alpine-800" : "")} />
                 {item.label}
               </Link>
             );
@@ -49,8 +49,8 @@ export function AppHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-4">
-          <Link href="/" className="text-fg-subtle hover:text-fg text-xs transition-colors">
-            ← Back to site
+          <Link href="/" className="text-xs text-fg-subtle transition-colors hover:text-fg">
+            Visit Swiss Trails ↗
           </Link>
         </div>
       </header>
@@ -64,7 +64,7 @@ export function AppHeader() {
         style={{ bottom: "calc(var(--safe-b) + var(--nav-gap))" }}
       >
         <div
-          className="mx-auto flex max-w-md items-stretch gap-1 rounded-full card-glass-strong shadow-lg pointer-events-auto px-1.5"
+          className="card-glass-strong pointer-events-auto mx-auto flex max-w-md items-stretch gap-1 rounded-[22px] px-1.5 shadow-xl"
           style={{ height: "var(--nav-bar-h)" }}
         >
           {NAV_ITEMS.map((item) => {
@@ -79,20 +79,20 @@ export function AppHeader() {
                 {isActive && (
                   <motion.span
                     layoutId="navActivePill"
-                    className="absolute inset-y-1.5 inset-x-0.5 rounded-full bg-surface-2 ring-1 ring-white/[0.06]"
+                    className="absolute inset-x-0.5 inset-y-1.5 rounded-[17px] bg-stone-100 shadow-sm"
                     transition={SPRING.snappy}
                   />
                 )}
                 <item.icon
                   className={cn(
                     "relative w-[22px] h-[22px] transition-colors duration-150",
-                    isActive ? "text-alpine-300" : "text-fg-muted"
+                    isActive ? "text-alpine-900" : "text-fg-muted"
                   )}
                 />
                 <span
                   className={cn(
                     "relative t-3xs transition-colors duration-150",
-                    isActive ? "text-alpine-300" : "text-fg-muted"
+                    isActive ? "text-trail-950" : "text-fg-muted"
                   )}
                 >
                   {item.label}

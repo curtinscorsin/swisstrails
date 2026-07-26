@@ -10,29 +10,24 @@ import { APP_URL } from "@/lib/config";
 export function Pricing() {
   const reduce = useReducedMotion();
   return (
-    <section id="pricing" className="py-24 lg:py-36 relative overflow-hidden scroll-mt-20 lg:scroll-mt-24">
-      {/* Glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-gold-900/10 blur-3xl" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="pricing" className="relative scroll-mt-20 overflow-hidden py-24 lg:scroll-mt-24 lg:py-40">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         {/* Header */}
         <div className="text-center mb-16">
           <Reveal>
-            <p className="t-eyebrow mb-4">Pricing</p>
+            <p className="t-eyebrow mb-5">Lifetime access</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="t-h1 mb-4">
-              One payment.
+              One small payment.
               <br />
-              <span className="text-gradient-gold">A summer of memories.</span>
+              <span className="text-stone-500">A very large Switzerland.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="t-body text-fg-muted max-w-md mx-auto">
-              No subscriptions. No hidden fees. No nonsense.
-              Pay once, explore forever.
+              No subscription, upgrade tier or recurring charge. Buy the guide once
+              and every future location is yours too.
             </p>
           </Reveal>
         </div>
@@ -40,31 +35,29 @@ export function Pricing() {
         {/* Pricing card */}
         <div className="max-w-lg mx-auto">
           <motion.div
-            className="relative card-solid rounded-2xl overflow-hidden"
+            className="relative overflow-hidden rounded-[28px] border border-stone-200 bg-stone-50 text-trail-950 shadow-xl"
             initial={reduce ? false : { opacity: 0, y: 40, scale: 0.97 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: reduce ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Top gradient bar */}
-            <div className="h-1 bg-gradient-to-r from-gold-700 via-gold-400 to-gold-700" />
-
-            <div className="p-8 lg:p-10">
+            <div className="p-7 sm:p-9 lg:p-10">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-gold-950/60 rounded-lg px-2.5 py-1 mb-6">
-                <Zap className="w-3 h-3 text-gold-500" />
-                <span className="text-gold-400 text-xs font-medium">Instant access</span>
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white/60 px-3 py-1.5">
+                <Zap className="h-3 w-3 text-alpine-700" />
+                <span className="text-xs font-medium text-stone-700">Instant access · lifetime updates</span>
               </div>
 
               {/* Price */}
               <div className="mb-8">
                 <div className="flex items-baseline gap-3">
-                  <span className="text-fg-subtle text-xl">CHF</span>
-                  <span className="text-6xl lg:text-7xl font-bold text-fg tracking-tight leading-none">
+                  <span className="text-xl text-stone-500">CHF</span>
+                  <span className="font-heading text-7xl leading-none tracking-[-0.04em] text-trail-950 lg:text-8xl">
                     {PRICING.amount}
                   </span>
                 </div>
-                <p className="text-fg-muted text-sm mt-2">
+                <p className="mt-3 text-sm text-stone-600">
                   One-time payment · Access for life
                 </p>
               </div>
@@ -74,9 +67,9 @@ export function Pricing() {
                 {PRICING.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
                     <div className="w-4 h-4 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3.5 h-3.5 text-alpine-500" />
+                      <Check className="h-3.5 w-3.5 text-alpine-700" />
                     </div>
-                    <span className="t-sm text-fg-muted">{feature}</span>
+                    <span className="t-sm text-stone-700">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -86,17 +79,17 @@ export function Pricing() {
                 asChild
                 variant="gold"
                 size="xl"
-                className="w-full shadow-[0_0_40px_rgba(245,184,40,0.2)]"
+                className="w-full bg-trail-950 text-stone-50 shadow-none hover:bg-trail-800"
               >
                 <a href={`${APP_URL}/checkout`}>
-                  Unlock the Map — CHF 29 →
+                  Get lifetime access — CHF 29
                 </a>
               </Button>
 
               {/* Reassurance */}
               <div className="mt-5 flex items-center justify-center gap-2">
-                <Shield className="w-3.5 h-3.5 text-fg-muted" />
-                <p className="text-center text-fg-muted text-xs">
+                <Shield className="h-3.5 w-3.5 text-stone-500" />
+                <p className="text-center text-xs text-stone-500">
                   Secured by Stripe · Visit 3 spots, love it or get refunded
                 </p>
               </div>
@@ -105,8 +98,8 @@ export function Pricing() {
 
           {/* Social proof under card */}
           <Reveal delay={0.3}>
-            <p className="mt-6 text-center text-fg-muted text-sm">
-              <span className="text-stone-300">3,200+</span> explorers already inside
+            <p className="mt-7 text-center text-sm text-fg-muted">
+              <span className="text-stone-200">3,200+</span> explorers already inside
             </p>
           </Reveal>
         </div>

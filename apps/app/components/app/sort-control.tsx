@@ -37,7 +37,7 @@ export function SortControl({ value, onChange, className }: SortControlProps) {
 
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <div className="flex items-center gap-1.5 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+      <div className="flex items-center gap-2 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
         {SORT_OPTIONS.map((opt) => {
           const active = value === opt.value;
           const isNearest = opt.value === "nearest";
@@ -47,10 +47,10 @@ export function SortControl({ value, onChange, className }: SortControlProps) {
               onClick={() => handleSelect(opt.value)}
               aria-pressed={active}
               className={cn(
-                "flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium whitespace-nowrap transition-colors flex-shrink-0",
+                "flex h-9 flex-shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 text-xs font-medium transition-colors",
                 active
-                  ? "bg-alpine-900/50 text-alpine-300"
-                  : "bg-white/[0.05] text-fg-muted hover:text-fg"
+                  ? "border-alpine-400/30 bg-alpine-900/60 text-alpine-200"
+                  : "border-white/[0.07] bg-white/[0.035] text-fg-muted hover:bg-white/[0.07] hover:text-fg"
               )}
             >
               {isNearest &&
