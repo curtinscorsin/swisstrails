@@ -5,25 +5,32 @@ const ASPECT_RATIOS = ["3/4", "4/5", "2/3", "4/5", "3/4", "1/1", "4/5", "3/5"];
 
 export default function ExploreLoading() {
   return (
-    <div className="h-full flex flex-col">
-      {/* Search bar */}
-      <div className="flex-shrink-0 flex items-center gap-2 px-3 py-2.5">
-        <div className="flex-1 h-11 rounded-lg bg-surface-2 animate-pulse" />
-        <div className="w-11 h-11 rounded-lg bg-surface-2 animate-pulse" />
+    <div className="flex h-full flex-col">
+      <div className="flex-shrink-0 border-b border-white/[0.07] px-3 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-5 lg:px-7 lg:pb-4 lg:pt-5">
+        <div className="mb-4 hidden justify-between lg:flex">
+          <div className="h-9 w-64 rounded-lg bg-surface-2 animate-pulse" />
+          <div className="h-8 w-80 rounded-lg bg-surface-1 animate-pulse" />
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="h-12 flex-1 rounded-full bg-surface-2 animate-pulse" />
+          <div className="h-12 w-24 rounded-full bg-surface-2 animate-pulse" />
+        </div>
+        <div className="mt-2.5 flex gap-2">
+          {[76, 82, 74].map((w) => (
+            <div
+              key={w}
+              className="h-9 rounded-full bg-surface-1 animate-pulse"
+              style={{ width: w }}
+            />
+          ))}
+        </div>
       </div>
-      {/* Sort strip */}
-      <div className="flex-shrink-0 flex gap-2 px-3 pb-2">
-        {[64, 80, 72].map((w, i) => (
-          <div key={i} className="h-9 rounded-full bg-surface-1 animate-pulse" style={{ width: w }} />
-        ))}
-      </div>
-      {/* Masonry */}
       <div className="flex-1 overflow-hidden">
-        <div className="columns-2 lg:columns-3 xl:columns-4 [column-gap:4px] lg:[column-gap:6px] px-1 pt-1">
+        <div className="columns-2 px-3 pt-3 [column-gap:10px] sm:px-5 sm:[column-gap:14px] lg:columns-3 lg:px-7 xl:columns-4">
           {Array.from({ length: 12 }).map((_, i) => (
             <div
               key={i}
-              className="break-inside-avoid mb-1 lg:mb-1.5 rounded-md bg-surface-1 animate-pulse"
+              className="mb-2.5 break-inside-avoid rounded-2xl bg-surface-1 animate-pulse sm:mb-3.5"
               style={{ aspectRatio: ASPECT_RATIOS[i % ASPECT_RATIOS.length] }}
             />
           ))}

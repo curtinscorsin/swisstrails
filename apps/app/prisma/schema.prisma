@@ -16,7 +16,7 @@ datasource db {
 // ─────────────────────────────────────────────
 
 model Profile {
-  id               String    @id @default(uuid())
+  id               String    @id @db.Uuid
   email            String    @unique
   name             String?
   avatarUrl        String?   @map("avatar_url")
@@ -35,8 +35,8 @@ model Profile {
 }
 
 enum UserRole {
-  USER
-  ADMIN
+  USER  @map("user")
+  ADMIN @map("admin")
 
   @@map("user_role")
 }
@@ -46,7 +46,7 @@ enum UserRole {
 // ─────────────────────────────────────────────
 
 model Location {
-  id                  String           @id @default(uuid())
+  id                  String           @id
   slug                String           @unique
   name                String
   tagline             String
@@ -73,6 +73,7 @@ model Location {
   elevation           Int?
   distanceKm          Float?           @map("distance_km")
   isFeatured          Boolean          @default(false) @map("is_featured")
+  isNew               Boolean          @default(false) @map("is_new")
   isPublished         Boolean          @default(false) @map("is_published")
   viewCount           Int              @default(0) @map("view_count")
   saveCount           Int              @default(0) @map("save_count")
@@ -134,18 +135,24 @@ enum Difficulty {
 }
 
 enum Region {
-  BERN
-  ZURICH
-  GRAUBUNDEN
-  VALAIS
-  LUCERNE
-  URI
-  TICINO
+  BERN         @map("bern")
+  ZURICH       @map("zurich")
+  GRAUBUNDEN   @map("graubunden")
+  VALAIS       @map("valais")
+  LUCERNE      @map("lucerne")
+  URI          @map("uri")
+  TICINO       @map("ticino")
   ST_GALLEN   @map("st-gallen")
-  APPENZELL
-  FRIBOURG
-  VAUD
-  OBWALDEN
+  APPENZELL    @map("appenzell")
+  FRIBOURG     @map("fribourg")
+  VAUD         @map("vaud")
+  OBWALDEN     @map("obwalden")
+  NIDWALDEN    @map("nidwalden")
+  SCHWYZ       @map("schwyz")
+  GLARUS       @map("glarus")
+  JURA         @map("jura")
+  NEUCHATEL    @map("neuchatel")
+  SOLOTHURN    @map("solothurn")
 
   @@map("region")
 }

@@ -8,20 +8,20 @@ export const metadata: Metadata = {
     default: "Swiss Trails",
     template: "%s | Swiss Trails",
   },
-  description: "500+ hidden gems across Switzerland — explore the map, save your favourites.",
+  description: "A carefully verified collection of Swiss hikes with official sources, route data and current advisories.",
   openGraph: {
     type: "website",
     locale: "en_CH",
     url: "https://app.swiss-trails.com",
     siteName: "Swiss Trails",
     title: "Swiss Trails — Your wildest weekends, found",
-    description: "Explore 500+ field-noted places across Switzerland and build your next adventure.",
+    description: "Explore source-backed Swiss hikes and build your next adventure.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Swiss Trails — Your wildest weekends, found" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Swiss Trails — Your wildest weekends, found",
-    description: "Explore 500+ field-noted places across Switzerland.",
+    description: "Explore source-backed Swiss hikes with transparent route notes.",
     images: ["/og.png"],
   },
   icons: {
@@ -48,11 +48,6 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  // The app is a native-style PWA shell — pinch-zooming the chrome (and the
-  // map UI overlay) is unwanted. The map does its own zoom internally (Leaflet),
-  // so browser zoom only causes a stuck, shifted-up layout. Disable it.
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -23,9 +23,11 @@ import { useMapPrefStore } from "@/store/map-pref-store";
 import { OpenInSheet } from "@/components/app/open-in-sheet";
 import { WeatherWidget } from "@/components/app/weather-widget";
 import { PhotoStrip } from "@/components/app/photo-strip";
+import { ResolvedLocationPhoto } from "@/components/app/location-photo";
 import { ReactionBar } from "@/components/app/reaction-bar";
+import { RouteVerificationDetails } from "@/components/app/route-verification";
 import { useLocationImages } from "@/lib/location-images";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import type { Location, Difficulty } from "@/types";
 
 interface LocationDetailSheetProps {
@@ -101,7 +103,7 @@ export function LocationDetailSheet({
   // Real "More like this" ranking — scores every other spot by a weighted blend
   // of category, geographic proximity, difficulty and region. Deterministic.
   const similar = location
-    ? similarLocations(location, PLACEHOLDER_LOCATIONS, 10)
+    ? similarLocations(location, CURATED_LOCATIONS, 10)
     : [];
 
   useEffect(() => {
@@ -144,7 +146,7 @@ export function LocationDetailSheet({
 
   function share() {
     if (!location) return;
-    const url = `https://swiss-trails.com/location/${location.slug}`;
+    const url = `${window.location.origin}/location/${location.slug}`;
     if (navigator.share) void navigator.share({ title: location.name, url });
     else void navigator.clipboard.writeText(url);
   }
@@ -242,17 +244,33 @@ export function LocationDetailSheet({
                   {location.elevation != null && (
                     <Stat icon={<Mountain className="w-4 h-4" />} label="Elevation" value={`${location.elevation.toLocaleString()} m`} />
                   )}
-                  <Stat icon={<Clock className="w-4 h-4" />} label="Visit time" value={`${location.visitDurationHours.min}–${location.visitDurationHours.max} h`} />
+                  <Stat
+                    icon={<Clock className="w-4 h-4" />}
+                    label="Walking time"
+                    value={
+                      location.verification
+                        ? formatDuration(location.verification.durationMinutes)
+                        : `${location.visitDurationHours.min}–${location.visitDurationHours.max} h`
+                    }
+                  />
                   {awayKm ? (
                     <Stat icon={<Navigation className="w-4 h-4" />} label="From you" value={`${awayKm} away`} />
-                  ) : (
+                  ) : !location.verification ? (
                     <Stat icon={<Car className="w-4 h-4" />} label="By car" value={`~${formatDuration(location.travelTimeMinutes)}`} />
-                  )}
+                  ) : null}
                 </div>
 
                 {/* Description */}
                 {location.description && (
                   <p className="text-stone-300 text-sm leading-relaxed">{location.description}</p>
+                )}
+
+                {location.verification && (
+                  <RouteVerificationDetails
+                    verification={location.verification}
+                    destination={location.coordinates}
+                    destinationName={`${location.name} map point`}
+                  />
                 )}
 
                 {/* Highlights — short */}
@@ -270,7 +288,8 @@ export function LocationDetailSheet({
                 )}
 
                 {/* Getting there */}
-                {(location.accessInfo || location.parkingAvailable || location.publicTransport) && (
+                {!location.verification &&
+                  (location.accessInfo || location.parkingAvailable || location.publicTransport) && (
                   <Section title="Getting there" icon={<Navigation className="w-3 h-3" />}>
                     {location.accessInfo && (
                       <p className="text-stone-400 text-sm mb-2.5">{location.accessInfo}</p>
@@ -283,7 +302,7 @@ export function LocationDetailSheet({
                 )}
 
                 {/* Best season — compact chip set */}
-                {location.bestSeason.length > 0 && (
+                {!location.verification && location.bestSeason.length > 0 && (
                   <Section title="Best season">
                     <div className="flex flex-wrap gap-1.5">
                       {location.bestSeason.map((s) => {
@@ -316,14 +335,14 @@ export function LocationDetailSheet({
                             scrollRef.current?.scrollTo(0, 0);
                             onSelectSimilar(sim);
                           }}
-                          className="pressable flex-shrink-0 w-28 rounded-lg overflow-hidden bg-surface-1 text-left"
+                          className="pressable group flex-shrink-0 w-28 rounded-lg overflow-hidden bg-surface-1 text-left"
                         >
                           <div className="relative h-16">
-                            <img
-                              src={sim.heroImage.url}
-                              alt={sim.name}
-                              className="w-full h-full object-cover"
-                              loading="lazy"
+                            <ResolvedLocationPhoto
+                              location={sim}
+                              className="object-cover transition-transform duration-500 group-hover:scale-105"
+                              sizes="112px"
+                              compactFallback
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                           </div>
@@ -349,15 +368,17 @@ export function LocationDetailSheet({
                 onClick={() => {
                   haptics.tap();
                   requestDirections({
-                    lat: location.coordinates.lat,
-                    lng: location.coordinates.lng,
-                    name: location.name,
+                    lat: location.verification?.start.coordinates.lat ?? location.coordinates.lat,
+                    lng: location.verification?.start.coordinates.lng ?? location.coordinates.lng,
+                    name: location.verification
+                      ? `${location.name} trailhead — ${location.verification.start.name}`
+                      : location.name,
                   });
                 }}
                 className="pressable flex-1 flex items-center justify-center gap-2 min-h-[44px] py-3.5 bg-alpine-600 hover:bg-alpine-500 text-white text-sm font-medium rounded-lg transition-colors"
               >
                 <Navigation className="w-4 h-4" />
-                Get directions
+                Directions to start
               </button>
               <button
                 data-no-drag

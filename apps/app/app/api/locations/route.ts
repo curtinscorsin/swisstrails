@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { createClient } from "@/lib/supabase/server";
 
 export async function GET(req: NextRequest) {
-  const session = await auth();
-  if (!session?.user?.id) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -14,27 +14,16 @@ export async function GET(req: NextRequest) {
   const difficulty = searchParams.get("difficulty");
   const q = searchParams.get("q")?.toLowerCase();
 
-  // When Supabase is configured, query from DB.
-  // For now, filter placeholder data.
-  let locations = PLACEHOLDER_LOCATIONS;
+  let query = supabase
+    .from("locations")
+    .select("*, location_images(*)", { count: "exact" })
+    .eq("is_published", true);
+  if (category) query = query.eq("category", category);
+  if (region) query = query.eq("region", region);
+  if (difficulty) query = query.eq("difficulty", difficulty);
+  if (q) query = query.or(`name.ilike.%${q}%,tagline.ilike.%${q}%,description.ilike.%${q}%`);
 
-  if (category) {
-    locations = locations.filter((l) => l.category === category);
-  }
-  if (region) {
-    locations = locations.filter((l) => l.region === region);
-  }
-  if (difficulty) {
-    locations = locations.filter((l) => l.difficulty === difficulty);
-  }
-  if (q) {
-    locations = locations.filter(
-      (l) =>
-        l.name.toLowerCase().includes(q) ||
-        l.tagline.toLowerCase().includes(q) ||
-        l.description.toLowerCase().includes(q)
-    );
-  }
-
-  return NextResponse.json({ locations, total: locations.length });
+  const { data, error, count } = await query.order("is_featured", { ascending: false });
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  return NextResponse.json({ locations: data, total: count ?? data.length });
 }

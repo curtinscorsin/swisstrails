@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { useMapStore } from "@/store/map-store";
 import { CATEGORIES } from "@/data/categories";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { cn } from "@/lib/utils";
 import { haptics } from "@/lib/haptics";
 import type { LocationCategory, Difficulty, Region } from "@/types";
@@ -14,14 +15,20 @@ const CHIP = "pressable inline-flex items-center rounded-full px-3.5 min-h-[40px
 const CHIP_ON = "bg-alpine-900/50 text-alpine-300 ring-1 ring-inset ring-alpine-700/40";
 const CHIP_OFF = "bg-surface-1 text-fg-muted hover:text-fg";
 
-const DIFFICULTIES: { id: Difficulty; label: string }[] = [
+const PUBLISHED_DIFFICULTIES = new Set(CURATED_LOCATIONS.map((location) => location.difficulty));
+const PUBLISHED_REGIONS = new Set(CURATED_LOCATIONS.map((location) => location.region));
+
+const ALL_DIFFICULTIES: { id: Difficulty; label: string }[] = [
   { id: "easy", label: "Easy" },
   { id: "moderate", label: "Moderate" },
   { id: "challenging", label: "Challenging" },
   { id: "expert", label: "Expert" },
 ];
+const DIFFICULTIES = ALL_DIFFICULTIES.filter((difficulty) =>
+  PUBLISHED_DIFFICULTIES.has(difficulty.id)
+);
 
-const REGIONS: { id: Region; label: string }[] = [
+const ALL_REGIONS: { id: Region; label: string }[] = [
   { id: "graubunden", label: "Graubünden" },
   { id: "valais", label: "Valais" },
   { id: "bern", label: "Bern" },
@@ -40,6 +47,7 @@ const REGIONS: { id: Region; label: string }[] = [
   { id: "neuchatel", label: "Neuchâtel" },
   { id: "solothurn", label: "Solothurn" },
 ];
+const REGIONS = ALL_REGIONS.filter((region) => PUBLISHED_REGIONS.has(region.id));
 
 const DIFF_COLORS: Record<Difficulty, string> = {
   easy: "text-alpine-300",

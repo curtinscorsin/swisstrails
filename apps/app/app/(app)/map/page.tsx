@@ -9,7 +9,7 @@ import { LocationGrid } from "@/components/app/location-grid";
 import { FilterDrawer } from "@/components/app/filter-drawer";
 import { useMapStore } from "@/store/map-store";
 import { useGeoStore } from "@/store/geo-store";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { filterLocations, countActiveFilters } from "@/lib/filters";
 import { sortLocations, type SortMode } from "@/lib/sort";
 import { SortControl } from "@/components/app/sort-control";
@@ -42,7 +42,7 @@ export default function MapPage() {
   const searchRef = useRef<HTMLInputElement>(null);
 
   const filteredLocations = useMemo(
-    () => filterLocations(PLACEHOLDER_LOCATIONS, searchQuery, activeFilters),
+    () => filterLocations(CURATED_LOCATIONS, searchQuery, activeFilters),
     [searchQuery, activeFilters]
   );
 
@@ -95,8 +95,8 @@ export default function MapPage() {
           <div className="bg-trail-950/80 backdrop-blur-xl rounded-lg px-3 py-1.5">
             <p className="text-fg-muted text-xs whitespace-nowrap">
               <span className="text-fg font-medium">{filteredLocations.length}</span>
-              {filteredLocations.length < PLACEHOLDER_LOCATIONS.length && (
-                <span> of {PLACEHOLDER_LOCATIONS.length}</span>
+              {filteredLocations.length < CURATED_LOCATIONS.length && (
+                <span> of {CURATED_LOCATIONS.length}</span>
               )}{" "}
               locations
             </p>
@@ -122,7 +122,7 @@ export default function MapPage() {
               <LocationGrid
                 key={filterKey}
                 locations={sortedLocations}
-                totalCount={PLACEHOLDER_LOCATIONS.length}
+                totalCount={CURATED_LOCATIONS.length}
                 activeFilterCount={activeFilterCount}
                 onOpenFilters={() => setShowFilters(true)}
               />

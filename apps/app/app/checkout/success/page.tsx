@@ -120,8 +120,8 @@ export default function CheckoutSuccessPage() {
           </h1>
 
           <p className="t-body text-fg-muted max-w-sm mx-auto mb-10">
-            Your adventure starts now. 500+ hidden locations across Switzerland
-            are waiting for you. Go find something extraordinary.
+            Your verified Swiss route collection is ready, with source links,
+            access notes and current advisories for safer planning.
           </p>
 
           <div className="space-y-3">

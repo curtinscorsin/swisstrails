@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Heart, Map } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LocationCard } from "@/components/app/location-card";
 import { useFavoritesStore } from "@/store/favorites-store";
-import { useMapStore } from "@/store/map-store";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { EASE_OUT, SPRING } from "@/lib/motion";
 
 export default function FavoritesPage() {
+  const router = useRouter();
   const { favoriteIds } = useFavoritesStore();
-  const { openBottomSheet } = useMapStore();
 
   // Persisted Zustand stores hydrate after mount; gate the list/count behind a
   // `mounted` flag so we don't flash a 0/empty state or risk an SSR mismatch.
@@ -21,7 +21,7 @@ export default function FavoritesPage() {
   useEffect(() => setMounted(true), []);
 
   const favoriteLocations = mounted
-    ? PLACEHOLDER_LOCATIONS.filter((l) => favoriteIds.has(l.id))
+    ? CURATED_LOCATIONS.filter((l) => favoriteIds.has(l.id))
     : [];
 
   const count = favoriteLocations.length;
@@ -82,7 +82,7 @@ export default function FavoritesPage() {
                 >
                   <LocationCard
                     location={location}
-                    onClick={() => openBottomSheet(location.id)}
+                    onClick={() => router.push(`/location/${location.slug}`)}
                   />
                 </motion.div>
               ))}

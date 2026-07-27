@@ -25,6 +25,7 @@ import { PhotoStrip } from "@/components/app/photo-strip";
 import { ReactionBar } from "@/components/app/reaction-bar";
 import { useLocationImages } from "@/lib/location-images";
 import { haptics } from "@/lib/haptics";
+import { RouteVerificationDetails } from "@/components/app/route-verification";
 import type { Location } from "@/types";
 
 interface LocationDetailProps {
@@ -93,7 +94,7 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
   const photos = useLocationImages(location);
 
   function share() {
-    const url = `https://swiss-trails.com/location/${location.slug}`;
+    const url = `${window.location.origin}/location/${location.slug}`;
     if (navigator.share) void navigator.share({ title: location.name, url });
     else void navigator.clipboard.writeText(url);
   }
@@ -197,8 +198,12 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
             )}
             <Stat
               icon={<Clock className="w-4 h-4" />}
-              label="Visit time"
-              value={`${location.visitDurationHours.min}–${location.visitDurationHours.max} h`}
+              label="Walking time"
+              value={
+                location.verification
+                  ? formatDuration(location.verification.durationMinutes)
+                  : `${location.visitDurationHours.min}–${location.visitDurationHours.max} h`
+              }
             />
             {awayKm ? (
               <Stat
@@ -206,18 +211,26 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
                 label="From you"
                 value={`${awayKm} away`}
               />
-            ) : (
+            ) : !location.verification ? (
               <Stat
                 icon={<Car className="w-4 h-4" />}
                 label="By car"
                 value={`~${formatDuration(location.travelTimeMinutes)}`}
               />
-            )}
+            ) : null}
           </div>
 
           {/* Description */}
           {location.description && (
             <p className="text-stone-300 text-sm leading-relaxed">{location.description}</p>
+          )}
+
+          {location.verification && (
+            <RouteVerificationDetails
+              verification={location.verification}
+              destination={location.coordinates}
+              destinationName={`${location.name} map point`}
+            />
           )}
 
           {/* Highlights — short bullet list */}
@@ -235,6 +248,7 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
           )}
 
           {/* Getting there — access + parking/transport chips */}
+          {!location.verification && (
           <Section title="Getting there" icon={<Navigation className="w-3 h-3" />}>
             {location.accessInfo && (
               <p className="text-stone-400 text-sm mb-2.5">{location.accessInfo}</p>
@@ -244,9 +258,10 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
               {location.publicTransport && <InfoChip icon={<Bus className="w-3.5 h-3.5" />}>Public transport</InfoChip>}
             </div>
           </Section>
+          )}
 
           {/* Best season — compact inline chip set */}
-          {location.bestSeason.length > 0 && (
+          {!location.verification && location.bestSeason.length > 0 && (
             <Section title="Best season">
               <div className="flex flex-wrap gap-1.5">
                 {location.bestSeason.map((s) => {
@@ -339,14 +354,16 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
           onClick={() => {
             haptics.tap();
             requestDirections({
-              lat: location.coordinates.lat,
-              lng: location.coordinates.lng,
-              name: location.name,
+              lat: location.verification?.start.coordinates.lat ?? location.coordinates.lat,
+              lng: location.verification?.start.coordinates.lng ?? location.coordinates.lng,
+              name: location.verification
+                ? `${location.name} trailhead — ${location.verification.start.name}`
+                : location.name,
             });
           }}
         >
           <Navigation className="w-4 h-4" />
-          Get directions
+          Directions to start
         </Button>
         <button
           type="button"

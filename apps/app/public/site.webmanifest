@@ -1,12 +1,11 @@
 {
   "name": "Swiss Trails",
   "short_name": "Swiss Trails",
-  "description": "500+ hidden gems across Switzerland",
-  "start_url": "/",
+  "description": "Source-backed Swiss hikes with transparent route details",
+  "start_url": "/explore",
   "display": "standalone",
-  "background_color": "#06080F",
-  "theme_color": "#06080F",
-  "orientation": "portrait-primary",
+  "background_color": "#0B0D0A",
+  "theme_color": "#0B0D0A",
   "icons": [
     {
       "src": "/icon-192x192.png",

@@ -127,7 +127,7 @@ export function getMapLink(lat: number, lng: number, name: string): string {
 }
 
 export function getShareUrl(slug: string): string {
-  return `https://swiss-trails.com/location/${slug}`;
+  return `https://app.swiss-trails.com/location/${slug}`;
 }
 
 export function copyToClipboard(text: string): Promise<void> {

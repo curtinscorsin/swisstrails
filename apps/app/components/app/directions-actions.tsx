@@ -17,18 +17,21 @@ interface DirectionsActionsProps {
  */
 export function DirectionsActions({ location }: DirectionsActionsProps) {
   const [openInSheet, setOpenInSheet] = useState(false);
-  const { lat, lng } = { lat: location.coordinates.lat, lng: location.coordinates.lng };
+  const target = location.verification?.start.coordinates ?? location.coordinates;
+  const targetName = location.verification
+    ? `${location.name} trailhead — ${location.verification.start.name}`
+    : location.name;
 
   return (
     <>
       <div className="flex-1 flex gap-2 min-w-0">
         <button
           type="button"
-          onClick={() => openDirections(lat, lng, location.name)}
+          onClick={() => openDirections(target.lat, target.lng, targetName)}
           className="flex-1 flex items-center justify-center gap-2 h-11 rounded-lg bg-alpine-600 hover:bg-alpine-500 text-white font-medium text-sm transition-colors"
         >
           <Navigation className="w-4 h-4" />
-          Get directions
+          Directions to start
         </button>
         <button
           type="button"

@@ -376,9 +376,9 @@
 
   .hero-gradient {
     background:
-      linear-gradient(180deg, rgba(7, 9, 7, 0.12) 0%, rgba(7, 9, 7, 0.16) 36%, rgba(7, 9, 7, 0.90) 100%),
-      linear-gradient(90deg, rgba(7, 9, 7, 0.52) 0%, rgba(7, 9, 7, 0.06) 58%, rgba(7, 9, 7, 0.18) 100%),
-      url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=88") center 58% / cover no-repeat;
+      radial-gradient(ellipse at 74% 16%, rgba(96, 118, 85, 0.22) 0%, transparent 43%),
+      radial-gradient(ellipse at 18% 72%, rgba(133, 105, 61, 0.12) 0%, transparent 42%),
+      linear-gradient(155deg, #11160f 0%, #0b0e0a 50%, #070907 100%);
   }
 
   .focus-ring {

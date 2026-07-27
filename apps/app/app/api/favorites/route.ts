@@ -1,32 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 
 type FavoriteRow = { location_id: string };
 
 export async function GET() {
-  const session = await auth();
-  if (!session?.user?.id) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const supabase = await createClient();
-  const { data, error } = await (supabase.from("favorites" as never) as unknown as {
-    select: (cols: string) => { eq: (col: string, val: string) => Promise<{ data: FavoriteRow[] | null; error: unknown }> };
-  })
+  const { data, error } = await (supabase as any)
+    .from("favorites")
     .select("location_id")
-    .eq("user_id", session.user.id);
+    .eq("user_id", user.id);
 
   if (error || !data) {
     return NextResponse.json({ favoriteIds: [] });
   }
 
-  return NextResponse.json({ favoriteIds: data.map((f) => f.location_id) });
+  return NextResponse.json({ favoriteIds: data.map((f: FavoriteRow) => f.location_id) });
 }
 
 export async function POST(req: NextRequest) {
-  const session = await auth();
-  if (!session?.user?.id) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -35,12 +34,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Location ID required" }, { status: 400 });
   }
 
-  const supabase = await createClient();
-  const { error } = await (supabase.from("favorites" as never) as ReturnType<typeof supabase.from>).insert({
-    id: crypto.randomUUID(),
-    user_id: session.user.id,
+  const { error } = await (supabase as any).from("favorites").insert({
+    user_id: user.id,
     location_id: locationId,
-  } as never);
+  });
 
   if (error) {
     const err = error as { code?: string };
@@ -54,18 +51,19 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const session = await auth();
-  if (!session?.user?.id) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { locationId } = await req.json();
-  const supabase = await createClient();
-
-  await (supabase.from("favorites" as never) as ReturnType<typeof supabase.from>)
+  const { error } = await (supabase as any)
+    .from("favorites")
     .delete()
-    .eq("user_id" as never, session.user.id as never)
-    .eq("location_id" as never, locationId as never);
+    .eq("user_id", user.id)
+    .eq("location_id", locationId);
 
+  if (error) return NextResponse.json({ error: "Failed to remove" }, { status: 500 });
   return NextResponse.json({ success: true });
 }

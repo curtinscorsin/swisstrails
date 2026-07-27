@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { LocationCard } from "@/components/app/location-card";
 import { useMapStore } from "@/store/map-store";
 import { cn } from "@/lib/utils";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { CATEGORIES } from "@/data/categories";
 import type { Location } from "@/types";
 
@@ -22,7 +22,7 @@ export function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
 
   const [showFilters, setShowFilters] = useState(false);
 
-  const filteredLocations: Location[] = PLACEHOLDER_LOCATIONS.filter((loc) => {
+  const filteredLocations: Location[] = CURATED_LOCATIONS.filter((loc) => {
     const q = searchQuery.toLowerCase();
     if (q && !loc.name.toLowerCase().includes(q) && !loc.tagline.toLowerCase().includes(q)) {
       return false;
@@ -31,6 +31,9 @@ export function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
       return false;
     }
     if (activeFilters.difficulties.length > 0 && !activeFilters.difficulties.includes(loc.difficulty)) {
+      return false;
+    }
+    if (activeFilters.regions.length > 0 && !activeFilters.regions.includes(loc.region)) {
       return false;
     }
     return true;
@@ -147,7 +150,11 @@ export function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
                     <div className="mt-3">
                       <p className="text-fg-subtle text-xs mb-2">Difficulty</p>
                       <div className="flex flex-wrap gap-1.5">
-                        {(["easy", "moderate", "challenging", "expert"] as const).map((d) => {
+                        {(["easy", "moderate", "challenging", "expert"] as const)
+                          .filter((difficulty) =>
+                            CURATED_LOCATIONS.some((location) => location.difficulty === difficulty)
+                          )
+                          .map((d) => {
                           const isActive = activeFilters.difficulties.includes(d);
                           return (
                             <button

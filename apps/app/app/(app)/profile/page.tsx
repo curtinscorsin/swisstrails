@@ -9,10 +9,11 @@ import { Button } from "@/components/ui/button";
 import { useFavoritesStore } from "@/store/favorites-store";
 import { useVisitedStore } from "@/store/visited-store";
 import { useMapPrefStore } from "@/store/map-pref-store";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { fadeUp } from "@/lib/motion";
 import { haptics } from "@/lib/haptics";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/client";
 
 const MAP_APP_OPTIONS = [
   { v: "auto", label: "Auto" },
@@ -66,7 +67,7 @@ const MENU_ITEMS = [
 ];
 
 /** Map of location id → region, so we can count distinct cantons visited. */
-const REGION_BY_ID = new Map(PLACEHOLDER_LOCATIONS.map((l) => [l.id, l.region]));
+const REGION_BY_ID = new Map(CURATED_LOCATIONS.map((l) => [l.id, l.region]));
 
 /** Animated integer that counts up from 0 on mount. */
 function CountUp({ value }: { value: number }) {
@@ -106,7 +107,25 @@ export default function ProfilePage() {
   // Persisted stores hydrate after mount; gate the stats so they don't paint 0
   // then jump (and to avoid an SSR mismatch).
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [profile, setProfile] = useState<{
+    name: string | null;
+    email: string;
+    avatar_url: string | null;
+    has_purchased: boolean;
+  } | null>(null);
+  useEffect(() => {
+    setMounted(true);
+    const supabase = createClient();
+    void supabase.auth.getUser().then(async ({ data: { user } }) => {
+      if (!user) return;
+      const { data } = await supabase
+        .from("profiles")
+        .select("name,email,avatar_url,has_purchased")
+        .eq("id", user.id)
+        .single();
+      if (data) setProfile(data);
+    });
+  }, []);
 
   // Distinct cantons among visited locations — a real metric in place of the
   // old placeholder "Since 2025".
@@ -124,9 +143,11 @@ export default function ProfilePage() {
     { label: "Cantons", value: cantonsVisited, Icon: Mountain },
   ];
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     haptics.tap();
-    router.push("/login");
+    await createClient().auth.signOut();
+    router.replace("/login");
+    router.refresh();
   };
 
   const handleMapApp = (v: (typeof MAP_APP_OPTIONS)[number]["v"]) => {
@@ -148,9 +169,11 @@ export default function ProfilePage() {
             <User className="w-5 h-5 text-stone-400" />
           </div>
           <div className="flex-1 min-w-0">
-            <h2 className="t-h4 text-fg truncate">Demo Explorer</h2>
+            <h2 className="t-h4 text-fg truncate">
+              {profile?.name || profile?.email || "Swiss Trails Explorer"}
+            </h2>
             <p className="text-fg-muted text-sm truncate mt-0.5">
-              Full access · all locations
+              {profile?.has_purchased ? "Full access · all locations" : profile?.email || "Loading account…"}
             </p>
           </div>
         </div>
@@ -273,8 +296,12 @@ export default function ProfilePage() {
               <Shield className="w-3.5 h-3.5 text-alpine-500" />
             </div>
             <div>
-              <p className="text-fg text-sm font-medium">Full access active</p>
-              <p className="text-fg-muted text-xs">Lifetime · includes all future locations</p>
+              <p className="text-fg text-sm font-medium">
+                {profile?.has_purchased ? "Full access active" : "Free account active"}
+              </p>
+              <p className="text-fg-muted text-xs">
+                {profile?.has_purchased ? "Lifetime · includes all future locations" : "Upgrade to unlock the complete collection"}
+              </p>
             </div>
           </div>
         </div>

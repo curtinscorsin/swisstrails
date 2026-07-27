@@ -6,7 +6,7 @@ import { useMapStore } from "@/store/map-store";
 import { LocationDetail } from "@/components/app/location-detail";
 import { EASE_OUT } from "@/lib/motion";
 import { haptics } from "@/lib/haptics";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 
 const PANEL_Z = 1100;
 const BACKDROP_Z = 1050;
@@ -52,7 +52,7 @@ export function BottomSheet() {
   const capturePid = useRef<number>(0);
 
   const selectedLocation = selectedLocationId
-    ? PLACEHOLDER_LOCATIONS.find((l) => l.id === selectedLocationId)
+    ? CURATED_LOCATIONS.find((l) => l.id === selectedLocationId)
     : null;
 
   function vh() {

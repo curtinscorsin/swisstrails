@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart, Clock, TrendingUp, MapPin, Check } from "lucide-react";
-import Image from "next/image";
+import { AlertTriangle, BadgeCheck, Heart, Clock, TrendingUp, MapPin, Check } from "lucide-react";
 import { cn, difficultyConfig, categoryConfig, formatDuration } from "@/lib/utils";
 import { SPRING } from "@/lib/motion";
 import { haptics } from "@/lib/haptics";
@@ -10,7 +9,7 @@ import { useFavoritesStore } from "@/store/favorites-store";
 import { useVisitedStore } from "@/store/visited-store";
 import { useGeoStore } from "@/store/geo-store";
 import { distanceKm, formatDistance } from "@/lib/distance";
-import { useLocationImages } from "@/lib/location-images";
+import { ResolvedLocationPhoto } from "@/components/app/location-photo";
 import type { Location } from "@/types";
 
 interface LocationCardProps {
@@ -33,10 +32,6 @@ export function LocationCard({
   const diff = difficultyConfig[location.difficulty];
   const cat = categoryConfig[location.category];
 
-  // Card image — first resolved image by source priority (admin override →
-  // sourced). Falls back to the sourced hero. See lib/location-images.ts.
-  const cardImage = useLocationImages(location)[0] ?? location.heroImage;
-
   // Real, honest distance when we know where the user is; otherwise fall back
   // to the static travel-time estimate (relabelled "~X by car", no "away").
   const awayKm = userPosition
@@ -55,24 +50,36 @@ export function LocationCard({
     <div
       className={cn(
         "relative rounded-lg overflow-hidden cursor-pointer group",
-        "transition-all duration-200",
+        "transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-alpine-500",
         isSelected
           ? "ring-1 ring-alpine-600"
           : "hover:bg-trail-800",
         compact ? "h-20 flex" : ""
       )}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      aria-label={onClick ? `Open ${location.name}` : undefined}
       onClick={onClick}
+      onKeyDown={(event) => {
+        if (
+          onClick &&
+          event.currentTarget === event.target &&
+          (event.key === "Enter" || event.key === " ")
+        ) {
+          event.preventDefault();
+          onClick();
+        }
+      }}
     >
       {compact ? (
         <>
           {/* Image thumb */}
           <div className="relative w-20 h-full flex-shrink-0 overflow-hidden">
-            <Image
-              src={cardImage.url}
-              alt={cardImage.alt}
-              fill
+            <ResolvedLocationPhoto
+              location={location}
               className="object-cover"
               sizes="80px"
+              compactFallback
             />
             <div className="absolute inset-0 bg-trail-950/20" />
             {/* Visited badge */}
@@ -90,7 +97,11 @@ export function LocationCard({
             <p className="text-fg text-sm font-medium truncate">{location.name}</p>
             <p className="text-fg-muted text-xs mt-0.5 truncate">
               {cat.label} ·{" "}
-              {awayKm ? `${awayKm} away` : `~${formatDuration(location.travelTimeMinutes)} by car`}
+              {awayKm
+                ? `${awayKm} away`
+                : location.verification
+                  ? `${formatDuration(location.verification.durationMinutes)} hike`
+                  : `~${formatDuration(location.travelTimeMinutes)} by car`}
             </p>
             <div className="flex items-center gap-2 mt-1.5">
               <span className={cn("text-xs font-medium", diff.color)}>
@@ -125,14 +136,32 @@ export function LocationCard({
         <>
           {/* Image */}
           <div className="relative aspect-[4/3] overflow-hidden">
-            <Image
-              src={cardImage.url}
-              alt={cardImage.alt}
-              fill
+            <ResolvedLocationPhoto
+              location={location}
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-trail-950/80 via-transparent to-transparent" />
+
+            {location.verification && (
+              <div className="absolute bottom-3 left-3">
+                <span
+                  className={cn(
+                    "inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide backdrop-blur-sm",
+                    location.verification.status === "open"
+                      ? "bg-black/50 text-white/80"
+                      : "bg-amber-950/80 text-amber-200"
+                  )}
+                >
+                  {location.verification.status === "open" ? (
+                    <BadgeCheck className="h-2.5 w-2.5" />
+                  ) : (
+                    <AlertTriangle className="h-2.5 w-2.5" />
+                  )}
+                  {location.verification.status === "open" ? "Checked" : "Advisory"}
+                </span>
+              </div>
+            )}
 
             {/* Category label */}
             <div className="absolute top-3 left-3">
@@ -165,7 +194,7 @@ export function LocationCard({
             </button>
 
             {/* Visited chip */}
-            {visited && (
+            {visited && !location.verification && (
               <div className="absolute bottom-3 left-3">
                 <span className="inline-flex items-center gap-1 text-[10px] font-semibold tracking-wide uppercase text-emerald-300 bg-emerald-900/70 backdrop-blur-sm rounded px-1.5 py-0.5">
                   <Check className="w-2.5 h-2.5" strokeWidth={3} />
@@ -203,7 +232,9 @@ export function LocationCard({
                 ) : (
                   <span className="flex items-center gap-1">
                     <Clock className="w-3 h-3" />
-                    ~{formatDuration(location.travelTimeMinutes)} by car
+                    {location.verification
+                      ? `${formatDuration(location.verification.durationMinutes)} hike`
+                      : `~${formatDuration(location.travelTimeMinutes)} by car`}
                   </span>
                 )}
                 <span className={cn("font-medium", diff.color)}>{diff.label}</span>

@@ -50,7 +50,45 @@ export interface LocationImage {
   width?: number;
   height?: number;
   credit?: string;
+  sourceUrl?: string;
   isHero?: boolean;
+}
+
+export interface LocationSource {
+  label: string;
+  url: string;
+  checkedAt: string;
+}
+
+export interface Trailhead {
+  name: string;
+  coordinates: Coordinates;
+  parking: string;
+  publicTransport: string;
+}
+
+export interface RouteVerification {
+  country: "Switzerland";
+  canton: string;
+  routeType: string;
+  season: string;
+  distanceKm: number;
+  durationMinutes: number;
+  ascentM: number | null;
+  descentM: number | null;
+  elevationNote?: string;
+  sacGrade: string;
+  status: "open" | "open-with-advisory" | "closed" | "check-current";
+  statusNote: string;
+  checkedAt: string;
+  start: Trailhead;
+  finish: string;
+  accessibility: string;
+  feeInfo: string;
+  restrictions: string[];
+  safety: string[];
+  uncertainties: string[];
+  sources: LocationSource[];
 }
 
 export interface Location {
@@ -84,6 +122,7 @@ export interface Location {
   saveCount: number;
   createdAt: string;
   updatedAt: string;
+  verification?: RouteVerification;
 }
 
 export interface Category {

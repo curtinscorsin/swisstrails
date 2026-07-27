@@ -5,14 +5,13 @@ import { Heart, Bookmark, CheckCircle2, type LucideIcon } from "lucide-react";
 import { useFavoritesStore } from "@/store/favorites-store";
 import { useVisitedStore } from "@/store/visited-store";
 import { useSocialStore } from "@/store/social-store";
-import { displayedCount } from "@/lib/social-counts";
 import { SPRING } from "@/lib/motion";
 import { haptics } from "@/lib/haptics";
 import { cn } from "@/lib/utils";
 
 /**
  * Engagement chips under the title — the canonical toggles, kept in sync with
- * the rest of the app, each showing a community count plus the user's own:
+ * the rest of the app. These are personal actions, not community metrics:
  *   ❤️ Like       → favourites store (the Favourites tab)
  *   🔖 Want to go  → "want to go" list (social store)
  *   ✓ Been there   → visited store (the Explored stat)
@@ -38,22 +37,23 @@ export function ReactionBar({
     toggle: () => void;
     Icon: LucideIcon;
     activeColor: string;
+    label: string;
     fill?: boolean;
   }[] = [
-    { kind: "like", on: liked, toggle: () => toggleLike(locationId), Icon: Heart, activeColor: "text-rose-400", fill: true },
-    { kind: "wantToGo", on: wantToGo, toggle: () => toggleWant(locationId), Icon: Bookmark, activeColor: "text-alpine-300", fill: true },
-    { kind: "beenThere", on: been, toggle: () => toggleBeen(locationId), Icon: CheckCircle2, activeColor: "text-emerald-400" },
+    { kind: "like", label: "Save", on: liked, toggle: () => toggleLike(locationId), Icon: Heart, activeColor: "text-rose-400", fill: true },
+    { kind: "wantToGo", label: "Plan", on: wantToGo, toggle: () => toggleWant(locationId), Icon: Bookmark, activeColor: "text-alpine-300", fill: true },
+    { kind: "beenThere", label: "Done", on: been, toggle: () => toggleBeen(locationId), Icon: CheckCircle2, activeColor: "text-emerald-400" },
   ];
 
   return (
     <div className={cn("flex items-center gap-2", className)}>
-      {chips.map(({ kind, on, toggle, Icon, activeColor, fill }) => {
-        const count = displayedCount(locationId, kind, on);
+      {chips.map(({ kind, label, on, toggle, Icon, activeColor, fill }) => {
         return (
           <button
             key={kind}
             type="button"
             data-no-drag
+            aria-label={`${on ? "Remove" : "Add"} ${label.toLowerCase()}`}
             aria-pressed={on}
             onClick={() => {
               if (!on) haptics.success();
@@ -77,7 +77,7 @@ export function ReactionBar({
             >
               <Icon className={cn("w-3.5 h-3.5", on && fill && "fill-current")} />
             </motion.span>
-            {count.toLocaleString()}
+            {label}
           </button>
         );
       })}

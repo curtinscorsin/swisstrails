@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTripStore } from "@/store/trip-store";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { distanceKm, formatDistance } from "@/lib/distance";
 import {
   fetchRouteLeg,
@@ -37,7 +37,12 @@ import { regionConfig, formatVisitDuration } from "@/lib/utils";
 import { fadeUp, staggerContainer, SPRING } from "@/lib/motion";
 import { haptics } from "@/lib/haptics";
 import { ElevationProfile } from "@/components/app/elevation-profile";
+import { ResolvedLocationPhoto } from "@/components/app/location-photo";
 import type { Location } from "@/types";
+
+function routeStart(location: Location) {
+  return location.verification?.start.coordinates ?? location.coordinates;
+}
 
 /**
  * `useSearchParams()` must be inside a Suspense boundary (Next 15 requirement,
@@ -79,7 +84,7 @@ function TripPageInner() {
     // on a stale empty render before hydration settles.
     if (useTripStore.getState().tripIds.length > 0) return;
 
-    const valid = new Set(PLACEHOLDER_LOCATIONS.map((l) => l.id));
+    const valid = new Set(CURATED_LOCATIONS.map((l) => l.id));
     const ids = raw
       .split(",")
       .map((s) => s.trim())
@@ -92,7 +97,7 @@ function TripPageInner() {
 
   // Resolve ids → locations, preserving trip order. Drop any stale ids.
   const stops = useMemo(() => {
-    const byId = new Map(PLACEHOLDER_LOCATIONS.map((l) => [l.id, l]));
+    const byId = new Map(CURATED_LOCATIONS.map((l) => [l.id, l]));
     return tripIds
       .map((id) => byId.get(id))
       .filter((l): l is Location => Boolean(l));
@@ -102,7 +107,7 @@ function TripPageInner() {
   const legKm = useMemo(
     () =>
       stops.map((loc, i) =>
-        i === 0 ? 0 : distanceKm(stops[i - 1].coordinates, loc.coordinates)
+        i === 0 ? 0 : distanceKm(routeStart(stops[i - 1]), routeStart(loc))
       ),
     [stops]
   );
@@ -118,8 +123,8 @@ function TripPageInner() {
   const legPairs = useMemo(
     () =>
       stops.slice(1).map((loc, i) => {
-        const from = stops[i].coordinates;
-        const to = loc.coordinates;
+        const from = routeStart(stops[i]);
+        const to = routeStart(loc);
         return {
           key: `${from.lng},${from.lat};${to.lng},${to.lat}`,
           from,
@@ -177,9 +182,9 @@ function TripPageInner() {
   const routeStops: RouteStop[] = useMemo(
     () =>
       stops.map((l) => ({
-        lat: l.coordinates.lat,
-        lng: l.coordinates.lng,
-        name: l.name,
+        lat: routeStart(l).lat,
+        lng: routeStart(l).lng,
+        name: l.verification ? `${l.name} trailhead` : l.name,
       })),
     [stops]
   );
@@ -562,13 +567,12 @@ function TripStopItem({
         </div>
 
         {/* Thumbnail */}
-        <div className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-white/[0.04]">
-          <img
-            src={loc.heroImage.url}
-            alt={loc.name}
-            className="w-full h-full object-cover pointer-events-none"
-            loading="lazy"
-            draggable={false}
+        <div className="relative flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-white/[0.04]">
+          <ResolvedLocationPhoto
+            location={loc}
+            className="pointer-events-none object-cover"
+            sizes="64px"
+            compactFallback
           />
         </div>
 

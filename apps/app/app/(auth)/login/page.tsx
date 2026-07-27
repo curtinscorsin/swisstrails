@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/brand/logo";
 import { haptics } from "@/lib/haptics";
+import { createClient } from "@/lib/supabase/client";
 
 const IS_MOCK = process.env.NEXT_PUBLIC_MOCK_MODE === "true";
 
@@ -31,16 +32,42 @@ export default function LoginPage() {
     setEmailError(undefined);
     haptics.tap();
     setIsEmailLoading(true);
-    await new Promise((r) => setTimeout(r, 1000));
+    const supabase = createClient();
+    const next = new URLSearchParams(window.location.search).get("next");
+    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/explore";
+    const { error } = await supabase.auth.signInWithOtp({
+      email: trimmed,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/confirm?next=${encodeURIComponent(safeNext)}`,
+        shouldCreateUser: true,
+      },
+    });
     setIsEmailLoading(false);
+    if (error) {
+      setEmailError(error.message);
+      haptics.warn();
+      return;
+    }
     setStep("email-sent");
   }
 
   async function handleGoogleSignIn() {
     haptics.tap();
     setIsGoogleLoading(true);
-    await new Promise((r) => setTimeout(r, 500));
-    setIsGoogleLoading(false);
+    const supabase = createClient();
+    const next = new URLSearchParams(window.location.search).get("next");
+    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/explore";
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(safeNext)}`,
+      },
+    });
+    if (error) {
+      setEmailError(error.message);
+      setIsGoogleLoading(false);
+      haptics.warn();
+    }
   }
 
   return (
@@ -62,8 +89,8 @@ export default function LoginPage() {
               className="justify-center"
             />
           </Link>
-          <h1 className="t-h2 text-fg mb-2">Welcome back</h1>
-          <p className="text-fg-muted text-sm">Sign in to access your locations</p>
+          <h1 className="t-h2 text-fg mb-2">Welcome to Swiss Trails</h1>
+          <p className="text-fg-muted text-sm">Sign in or create your free account</p>
         </div>
 
         {/* Mock mode demo entry */}
@@ -101,7 +128,7 @@ export default function LoginPage() {
             animate={{ opacity: 1, scale: 1 }}
           >
             <motion.div
-              className="w-20 h-20 rounded-full bg-alpine-900 border-2 border-alpine-600 flex items-center justify-center mx-auto mb-6 shadow-[0_0_40px_rgba(81,94,255,0.3)]"
+              className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border-2 border-alpine-600 bg-alpine-900 shadow-[0_0_40px_rgba(120,145,110,0.28)]"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.1, type: "spring", stiffness: 300, damping: 20 }}

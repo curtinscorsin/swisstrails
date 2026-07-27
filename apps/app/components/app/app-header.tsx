@@ -49,9 +49,12 @@ export function AppHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-4">
-          <Link href="/" className="text-xs text-fg-subtle transition-colors hover:text-fg">
+          <a
+            href="https://swiss-trails.com"
+            className="text-xs text-fg-subtle transition-colors hover:text-fg"
+          >
             Visit Swiss Trails ↗
-          </Link>
+          </a>
         </div>
       </header>
 

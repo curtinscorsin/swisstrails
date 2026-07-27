@@ -9,10 +9,11 @@
     "start": "next start",
     "lint": "next lint",
     "check-types": "tsc --noEmit",
+    "audit:content": "node --import tsx scripts/audit-curated-content.ts",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "db:generate": "prisma generate",
-    "db:seed": "tsx prisma/seed.ts",
+    "db:seed": "tsx --env-file=.env.local scripts/seed-supabase.ts",
     "db:migrate": "prisma migrate dev"
   },
   "dependencies": {

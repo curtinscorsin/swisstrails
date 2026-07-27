@@ -1,32 +1,37 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { categoryConfig, difficultyConfig, regionConfig, formatDuration } from "@/lib/utils";
 import { DirectionsActions } from "@/components/app/directions-actions";
 import { WeatherWidget } from "@/components/app/weather-widget";
 import { PhotoStrip } from "@/components/app/photo-strip";
+import { LocationPhoto } from "@/components/app/location-photo";
+import { RouteVerificationDetails } from "@/components/app/route-verification";
+import {
+  getPrimaryLocationImage,
+  resolveSourcedImages,
+} from "@/lib/location-image-data";
 import {
   MapPin, Clock, Mountain, ArrowLeft, Navigation, Gauge,
-  Car, Bus, Lightbulb,
+  Car, Bus, Lightbulb, Ruler,
 } from "lucide-react";
-import type { LocationImage } from "@/types";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return PLACEHOLDER_LOCATIONS.map((loc) => ({ slug: loc.slug }));
+  return CURATED_LOCATIONS.map((loc) => ({ slug: loc.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const location = PLACEHOLDER_LOCATIONS.find((l) => l.slug === slug);
+  const location = CURATED_LOCATIONS.find((l) => l.slug === slug);
   if (!location) return {};
 
-  const cat = categoryConfig[location.category];
+  const primaryImage = getPrimaryLocationImage(location);
+  const socialImage = primaryImage?.url ?? "/og.png";
 
   return {
     title: location.name,
@@ -34,32 +39,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${location.name} — Swiss Trails`,
       description: location.tagline,
-      images: [{ url: location.heroImage.url, width: 1200, height: 800, alt: location.heroImage.alt }],
+      images: [{ url: socialImage, width: 1200, height: 800, alt: location.name }],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title: `${location.name} — Swiss Trails`,
       description: location.tagline,
-      images: [location.heroImage.url],
+      images: [socialImage],
     },
   };
 }
 
 export default async function LocationPage({ params }: Props) {
   const { slug } = await params;
-  const location = PLACEHOLDER_LOCATIONS.find((l) => l.slug === slug);
+  const location = CURATED_LOCATIONS.find((l) => l.slug === slug);
   if (!location) notFound();
 
   const cat = categoryConfig[location.category];
   const diff = difficultyConfig[location.difficulty];
   const region = regionConfig[location.region];
 
-  // Photos for the strip: hero first, then gallery (dedupe by url).
-  const photoStrip: LocationImage[] = [
-    location.heroImage,
-    ...location.gallery.filter((g) => g.url !== location.heroImage.url),
-  ];
+  const photoStrip = resolveSourcedImages(location);
+  const primaryImage = photoStrip[0] ?? null;
 
   const DIFF_COLOR: Record<string, string> = {
     easy: "text-emerald-400",
@@ -72,10 +74,9 @@ export default async function LocationPage({ params }: Props) {
     <div className="min-h-dvh bg-trail-950 text-fg">
       {/* Hero */}
       <div className="relative h-[55vh] min-h-[340px]">
-        <Image
-          src={location.heroImage.url}
-          alt={location.heroImage.alt}
-          fill
+        <LocationPhoto
+          location={location}
+          image={primaryImage}
           className="object-cover"
           priority
           sizes="100vw"
@@ -85,7 +86,7 @@ export default async function LocationPage({ params }: Props) {
         {/* Back */}
         <div className="absolute top-0 left-0 right-0 px-2 pt-[max(0.5rem,env(safe-area-inset-top))] flex items-center justify-between">
           <Link
-            href="/"
+            href="/explore"
             className="inline-flex items-center gap-1.5 h-11 px-2 text-white/80 hover:text-white transition-colors text-sm"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -120,22 +121,28 @@ export default async function LocationPage({ params }: Props) {
             value={diff.label}
             valueClass={DIFF_COLOR[location.difficulty]}
           />
+          {location.distanceKm && (
+            <Stat
+              icon={<Ruler className="w-4 h-4" />}
+              label="Distance"
+              value={`${location.distanceKm} km`}
+            />
+          )}
           {location.elevation && (
             <Stat
               icon={<Mountain className="w-4 h-4" />}
-              label="Elevation"
+              label="Destination"
               value={`${location.elevation.toLocaleString()} m`}
             />
           )}
           <Stat
             icon={<Clock className="w-4 h-4" />}
-            label="Visit time"
-            value={`${location.visitDurationHours.min}–${location.visitDurationHours.max} h`}
-          />
-          <Stat
-            icon={<Car className="w-4 h-4" />}
-            label="By car"
-            value={`~${formatDuration(location.travelTimeMinutes)}`}
+            label="Walking time"
+            value={
+              location.verification
+                ? formatDuration(location.verification.durationMinutes)
+                : `${location.visitDurationHours.min}–${location.visitDurationHours.max} h`
+            }
           />
           <Stat
             icon={<MapPin className="w-4 h-4" />}
@@ -149,8 +156,21 @@ export default async function LocationPage({ params }: Props) {
           <p className="text-stone-300 leading-relaxed">{location.description}</p>
         )}
 
+        {location.longDescription && (
+          <p className="text-stone-400 text-sm leading-relaxed">{location.longDescription}</p>
+        )}
+
+        {location.verification && (
+          <RouteVerificationDetails
+            verification={location.verification}
+            destination={location.coordinates}
+            destinationName={`${location.name} map point`}
+          />
+        )}
+
         {/* Getting there — access + parking/transport chips */}
-        {(location.accessInfo || location.parkingAvailable || location.publicTransport) && (
+        {!location.verification &&
+          (location.accessInfo || location.parkingAvailable || location.publicTransport) && (
           <div>
             <p className="text-[11px] font-medium tracking-[0.14em] uppercase text-fg-muted mb-2.5 flex items-center gap-1.5">
               <Navigation className="w-3 h-3" />
@@ -226,20 +246,16 @@ export default async function LocationPage({ params }: Props) {
             href="/explore"
             className="flex items-center justify-center gap-2 h-11 px-4 flex-shrink-0 rounded-lg bg-white/[0.06] hover:bg-white/[0.1] text-stone-300 font-medium text-sm transition-colors"
           >
-            Explore all 500+
+            Explore routes
           </Link>
         </div>
 
-        {/* Upsell */}
-        <div className="rounded-xl bg-white/[0.03] p-5 text-center">
-          <p className="text-fg text-sm font-medium mb-1">Want 500+ more locations like this?</p>
-          <p className="text-fg-muted text-xs mb-4">One payment. Lifetime access. Hidden lakes, secret viewpoints, night skies.</p>
-          <Link
-            href="/checkout"
-            className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-lg bg-gold-400 hover:bg-gold-300 active:bg-gold-500 text-trail-950 text-sm font-semibold transition-colors"
-          >
-            Get Swiss Trails — CHF 29
-          </Link>
+        <div className="rounded-xl border border-white/[0.07] bg-white/[0.03] p-5">
+          <p className="text-fg text-sm font-medium mb-1">Why the collection is intentionally small</p>
+          <p className="text-fg-muted text-xs leading-relaxed">
+            Swiss Trails publishes a route only after its place, route data, access notes and
+            source links can be checked. More routes will appear as that review is completed.
+          </p>
         </div>
       </div>
     </div>

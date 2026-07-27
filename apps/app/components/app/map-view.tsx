@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, useMap, ZoomControl } from "react-leaflet";
 import { useMapStore } from "@/store/map-store";
-import { PLACEHOLDER_LOCATIONS, SWITZERLAND_CENTER, SWITZERLAND_DEFAULT_ZOOM } from "@/data/locations";
+import { SWITZERLAND_CENTER, SWITZERLAND_DEFAULT_ZOOM } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { categoryConfig } from "@/lib/utils";
 import { haptics } from "@/lib/haptics";
 import type { Location } from "@/types";
@@ -109,7 +110,7 @@ function RecenterController() {
 
   useEffect(() => {
     if (!selectedLocationId) return;
-    const location = PLACEHOLDER_LOCATIONS.find((l) => l.id === selectedLocationId);
+    const location = CURATED_LOCATIONS.find((l) => l.id === selectedLocationId);
     if (!location) return;
 
     const zoom = map.getZoom();
@@ -165,7 +166,7 @@ function ClusterLayer({ locations }: { locations: Location[] }) {
 
 function SelectedMarker() {
   const { selectedLocationId } = useMapStore();
-  const location = PLACEHOLDER_LOCATIONS.find((l) => l.id === selectedLocationId);
+  const location = CURATED_LOCATIONS.find((l) => l.id === selectedLocationId);
   if (!location) return null;
   return (
     <Marker

@@ -9,7 +9,7 @@ import {
   useTransform,
   animate,
 } from "framer-motion";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ImageOff, X } from "lucide-react";
 import { SPRING } from "@/lib/motion";
 import { haptics } from "@/lib/haptics";
 import { cn } from "@/lib/utils";
@@ -57,14 +57,7 @@ export function PhotoStrip({ photos, className }: PhotoStripProps) {
             aria-label={`Open photo ${i + 1} of ${photos.length}`}
             className="pressable relative flex-shrink-0 h-24 w-32 rounded-xl overflow-hidden bg-surface-1"
           >
-            <Image
-              src={img.url}
-              alt={img.alt}
-              fill
-              className="object-cover"
-              sizes="128px"
-              priority={i === 0}
-            />
+            <PhotoThumbnail image={img} priority={i === 0} />
           </button>
         ))}
       </div>
@@ -76,6 +69,36 @@ export function PhotoStrip({ photos, className }: PhotoStripProps) {
         onIndexChange={setLightboxIndex}
       />
     </>
+  );
+}
+
+function PhotoThumbnail({
+  image,
+  priority,
+}: {
+  image: LocationImage;
+  priority: boolean;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <span className="absolute inset-0 flex items-center justify-center bg-surface-2 text-fg-subtle">
+        <ImageOff className="h-5 w-5" aria-hidden />
+      </span>
+    );
+  }
+
+  return (
+    <Image
+      src={image.url}
+      alt={image.alt}
+      fill
+      className="object-cover"
+      sizes="128px"
+      priority={priority}
+      onError={() => setFailed(true)}
+    />
   );
 }
 
@@ -255,6 +278,22 @@ function LightboxInner({
           </p>
         </>
       )}
+      {photos[index]?.credit && (
+        photos[index].sourceUrl ? (
+          <a
+            href={photos[index].sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="absolute bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-4 z-10 max-w-[40vw] truncate text-[10px] text-white/55 underline decoration-white/20 underline-offset-2 hover:text-white/80"
+          >
+            {photos[index].credit} ↗
+          </a>
+        ) : (
+          <p className="absolute bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-4 max-w-[40vw] truncate text-[10px] text-white/45 pointer-events-none">
+            {photos[index].credit}
+          </p>
+        )
+      )}
     </motion.div>
   );
 }
@@ -269,25 +308,34 @@ function LightboxPage({
   active: boolean;
 }) {
   const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
   return (
     <div
       className="relative h-full flex-shrink-0"
       style={{ width: width || "100%" }}
     >
-      {!loaded && <div className="absolute inset-8 skeleton rounded-lg" />}
-      <Image
-        src={img.url}
-        alt={img.alt}
-        fill
-        className={cn(
-          "object-contain transition-opacity duration-300",
-          loaded ? "opacity-100" : "opacity-0"
-        )}
-        sizes="100vw"
-        draggable={false}
-        priority={active}
-        onLoad={() => setLoaded(true)}
-      />
+      {!loaded && !failed && <div className="absolute inset-8 skeleton rounded-lg" />}
+      {failed ? (
+        <div className="absolute inset-8 flex flex-col items-center justify-center gap-2 rounded-lg bg-white/[0.04] text-white/45">
+          <ImageOff className="h-7 w-7" aria-hidden />
+          <span className="text-xs">Photo unavailable</span>
+        </div>
+      ) : (
+        <Image
+          src={img.url}
+          alt={img.alt}
+          fill
+          className={cn(
+            "object-contain transition-opacity duration-300",
+            loaded ? "opacity-100" : "opacity-0"
+          )}
+          sizes="100vw"
+          draggable={false}
+          priority={active}
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+        />
+      )}
     </div>
   );
 }

@@ -3,7 +3,9 @@
 import type { Location, LocationImage } from "@/types";
 import { useImageOverridesStore } from "@/store/image-overrides-store";
 import { SUPABASE_IMAGES_ENABLED } from "@/lib/flags";
-import { SOURCED_IMAGES } from "@/data/sourced-images";
+import { resolveSourcedImages } from "@/lib/location-image-data";
+
+export { getPrimaryLocationImage, resolveSourcedImages } from "@/lib/location-image-data";
 
 /**
  * Image source-priority model.
@@ -12,30 +14,11 @@ import { SOURCED_IMAGES } from "@/data/sourced-images";
  *
  *   1. User / Supabase-uploaded images  ← FUTURE (gated by SUPABASE_IMAGES_ENABLED)
  *   2. Admin override                   ← image-overrides-store (localStorage)
- *   3. Sourced                          ← location.heroImage + location.gallery
+ *   3. Destination-verified sourced images
  *
  * Whichever tier supplies a non-empty list wins outright (no merging across
  * tiers). Within the winning list the FIRST item is treated as the hero/primary.
  */
-
-/**
- * Priority tier #3 — the location's own sourced images, deduped by url:
- *   heroImage (Unsplash) → real geo-located Wikimedia Commons photos
- *   (scripts/source-images.mjs → data/sourced-images.ts) → any inline gallery.
- * Locations with no Commons coverage (e.g. loc-175) simply fall back to their
- * hero. Pure: safe to call from server components, loaders, tests, etc.
- */
-export function resolveSourcedImages(location: Location): LocationImage[] {
-  const seen = new Set<string>();
-  const out: LocationImage[] = [];
-  const commons = SOURCED_IMAGES[location.id] ?? [];
-  for (const img of [location.heroImage, ...commons, ...location.gallery]) {
-    if (!img?.url || seen.has(img.url)) continue;
-    seen.add(img.url);
-    out.push(img);
-  }
-  return out;
-}
 
 /**
  * Priority tier #1 — Supabase / user-uploaded images.
@@ -75,6 +58,6 @@ export function useLocationImages(location: Location | null): LocationImage[] {
   // 2. Admin override (localStorage).
   if (override && override.length > 0) return override;
 
-  // 3. Sourced (Unsplash + Wikimedia), deduped.
+  // 3. Destination-verified Wikimedia / explicit gallery images, deduped.
   return resolveSourcedImages(location);
 }

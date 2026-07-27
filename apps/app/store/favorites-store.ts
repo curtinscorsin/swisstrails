@@ -35,11 +35,20 @@ export const useFavoritesStore = create<FavoritesStore>()(
 
       toggleFavorite: (id) => {
         const { favoriteIds, addFavorite, removeFavorite } = get();
-        if (favoriteIds.has(id)) {
+        const wasFavorite = favoriteIds.has(id);
+        if (wasFavorite) {
           removeFavorite(id);
         } else {
           addFavorite(id);
         }
+        // Local persistence is the source of truth for immediate/offline use.
+        // Server sync is best-effort: an unauthenticated or temporarily offline
+        // visitor must not lose a favourite they just saved.
+        void fetch("/api/favorites", {
+          method: wasFavorite ? "DELETE" : "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ locationId: id }),
+        }).catch(() => undefined);
       },
 
       isFavorite: (id) => get().favoriteIds.has(id),

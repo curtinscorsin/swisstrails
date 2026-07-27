@@ -20,7 +20,8 @@ create type difficulty as enum ('easy', 'moderate', 'challenging', 'expert');
 create type region as enum (
   'bern', 'zurich', 'graubunden', 'valais', 'lucerne',
   'uri', 'ticino', 'st-gallen', 'appenzell', 'fribourg',
-  'vaud', 'obwalden'
+  'vaud', 'obwalden', 'nidwalden', 'schwyz', 'glarus', 'jura',
+  'neuchatel', 'solothurn'
 );
 create type season as enum ('spring', 'summer', 'autumn', 'winter', 'year-round');
 create type purchase_status as enum ('pending', 'completed', 'refunded');
@@ -29,7 +30,7 @@ create type purchase_status as enum ('pending', 'completed', 'refunded');
 -- PROFILES
 -- ─────────────────────────────────────────────
 create table profiles (
-  id                  uuid primary key default uuid_generate_v4(),
+  id                  uuid primary key references auth.users(id) on delete cascade,
   email               text unique not null,
   name                text,
   avatar_url          text,
@@ -54,7 +55,7 @@ begin
   );
   return new;
 end;
-$$ language plpgsql security definer;
+$$ language plpgsql security definer set search_path = '';
 
 create trigger on_auth_user_created
   after insert on auth.users
@@ -77,7 +78,7 @@ create trigger profiles_updated_at
 -- LOCATIONS
 -- ─────────────────────────────────────────────
 create table locations (
-  id                    uuid primary key default uuid_generate_v4(),
+  id                    text primary key,
   slug                  text unique not null,
   name                  text not null,
   tagline               text not null,
@@ -104,6 +105,7 @@ create table locations (
   elevation             integer,
   distance_km           double precision,
   is_featured           boolean not null default false,
+  is_new                boolean not null default false,
   is_published          boolean not null default false,
   view_count            integer not null default 0,
   save_count            integer not null default 0,
@@ -126,8 +128,8 @@ create trigger locations_updated_at
 -- LOCATION IMAGES
 -- ─────────────────────────────────────────────
 create table location_images (
-  id          uuid primary key default uuid_generate_v4(),
-  location_id uuid not null references locations(id) on delete cascade,
+  id          text primary key,
+  location_id text not null references locations(id) on delete cascade,
   url         text not null,
   alt         text not null,
   width       integer,
@@ -145,7 +147,7 @@ create index location_images_location_idx on location_images(location_id);
 create table favorites (
   id          uuid primary key default uuid_generate_v4(),
   user_id     uuid not null references profiles(id) on delete cascade,
-  location_id uuid not null references locations(id) on delete cascade,
+  location_id text not null references locations(id) on delete cascade,
   created_at  timestamptz not null default now(),
   unique(user_id, location_id)
 );
@@ -158,13 +160,13 @@ create or replace function update_location_save_count()
 returns trigger as $$
 begin
   if tg_op = 'INSERT' then
-    update locations set save_count = save_count + 1 where id = new.location_id;
+    update public.locations set save_count = save_count + 1 where id = new.location_id;
   elsif tg_op = 'DELETE' then
-    update locations set save_count = greatest(0, save_count - 1) where id = old.location_id;
+    update public.locations set save_count = greatest(0, save_count - 1) where id = old.location_id;
   end if;
   return null;
 end;
-$$ language plpgsql security definer;
+$$ language plpgsql security definer set search_path = '';
 
 create trigger favorites_save_count
   after insert or delete on favorites
@@ -233,83 +235,108 @@ create index audit_logs_resource_idx on audit_logs(resource, resource_id);
 alter table profiles enable row level security;
 
 create policy "profiles_select_own" on profiles
-  for select using (auth.uid() = id);
+  for select to authenticated using ((select auth.uid()) = id);
 
 create policy "profiles_update_own" on profiles
-  for update using (auth.uid() = id);
+  for update to authenticated
+  using ((select auth.uid()) = id)
+  with check ((select auth.uid()) = id);
+
+create schema if not exists private;
+
+create or replace function private.is_admin()
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = (select auth.uid()) and role = 'admin'
+  );
+$$;
 
 create policy "profiles_select_admin" on profiles
-  for select using (
-    exists (select 1 from profiles where id = auth.uid() and role = 'admin')
-  );
+  for select to authenticated using ((select private.is_admin()));
 
 -- Locations: published locations are public for authenticated users with access
 alter table locations enable row level security;
 
 create policy "locations_select_authenticated" on locations
-  for select using (
-    is_published = true
-    and exists (
-      select 1 from profiles
-      where id = auth.uid()
-      and has_purchased = true
-    )
-  );
+  for select to authenticated using (is_published = true);
 
 create policy "locations_all_admin" on locations
-  for all using (
-    exists (select 1 from profiles where id = auth.uid() and role = 'admin')
-  );
+  for all to authenticated
+  using ((select private.is_admin()))
+  with check ((select private.is_admin()));
 
 -- Location images: same access as parent location
 alter table location_images enable row level security;
 
 create policy "location_images_select" on location_images
-  for select using (
+  for select to authenticated using (
     exists (
       select 1 from locations l
-      inner join profiles p on p.id = auth.uid()
       where l.id = location_id
       and l.is_published = true
-      and p.has_purchased = true
     )
   );
+
+create policy "location_images_all_admin" on location_images
+  for all to authenticated
+  using ((select private.is_admin()))
+  with check ((select private.is_admin()));
 
 -- Favorites: users can CRUD their own
 alter table favorites enable row level security;
 
-create policy "favorites_crud_own" on favorites
-  for all using (auth.uid() = user_id);
+create policy "favorites_select_own" on favorites
+  for select to authenticated using ((select auth.uid()) = user_id);
+create policy "favorites_insert_own" on favorites
+  for insert to authenticated with check ((select auth.uid()) = user_id);
+create policy "favorites_delete_own" on favorites
+  for delete to authenticated using ((select auth.uid()) = user_id);
 
 -- Purchases: users can read own, admins can read all
 alter table purchases enable row level security;
 
 create policy "purchases_select_own" on purchases
-  for select using (auth.uid() = user_id);
-
-create policy "purchases_insert_service" on purchases
-  for insert with check (true); -- service role only
+  for select to authenticated using ((select auth.uid()) = user_id);
 
 create policy "purchases_select_admin" on purchases
-  for select using (
-    exists (select 1 from profiles where id = auth.uid() and role = 'admin')
-  );
+  for select to authenticated using ((select private.is_admin()));
 
 -- Testimonials: published are public
 alter table testimonials enable row level security;
 
 create policy "testimonials_select_published" on testimonials
-  for select using (is_published = true);
+  for select to anon, authenticated using (is_published = true);
 
 create policy "testimonials_all_admin" on testimonials
-  for all using (
-    exists (select 1 from profiles where id = auth.uid() and role = 'admin')
-  );
+  for all to authenticated
+  using ((select private.is_admin()))
+  with check ((select private.is_admin()));
+
+alter table audit_logs enable row level security;
+create policy "audit_logs_select_admin" on audit_logs
+  for select to authenticated using ((select private.is_admin()));
 
 -- ─────────────────────────────────────────────
--- STORAGE BUCKETS (run in Supabase dashboard)
+-- STORAGE BUCKETS
 -- ─────────────────────────────────────────────
--- insert into storage.buckets (id, name, public) values
---   ('location-images', 'location-images', true),
---   ('user-uploads', 'user-uploads', false),
---   ('profile-images', 'profile-images', true);
+insert into storage.buckets (id, name, public)
+values
+  ('location-images', 'location-images', true),
+  ('user-uploads', 'user-uploads', false),
+  ('profile-images', 'profile-images', true)
+on conflict (id) do nothing;
+
+create policy "public_location_images" on storage.objects
+  for select to anon, authenticated using (bucket_id = 'location-images');
+create policy "public_profile_images" on storage.objects
+  for select to anon, authenticated using (bucket_id = 'profile-images');
+create policy "users_manage_own_uploads" on storage.objects
+  for all to authenticated
+  using (bucket_id = 'user-uploads' and (storage.foldername(name))[1] = (select auth.uid())::text)
+  with check (bucket_id = 'user-uploads' and (storage.foldername(name))[1] = (select auth.uid())::text);

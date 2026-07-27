@@ -105,7 +105,8 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
 
   async function copyCoords() {
     if (!location) return;
-    const text = formatCoordinates(location.coordinates.lat, location.coordinates.lng);
+    const target = location.verification?.start.coordinates ?? location.coordinates;
+    const text = formatCoordinates(target.lat, target.lng);
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
@@ -115,8 +116,12 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
     }
   }
 
-  const lat = location?.coordinates.lat ?? 0;
-  const lng = location?.coordinates.lng ?? 0;
+  const target = location?.verification?.start.coordinates ?? location?.coordinates;
+  const lat = target?.lat ?? 0;
+  const lng = target?.lng ?? 0;
+  const targetName = location?.verification
+    ? `${location.name} trailhead — ${location.verification.start.name}`
+    : location?.name ?? "";
 
   return (
     <AnimatePresence>
@@ -155,10 +160,10 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
             <div className="flex items-center justify-between px-5 pt-2 pb-3">
               <div className="min-w-0">
                 <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-fg-muted">
-                  Get directions
+                  Directions to route start
                 </p>
                 <h3 className="text-fg text-base font-semibold leading-tight line-clamp-1">
-                  {location.name}
+                  {location.verification?.start.name ?? location.name}
                 </h3>
               </div>
               <button
@@ -177,7 +182,7 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
             <div className="px-3 pb-[max(1rem,env(safe-area-inset-bottom))] space-y-0.5 overflow-y-auto overscroll-contain">
               <Row
                 icon={Navigation}
-                label="Get directions — Google Maps"
+                label="Route start — Google Maps"
                 onClick={() =>
                   openUrl(
                     isIOS() || isAndroid()
@@ -188,8 +193,8 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
               />
               <Row
                 icon={Apple}
-                label="Get directions — Apple Maps"
-                onClick={() => openUrl(appleMapsApp(lat, lng, location.name))}
+                label="Route start — Apple Maps"
+                onClick={() => openUrl(appleMapsApp(lat, lng, targetName))}
               />
               <Row
                 icon={Mountain}
@@ -216,7 +221,7 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
                 label="Download GPX"
                 hint="For Garmin & GPS apps"
                 onClick={() =>
-                  downloadGpx(lat, lng, location.name, location.slug)
+                  downloadGpx(lat, lng, targetName, `${location.slug}-trailhead`)
                 }
               />
               <Row

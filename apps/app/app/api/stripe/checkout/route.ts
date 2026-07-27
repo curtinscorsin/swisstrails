@@ -1,19 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createCheckoutSession } from "@/lib/stripe";
-import { auth } from "@/lib/auth";
+import { createClient } from "@/lib/supabase/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth();
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json(
+        { error: "Please sign in before purchasing" },
+        { status: 401 }
+      );
+    }
     const body = await req.json();
-    const email = body.email ?? session?.user?.email;
+    const email = body.email ?? user.email;
 
     if (!email) {
       return NextResponse.json({ error: "Email required" }, { status: 400 });
     }
 
-    const userId = session?.user?.id ?? `guest_${Date.now()}`;
-    const url = await createCheckoutSession(userId, email);
+    const url = await createCheckoutSession(user.id, email);
 
     return NextResponse.json({ url });
   } catch (error) {

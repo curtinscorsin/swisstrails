@@ -29,7 +29,8 @@ export default function HikeBuddyPage() {
             <h1 className="t-h2 text-fg mb-3">Hike Buddy</h1>
             <p className="t-body text-fg-muted max-w-sm mb-8">
               Find hiking partners who match your pace, favourite regions and
-              availability. We&apos;re putting the finishing touches on it.
+              availability. This feature is not available yet; no public member
+              profiles are currently shown.
             </p>
             <Button asChild variant="alpine">
               <Link href="/explore">

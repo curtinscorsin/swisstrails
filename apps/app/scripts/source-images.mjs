@@ -6,13 +6,11 @@
  * `apps/app/data/locations.ts` and writes them to `apps/app/data/sourced-images.ts`.
  *
  * Strategy (per location):
- *   1. Primary — free photo APIs, ONLY if their keys exist in the environment:
- *        UNSPLASH_ACCESS_KEY, PEXELS_API_KEY, PIXABAY_API_KEY
- *      (Keys are not present in the default run; this path is written but skipped.)
- *   2. Fallback (KEYLESS, what actually runs) — Wikimedia Commons geosearch near
- *      the location's coordinates. Keeps real photos (image/jpeg, not maps/SVG/etc),
- *      takes up to 3 per location, and records attribution in `credit`.
- *   3. If nothing is found, the location is omitted from the output map.
+ *   1. Search Wikimedia Commons by the destination's exact name.
+ *   2. Keep only real JPEG photos whose file title contains at least one
+ *      destination-specific token (for example "Macun" for "Lai da Macun").
+ *   3. If no verified match is found, omit the location instead of presenting
+ *      a nearby-but-unrelated image as that destination.
  *
  * The script is RESUMABLE / IDEMPOTENT: it loads any locations already present in
  * `sourced-images.ts` and skips them, so it can be re-run to fill gaps.
@@ -22,8 +20,6 @@
  *   LIMIT=20 node apps/app/scripts/source-images.mjs        # only process 20 (debug)
  *   FORCE=1 node apps/app/scripts/source-images.mjs         # ignore existing, redo all
  *
- * To use the paid/free APIs later, set the relevant key(s) in the environment:
- *   UNSPLASH_ACCESS_KEY=... PEXELS_API_KEY=... PIXABAY_API_KEY=... node apps/app/scripts/source-images.mjs
  */
 
 import { readFile, writeFile } from "node:fs/promises";
@@ -40,11 +36,9 @@ const USER_AGENT =
   "SwissTrails-ImageSourcer/1.0 (https://swisstrails.example; hiking location photo sourcing; node fetch)";
 
 const MAX_PER_LOCATION = 3;
-const GEO_RADIUS_M = 4000;
-const GEO_LIMIT = 12;
 const THUMB_WIDTH = 1200;
 const CONCURRENCY = 4;
-const POLITE_DELAY_MS = 150; // small delay between requests inside a worker
+const POLITE_DELAY_MS = 120; // small delay between requests inside a worker
 const SAVE_EVERY = 25; // checkpoint output every N newly-processed locations
 
 const LIMIT = process.env.LIMIT ? Number(process.env.LIMIT) : Infinity;
@@ -152,66 +146,16 @@ function stripHtml(str) {
 }
 
 /* ------------------------------------------------------------------ */
-/* SOURCE 1 — keyed free APIs (only run if env keys are present).        */
-/* ------------------------------------------------------------------ */
-const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY;
-const PEXELS_KEY = process.env.PEXELS_API_KEY;
-const PIXABAY_KEY = process.env.PIXABAY_API_KEY;
-
-async function fromUnsplash(loc) {
-  if (!UNSPLASH_KEY) return [];
-  const q = encodeURIComponent(`${loc.name} Switzerland`);
-  const url = `https://api.unsplash.com/search/photos?query=${q}&per_page=${MAX_PER_LOCATION}&orientation=landscape`;
-  const json = await fetchJson(url, {
-    headers: { Authorization: `Client-ID ${UNSPLASH_KEY}` },
-  });
-  if (!json?.results?.length) return [];
-  return json.results.slice(0, MAX_PER_LOCATION).map((p, i) => ({
-    id: `${loc.id}-unsplash-${i}`,
-    url: `${p.urls.raw}&w=${THUMB_WIDTH}&q=80`,
-    alt: loc.name,
-    width: THUMB_WIDTH,
-    credit: `${p.user?.name ?? "Unknown"} / Unsplash`,
-  }));
-}
-
-async function fromPexels(loc) {
-  if (!PEXELS_KEY) return [];
-  const q = encodeURIComponent(`${loc.name} Switzerland`);
-  const url = `https://api.pexels.com/v1/search?query=${q}&per_page=${MAX_PER_LOCATION}&orientation=landscape`;
-  const json = await fetchJson(url, { headers: { Authorization: PEXELS_KEY } });
-  if (!json?.photos?.length) return [];
-  return json.photos.slice(0, MAX_PER_LOCATION).map((p, i) => ({
-    id: `${loc.id}-pexels-${i}`,
-    url: `${p.src?.large ?? p.src?.original}`,
-    alt: loc.name,
-    width: THUMB_WIDTH,
-    credit: `${p.photographer ?? "Unknown"} / Pexels`,
-  }));
-}
-
-async function fromPixabay(loc) {
-  if (!PIXABAY_KEY) return [];
-  const q = encodeURIComponent(`${loc.name} Switzerland`);
-  const url = `https://pixabay.com/api/?key=${PIXABAY_KEY}&q=${q}&image_type=photo&orientation=horizontal&per_page=${MAX_PER_LOCATION}`;
-  const json = await fetchJson(url);
-  if (!json?.hits?.length) return [];
-  return json.hits.slice(0, MAX_PER_LOCATION).map((p, i) => ({
-    id: `${loc.id}-pixabay-${i}`,
-    url: p.largeImageURL ?? p.webformatURL,
-    alt: loc.name,
-    width: THUMB_WIDTH,
-    credit: `${p.user ?? "Unknown"} / Pixabay`,
-  }));
-}
-
-/* ------------------------------------------------------------------ */
-/* SOURCE 2 — Wikimedia Commons geosearch (KEYLESS fallback).            */
+/* Verified Wikimedia Commons name search (KEYLESS).                    */
 /* ------------------------------------------------------------------ */
 function isRealPhoto(info, title) {
   const mime = info?.mime ?? "";
   if (mime !== "image/jpeg") return false; // jpeg only -> excludes svg/png maps/icons/diagrams
-  const t = (title ?? "").toLowerCase();
+  // Card and hero crops need a genuinely usable landscape source. Reject
+  // thumbnails, portraits and tiny historical files rather than upscaling them.
+  if ((info.width ?? 0) < 1000 || (info.height ?? 0) < 600) return false;
+  if ((info.width ?? 0) / (info.height ?? 1) < 1.05) return false;
+  const t = normalizeWords(title);
   // Filter out non-photographic assets that still happen to be jpeg.
   const bannedWords = [
     "map",
@@ -229,6 +173,109 @@ function isRealPhoto(info, title) {
     "scan",
     "drawing",
     "sketch",
+    "painting",
+    "portrait",
+    "poster",
+    "museum",
+    "museo",
+    "musee",
+    "herbarium",
+    "flora",
+    "flower",
+    "blume",
+    "orchid",
+    "fungus",
+    "xylaria",
+    "bird",
+    "vogel",
+    "kleiber",
+    "sitta",
+    "ibex",
+    "steinbock",
+    "cattle",
+    "cows",
+    "cow",
+    "horse",
+    "sheep",
+    "goat",
+    "snake",
+    "bothriechis",
+    "wildlife",
+    "chamois",
+    "elephant",
+    "wild baby",
+    "cat runs",
+    "interior",
+    "inside",
+    " innen",
+    "binnen",
+    "interieur",
+    "gastraum",
+    "aufenthaltsraum",
+    "zimmer",
+    "stube",
+    "kitchen",
+    "church",
+    "kirche",
+    "chapel",
+    "kapelle",
+    "bahnhof",
+    "station",
+    "gondola",
+    "cable car",
+    "funiculaire",
+    "funivia",
+    "bergbahn",
+    "seilbahn",
+    "luftseilbahn",
+    "bahn",
+    "ski lift",
+    "chairlift",
+    "bus",
+    "railway",
+    " lok ",
+    "tunnel",
+    "restaurant",
+    "hotel",
+    "werbe",
+    "carton",
+    "kirchner",
+    "installation design",
+    "championship",
+    "canoe",
+    "slalom",
+    "sekeri",
+    "turkey",
+    "cape town",
+    "anvers",
+    "antwerp",
+    "poort",
+    "relief",
+    "swisstopo",
+    "building site",
+    "construction site",
+    "denkmal",
+    "friedhof",
+    "cemetery",
+    "cimiter",
+    "grave",
+    "grab ",
+    "grenposten",
+    "grenzposten",
+    "schloss",
+    "castle",
+    "statue",
+    "sculpture",
+    "schiff",
+    "ship",
+    "panneaux",
+    "fingerpost",
+    "rhb",
+    "stern club",
+    "memorial",
+    "monument",
+    "schild",
+    " sign",
     "blazon",
     "flag",
   ];
@@ -236,40 +283,155 @@ function isRealPhoto(info, title) {
   return true;
 }
 
-async function fromCommons(loc) {
-  const url =
-    `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*` +
-    `&generator=geosearch&ggscoord=${loc.lat}|${loc.lng}` +
-    `&ggsradius=${GEO_RADIUS_M}&ggslimit=${GEO_LIMIT}&ggsnamespace=6` +
-    `&prop=imageinfo&iiprop=url|extmetadata|mime|size&iiurlwidth=${THUMB_WIDTH}`;
+const GENERIC_NAME_TOKENS = new Set([
+  "above", "alp", "alpe", "approach", "around", "back", "bridge", "circuit", "east", "first", "floor",
+  "from", "glacier", "gorge", "headwall", "hidden", "high", "lake", "lakes",
+  "loop", "lower", "meadow", "mont", "monte", "near", "ober", "old", "panorama", "pass", "photo", "plateau",
+  "quiet", "reservoir", "ridge", "road", "route", "side", "southern", "spot",
+  "summit", "sunset", "swiss", "switzerland", "terraces", "trail", "trails",
+  "traverse", "upper", "valle", "valley", "view", "viewpoint", "viewpoints",
+  "village", "waterfall", "wildlife", "with",
+]);
 
-  const json = await fetchJson(url);
-  const pages = json?.query?.pages;
-  if (!pages) return [];
+function strongestDestinationToken(tokens) {
+  return tokens.reduce(
+    (strongest, token) => (token.length >= strongest.length ? token : strongest),
+    "",
+  );
+}
 
-  // Preserve geosearch ordering (nearest first) via `index`.
-  const ordered = Object.values(pages).sort(
+function normalizeWords(value) {
+  return String(value ?? "")
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function destinationTokens(name) {
+  // Parentheses usually describe an access town/region, while slash-separated
+  // names often provide the most distinctive secondary waypoint. Ignore only
+  // the parenthetical qualifier so "(Bürglen)" cannot make a Bürglen viaduct
+  // look like "Biel-Kinzig".
+  const primaryName = String(name).split("(", 1)[0];
+  return [...new Set(
+    normalizeWords(primaryName)
+      .split(/\s+/)
+      .filter((token) => token.length >= 4 && !GENERIC_NAME_TOKENS.has(token)),
+  )];
+}
+
+function searchQueries(name, tokens) {
+  const full = String(name)
+    .replace(/[()[\],]/g, " ")
+    .replace(/\s*\/\s*/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const concise = full
+    .replace(
+      /\b(panorama|trails?|back|high|circuit|viewpoints?|hidden|upper|lower|above|around)\b/gi,
+      " ",
+    )
+    .replace(/\s+/g, " ")
+    .trim();
+  const strongestToken = strongestDestinationToken(tokens);
+  return [
+    ...new Set(
+      [full, concise, strongestToken]
+        .filter(Boolean)
+        .map((query) => `${query} Switzerland`),
+    ),
+  ].slice(0, 3);
+}
+
+function titleMatchesDestination(title, tokens) {
+  const normalizedTitle = normalizeWords(title.replace(/^File:/i, ""));
+  // Requiring the longest usable place token avoids ambiguous partial matches:
+  // "Trift bridge" must match Trift, not an unrelated bridge, and
+  // "First / Entlebuch" must match Entlebuch, not any file containing "first".
+  const strongestToken = strongestDestinationToken(tokens);
+  return Boolean(strongestToken && normalizedTitle.includes(strongestToken));
+}
+
+async function searchCommons(query) {
+  const params = new URLSearchParams({
+    action: "query",
+    format: "json",
+    origin: "*",
+    generator: "search",
+    gsrsearch: `${query} filetype:bitmap`,
+    gsrnamespace: "6",
+    gsrlimit: "16",
+    prop: "imageinfo",
+    iiprop: "url|extmetadata|mime|size",
+    iiurlwidth: String(THUMB_WIDTH),
+  });
+  const json = await fetchJson(`https://commons.wikimedia.org/w/api.php?${params}`);
+  return Object.values(json?.query?.pages ?? {}).sort(
     (a, b) => (a.index ?? 1e9) - (b.index ?? 1e9),
   );
+}
 
+function distanceKm(aLat, aLng, bLat, bLng) {
+  const toRadians = (degrees) => (degrees * Math.PI) / 180;
+  const earthRadiusKm = 6371;
+  const dLat = toRadians(bLat - aLat);
+  const dLng = toRadians(bLng - aLng);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRadians(aLat)) *
+      Math.cos(toRadians(bLat)) *
+      Math.sin(dLng / 2) ** 2;
+  return earthRadiusKm * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+}
+
+async function fromCommons(loc) {
+  const tokens = destinationTokens(loc.name);
+  if (!tokens.length) return [];
+
+  const candidates = [];
+  const seenTitles = new Set();
+  for (const query of searchQueries(loc.name, tokens)) {
+    const pages = await searchCommons(query);
+    for (const page of pages) {
+      if (seenTitles.has(page.title)) continue;
+      seenTitles.add(page.title);
+      if (!titleMatchesDestination(page.title, tokens)) continue;
+      const info = page.imageinfo?.[0];
+      if (!info || !isRealPhoto(info, page.title)) continue;
+      const meta = info.extmetadata ?? {};
+      const imageLat = Number.parseFloat(meta.GPSLatitude?.value);
+      const imageLng = Number.parseFloat(meta.GPSLongitude?.value);
+      if (
+        Number.isFinite(imageLat) &&
+        Number.isFinite(imageLng) &&
+        distanceKm(loc.lat, loc.lng, imageLat, imageLng) > 80
+      ) {
+        continue;
+      }
+      const tokenMatches = tokens.filter((token) =>
+        normalizeWords(page.title).includes(token),
+      ).length;
+      candidates.push({ page, info, score: tokenMatches * 100 - (page.index ?? 99) });
+    }
+    if (candidates.length >= MAX_PER_LOCATION) break;
+    await sleep(POLITE_DELAY_MS);
+  }
+
+  candidates.sort((a, b) => b.score - a.score);
   const out = [];
   const seenUrls = new Set();
-  for (const page of ordered) {
-    const info = page.imageinfo?.[0];
-    if (!info) continue;
-    if (!isRealPhoto(info, page.title)) continue;
-
+  for (const { info } of candidates) {
     const thumbUrl = info.thumburl ?? info.url;
     if (!thumbUrl || seenUrls.has(thumbUrl)) continue;
     seenUrls.add(thumbUrl);
-
     const meta = info.extmetadata ?? {};
     const artist = stripHtml(meta.Artist?.value) || "Unknown";
     const license =
       stripHtml(meta.LicenseShortName?.value) ||
       stripHtml(meta.License?.value) ||
       "see Wikimedia Commons";
-
     out.push({
       id: `${loc.id}-commons-${out.length}`,
       url: thumbUrl,
@@ -277,32 +439,35 @@ async function fromCommons(loc) {
       width: info.thumbwidth ?? THUMB_WIDTH,
       credit: `${artist} / ${license} via Wikimedia Commons`,
     });
-
     if (out.length >= MAX_PER_LOCATION) break;
   }
   return out;
 }
 
 /* ------------------------------------------------------------------ */
-/* Source a single location: try keyed APIs first, then Commons.        */
+/* Source a single location from a destination-verified provider.       */
 /* ------------------------------------------------------------------ */
 async function sourceLocation(loc) {
-  // Primary keyed providers (skipped when no keys present).
-  for (const provider of [fromUnsplash, fromPexels, fromPixabay]) {
-    try {
-      const imgs = await provider(loc);
-      if (imgs.length) return imgs;
-    } catch (err) {
-      // ignore provider error, fall through
-    }
-  }
-  // Keyless fallback.
   try {
     await sleep(POLITE_DELAY_MS);
     return await fromCommons(loc);
   } catch (err) {
     return [];
   }
+}
+
+function dedupeAcrossLocations(map, allLocations) {
+  const seenUrls = new Set();
+  const deduped = {};
+  for (const loc of allLocations) {
+    const images = (map[loc.id] ?? []).filter((image) => {
+      if (!image?.url || seenUrls.has(image.url)) return false;
+      seenUrls.add(image.url);
+      return true;
+    });
+    if (images.length) deduped[loc.id] = images;
+  }
+  return deduped;
 }
 
 /* ------------------------------------------------------------------ */
@@ -316,9 +481,9 @@ function serialize(map) {
   });
   const lines = [];
   lines.push("// AUTO-GENERATED by scripts/source-images.mjs — do not edit by hand.");
-  lines.push("// Real, free, attribution-only photos sourced from Wikimedia Commons");
-  lines.push("// (geosearch near each location) and, when API keys are present,");
-  lines.push("// Unsplash / Pexels / Pixabay. Re-run the script to refresh/extend.");
+  lines.push("// Real, free, attribution-only photos sourced from Wikimedia Commons.");
+  lines.push("// Every file title is verified against a destination-specific name token;");
+  lines.push("// unmatched nearby photos are intentionally omitted. Re-run to refresh.");
   lines.push('import type { LocationImage } from "@/types";');
   lines.push("");
   lines.push("export const SOURCED_IMAGES: Record<string, LocationImage[]> = {");
@@ -389,14 +554,15 @@ async function main() {
   for (let w = 0; w < CONCURRENCY; w++) workers.push(worker(w));
   await Promise.all(workers);
 
-  await save(results);
+  const verifiedResults = dedupeAcrossLocations(results, allLocations);
+  await save(verifiedResults);
 
-  const totalImages = Object.values(results).reduce((n, a) => n + a.length, 0);
+  const totalImages = Object.values(verifiedResults).reduce((n, a) => n + a.length, 0);
   console.log("\n----------------------------------------------------");
   console.log("Coverage summary");
   console.log("----------------------------------------------------");
   console.log(`Total locations:               ${allLocations.length}`);
-  console.log(`Locations with >=1 real image: ${Object.keys(results).length}`);
+  console.log(`Locations with verified images: ${Object.keys(verifiedResults).length}`);
   console.log(`Total images sourced:          ${totalImages}`);
   console.log(`Output written to:             ${OUTPUT_PATH}`);
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X, ArrowUp, ArrowDown, Trash2, Star, Plus, RotateCcw, Upload, ImageOff, Undo2,
@@ -26,7 +25,7 @@ interface LocationImageEditorProps {
  *
  * Reads/writes `image-overrides-store`, so changes reflect live everywhere the
  * app resolves images via `useLocationImages` (detail sheet, cards). When no
- * override exists the editor shows the sourced Unsplash/Wikimedia images;
+ * override exists the editor shows destination-verified Wikimedia images;
  * editing any of them seeds an override from that sourced list first.
  */
 export function LocationImageEditor({ location, onClose }: LocationImageEditorProps) {
@@ -179,13 +178,18 @@ export function LocationImageEditor({ location, onClose }: LocationImageEditorPr
                   <div className="flex items-center gap-3">
                     {/* Thumb */}
                     <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden bg-surface-1">
-                      <Image
+                      <ImageOff className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 text-fg-subtle" />
+                      {/* Admin overrides may point at any HTTPS image host, so a
+                          native image is intentionally used instead of Next's
+                          hostname allowlist. */}
+                      <img
                         src={img.url}
                         alt={img.alt}
-                        fill
-                        className="object-cover"
-                        sizes="64px"
-                        unoptimized
+                        className="absolute inset-0 h-full w-full object-cover"
+                        loading="lazy"
+                        onError={(event) => {
+                          event.currentTarget.style.display = "none";
+                        }}
                       />
                       {i === 0 && (
                         <span className="absolute top-1 left-1 inline-flex items-center gap-0.5 t-3xs font-semibold uppercase tracking-wide text-trail-950 bg-gold-400 rounded px-1 py-0.5">

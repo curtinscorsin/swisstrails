@@ -2,20 +2,20 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, SlidersHorizontal, X, Sparkles } from "lucide-react";
+import { AlertTriangle, BadgeCheck, Search, SlidersHorizontal, X, Sparkles } from "lucide-react";
 import { useMapStore } from "@/store/map-store";
 import { useGeoStore } from "@/store/geo-store";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { filterLocations, countActiveFilters } from "@/lib/filters";
-import { useLocationImages } from "@/lib/location-images";
 import { sortLocations, type SortMode } from "@/lib/sort";
 import { currentSeason, isInSeason } from "@/lib/season";
 import { seasonConfig } from "@/lib/utils";
 import { FilterDrawer } from "@/components/app/filter-drawer";
 import { SortControl } from "@/components/app/sort-control";
 import { LocationDetailSheet } from "@/components/app/location-detail-sheet";
+import { ResolvedLocationPhoto } from "@/components/app/location-photo";
 import { TripPill } from "@/components/app/trip-pill";
-import { categoryConfig, regionConfig, cn } from "@/lib/utils";
+import { regionConfig, cn } from "@/lib/utils";
 import { haptics } from "@/lib/haptics";
 import type { Location } from "@/types";
 
@@ -28,8 +28,8 @@ const SEASON_DISMISS_KEY = "swiss-trails-season-rail-dismissed";
 const SEASON_RAIL_LIMIT = 12;
 
 // Infinite-scroll page size for the masonry — keeps the DOM light and avoids
-// mounting all 500 cards (and fetching their images) up front, which would
-// burn Unsplash/Vercel bandwidth the user may never scroll to.
+// mounting every card (and fetching its images) up front, which would
+// fetch destination photos the user may never scroll to.
 const MASONRY_PAGE = 24;
 
 export default function ExplorePage() {
@@ -43,7 +43,7 @@ export default function ExplorePage() {
   const filteredLocations = useMemo(
     () =>
       sortLocations(
-        filterLocations(PLACEHOLDER_LOCATIONS, searchQuery, activeFilters),
+        filterLocations(CURATED_LOCATIONS, searchQuery, activeFilters),
         sortMode,
         userPosition
       ),
@@ -60,7 +60,7 @@ export default function ExplorePage() {
   const season = currentSeason();
   const inSeasonLocations = useMemo(
     () =>
-      PLACEHOLDER_LOCATIONS.filter((loc) => isInSeason(loc, season))
+      CURATED_LOCATIONS.filter((loc) => isInSeason(loc, season))
         .slice()
         .sort((a, b) => Number(b.isFeatured) - Number(a.isFeatured))
         .slice(0, SEASON_RAIL_LIMIT),
@@ -76,7 +76,7 @@ export default function ExplorePage() {
     inSeasonLocations.length > 0;
 
   // Continuous loading: render a window of cards and grow it as the user nears
-  // the end, so we never mount all 500 (and their images) at once.
+  // the end, so larger future curated releases remain lightweight.
   const scrollRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [visibleCount, setVisibleCount] = useState(MASONRY_PAGE);
@@ -128,7 +128,7 @@ export default function ExplorePage() {
             <h1 className="font-heading text-4xl leading-none text-fg">Find your next trail.</h1>
           </div>
           <p className="max-w-sm text-right text-sm leading-relaxed text-fg-muted">
-            Field notes, precise access details and quiet places worth the walk.
+            Official route data, precise access details and transparent advisories.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -258,11 +258,11 @@ export default function ExplorePage() {
                       onClick={() => setSelectedLocation(loc)}
                       className="group relative h-28 w-44 flex-shrink-0 overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04] text-left shadow-sm transition-transform active:scale-[0.98]"
                     >
-                      <img
-                        src={loc.heroImage.url}
-                        alt={loc.name}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
+                      <ResolvedLocationPhoto
+                        location={loc}
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        sizes="176px"
+                        compactFallback
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
                       <div className="absolute bottom-0 left-0 right-0 p-2">
@@ -338,13 +338,6 @@ interface MasonryCardProps {
 }
 
 function MasonryCard({ location, aspectRatio, onClick }: MasonryCardProps) {
-  const [imgError, setImgError] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-  // Resolve via the image source-priority resolver so admin/curated images
-  // appear on the wall too (previously it hard-used heroImage.url).
-  const images = useLocationImages(location);
-  const src = images[0]?.url ?? location.heroImage.url;
-
   return (
     <motion.button
       className="relative mb-2.5 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/[0.07] bg-surface-1 shadow-sm sm:mb-3.5"
@@ -352,27 +345,33 @@ function MasonryCard({ location, aspectRatio, onClick }: MasonryCardProps) {
       onClick={onClick}
       whileTap={{ scale: 0.97 }}
     >
-      {/* Shimmer placeholder until the image decodes — no grey-box→snap. */}
-      {!loaded && !imgError && (
-        <div className="skeleton absolute inset-0 z-0 rounded-none" />
-      )}
-      {!imgError ? (
-        <img
-          src={src}
-          alt={location.name}
-          className="relative z-[1] h-full w-full object-cover opacity-100 transition-[opacity,transform] duration-700 hover:scale-[1.025]"
-          loading="lazy"
-          decoding="async"
-          onLoad={() => setLoaded(true)}
-          onError={() => setImgError(true)}
-        />
-      ) : (
-        <div className="w-full h-full flex items-center justify-center bg-trail-800">
-          <span className="text-stone-500 text-xs">{categoryConfig[location.category].label}</span>
-        </div>
-      )}
+      <ResolvedLocationPhoto
+        location={location}
+        className="relative z-[1] object-cover transition-transform duration-700 hover:scale-[1.025]"
+        sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 25vw"
+      />
 
       <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/85 via-black/5 to-transparent" />
+
+      {location.verification && (
+        <div className="absolute left-2.5 top-2.5 z-[3]">
+          <span
+            className={cn(
+              "inline-flex items-center gap-1 rounded-full border px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.08em] backdrop-blur-md",
+              location.verification.status === "open"
+                ? "border-white/15 bg-black/45 text-white/80"
+                : "border-amber-500/35 bg-amber-950/75 text-amber-200"
+            )}
+          >
+            {location.verification.status === "open" ? (
+              <BadgeCheck className="h-3 w-3" />
+            ) : (
+              <AlertTriangle className="h-3 w-3" />
+            )}
+            {location.verification.status === "open" ? "Source checked" : "Advisory"}
+          </span>
+        </div>
+      )}
 
       <div className="absolute bottom-0 left-0 right-0 z-[3] p-3 text-left sm:p-4">
         <p className="line-clamp-2 text-sm font-medium leading-tight text-white sm:text-base">{location.name}</p>
