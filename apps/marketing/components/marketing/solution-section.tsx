@@ -8,12 +8,12 @@ const FEATURES = [
   {
     icon: MapPin,
     title: "Source-recorded places",
-    body: "Destination coordinates, access points, season and practical details with their sources.",
+    body: "Destination references and source links, with access details added only when independently supported.",
   },
   {
     icon: Search,
     title: "Find the right day out",
-    body: "Filter by region, difficulty, season and the kind of landscape you want to experience.",
+    body: "Search by region and landscape, then inspect what is known before deciding where to go.",
   },
   {
     icon: Heart,

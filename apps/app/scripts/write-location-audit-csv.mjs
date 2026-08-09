@@ -2,6 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const inputPath = process.argv[2] ?? "/private/tmp/swiss-trails-geoadmin-audit.json";
 const outputPath = process.argv[3] ?? "docs/location-audit-2026-08-09.csv";
+const cataloguePath = new URL("../data/master-catalogue.json", import.meta.url);
 
 const checkedAt = "2026-08-09";
 const verified = {
@@ -93,12 +94,14 @@ function csv(value) {
 }
 
 const audit = JSON.parse(await readFile(inputPath, "utf8"));
+const catalogue = JSON.parse(await readFile(cataloguePath, "utf8"));
+const catalogueByName = new Map(catalogue.map((place) => [place.name, place]));
 const headers = [
   "Number",
   "Name",
   "Canton",
-  "Verified latitude",
-  "Verified longitude",
+  "Published latitude",
+  "Published longitude",
   "Coordinate type",
   "Exact start",
   "Parking",
@@ -129,20 +132,23 @@ const rows = audit.places.map((place) => {
     ];
   }
 
+  const published = catalogueByName.get(place.name);
+  if (!published) throw new Error(`Missing published catalogue entry for ${place.name}`);
+
   return [
     place.index,
     place.name,
     place.canton,
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    place.searches?.[0]?.url ?? "",
+    published.coordinates.lat,
+    published.coordinates.lng,
+    published.coordinateType,
+    "Not published — destination reference is not a verified trailhead",
+    "Not independently verified",
+    "Not independently verified",
+    published.federalSearchUrl ?? "",
     checkedAt,
-    "hidden_pending_manual_verification",
-    "The supplied coordinate is not treated as verified. Exact map object, access point, parking, public transport, current rules and an authentic licensed photograph still require manual source review.",
+    "published_source_linked_destination_reference",
+    "The representative destination point and source trail are published. Exact access point, parking, public transport, current rules and route metrics remain visibly unresolved.",
   ];
 });
 

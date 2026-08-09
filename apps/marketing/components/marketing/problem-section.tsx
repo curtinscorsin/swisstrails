@@ -87,8 +87,8 @@ export function ProblemSection() {
         <Reveal delay={0.5}>
           <div className="mt-16 grid gap-6 rounded-[24px] border border-white/10 bg-stone-50 p-7 text-trail-950 sm:grid-cols-[1fr_auto] sm:items-center lg:p-10">
             <p className="font-heading text-3xl leading-[1.02] sm:text-4xl">
-              Eight places, checked carefully.
-              <span className="text-stone-600"> Accuracy before volume.</span>
+              One hundred places, clearly sourced.
+              <span className="text-stone-600"> Unknown details stay visible.</span>
             </p>
             <p className="text-sm text-stone-600 sm:text-right">
               CHF 29 once

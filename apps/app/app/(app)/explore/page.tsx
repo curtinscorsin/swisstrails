@@ -89,7 +89,7 @@ export default function ExplorePage() {
             <h1 className="font-heading text-4xl leading-none text-fg">Places worth knowing.</h1>
           </div>
           <p className="max-w-sm text-right text-sm leading-relaxed text-fg-muted">
-            A smaller collection, checked against official sources and published only when its identity is clear.
+            One hundred Swiss destinations with source links and visible uncertainty instead of invented details.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -179,23 +179,23 @@ export default function ExplorePage() {
               <div className="max-w-2xl">
                 <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-alpine-300">
                   <BadgeCheck className="h-4 w-4" />
-                  Source-checked collection
+                  Source-linked collection
                 </p>
                 <h2 id="editorial-standard" className="font-heading text-3xl leading-[1.05] text-fg sm:text-4xl">
-                  Eight places we can stand behind.
+                  One hundred places, honestly scoped.
                 </h2>
                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-fg-muted sm:text-base">
-                  Each published photograph shows the named place. Coordinates, access and practical notes are separated clearly and linked to their sources.
+                  Every page links its destination sources. Route and access details appear only when supported; unresolved information is labelled clearly.
                 </p>
               </div>
               <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-0 lg:w-72">
                 <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
-                  <p className="font-heading text-3xl text-fg">8</p>
+                  <p className="font-heading text-3xl text-fg">100</p>
                   <p className="mt-1 text-xs leading-snug text-fg-muted">published places</p>
                 </div>
                 <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
-                  <p className="font-heading text-3xl text-fg">4+</p>
-                  <p className="mt-1 text-xs leading-snug text-fg-muted">recorded sources per place</p>
+                  <p className="font-heading text-3xl text-fg">61</p>
+                  <p className="mt-1 text-xs leading-snug text-fg-muted">licensed location photographs</p>
                 </div>
                 <p className="col-span-2 px-1 pt-1 text-[11px] text-stone-500">Last editorial check: 9 August 2026</p>
               </div>
@@ -203,7 +203,7 @@ export default function ExplorePage() {
             <div className="flex items-end justify-between pb-1 pt-6">
               <div>
                 <p className="t-eyebrow">Published collection</p>
-                <p className="mt-1 text-sm text-fg-muted">Select a place for its verified visit details and source links.</p>
+                <p className="mt-1 text-sm text-fg-muted">Select a place to see its sources, known details and open questions.</p>
               </div>
               <span className="hidden text-xs text-stone-500 sm:block">{CURATED_LOCATIONS.length} places</span>
             </div>
@@ -290,17 +290,21 @@ function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardPr
           <span
             className={cn(
               "inline-flex items-center gap-1 rounded-full border px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.08em] backdrop-blur-md",
-              location.verification.status === "open"
+              location.verification.status === "open" || location.difficulty === "not-rated"
                 ? "border-white/15 bg-black/45 text-white/80"
                 : "border-amber-500/35 bg-amber-950/75 text-amber-200"
             )}
           >
-            {location.verification.status === "open" ? (
+            {location.verification.status === "open" || location.difficulty === "not-rated" ? (
               <BadgeCheck className="h-3 w-3" />
             ) : (
               <AlertTriangle className="h-3 w-3" />
             )}
-            {location.verification.status === "open" ? "Source checked" : "Advisory"}
+            {location.difficulty === "not-rated"
+              ? "Source linked"
+              : location.verification.status === "open"
+                ? "Source checked"
+                : "Advisory"}
           </span>
         </div>
       )}

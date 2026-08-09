@@ -92,6 +92,7 @@ function Row({ icon: Icon, label, hint, href, onClick, done }: RowProps) {
 
 export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
   const [copied, setCopied] = useState(false);
+  const destinationOnly = location?.verification?.routeType === "Destination reference only";
 
   // Body-scroll-lock while open (ref-counted so it composes with other sheets).
   useEffect(() => {
@@ -119,7 +120,7 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
   const target = location?.verification?.start.coordinates ?? location?.coordinates;
   const lat = target?.lat ?? 0;
   const lng = target?.lng ?? 0;
-  const targetName = location?.verification
+  const targetName = location?.verification && !destinationOnly
     ? `${location.name} access point — ${location.verification.start.name}`
     : location?.name ?? "";
 
@@ -160,10 +161,10 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
             <div className="flex items-center justify-between px-5 pt-2 pb-3">
               <div className="min-w-0">
                 <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-fg-muted">
-                  Directions to route start
+                  {destinationOnly ? "Destination reference" : "Directions to route start"}
                 </p>
                 <h3 className="text-fg text-base font-semibold leading-tight line-clamp-1">
-                  {location.verification?.start.name ?? location.name}
+                  {destinationOnly ? location.name : location.verification?.start.name ?? location.name}
                 </h3>
               </div>
               <button
@@ -182,7 +183,7 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
             <div className="px-3 pb-[max(1rem,env(safe-area-inset-bottom))] space-y-0.5 overflow-y-auto overscroll-contain">
               <Row
                 icon={Navigation}
-                label="Route start — Google Maps"
+                label={destinationOnly ? "Map point — Google Maps" : "Route start — Google Maps"}
                 onClick={() =>
                   openUrl(
                     isIOS() || isAndroid()
@@ -193,7 +194,7 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
               />
               <Row
                 icon={Apple}
-                label="Route start — Apple Maps"
+                label={destinationOnly ? "Map point — Apple Maps" : "Route start — Apple Maps"}
                 onClick={() => openUrl(appleMapsApp(lat, lng, targetName))}
               />
               <Row

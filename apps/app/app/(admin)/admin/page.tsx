@@ -7,7 +7,7 @@ const STATS = [
     label: "Total Locations",
     value: String(CURATED_LOCATIONS.length),
     icon: Map,
-    trend: "Source-checked catalogue",
+    trend: "Source-linked catalogue",
   },
   { label: "Total Users", value: "0", icon: Users, trend: "Awaiting launch" },
   { label: "Total Sales", value: "CHF 0", icon: ShoppingBag, trend: "—" },

@@ -17,8 +17,9 @@ interface DirectionsActionsProps {
  */
 export function DirectionsActions({ location }: DirectionsActionsProps) {
   const [openInSheet, setOpenInSheet] = useState(false);
+  const destinationOnly = location.verification?.routeType === "Destination reference only";
   const target = location.verification?.start.coordinates ?? location.coordinates;
-  const targetName = location.verification
+  const targetName = location.verification && !destinationOnly
     ? `${location.name} access point — ${location.verification.start.name}`
     : location.name;
 
@@ -31,7 +32,7 @@ export function DirectionsActions({ location }: DirectionsActionsProps) {
           className="flex-1 flex items-center justify-center gap-2 h-11 rounded-lg bg-alpine-600 hover:bg-alpine-500 text-white font-medium text-sm transition-colors"
         >
           <Navigation className="w-4 h-4" />
-          Directions to start
+          {destinationOnly ? "Directions to map point" : "Directions to start"}
         </button>
         <button
           type="button"

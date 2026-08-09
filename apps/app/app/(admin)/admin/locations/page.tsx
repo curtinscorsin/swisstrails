@@ -45,8 +45,8 @@ export default function AdminLocationsPage() {
             <h1 className="t-h2 text-fg">Locations</h1>
             <p className="text-fg-muted text-sm mt-1">
               {results.length === CURATED_LOCATIONS.length
-                ? `${CURATED_LOCATIONS.length} verified locations`
-                : `${results.length} of ${CURATED_LOCATIONS.length} verified locations`}
+                ? `${CURATED_LOCATIONS.length} published source records`
+                : `${results.length} of ${CURATED_LOCATIONS.length} published source records`}
             </p>
           </div>
           <div className="flex items-center gap-3">

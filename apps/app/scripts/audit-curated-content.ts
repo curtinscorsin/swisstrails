@@ -1,6 +1,7 @@
 #!/usr/bin/env tsx
 
 import { CURATED_LOCATIONS } from "../data/curated-locations";
+import { CATEGORIES } from "../data/categories";
 import { resolveSourcedImages } from "../lib/location-image-data";
 
 const failures: string[] = [];
@@ -23,16 +24,22 @@ function isSwissCoordinate(lat: number, lng: number) {
   return lat >= 45.7 && lat <= 47.9 && lng >= 5.7 && lng <= 10.7;
 }
 
-assert(CURATED_LOCATIONS.length === 8, `Expected 8 published places, found ${CURATED_LOCATIONS.length}`);
+assert(CURATED_LOCATIONS.length === 100, `Expected 100 published places, found ${CURATED_LOCATIONS.length}`);
 
 for (const field of ["id", "slug", "name"] as const) {
   const repeated = duplicates(CURATED_LOCATIONS.map((location) => location[field]));
   assert(repeated.length === 0, `Duplicate ${field}: ${repeated.join(", ")}`);
 }
 
+for (const category of CATEGORIES) {
+  const actual = CURATED_LOCATIONS.filter((location) => location.category === category.id).length;
+  assert(category.count === actual, `${category.id}: displayed count ${category.count} does not match ${actual}`);
+}
+
 const publishedImageUrls: string[] = [];
 const publishedSourceUrls: string[] = [];
 let fallbackCount = 0;
+let destinationOnlyCount = 0;
 
 for (const location of CURATED_LOCATIONS) {
   const prefix = `${location.id} (${location.name})`;
@@ -43,6 +50,8 @@ for (const location of CURATED_LOCATIONS) {
   assert(isSwissCoordinate(location.coordinates.lat, location.coordinates.lng), `${prefix}: destination coordinate is outside Switzerland`);
   assert(verification, `${prefix}: missing verification record`);
   if (!verification) continue;
+  const destinationOnly = verification.routeType === "Destination reference only";
+  if (destinationOnly) destinationOnlyCount += 1;
 
   assert(verification.country === "Switzerland", `${prefix}: wrong country`);
   assert(Boolean(verification.canton), `${prefix}: missing canton`);
@@ -61,7 +70,16 @@ for (const location of CURATED_LOCATIONS) {
   assert(Boolean(verification.feeInfo), `${prefix}: fee status is not documented`);
   assert(verification.restrictions.length > 0, `${prefix}: restrictions are missing`);
   assert(verification.safety.length > 0, `${prefix}: safety notes are missing`);
-  assert(verification.sources.length >= 4, `${prefix}: insufficient source trail`);
+  assert(
+    verification.sources.length >= (destinationOnly ? 2 : 4),
+    `${prefix}: insufficient source trail`
+  );
+  if (destinationOnly) {
+    assert(location.difficulty === "not-rated", `${prefix}: unresolved access must not have a difficulty rating`);
+    assert(verification.distanceKm === null, `${prefix}: destination-only record invents a distance`);
+    assert(verification.durationMinutes === null, `${prefix}: destination-only record invents a duration`);
+    assert(verification.ascentM === null, `${prefix}: destination-only record invents ascent`);
+  }
 
   const sourceDates = new Set(verification.sources.map((source) => source.checkedAt));
   assert(sourceDates.size === 1 && sourceDates.has(verification.checkedAt), `${prefix}: source dates do not match route review date`);
@@ -94,9 +112,10 @@ if (failures.length > 0) {
 
 console.log("Curated content audit passed");
 console.log(`- ${CURATED_LOCATIONS.length} published, source-backed places`);
-console.log("- 92 master-list places remain hidden pending manual verification");
+console.log(`- ${CURATED_LOCATIONS.length - destinationOnlyCount} places include detailed visit verification`);
+console.log(`- ${destinationOnlyCount} places publish sourced identity only and label logistics unresolved`);
 console.log(`- ${publishedImageUrls.length} unique, credited location photographs`);
-console.log(`- ${fallbackCount} place uses the honest designed image placeholder`);
+console.log(`- ${fallbackCount} places use the honest designed image placeholder`);
 
 if (process.argv.includes("--network")) {
   const urls = [...new Set([...publishedImageUrls, ...publishedSourceUrls])];

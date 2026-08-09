@@ -4,9 +4,9 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Camera, ExternalLink, SearchCheck, Shield } from "lucide-react";
 
 const STATS = [
-  { value: "8", label: "Published places" },
-  { value: "8", label: "Authentic licensed photographs" },
-  { value: "4+", label: "Recorded sources per place" },
+  { value: "100", label: "Published destinations" },
+  { value: "61", label: "Licensed location photographs" },
+  { value: "100", label: "Source-linked map records" },
   { value: "09.08.26", label: "Latest editorial check" },
 ];
 

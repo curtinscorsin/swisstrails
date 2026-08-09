@@ -2,8 +2,8 @@
    CORE DOMAIN TYPES — Swiss Trails
 ───────────────────────────────────────────── */
 
-export type Difficulty = "easy" | "moderate" | "challenging" | "expert";
-export type Season = "spring" | "summer" | "autumn" | "winter" | "year-round";
+export type Difficulty = "easy" | "moderate" | "challenging" | "expert" | "not-rated";
+export type Season = "spring" | "summer" | "autumn" | "winter" | "year-round" | "check-current";
 export type LocationCategory =
   | "hidden-lake"
   | "viewpoint"

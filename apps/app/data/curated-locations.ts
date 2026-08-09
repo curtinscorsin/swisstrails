@@ -1,5 +1,13 @@
 import { SOURCED_IMAGES } from "@/data/sourced-images";
-import type { Location, LocationSource, RouteVerification } from "@/types";
+import masterCatalogue from "@/data/master-catalogue.json";
+import type {
+  CoordinateType,
+  Location,
+  LocationCategory,
+  LocationSource,
+  Region,
+  RouteVerification,
+} from "@/types";
 
 const CHECKED_AT = "2026-08-09";
 const CREATED_AT = "2026-08-09T00:00:00.000Z";
@@ -39,7 +47,7 @@ const sharedSafety = [
   "On-site signs and instructions take precedence over this catalogue.",
 ];
 
-export const CURATED_LOCATIONS: Location[] = [
+const DETAILED_LOCATIONS: Location[] = [
   {
     id: "spot-oeschinensee",
     slug: "oeschinensee",
@@ -586,5 +594,173 @@ export const CURATED_LOCATIONS: Location[] = [
     }),
   },
 ];
+
+interface MasterCatalogueEntry {
+  index: number;
+  id: string;
+  slug: string;
+  name: string;
+  canton: string;
+  region: Region;
+  coordinates: { lat: number; lng: number };
+  coordinateType: CoordinateType;
+  category: LocationCategory;
+  federalSearchUrl: string | null;
+  federalMatchStatus: "candidate_match" | "manual_review" | "no_match";
+  federalMatchLabel: string | null;
+}
+
+function swisstopoMapUrl(lat: number, lng: number) {
+  const phi = (lat * 3600 - 169028.66) / 10000;
+  const lam = (lng * 3600 - 26782.5) / 10000;
+  const east =
+    2600072.37 +
+    211455.93 * lam -
+    10938.51 * lam * phi -
+    0.36 * lam * phi * phi -
+    44.54 * lam ** 3;
+  const north =
+    1200147.07 +
+    308807.95 * phi +
+    3745.25 * lam ** 2 +
+    76.63 * phi ** 2 -
+    194.56 * lam ** 2 * phi +
+    119.79 * phi ** 3;
+
+  return `https://map.geo.admin.ch/?lang=en&topic=ech&bgLayer=ch.swisstopo.pixelkarte-farbe&E=${Math.round(east)}&N=${Math.round(north)}&zoom=8`;
+}
+
+const placeTypeCopy: Record<CoordinateType, { tagline: string; description: string }> = {
+  attraction: {
+    tagline: "A sourced landmark reference with unfinished logistics labelled clearly",
+    description: "The published pin identifies the named landmark. It is not presented as a verified trailhead, parking area or public-transport stop.",
+  },
+  summit: {
+    tagline: "A sourced summit reference—not a route or access recommendation",
+    description: "The published pin identifies the summit. It does not imply that a hiking route, ascent conditions or safe access have been verified.",
+  },
+  lake_center: {
+    tagline: "A sourced lake reference kept separate from access and parking",
+    description: "The published pin represents the lake itself. Shore access, trailheads, parking and public transport require separate confirmation.",
+  },
+  village: {
+    tagline: "A sourced settlement reference for planning a future visit",
+    description: "The published pin identifies the named settlement. Individual sights, parking areas and walking routes have their own current information.",
+  },
+  valley_reference: {
+    tagline: "A broad landscape reference—not a single trail or entrance",
+    description: "This is a representative point within the named valley or landscape. The area can have several access points, routes and local restrictions.",
+  },
+  viewpoint: {
+    tagline: "A sourced destination point with access still to be confirmed",
+    description: "The published pin identifies the named destination or viewpoint. It is not automatically a safe or publicly accessible route start.",
+  },
+  heritage_area_reference: {
+    tagline: "A sourced reference within a wider protected or historic area",
+    description: "This point represents the named area for orientation. One pin cannot describe every entrance, site, path or rule within the wider property.",
+  },
+};
+
+function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
+  const copy = placeTypeCopy[entry.coordinateType];
+  const image = SOURCED_IMAGES[entry.id]?.[0];
+  const sources: LocationSource[] = [
+    source(
+      "Swiss federal map — published destination point",
+      swisstopoMapUrl(entry.coordinates.lat, entry.coordinates.lng)
+    ),
+  ];
+
+  if (entry.federalSearchUrl) {
+    sources.push(source("Swiss federal gazetteer — name search", entry.federalSearchUrl));
+  }
+  if (image?.sourceUrl) {
+    sources.push(source("Wikimedia Commons — photograph, creator and licence", image.sourceUrl));
+  }
+
+  const matchUncertainty =
+    entry.federalMatchStatus === "candidate_match"
+      ? `The federal gazetteer returned a nearby candidate (${entry.federalMatchLabel ?? "unnamed result"}); the published point remains a destination reference, not a verified trailhead.`
+      : "The federal name search did not return one unambiguous direct feature match. The supplied representative point is retained and should not be treated as a trailhead.";
+
+  return {
+    id: entry.id,
+    slug: entry.slug,
+    name: entry.name,
+    tagline: copy.tagline,
+    description: `${entry.name} is listed in ${entry.canton}. ${copy.description}`,
+    longDescription:
+      "Swiss Trails currently publishes the destination identity, representative point and source trail for this place. Exact route distance, duration, elevation gain, parking, public transport, fees, accessibility and seasonal access are deliberately left unresolved until each claim has a suitable current source.",
+    category: entry.category,
+    difficulty: "not-rated",
+    region: entry.region,
+    coordinates: entry.coordinates,
+    coordinateType: entry.coordinateType,
+    heroImage: image ?? {
+      id: `placeholder-${entry.slug}`,
+      url: "",
+      alt: entry.name,
+      isHero: true,
+    },
+    gallery: [],
+    tags: [entry.name, entry.canton, entry.coordinateType.replaceAll("_", " "), "source-linked"],
+    bestSeason: ["check-current"],
+    travelTimeMinutes: 0,
+    visitDurationHours: { min: 0, max: 0 },
+    highlights: [
+      `Named destination in ${entry.canton}`,
+      `${entry.coordinateType.replaceAll("_", " ")} map reference`,
+      image ? "Location-linked licensed photograph" : "Honest placeholder—no unverified photograph",
+    ],
+    tips: ["Open the linked federal map and current local information before travelling."],
+    whatToBring: [],
+    accessInfo: "No route start, parking place or public-transport stop is claimed for this record yet.",
+    parkingAvailable: false,
+    publicTransport: false,
+    isFeatured: false,
+    isNew: true,
+    viewCount: 0,
+    saveCount: 0,
+    createdAt: CREATED_AT,
+    updatedAt: CREATED_AT,
+    verification: verification({
+      canton: entry.canton,
+      routeType: "Destination reference only",
+      season: "Not independently verified—check current local information",
+      distanceKm: null,
+      durationMinutes: null,
+      ascentM: null,
+      descentM: null,
+      elevationNote: "No walking route or access effort is published for this record.",
+      sacGrade: null,
+      status: "check-current",
+      statusNote: "The destination identity and reference point are source-linked. Visit logistics and current operating conditions still require confirmation.",
+      start: {
+        name: "Destination reference—not a verified trailhead",
+        coordinates: entry.coordinates,
+        parking: "Not independently verified. Check official local visitor information and on-site signs.",
+        publicTransport: "Not independently verified. Plan the journey with the current public-transport timetable.",
+      },
+      finish: null,
+      accessibility: "Not independently verified for this destination record.",
+      feeInfo: "Not independently verified; fees and operating periods can change.",
+      restrictions: [
+        "Check current closures, protected-area rules, permits and seasonal restrictions with the responsible local authority before travel.",
+      ],
+      safety: sharedSafety,
+      uncertainties: [
+        matchUncertainty,
+        "Route distance, duration, elevation gain and an exact access point are not yet published.",
+      ],
+      sources,
+    }),
+  };
+}
+
+const detailedByName = new Map(DETAILED_LOCATIONS.map((location) => [location.name, location]));
+
+export const CURATED_LOCATIONS: Location[] = (masterCatalogue as MasterCatalogueEntry[]).map(
+  (entry) => detailedByName.get(entry.name) ?? buildSourceBackedLocation(entry)
+);
 
 export const CURATED_LOCATION_IDS = new Set(CURATED_LOCATIONS.map((location) => location.id));

@@ -254,10 +254,10 @@ export default async function LocationPage({ params }: Props) {
         </div>
 
         <div className="rounded-xl border border-white/[0.07] bg-white/[0.03] p-5">
-          <p className="text-fg text-sm font-medium mb-1">Why the collection is intentionally small</p>
+          <p className="text-fg text-sm font-medium mb-1">How to read this guide</p>
           <p className="text-fg-muted text-xs leading-relaxed">
-            Swiss Trails publishes a place only after its identity, visit details, access notes,
-            photograph and source links can be checked. More places will appear as that review is completed.
+            A published destination does not automatically mean every route or access detail is verified.
+            Source-backed facts are shown directly; unresolved logistics are labelled instead of estimated.
           </p>
         </div>
       </div>

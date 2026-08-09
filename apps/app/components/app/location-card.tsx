@@ -101,7 +101,9 @@ export function LocationCard({
                 ? `${awayKm} away`
                 : location.verification?.durationMinutes != null
                   ? `${formatDuration(location.verification.durationMinutes)} walk`
-                  : "Access checked"}
+                  : location.difficulty === "not-rated"
+                    ? "Access not rated"
+                    : "Access checked"}
             </p>
             <div className="flex items-center gap-2 mt-1.5">
               <span className={cn("text-xs font-medium", diff.color)}>
@@ -148,17 +150,21 @@ export function LocationCard({
                 <span
                   className={cn(
                     "inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide backdrop-blur-sm",
-                    location.verification.status === "open"
+                    location.verification.status === "open" || location.difficulty === "not-rated"
                       ? "bg-black/50 text-white/80"
                       : "bg-amber-950/80 text-amber-200"
                   )}
                 >
-                  {location.verification.status === "open" ? (
+                  {location.verification.status === "open" || location.difficulty === "not-rated" ? (
                     <BadgeCheck className="h-2.5 w-2.5" />
                   ) : (
                     <AlertTriangle className="h-2.5 w-2.5" />
                   )}
-                  {location.verification.status === "open" ? "Checked" : "Advisory"}
+                  {location.difficulty === "not-rated"
+                    ? "Source-linked"
+                    : location.verification.status === "open"
+                      ? "Checked"
+                      : "Advisory"}
                 </span>
               </div>
             )}
@@ -234,7 +240,9 @@ export function LocationCard({
                     <Clock className="w-3 h-3" />
                     {location.verification?.durationMinutes != null
                       ? `${formatDuration(location.verification.durationMinutes)} walk`
-                      : "Access checked"}
+                      : location.difficulty === "not-rated"
+                        ? "Access not rated"
+                        : "Access checked"}
                   </span>
                 )}
                 <span className={cn("font-medium", diff.color)}>{diff.label}</span>

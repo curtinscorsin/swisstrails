@@ -41,6 +41,7 @@ const DIFF_COLORS: Record<Difficulty, string> = {
   moderate: "text-yellow-400",
   challenging: "text-orange-400",
   expert: "text-red-400",
+  "not-rated": "text-stone-300",
 };
 
 function IconAction({

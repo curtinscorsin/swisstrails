@@ -38,6 +38,7 @@ export const difficultyConfig: Record<
   moderate: { label: "Moderate", color: "text-gold-300", bgColor: "bg-gold-950" },
   challenging: { label: "Challenging", color: "text-orange-300", bgColor: "bg-orange-950" },
   expert: { label: "Expert", color: "text-red-300", bgColor: "bg-red-950" },
+  "not-rated": { label: "Not rated", color: "text-stone-300", bgColor: "bg-stone-900" },
 };
 
 export const seasonConfig: Record<
@@ -49,6 +50,7 @@ export const seasonConfig: Record<
   autumn: { label: "Autumn", emoji: "🍂", months: "Sep–Nov" },
   winter: { label: "Winter", emoji: "❄️", months: "Dec–Feb" },
   "year-round": { label: "Year-round", emoji: "🌍", months: "All year" },
+  "check-current": { label: "Check current", emoji: "↗", months: "Official source" },
 };
 
 export const categoryConfig: Record<

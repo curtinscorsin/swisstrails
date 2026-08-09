@@ -5,7 +5,7 @@ import type { Location, Season } from "@/types";
  * "year-round" is intentionally excluded — it is a property of a *location*,
  * not a moment in time, so `currentSeason` never returns it.
  */
-export type CalendarSeason = Exclude<Season, "year-round">;
+export type CalendarSeason = Exclude<Season, "year-round" | "check-current">;
 
 /**
  * Maps the month of the given date to its meteorological season.

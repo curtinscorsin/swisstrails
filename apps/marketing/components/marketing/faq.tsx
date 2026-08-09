@@ -11,7 +11,7 @@ import {
 const FAQ_ITEMS = [
   {
     q: "What exactly do I get?",
-    a: "You get access to the currently published source-checked collection. At launch that means 8 places, each with an authentic licensed photograph, map reference, separate access information, practical notes, uncertainty labels and links to the sources used.",
+    a: "You get access to 100 Swiss destination pages. Every page includes a sourced map record and uncertainty labels. Sixty-one currently have a high-resolution, location-linked licensed photograph; the others use an honest branded placeholder until a suitable image is approved.",
   },
   {
     q: "Is this really a one-time payment?",
@@ -27,7 +27,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What if I don't have a car?",
-    a: "All currently published places record a public-transport starting point. Where an exact journey time has not been verified, we leave it out instead of estimating it.",
+    a: "Public-transport and parking details appear only where they have been independently checked. Other pages say that the information is unresolved and direct you to current official planning information instead of estimating it.",
   },
   {
     q: "How is this different from a regular hiking app?",

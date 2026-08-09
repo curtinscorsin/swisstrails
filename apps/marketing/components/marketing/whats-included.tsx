@@ -127,7 +127,7 @@ export function WhatsIncluded() {
         <Reveal delay={0.3}>
           <div className="mt-12 text-center">
             <p className="text-sm text-fg-muted">
-              New places appear only after their details and photograph meet the same publication standard.
+              Every destination needs a source trail; richer logistics and photography are added only after they pass review.
             </p>
           </div>
         </Reveal>

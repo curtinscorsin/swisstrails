@@ -1,0 +1,1702 @@
+[
+  {
+    "index": 1,
+    "id": "spot-oeschinensee",
+    "slug": "oeschinensee",
+    "name": "Oeschinensee",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.4983,
+      "lng": 7.7269
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Oeschinensee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Oeschinensee (BE) - Kandersteg"
+  },
+  {
+    "index": 2,
+    "id": "spot-seealpsee",
+    "slug": "seealpsee",
+    "name": "Seealpsee",
+    "canton": "Appenzell Innerrhoden",
+    "region": "appenzell",
+    "coordinates": {
+      "lat": 47.2689,
+      "lng": 9.4
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seealpsee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Open building Berggasthaus Seealpsee (AI) - Schwende-Rüte"
+  },
+  {
+    "index": 3,
+    "id": "spot-creux-du-van",
+    "slug": "creux-du-van",
+    "name": "Creux du Van",
+    "canton": "Neuchâtel",
+    "region": "neuchatel",
+    "coordinates": {
+      "lat": 46.9325,
+      "lng": 6.7236
+    },
+    "coordinateType": "viewpoint",
+    "category": "gorge",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Creux+du+Van&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Ditch Creux du Van (NE) - La Grande Béroche"
+  },
+  {
+    "index": 4,
+    "id": "spot-matterhorn",
+    "slug": "matterhorn",
+    "name": "Matterhorn",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 45.9764,
+      "lng": 7.6586
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Matterhorn&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Glacier Matterhorngletscher (VS) - Zermatt"
+  },
+  {
+    "index": 5,
+    "id": "spot-jungfraujoch",
+    "slug": "jungfraujoch",
+    "name": "Jungfraujoch",
+    "canton": "Bern / Valais",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.5472,
+      "lng": 7.9806
+    },
+    "coordinateType": "viewpoint",
+    "category": "glacier",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Jungfraujoch&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Pass Jungfraujoch (BE) - Lauterbrunnen"
+  },
+  {
+    "index": 6,
+    "id": "spot-lauterbrunnen-valley",
+    "slug": "lauterbrunnen-valley",
+    "name": "Lauterbrunnen Valley",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.595,
+      "lng": 7.9075
+    },
+    "coordinateType": "valley_reference",
+    "category": "alpine-meadow",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lauterbrunnen+Valley&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Populated Place Lauterbrunnen (BE) - Lauterbrunnen"
+  },
+  {
+    "index": 7,
+    "id": "spot-rhine-falls",
+    "slug": "rhine-falls",
+    "name": "Rhine Falls",
+    "canton": "Schaffhausen / Zürich",
+    "region": "schaffhausen",
+    "coordinates": {
+      "lat": 47.6772,
+      "lng": 8.6158
+    },
+    "coordinateType": "attraction",
+    "category": "waterfall",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rhine+Falls&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Viewpoint Rheinfall-Felsen (ZH) - Laufen-Uhwiesen"
+  },
+  {
+    "index": 8,
+    "id": "spot-pilatus",
+    "slug": "pilatus",
+    "name": "Pilatus",
+    "canton": "Obwalden / Nidwalden",
+    "region": "obwalden",
+    "coordinates": {
+      "lat": 46.9739,
+      "lng": 8.2411
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Pilatus&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Massif Pilatus (OW,NW,LU) - Hergiswil (NW),Alpnach,Schwarzenberg"
+  },
+  {
+    "index": 9,
+    "id": "spot-rigi",
+    "slug": "rigi",
+    "name": "Rigi",
+    "canton": "Schwyz / Lucerne",
+    "region": "schwyz",
+    "coordinates": {
+      "lat": 47.0567,
+      "lng": 8.485
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rigi&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Main peak Rigi Kulm (SZ) - Arth"
+  },
+  {
+    "index": 10,
+    "id": "spot-stoos-fronalpstock",
+    "slug": "stoos-fronalpstock",
+    "name": "Stoos–Fronalpstock",
+    "canton": "Schwyz",
+    "region": "schwyz",
+    "coordinates": {
+      "lat": 46.9681,
+      "lng": 8.6373
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Stoos%E2%80%93Fronalpstock&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Viewpoint Stoos-Fronalpstock (SZ) - Morschach"
+  },
+  {
+    "index": 11,
+    "id": "spot-titlis",
+    "slug": "titlis",
+    "name": "Titlis",
+    "canton": "Obwalden / Bern",
+    "region": "obwalden",
+    "coordinates": {
+      "lat": 46.7722,
+      "lng": 8.4378
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Titlis&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Alpin peak Titlis (BE) - Innertkirchen"
+  },
+  {
+    "index": 12,
+    "id": "spot-lake-lucerne",
+    "slug": "lake-lucerne",
+    "name": "Lake Lucerne",
+    "canton": "Lucerne / Uri / Schwyz / Nidwalden",
+    "region": "lucerne",
+    "coordinates": {
+      "lat": 47.0194,
+      "lng": 8.4011
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lake+Lucerne&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Lake Vierwaldstättersee (OW,UR,NW,LU,SZ) - Ingenbohl,Seedorf (UR),Isenthal,Sisikon,Flüelen,Buochs,Gersau,Weggis,Meggen,Ennetbürgen,Stansstad,Greppen,Küssnacht (SZ),Alpnach,Luzern,Horw,Emmetten,Seelisberg,Vitznau,Morschach,Hergiswil (NW),Ennetmoos,Beckenried"
+  },
+  {
+    "index": 13,
+    "id": "spot-chapel-bridge",
+    "slug": "chapel-bridge",
+    "name": "Chapel Bridge",
+    "canton": "Lucerne",
+    "region": "lucerne",
+    "coordinates": {
+      "lat": 47.0517,
+      "lng": 8.3075
+    },
+    "coordinateType": "attraction",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chapel+Bridge&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Road Kapellbrücke (LU) - Luzern"
+  },
+  {
+    "index": 14,
+    "id": "spot-chateau-de-chillon",
+    "slug": "chateau-de-chillon",
+    "name": "Château de Chillon",
+    "canton": "Vaud",
+    "region": "vaud",
+    "coordinates": {
+      "lat": 46.4142,
+      "lng": 6.9275
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ch%C3%A2teau+de+Chillon&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Historical area Château de Chillon (VD) - Veytaux"
+  },
+  {
+    "index": 15,
+    "id": "spot-lavaux-vineyard-terraces",
+    "slug": "lavaux-vineyard-terraces",
+    "name": "Lavaux Vineyard Terraces",
+    "canton": "Vaud",
+    "region": "vaud",
+    "coordinates": {
+      "lat": 46.4919,
+      "lng": 6.7461
+    },
+    "coordinateType": "heritage_area_reference",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lavaux+Vineyard+Terraces&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "no_match",
+    "federalMatchLabel": null
+  },
+  {
+    "index": 16,
+    "id": "spot-aletsch-glacier",
+    "slug": "aletsch-glacier",
+    "name": "Aletsch Glacier",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 46.4422,
+      "lng": 8.0778
+    },
+    "coordinateType": "viewpoint",
+    "category": "glacier",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Aletsch+Glacier&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Glacier Grosser Aletschgletscher (VS) - Bettmeralp,Fieschertal,Naters,Riederalp"
+  },
+  {
+    "index": 17,
+    "id": "spot-gornergrat",
+    "slug": "gornergrat",
+    "name": "Gornergrat",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 45.9833,
+      "lng": 7.7847
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Gornergrat&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building 3100 Kulmhotel Gornergrat (VS) - Zermatt"
+  },
+  {
+    "index": 18,
+    "id": "spot-riffelsee",
+    "slug": "riffelsee",
+    "name": "Riffelsee",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 45.9847,
+      "lng": 7.7626
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Riffelsee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Riffelsee (VS) - Zermatt"
+  },
+  {
+    "index": 19,
+    "id": "spot-schilthorn",
+    "slug": "schilthorn",
+    "name": "Schilthorn",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.5575,
+      "lng": 7.8353
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schilthorn&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Main peak Schilthorn (BE) - Lauterbrunnen"
+  },
+  {
+    "index": 20,
+    "id": "spot-grindelwald-first",
+    "slug": "grindelwald-first",
+    "name": "Grindelwald First",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.66,
+      "lng": 8.0547
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Grindelwald+First&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Other transport First (Grindelwald) (BE) - Grindelwald"
+  },
+  {
+    "index": 21,
+    "id": "spot-bachalpsee",
+    "slug": "bachalpsee",
+    "name": "Bachalpsee",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.669,
+      "lng": 8.0236
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Bachalpsee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place Jaggisbachau (BE) - Frauenkappelen"
+  },
+  {
+    "index": 22,
+    "id": "spot-schynige-platte",
+    "slug": "schynige-platte",
+    "name": "Schynige Platte",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.6513,
+      "lng": 7.9079
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schynige+Platte&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Berghotel Schynige Platte (BE) - Gsteigwiler"
+  },
+  {
+    "index": 23,
+    "id": "spot-blausee",
+    "slug": "blausee",
+    "name": "Blausee",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.5327,
+      "lng": 7.6643
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Blausee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Restaurant Blausee (BE) - Kandergrund"
+  },
+  {
+    "index": 24,
+    "id": "spot-aare-gorge",
+    "slug": "aare-gorge",
+    "name": "Aare Gorge",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.7194,
+      "lng": 8.2145
+    },
+    "coordinateType": "attraction",
+    "category": "gorge",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Aare+Gorge&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Ditch Aareschlucht (BE) - Innertkirchen"
+  },
+  {
+    "index": 25,
+    "id": "spot-rhine-gorge-ruinaulta",
+    "slug": "rhine-gorge-ruinaulta",
+    "name": "Rhine Gorge (Ruinaulta)",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.8056,
+      "lng": 9.3195
+    },
+    "coordinateType": "valley_reference",
+    "category": "gorge",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rhine+Gorge+%28Ruinaulta%29&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Ditch Ruinaulta (GR) - Sagogn,Flims,Ilanz/Glion,Tamins,Trin,Safiental,Bonaduz"
+  },
+  {
+    "index": 26,
+    "id": "spot-caumasee",
+    "slug": "caumasee",
+    "name": "Caumasee",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.8198,
+      "lng": 9.2956
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Caumasee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Restaurant Caumasee (GR) - Flims"
+  },
+  {
+    "index": 27,
+    "id": "spot-landwasser-viaduct",
+    "slug": "landwasser-viaduct",
+    "name": "Landwasser Viaduct",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.6807,
+      "lng": 9.6752
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Landwasser+Viaduct&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Narrow railway track Landwasserviadukt (GR) - Schmitten (GR),Bergün Filisur"
+  },
+  {
+    "index": 28,
+    "id": "spot-bernina-pass-and-lago-bianco",
+    "slug": "bernina-pass-and-lago-bianco",
+    "name": "Bernina Pass and Lago Bianco",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.399,
+      "lng": 10.0236
+    },
+    "coordinateType": "viewpoint",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Bernina+Pass+and+Lago+Bianco&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Roadpass Berninapass (GR) - Poschiavo"
+  },
+  {
+    "index": 29,
+    "id": "spot-swiss-national-park",
+    "slug": "swiss-national-park",
+    "name": "Swiss National Park",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.6667,
+      "lng": 10.1667
+    },
+    "coordinateType": "heritage_area_reference",
+    "category": "forest",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Swiss+National+Park&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Building Hotel Parc Naziunal Il Fuorn (GR) - Zernez"
+  },
+  {
+    "index": 30,
+    "id": "spot-verzasca-valley",
+    "slug": "verzasca-valley",
+    "name": "Verzasca Valley",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 46.2585,
+      "lng": 8.8371
+    },
+    "coordinateType": "valley_reference",
+    "category": "alpine-meadow",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Verzasca+Valley&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place Oviga (TI) - Verzasca"
+  },
+  {
+    "index": 31,
+    "id": "spot-ponte-dei-salti",
+    "slug": "ponte-dei-salti",
+    "name": "Ponte dei Salti",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 46.2589,
+      "lng": 8.8375
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ponte+dei+Salti&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Road Ponte dei Salti (TI) - Verzasca"
+  },
+  {
+    "index": 32,
+    "id": "spot-three-castles-of-bellinzona",
+    "slug": "three-castles-of-bellinzona",
+    "name": "Three Castles of Bellinzona",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 46.1928,
+      "lng": 9.0225
+    },
+    "coordinateType": "attraction",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Three+Castles+of+Bellinzona&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Golf course Golf dei Castelli (TI) - Bellinzona"
+  },
+  {
+    "index": 33,
+    "id": "spot-old-city-of-bern",
+    "slug": "old-city-of-bern",
+    "name": "Old City of Bern",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.948,
+      "lng": 7.451
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Old+City+of+Bern&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Ward Untere Altstadt (BE) - Bern"
+  },
+  {
+    "index": 34,
+    "id": "spot-abbey-district-of-st-gallen",
+    "slug": "abbey-district-of-st-gallen",
+    "name": "Abbey District of St. Gallen",
+    "canton": "St. Gallen",
+    "region": "st-gallen",
+    "coordinates": {
+      "lat": 47.423,
+      "lng": 9.3775
+    },
+    "coordinateType": "heritage_area_reference",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Abbey+District+of+St.+Gallen&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "St. Gallen (SG,AR) - Teufen (AR),Wittenbach,St. Gallen,Gaiserwald,Gossau (SG),Mörschwil"
+  },
+  {
+    "index": 35,
+    "id": "spot-gruyeres",
+    "slug": "gruyeres",
+    "name": "Gruyères",
+    "canton": "Fribourg",
+    "region": "fribourg",
+    "coordinates": {
+      "lat": 46.584,
+      "lng": 7.0825
+    },
+    "coordinateType": "village",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Gruy%C3%A8res&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Local name swisstopo Charrière-des-Morts (FR) - Gruyères"
+  },
+  {
+    "index": 36,
+    "id": "spot-trummelbach-falls",
+    "slug": "trummelbach-falls",
+    "name": "Trümmelbach Falls",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.571,
+      "lng": 7.9147
+    },
+    "coordinateType": "attraction",
+    "category": "waterfall",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Tr%C3%BCmmelbach+Falls&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Trümmelbach (BE) - Lauterbrunnen"
+  },
+  {
+    "index": 37,
+    "id": "spot-rosenlaui-glacier-gorge",
+    "slug": "rosenlaui-glacier-gorge",
+    "name": "Rosenlaui Glacier Gorge",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.7131,
+      "lng": 8.1623
+    },
+    "coordinateType": "attraction",
+    "category": "gorge",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rosenlaui+Glacier+Gorge&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Main Region Mittelland (GE,TG,AG,FR,SO,VD,SG,SH,BE,AI,GL,ZG,NW,LU,SZ,NE,ZH,AR) - Rothrist,Moosleerau,Winznau,Trimbach,Zug,Walchwil,Schübelbach,Olten,Suhr,Unterentfelden,Oberentfelden,Hägendorf,Kölliken,Holziken,Sattel,Reichenburg,Steinen,Steinerberg,Einsiedeln,Arth,Vinelz,Tschugg,Wynau,Oberbuchsiten,Grangettes,Sorens,Pont-la-Ville,Bulle,Le Mouret,Treyvaux,Corbières,Pont-en-Ogoz,La Roche,Schwarzhäusern,Triengen,Le Châtelard,Plaffeien,Niederbuchsiten,Kestenholz,Oensingen,Herzogenbuchsee,Thörigen,Bettenhausen,Boswil,Kallern,Ammerswil,Unterkulm,Oberkulm,Niederönz,Egliswil,Seon,Aesch (LU),Bellikon,Unterlunkhofen,Bremgarten (AG),Eggenwil,Widen,Oberwil-Lieli,Teufenthal (AG),Beinwil am See,Beinwil (Freiamt),Mühlau,Wohlenschwil,Auw,Hägglingen,Hauptwil-Gottshaus,Schmiedrued,Reinach (AG),Rickenbach (LU),Schlierbach,Geuensee,Grub (AR),Wald (AR),Biberist,Dierikon,Zielebach,Adligenswil,Villars-Epeney,Sévaz,Treytorrens (Payerne),Cortaillod,Cheyres-Châbles,Boudry,Bonvillars,Grandcour,Chêne-Pâquier,Fiez,Grolley-Ponthaux,Corcelles-près-Payerne,Cugy (FR),Chevroux,Agiez,Neuchâtel,Ursins,Orzens,Pailly,Molondin,Gletterens,Delley-Portalban,Champagne,Lully (FR),Vallon,Lac de Neuchâtel (NE),Milvignes,La Grande Béroche,Les Montets,Corcelles-près-Concise,Onnens (VD),Concise,Montagny-près-Yverdon,Romont (FR),Suscévaz,Cornaux,Dompierre (VD),Avenches,Cheseaux-Noréaz,Yvonand,Nuvilly,Giez,Gampelen,Neyruz (FR),Cottens (FR),Grandson,Essertines-sur-Yverdon,Valeyres-sous-Ursins,Vuiteboeuf,Valbroye,L'Abergement,Châtillon (FR),Orges,Novalles,Fontaines-sur-Grandson,Chénens,Villaz,Cudrefin,Belmont-Broye,Vully-les-Lacs,Vugelles-La Mothe,Valeyres-sous-Montagny,Chavannes-le-Chêne,Saint-Aubin (FR),Missy,Payerne,Montagny (FR),Yverdon-les-Bains,Treycovagnes,Buttwil,Möriken-Wildegg,Lenzburg,Bielersee (NE),Gals,Büron,Hunzenschwil,Leimbach (AG),Dintikon,Surpierre,Fétigny-Ménières,Champtauroz,Châtonnaye,Villarzel,Estavayer,Trey,Grossdietwil,Luzern,Horw,La Brillaz,Prez,Kirchdorf (BE),Gerzensee,Künten,Wohlen (AG),Fischbach-Göslikon,Givisiez,Villars-sur-Glâne,Belfaux,Blumenstein,Mont-Vully,Meikirch,Grandevent,Pierrafortscha,Greng,Rechthalten,Chamblon,Ottenbach,Dürrenäsch,Wildberg,Altikon,Tévenon,Steinach,Rüderswil,Thalheim an der Thur,Laufen-Uhwiesen,Lauperswil,Andelfingen,Turbenthal,Fischingen,Bichelsee-Balterswil,Marthalen,Hettlingen,Münchenbuchsee,Wiggiswil,Boniswil,Meisterschwanden,Seengen,Bettwiesen,Niederwil (AG),Schenkon,Suchy,Orbe,Chavornay,Pfäffikon,Russikon,Bütschwil-Ganterschwil,Wattwil,Lichtensteig,Valeyres-sous-Rances,Faoug,Tafers,St. Ursen,Degersheim,Neckertal,Wünnewil-Flamatt,Giffers,Tentlingen,Donneloye,Cuarny,Bösingen,Bonstetten,Islisberg,Hedingen,Menziken,Beromünster,Othmarsingen,Mellingen,Hendschiken,Menzingen,Teufen (AR),Schlatt-Haslen,Schänis,Affoltern am Albis,Dottikon,Grosswangen,Sâles,Vaulruz,Rüschlikon,Buttisholz,Autigny,Gibloux,Niederhünigen,Häutligen,Oberlangenegg,Montreux,Root,Gisikon,Luthern,Vitznau,Arni (BE),Mézières (FR),Merenschwand,Rupperswil,Hitzkirch,Ermensee,Oberlunkhofen,Muri (AG),Aristau,Waltenschwil,Bünzen,Corseaux,Rottenschwil,Mettmenstetten,Cham,Aesch (ZH),Oberriet (SG),Démoret,Corminboeuf,Forst-Längenbühl,Wattenwil,Greifensee,Guggisberg,Wohlen bei Bern,Greifensee,Marly,Avry,Nesslau,Torny,Sergey,Baulmes,Les Clées,Bofflens,Weesen,Glarus Nord,Rances,Ferenbalm,Stammheim,Wagenhausen,Hagenbuch,Wiesendangen,Neftenbach,Flurlingen,Feuerthalen,Schaffhausen,Warth-Weiningen,Ellikon an der Thur,Zell (ZH),Weisslingen,Elsau,Champvent,Belmont-sur-Yverdon,Mathod,Diessenhofen,Rickenbach (ZH),Dinhard,Nürensdorf,Bassersdorf,Ependes (VD),Lindau,Basadingen-Schlattingen,Herbligen,Brenzikofen,Oppligen,Kiesen,Niedermuhlern,Thurnen,Trüllikon,Benken (ZH),Schlatt (TG),Pfungen,Elgg,Mühleberg,Wileroltigen,Radelfingen,Kloten,Winkel,Oberembrach,Neuenegg,Zollikofen,Laupen,Wila,Illnau-Effretikon,Kirchlindach,Ramsen,Hemishofen,Aadorf,Pomy,Cronay,Wädenswil,Dörflingen,Winterthur,Seuzach,Dietlikon,Wangen-Brüttisellen,Opfikon,Truttikon,Ebnat-Kappel,Oberbalm,Köniz,Kehrsatz,Egerkingen,Dulliken,Uttigen,Linden,Neuheim,Fällanden,Stein (AR),Oberthal,Horriwil,Besenbüren,Bettwil,Schongau,Emmen,Kriens,Escholzmatt-Marbach,Schangnau,Wängi,Münchwilen (TG),Sirnach,Rorschacherberg,Rorschach,St. Margrethen,Berg (SG),Häggenschwil,Trub,Buchrain,Rothenburg,Eriswil,Walterswil (BE),Oeschenbach,Rheineck,Goldach,Mörschwil,Wyssachen,St. Gallen,Eschenbach (LU),Rain,La Sonnaz,Hauterive (FR),Matran,Riggisberg,Rüeggisberg,Brütten,Schlatt (ZH),Granges-Paccot,Ennetbürgen,Gersau,Jaberg,Wynigen,Steffisburg,Fahrni,Kriegstetten,Hüniken,Recherswil,Zufikon,Dietikon,Bergdietikon,Spreitenbach,Römerswil,Wiler bei Utzenstorf,Berikon,Stansstad,Aefligen,Busswil bei Melchnau,Biglen,Worb,Allmendingen,Rubigen,Konolfingen,Küssnacht (SZ),Sumiswald,Trachselwald,Seeberg,Drei Höfe,Eich,Röthenbach im Emmental,Oberhünigen,Oberdiessbach,Amden,Mirchel,Burgdorf,Lotzwil,Rüti bei Lyssach,Toffen,Willisau,Hergiswil bei Willisau,Madiswil,Rütschelen,Landiswil,Walkringen,Gondiswil,Langnau im Emmental,Huttwil,Trubschachen,Wolhusen,Alberswil,Romoos,Menznau,Urtenen-Schönbühl,Brünisried,Zäziwil,Freimettigen,Rohrbach,Rohrbachgraben,Alpthal,Uznach,Bauma,Wetzikon (ZH),Gossau (ZH),Kriechenwil,Kleinbösingen,Gurmels,Eichberg,Altstätten,Hittnau,Fischenthal,Bäretswil,Siselen,Bargen (BE),Wichtrach,Kallnach,Hinwil,Affoltern im Emmental,Rüegsau,Morrens (VD),Erlenbach (ZH),Wangen (SZ),Galgenen,Altendorf,Vucherens,Vulliens,Lussery-Villars,Münsingen,Gurzelen,Seftigen,Belp,Burgistein,Biel/Bienne,Kaufdorf,Düdingen,Schmitten (FR),Misery-Courtion,Muri bei Bern,Bellmund,Ried bei Kerzers,Moosseedorf,Amsoldingen,Thierachern,Uebeschi,Seedorf (BE),Muntelier,Murten,Cressier (FR),Courgevaux,Staatswald Galm,Münchenwiler,Worben,Jens,Heitenried,Gurbrü,Bühl,Courtepin,Rüschegg,Ipsach,Epsach,Mörigen,Hermrigen,La Neuveville,Twann-Tüscherz,Grosshöchstetten,Brügg,Nidau,Bois-d'Amont,Ins,Ueberstorf,Treiten,Erlach,Bäriswil,Fribourg,Täuffelen,Aarberg,Cressier (NE),Port,Aegerten,Walperswil,Le Landeron,Merzligen,Sutz-Lattrigen,Bielersee (BE),Ligerz,Kappelen,Müntschemier,Untereggen,Wuppenau,Dürnten,Zuzwil (SG),Kirchberg (SG),Oberburg,Hindelbank,Krauchthal,Ittigen,Bolligen,Meyriez,Speicher,Ostermundigen,Stettlen,Laténa,Lac de Neuchâtel (BE),Cuarnens,Kaltbrunn,Vullierens,Bercher,Appenzell,Schwende-Rüte,Benken (SG),Oberägeri,Rothenthurm,Gommiswald,Schönengrund,Urnäsch,Uitikon,Urdorf,Lüscherz,Ferpicloz,Waldstatt,Schwellbrunn,Finsterhennen,Brüttelen,Schönholzerswilen,Stettfurt,Wigoltingen,Berneck,Thal,Walzenhausen,Tübach,Märstetten,Tägerwilen,Bottighofen,Arbon,Weinfelden,Bremgarten bei Bern,Frauenkappelen,Bern,Freienbach,Lachen,Gonten,Thalwil,Trogen,Gais,Spiez,Hilterfingen,Heiligenschwendi,Obfelden,Knonau,Dübendorf,Schwerzenbach,Bühler,Schmerikon,Arni (AG),Lully (VD),Chavannes-de-Bogis,Avully,Saint-Cergue,Russin,Pregny-Chambésy,Dardagny,Attalens,Le Vaud,Essertines-sur-Rolle,Arnex-sur-Nyon,Crans (VD),Dully,Givrins,Biberstein,Bassins,Arzier-Le Muids,Bernex,Perly-Certoux,Crassier,Avusy,Chancy,Bellevue,Prangins,Collex-Bossy,Le Grand-Saconnex,Cologny,Founex,Choulex,Collonge-Bellerive,Servion,Puidoux,Bogis-Bossey,Birr,Anières,Corsier (GE),Ehrendingen,Rafz,Rheinau,Weiach,Untersiggenthal,Bülach,Zurzach,Buchberg,Steinmaur,Bursinel,Begnins,Rolle,Lussy-sur-Morges,Signy-Avenex,Chardonne,Saint-Prex,Rivaz,Vinzel,Fisibach,Schneisingen,Mellikon,Birrhard,Wettingen,Neuenhof,Birmenstorf (AG),Tägerig,Endingen,Niederrohrdorf,Oberrohrdorf,Remetschwil,Freienwil,Obersiggenthal,Killwangen,Schöfflisdorf,Schleinikon,Rümlang,Regensdorf,Dielsdorf,Wallisellen,Chexbres,Duillier,Coppet,Grens,Burtigny,Tolochenaz,Paudex,Hermance,Vevey,Eysins,Gland,Nyon,Tartegnin,Féchy,Perroy,Coinsins,Vich,Bougy-Villars,Genolier,Luins,Saint-Saphorin (Lavaux),Allaman,Mont-sur-Rolle,Trélex,Gilly,Bursins,Buchillon,Chêne-Bougeries,Vandoeuvres,Genève,Saint-Oyens,Longirod,Niederhasli,Niederweningen,Oberglatt,Regensberg,Neerach,Würenlingen,Tegerfelden,Siglistorf,Saubraz,Gimel,Bière,Savigny,Zollikon,Mönchaltorf,Kilchberg (ZH),Männedorf,Egg,Stäfa,Maur,Meilen,Küsnacht (ZH),Seegräben,Grüningen,Oberrieden,Glattfelden,Boppelsen,Wasterkingen,Wil (ZH),Adliswil,Stallikon,Hüntwangen,Mülligen,Oetwil am See,Hochfelden,Stadel,Niederglatt,Buchs (ZH),Steinhausen,Kappel am Albis,Dänikon,Würenlos,Homberg,Hausen am Albis,Richterswil,Feusisberg,Wollerau,Teuffenthal (BE),Horrenbach-Buchen,Uetikon am See,Zumikon,Herrliberg,Kappel (SO),Boningen,Dachsen,Dällikon,Unterengstringen,Inkwil,Mägenwil,Zürich,Wettswil am Albis,Lavigny,Etoy,Villars-le-Terroir,Oberhofen am Thunersee,Strengelbach,Berken,Walliswil bei Niederbipp,Thun,Oberbipp,Rüttenen,Feldbrunnen-St. Niklaus,Lohn-Ammannsegg,Solothurn,Kammersrohr,Attiswil,Vordemwald,Küttigen,Eppenberg-Wöschnau,Aarau,Balm bei Günsberg,Gretzenbach,Wiedlisbach,Reisiswil,Staffelbach,Derendingen,Oftringen,Subingen,Niederbüren,Niederhelfenschwil,Hombrechtikon,Bachs,Eglisau,Höri,Thunersee,La Rippe,Chéserex,Marchissy,Otelfingen,Embrach,Lufingen,Cugy (VD),Prilly,Romanel-sur-Lausanne,Cheseaux-sur-Lausanne,Lutry,Lausanne,Pully,Flawil,Wittenbach,Utzenstorf,Zuzwil (BE),Jegenstorf,Iffwil,Commugny,Presinge,Rapperswil (BE),Obergerlafingen,Puplinge,Oberweningen,Grossaffoltern,Schüpfen,Deisswil bei Münchenbuchsee,Saint-Livres,Unterramsern,Uzwil,Bischofszell,Amriswil,Felben-Wellhausen,Zihlschlacht-Sitterdorf,Herdern,Langrickenbach,Lommis,Uttwil,Gottlieben,Kreuzlingen,Bussnang,Birwinken,Sulgen,Matzingen,Berlingen,Kradolf-Schönenberg,Muolen,Erlen,Bürglen (TG),Homburg,Güttingen,Dozwil,Kesswil,Hüttlingen,Münsterlingen,Thundorf,Affeltrangen,Raperswilen,Ermatingen,Salenstein,Aclens,Romanel-sur-Morges,Bremblens,Gollion,Laconnex,Soral,Bardonnex,Confignon,Onex,Salmsach,Romanshorn,Müllheim,Egnach,Amlikon-Bissegg,Sommeri,Hefenhofen,Kemmental,Pfyn,Berg (TG),Altnau,Wäldi,Steckborn,Hohentannen,Plan-les-Ouates,Jussy,Roggwil (TG),Renens (VD),Crissier,Chavannes-près-Renens,Jouxtens-Mézery,Gingins,Bussigny,Villars-Sainte-Croix,Ecublens (VD),Veyrier,Troinex,Flumenthal,Luterbach,Satigny,Meyrin,Aire-la-Ville,Vernier,Lüterkofen-Ichertswil,Au (SG),Widnau,Diepoldsau,Rehetobel,Bellach,Grenchen,Lüsslingen-Nennigkofen,Schwadernau,Curtilles,Granges (Veveyse),Bossonnens,Forel (Lavaux),Lonay,Fraubrunnen,Vaux-sur-Morges,Prévondavaux,Bussy-sur-Moudon,Mauraz,Pieterlen,Romont (BE),Lengnau (BE),Penthéréaz,Moiry,Lovatens,Prévonloup,Buchegg,Oberengstringen,Lupfig,Rossenges,Syens,Chigny,Ursy,Saint-Martin (FR),Montricher,La Sarraz,Rüdlingen,Carouge (GE),Cartigny,Meinier,Brunegg,Lancy,Denges,Moudon,Sigriswil,Fislisbach,Baden,Lengnau (AG),Stetten (AG),Montpreveyres,Penthalaz,Penthaz,Oetwil an der Limmat,Hüttikon,Bretigny-sur-Morrens,Assens,Bachenbülach,Oulens-sous-Echallens,Ferreyres,Chevilly,Echallens,Montilliez,Etagnières,Eclépens,Oppens,Rueyres,Montcherand,Arnex-sur-Orbe,Vufflens-la-Ville,Bavois,Poliez-Pittet,Froideville,Berolle,Jorat-Mézières,Bettens,Pompaples,Niederlenz,Boussens,Veltheim (AG),Goumoëns,Daillens,Mollens (VD),L'Isle,La Chaux (Cossonay),Chavannes-le-Veyron,Auenstein,Hautemorges,Hermenches,Jorat-Menthue,Ropraz,Corcelles-le-Jorat,Tobel-Tägerschen,Meinisberg,Biezwil,Schnottwil,Fey,Orny,Le Mont-sur-Lausanne,Epalinges,Belmont-sur-Lausanne,Messen,Graben,Heimenhausen,Wikon,Altbüron,Melchnau,Bätterkinden,Wengi,Schöftland,Kirchleerau,Dizy,Saint-Barthélemy (VD),Wangen an der Aare,Knutwil,Bottenwil,Wiliberg,Gunzgen,Neuendorf,Grancy,Senarclens,Vuarrens,Mex (VD),Büetigen,Zuchwil,Kernenried,Gerlafingen,Bettlach,Arch,Kirchberg (BE),Rüdtligen-Alchenflüh,Lyssach,Langendorf,Bournens,Büren an der Aare,Sullens,Boulens,Montanaire,Ogens,Oberwil bei Büren,Safnern,Ersigen,Deitingen,Thônex,Scheuren,Bottens,Chavannes-des-Bois,Versoix,Villars-sous-Yens,Dättlikon,Freienstein-Teufen,Yens,Ballens,Corsier-sur-Vevey,Morges,Bourg-en-Lavaux,Aubonne,Saint-Sulpice (VD),Préverenges,Vufflens-le-Château,Echichens,Clarmont,Denens,Lauerz,Hagneck,Staufen,Jonen,Sarmenstorf,Gränichen,Dotzigen,Meienried,Leuzigen,Diessbach bei Büren,Gontenschwil,Birrwil,Geltwil,Risch,Willadingen,Aarburg,Cossonay,Chêne-Bourg,Lyss,Rüti bei Büren,Mauensee,Höchstetten,Hellsau,Alchenstorf,Ballwil,Abtwil,Vechigen,Weggis,Meggen,Buchholterberg,Wachseldorn,Unterlangenegg,Entlebuch,Hasle (LU),Schüpfheim,Doppleschwand,Mies,Genthod,Tannay,Ebikon,Greppen,Bleienbach,Hubersdorf,Günsberg,Heiden,Uezwil,Hochdorf,Sins,Echandens,Fahrwangen,Langenthal,Roggwil (BE),Wolfwil,Safenwil,Pfaffnau,Roggliswil,Vorderthal,Braunau,Lengwil,Villorsonnens,Massonnens,Gaiserwald,Zell (LU),Flühli,Ufhusen,Vuadens,Hergiswil (NW),Schwarzenberg,Rue,Wald (BE),Waldkirch,Oberbüren,Oberuzwil,Andwil (SG),Wil (SG),Billens-Hennens,Lucens,Gossau (SG),Châtel-Saint-Denis,Vuisternens-devant-Romont,La Verrerie,Siviriez,Hauteville,Oron,Blonay - Saint-Légier,La Tour-de-Peilz,Hünenberg,Fehraltorf,Volketswil,Maschwanden,Horgen,Zürichsee (ZH),Fräschels,Neunforn,Horn,Bodensee (SG),Oberegg,Reute (AR),Rickenbach (TG),Wilen (TG),Kerzers,Villmergen,Rudolfstetten-Friedlisberg,Eschlikon,Büttikon,Schafisheim,Lutzenberg,Wolfhalden,Mammern,Frauenfeld,Gachnang,Eschenz,Stein am Rhein,Büsingen am Hochrhein,Rorbas,Berg am Irchel,Buch am Irchel,Chavannes-sur-Moudon,Plasselb,St. Silvester,Gy,Riedholz,Langnau am Albis,Rapperswil-Jona,Aeugst am Albis,Rifferswil,Bubikon,Rüti (ZH),Studen (BE),Orpund,Tuggen,Herisau,Hundwil,Selzach,Lommiswil,Mosnang,Eschenbach (SG),Wald (ZH),Birmensdorf (ZH),Oberdorf (SO),Geroldswil,Weiningen (ZH),Schlieren,Uster,Baar,Hohenrain,Wauwil,Hirschthal,Däniken,Härkingen,Fulenbach,Reitnau,Niederbipp,Aeschi (SO),Zofingen,Brittnau,Dagmersellen,Etziken,Muhen,Aarwangen,Schlossrued,Reiden,Walliswil bei Wangen,Buchs (AG),Thunstetten,Schönenwerd,Uerkheim,Walterswil (SO),Niedergösgen,Sauge,Schötz,Altishofen,Nebikon,Starrkirch-Wil,Obergösgen,Borex,Céligny,Egolzwil,Meierskappel,Fischbach,Eriz,Lützelflüh,Hasle bei Burgdorf,Heimiswil,Neuenkirch,Malters,Werthenstein,Dürrenroth,Ochlenberg,Remaufens,Inwil,Dietwil,Oberrüti,Sursee,Oberkirch,Udligenswil,Auswil,Ursenbach,Riaz,Le Flon,Bowil,Signau,Ettiswil,Koppigen,Semsales,Bannwil,Hallwil,Zetzwil,Maracon,Villars-le-Comte,Balgach,Rovray,Echarlens,Marsens,Bioley-Magnoux,Murgenthal,Rumendingen,Mattstetten,Schwarzenburg,Bolken,Marbach (SG),Rebstein,Dorf,Ossingen,Kleinandelfingen,Eggiwil,Jongny,Heimberg,Villarsel-sur-Marly,Uetendorf,Henniez,Volken,Flaach,Dägerlen,Hildisrieden,Sempach,Henggart,Bodensee (TG),Jonschwil,Eggersriet,Leutwil,Lütisburg,Hüttwilen,Uesslingen-Buch,Nottwil,Ruswil,Neuhausen am Rheinfall,Unterägeri"
+  },
+  {
+    "index": 38,
+    "id": "spot-gelmersee",
+    "slug": "gelmersee",
+    "name": "Gelmersee",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.6144,
+      "lng": 8.3033
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Gelmersee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Lake Gelmersee (BE) - Guttannen"
+  },
+  {
+    "index": 39,
+    "id": "spot-giessbach-falls",
+    "slug": "giessbach-falls",
+    "name": "Giessbach Falls",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.7354,
+      "lng": 8.0223
+    },
+    "coordinateType": "attraction",
+    "category": "waterfall",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Giessbach+Falls&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place Giessbach (BE) - Brienz (BE)"
+  },
+  {
+    "index": 40,
+    "id": "spot-engstligen-falls",
+    "slug": "engstligen-falls",
+    "name": "Engstligen Falls",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.4503,
+      "lng": 7.57
+    },
+    "coordinateType": "attraction",
+    "category": "waterfall",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Engstligen+Falls&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place Engstligenalp (BE) - Adelboden"
+  },
+  {
+    "index": 41,
+    "id": "spot-lauenensee",
+    "slug": "lauenensee",
+    "name": "Lauenensee",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.4072,
+      "lng": 7.3189
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lauenensee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Building Restaurant Lauenensee (BE) - Lauenen"
+  },
+  {
+    "index": 42,
+    "id": "spot-gantrischseeli",
+    "slug": "gantrischseeli",
+    "name": "Gantrischseeli",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 46.7129,
+      "lng": 7.44
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Gantrischseeli&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Gantrischseeli (BE) - Rüschegg"
+  },
+  {
+    "index": 43,
+    "id": "spot-gorges-de-l-areuse",
+    "slug": "gorges-de-l-areuse",
+    "name": "Gorges de l’Areuse",
+    "canton": "Neuchâtel",
+    "region": "neuchatel",
+    "coordinates": {
+      "lat": 46.958,
+      "lng": 6.79
+    },
+    "coordinateType": "valley_reference",
+    "category": "gorge",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Gorges+de+l%E2%80%99Areuse&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Ditch Gorges de l'Areuse (NE) - Brot-Plamboz,Boudry,La Grande Béroche,Rochefort,Val-de-Travers"
+  },
+  {
+    "index": 44,
+    "id": "spot-saut-du-doubs",
+    "slug": "saut-du-doubs",
+    "name": "Saut du Doubs",
+    "canton": "Neuchâtel",
+    "region": "neuchatel",
+    "coordinates": {
+      "lat": 47.0995,
+      "lng": 6.701
+    },
+    "coordinateType": "attraction",
+    "category": "waterfall",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Saut+du+Doubs&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Restaurant Saut-du-Doubs (NE) - Le Locle"
+  },
+  {
+    "index": 45,
+    "id": "spot-etang-de-la-gruere",
+    "slug": "etang-de-la-gruere",
+    "name": "Étang de la Gruère",
+    "canton": "Jura",
+    "region": "jura",
+    "coordinates": {
+      "lat": 47.2381,
+      "lng": 7.048
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=%C3%89tang+de+la+Gru%C3%A8re&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Etang de la Gruère (JU) - Saignelégier"
+  },
+  {
+    "index": 46,
+    "id": "spot-st-ursanne",
+    "slug": "st-ursanne",
+    "name": "St-Ursanne",
+    "canton": "Jura",
+    "region": "jura",
+    "coordinates": {
+      "lat": 47.3647,
+      "lng": 7.154
+    },
+    "coordinateType": "village",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=St-Ursanne&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Populated Place St-Ursanne (JU) - Clos du Doubs"
+  },
+  {
+    "index": 47,
+    "id": "spot-chasseral",
+    "slug": "chasseral",
+    "name": "Chasseral",
+    "canton": "Bern",
+    "region": "bern",
+    "coordinates": {
+      "lat": 47.1325,
+      "lng": 7.0592
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chasseral&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Main peak Chasseral (BE) - Nods"
+  },
+  {
+    "index": 48,
+    "id": "spot-lac-de-joux",
+    "slug": "lac-de-joux",
+    "name": "Lac de Joux",
+    "canton": "Vaud",
+    "region": "vaud",
+    "coordinates": {
+      "lat": 46.625,
+      "lng": 6.2867
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lac+de+Joux&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Lac de Joux (VD) - Le Chenit,L'Abbaye,Le Lieu"
+  },
+  {
+    "index": 49,
+    "id": "spot-dent-de-vaulion",
+    "slug": "dent-de-vaulion",
+    "name": "Dent de Vaulion",
+    "canton": "Vaud",
+    "region": "vaud",
+    "coordinates": {
+      "lat": 46.6811,
+      "lng": 6.3503
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Dent+de+Vaulion&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Chalet de la Dent de Vaulion (VD) - Vaulion"
+  },
+  {
+    "index": 50,
+    "id": "spot-vallon-de-nant",
+    "slug": "vallon-de-nant",
+    "name": "Vallon de Nant",
+    "canton": "Vaud",
+    "region": "vaud",
+    "coordinates": {
+      "lat": 46.2528,
+      "lng": 7.101
+    },
+    "coordinateType": "valley_reference",
+    "category": "alpine-meadow",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Vallon+de+Nant&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Valley Vallon de Nant (VD,VS) - Lavey-Morcles,Fully,Leytron,Collonges,Bex"
+  },
+  {
+    "index": 51,
+    "id": "spot-lac-des-chavonnes",
+    "slug": "lac-des-chavonnes",
+    "name": "Lac des Chavonnes",
+    "canton": "Vaud",
+    "region": "vaud",
+    "coordinates": {
+      "lat": 46.342,
+      "lng": 7.137
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lac+des+Chavonnes&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Lake Lac des Chavonnes (VD) - Ormont-Dessous"
+  },
+  {
+    "index": 52,
+    "id": "spot-rochers-de-naye",
+    "slug": "rochers-de-naye",
+    "name": "Rochers-de-Naye",
+    "canton": "Vaud",
+    "region": "vaud",
+    "coordinates": {
+      "lat": 46.4314,
+      "lng": 6.9764
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rochers-de-Naye&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Main peak Rochers de Naye (VD) - Veytaux"
+  },
+  {
+    "index": 53,
+    "id": "spot-grande-caricaie",
+    "slug": "grande-caricaie",
+    "name": "Grande Cariçaie",
+    "canton": "Vaud / Fribourg",
+    "region": "vaud",
+    "coordinates": {
+      "lat": 46.815,
+      "lng": 6.768
+    },
+    "coordinateType": "heritage_area_reference",
+    "category": "forest",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Grande+Cari%C3%A7aie&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place Grande-Croix (VD) - Pailly"
+  },
+  {
+    "index": 54,
+    "id": "spot-mont-vully",
+    "slug": "mont-vully",
+    "name": "Mont Vully",
+    "canton": "Fribourg",
+    "region": "fribourg",
+    "coordinates": {
+      "lat": 46.9617,
+      "lng": 7.0742
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Mont+Vully&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Populated Place Joressens (FR) - Mont-Vully"
+  },
+  {
+    "index": 55,
+    "id": "spot-ogoz-island",
+    "slug": "ogoz-island",
+    "name": "Ogoz Island",
+    "canton": "Fribourg",
+    "region": "fribourg",
+    "coordinates": {
+      "lat": 46.6983,
+      "lng": 7.1
+    },
+    "coordinateType": "attraction",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ogoz+Island&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place La Comba (FR) - Pont-en-Ogoz"
+  },
+  {
+    "index": 56,
+    "id": "spot-schwarzsee",
+    "slug": "schwarzsee",
+    "name": "Schwarzsee",
+    "canton": "Fribourg",
+    "region": "fribourg",
+    "coordinates": {
+      "lat": 46.6678,
+      "lng": 7.29
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schwarzsee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Other transport Schwarzsee Gypsera (Talstat.) (FR) - Plaffeien"
+  },
+  {
+    "index": 57,
+    "id": "spot-gastlosen",
+    "slug": "gastlosen",
+    "name": "Gastlosen",
+    "canton": "Fribourg",
+    "region": "fribourg",
+    "coordinates": {
+      "lat": 46.577,
+      "lng": 7.275
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Gastlosen&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Local name swisstopo Wälsch Gastlosen (FR) - Jaun"
+  },
+  {
+    "index": 58,
+    "id": "spot-gorges-de-la-jogne",
+    "slug": "gorges-de-la-jogne",
+    "name": "Gorges de la Jogne",
+    "canton": "Fribourg",
+    "region": "fribourg",
+    "coordinates": {
+      "lat": 46.6059,
+      "lng": 7.1188
+    },
+    "coordinateType": "valley_reference",
+    "category": "gorge",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Gorges+de+la+Jogne&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Ditch Gorges de la Jogne (FR) - Broc"
+  },
+  {
+    "index": 59,
+    "id": "spot-lac-de-taney",
+    "slug": "lac-de-taney",
+    "name": "Lac de Taney",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 46.3467,
+      "lng": 6.8422
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lac+de+Taney&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Lac de Taney (VS) - Vouvry"
+  },
+  {
+    "index": 60,
+    "id": "spot-derborence",
+    "slug": "derborence",
+    "name": "Derborence",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 46.2817,
+      "lng": 7.215
+    },
+    "coordinateType": "valley_reference",
+    "category": "alpine-meadow",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Derborence&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Refuge du Lac de Derborence (VS) - Conthey"
+  },
+  {
+    "index": 61,
+    "id": "spot-earth-pyramids-of-euseigne",
+    "slug": "earth-pyramids-of-euseigne",
+    "name": "Earth Pyramids of Euseigne",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 46.1735,
+      "lng": 7.4206
+    },
+    "coordinateType": "attraction",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Earth+Pyramids+of+Euseigne&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Road Tunnel des pyramides d'Euseigne (VS) - Hérémence"
+  },
+  {
+    "index": 62,
+    "id": "spot-lac-de-moiry",
+    "slug": "lac-de-moiry",
+    "name": "Lac de Moiry",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 46.1367,
+      "lng": 7.5739
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lac+de+Moiry&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Restaurant Lac de Moiry (VS) - Anniviers"
+  },
+  {
+    "index": 63,
+    "id": "spot-grande-dixence-dam",
+    "slug": "grande-dixence-dam",
+    "name": "Grande Dixence Dam",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 46.0803,
+      "lng": 7.4031
+    },
+    "coordinateType": "attraction",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Grande+Dixence+Dam&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Dam Grande Dixence (VS) - Hérémence"
+  },
+  {
+    "index": 64,
+    "id": "spot-lac-bleu-d-arolla",
+    "slug": "lac-bleu-d-arolla",
+    "name": "Lac Bleu d’Arolla",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 46.0506,
+      "lng": 7.48
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lac+Bleu+d%E2%80%99Arolla&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Building Pension du Lac Bleu (VS) - Evolène"
+  },
+  {
+    "index": 65,
+    "id": "spot-champex-lac",
+    "slug": "champex-lac",
+    "name": "Champex-Lac",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 46.0322,
+      "lng": 7.1177
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Champex-Lac&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Populated Place Champex-Lac (VS) - Orsières"
+  },
+  {
+    "index": 66,
+    "id": "spot-bisse-du-torrent-neuf",
+    "slug": "bisse-du-torrent-neuf",
+    "name": "Bisse du Torrent-Neuf",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 46.2725,
+      "lng": 7.3285
+    },
+    "coordinateType": "attraction",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Bisse+du+Torrent-Neuf&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Chapel Notre-Dame du Torrent-Neuf (VS) - Savièse"
+  },
+  {
+    "index": 67,
+    "id": "spot-gorges-du-durnand",
+    "slug": "gorges-du-durnand",
+    "name": "Gorges du Durnand",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 46.0617,
+      "lng": 7.064
+    },
+    "coordinateType": "attraction",
+    "category": "gorge",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Gorges+du+Durnand&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Ditch Gorges du Durnand (VS) - Bovernier"
+  },
+  {
+    "index": 68,
+    "id": "spot-val-ferret",
+    "slug": "val-ferret",
+    "name": "Val Ferret",
+    "canton": "Valais",
+    "region": "valais",
+    "coordinates": {
+      "lat": 45.9328,
+      "lng": 7.0989
+    },
+    "coordinateType": "valley_reference",
+    "category": "alpine-meadow",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Val+Ferret&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Valley Val Ferret (VS) - Bourg-Saint-Pierre,Orsières,Trient,Liddes"
+  },
+  {
+    "index": 69,
+    "id": "spot-foroglio-waterfall",
+    "slug": "foroglio-waterfall",
+    "name": "Foroglio Waterfall",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 46.3744,
+      "lng": 8.5489
+    },
+    "coordinateType": "attraction",
+    "category": "waterfall",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Foroglio+Waterfall&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Waterfall Cascata di Foroglio (TI) - Cevio"
+  },
+  {
+    "index": 70,
+    "id": "spot-val-calnegia",
+    "slug": "val-calnegia",
+    "name": "Val Calnègia",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 46.362,
+      "lng": 8.522
+    },
+    "coordinateType": "valley_reference",
+    "category": "alpine-meadow",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Val+Caln%C3%A8gia&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Valley La Vall Calnègia (TI) - Bosco/Gurin,Cevio,Cerentino"
+  },
+  {
+    "index": 71,
+    "id": "spot-piora-valley-and-lago-ritom",
+    "slug": "piora-valley-and-lago-ritom",
+    "name": "Piora Valley and Lago Ritom",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 46.5393,
+      "lng": 8.6911
+    },
+    "coordinateType": "valley_reference",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Piora+Valley+and+Lago+Ritom&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Valley Val Piora (TI) - Quinto,Airolo,Blenio,Faido"
+  },
+  {
+    "index": 72,
+    "id": "spot-lago-di-tome",
+    "slug": "lago-di-tome",
+    "name": "Lago di Tomè",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 46.3632,
+      "lng": 8.6899
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lago+di+Tom%C3%A8&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Lago di Tomé (TI) - Lavizzara"
+  },
+  {
+    "index": 73,
+    "id": "spot-brissago-islands",
+    "slug": "brissago-islands",
+    "name": "Brissago Islands",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 46.1343,
+      "lng": 8.7358
+    },
+    "coordinateType": "attraction",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Brissago+Islands&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Island on a lake Isole di Brissago (TI) - Brissago"
+  },
+  {
+    "index": 74,
+    "id": "spot-monte-san-giorgio",
+    "slug": "monte-san-giorgio",
+    "name": "Monte San Giorgio",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 45.9139,
+      "lng": 8.9492
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Monte+San+Giorgio&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Main hill Monte San Giorgio (TI) - Mendrisio"
+  },
+  {
+    "index": 75,
+    "id": "spot-monte-generoso",
+    "slug": "monte-generoso",
+    "name": "Monte Generoso",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 45.9283,
+      "lng": 9.0197
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Monte+Generoso&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Viewpoint Monte Generoso (TI) - Val Mara"
+  },
+  {
+    "index": 76,
+    "id": "spot-santa-petronilla-waterfall",
+    "slug": "santa-petronilla-waterfall",
+    "name": "Santa Petronilla Waterfall",
+    "canton": "Ticino",
+    "region": "ticino",
+    "coordinates": {
+      "lat": 46.3494,
+      "lng": 8.9647
+    },
+    "coordinateType": "attraction",
+    "category": "waterfall",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Santa+Petronilla+Waterfall&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Waterfall Cascata di Santa Petronilla 3 (TI) - Biasca"
+  },
+  {
+    "index": 77,
+    "id": "spot-soglio",
+    "slug": "soglio",
+    "name": "Soglio",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.3424,
+      "lng": 9.5396
+    },
+    "coordinateType": "village",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Soglio&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Populated Place Soglio (GR) - Bregaglia"
+  },
+  {
+    "index": 78,
+    "id": "spot-val-roseg",
+    "slug": "val-roseg",
+    "name": "Val Roseg",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.432,
+      "lng": 9.877
+    },
+    "coordinateType": "valley_reference",
+    "category": "alpine-meadow",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Val+Roseg&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Valley Val Roseg (GR) - Pontresina,Samedan,Celerina/Schlarigna,St. Moritz,Silvaplana,Sils im Engadin/Segl"
+  },
+  {
+    "index": 79,
+    "id": "spot-morteratsch-glacier",
+    "slug": "morteratsch-glacier",
+    "name": "Morteratsch Glacier",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.4167,
+      "lng": 9.9325
+    },
+    "coordinateType": "viewpoint",
+    "category": "glacier",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Morteratsch+Glacier&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place Les Clées (VD) - Les Clées"
+  },
+  {
+    "index": 80,
+    "id": "spot-lai-da-palpuogna",
+    "slug": "lai-da-palpuogna",
+    "name": "Lai da Palpuogna",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.578,
+      "lng": 9.7845
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lai+da+Palpuogna&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place Pro da l'Alp (GR) - Silvaplana"
+  },
+  {
+    "index": 81,
+    "id": "spot-joriseen",
+    "slug": "joriseen",
+    "name": "Jöriseen",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.7785,
+      "lng": 9.9686
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=J%C3%B6riseen&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Jöriseen (GR) - Klosters"
+  },
+  {
+    "index": 82,
+    "id": "spot-viamala-gorge",
+    "slug": "viamala-gorge",
+    "name": "Viamala Gorge",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.6608,
+      "lng": 9.4482
+    },
+    "coordinateType": "attraction",
+    "category": "gorge",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Viamala+Gorge&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Ditch Viamala (GR) - Sils im Domleschg,Thusis,Rongellen,Zillis-Reischen,Muntogna da Schons"
+  },
+  {
+    "index": 83,
+    "id": "spot-lej-da-staz",
+    "slug": "lej-da-staz",
+    "name": "Lej da Staz",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.4975,
+      "lng": 9.8725
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lej+da+Staz&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Hotel Restaurant Lej da Staz (GR) - Celerina/Schlarigna"
+  },
+  {
+    "index": 84,
+    "id": "spot-val-mustair",
+    "slug": "val-mustair",
+    "name": "Val Müstair",
+    "canton": "Graubünden",
+    "region": "graubunden",
+    "coordinates": {
+      "lat": 46.602,
+      "lng": 10.424
+    },
+    "coordinateType": "valley_reference",
+    "category": "alpine-meadow",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Val+M%C3%BCstair&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Populated Place Sta. Maria Val Müstair (GR) - Val Müstair"
+  },
+  {
+    "index": 85,
+    "id": "spot-klontalersee",
+    "slug": "klontalersee",
+    "name": "Klöntalersee",
+    "canton": "Glarus",
+    "region": "glarus",
+    "coordinates": {
+      "lat": 47.0278,
+      "lng": 8.9717
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kl%C3%B6ntalersee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Klöntalersee (GL) - Glarus"
+  },
+  {
+    "index": 86,
+    "id": "spot-oberblegisee",
+    "slug": "oberblegisee",
+    "name": "Oberblegisee",
+    "canton": "Glarus",
+    "region": "glarus",
+    "coordinates": {
+      "lat": 46.9696,
+      "lng": 9.0326
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Oberblegisee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Oberblegisee (GL) - Glarus Süd"
+  },
+  {
+    "index": 87,
+    "id": "spot-muttsee",
+    "slug": "muttsee",
+    "name": "Muttsee",
+    "canton": "Glarus",
+    "region": "glarus",
+    "coordinates": {
+      "lat": 46.8565,
+      "lng": 9.0185
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Muttsee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Muttseehütte SAC (GL) - Glarus Süd"
+  },
+  {
+    "index": 88,
+    "id": "spot-swiss-tectonic-arena-sardona",
+    "slug": "swiss-tectonic-arena-sardona",
+    "name": "Swiss Tectonic Arena Sardona",
+    "canton": "Glarus / Graubünden / St. Gallen",
+    "region": "glarus",
+    "coordinates": {
+      "lat": 46.9225,
+      "lng": 9.2528
+    },
+    "coordinateType": "heritage_area_reference",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Swiss+Tectonic+Arena+Sardona&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Local name swisstopo Sardonachrazeri (SG) - Pfäfers"
+  },
+  {
+    "index": 89,
+    "id": "spot-seerenbach-falls",
+    "slug": "seerenbach-falls",
+    "name": "Seerenbach Falls",
+    "canton": "St. Gallen",
+    "region": "st-gallen",
+    "coordinates": {
+      "lat": 47.1394,
+      "lng": 9.222
+    },
+    "coordinateType": "attraction",
+    "category": "waterfall",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seerenbach+Falls&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place Vals (SG) - Flums"
+  },
+  {
+    "index": 90,
+    "id": "spot-pizol-five-lakes",
+    "slug": "pizol-five-lakes",
+    "name": "Pizol Five Lakes",
+    "canton": "St. Gallen",
+    "region": "st-gallen",
+    "coordinates": {
+      "lat": 46.9785,
+      "lng": 9.3867
+    },
+    "coordinateType": "valley_reference",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Pizol+Five+Lakes&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Glacier Pizolgletscher (SG) - Mels"
+  },
+  {
+    "index": 91,
+    "id": "spot-saxer-lucke",
+    "slug": "saxer-lucke",
+    "name": "Saxer Lücke",
+    "canton": "St. Gallen",
+    "region": "st-gallen",
+    "coordinates": {
+      "lat": 47.2455,
+      "lng": 9.4398
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Saxer+L%C3%BCcke&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Pass Saxerlücke (AI) - Schwende-Rüte"
+  },
+  {
+    "index": 92,
+    "id": "spot-falensee",
+    "slug": "falensee",
+    "name": "Fälensee",
+    "canton": "Appenzell Innerrhoden",
+    "region": "appenzell",
+    "coordinates": {
+      "lat": 47.2531,
+      "lng": 9.4186
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=F%C3%A4lensee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place Vulliens (VD) - Vulliens"
+  },
+  {
+    "index": 93,
+    "id": "spot-schafler",
+    "slug": "schafler",
+    "name": "Schäfler",
+    "canton": "Appenzell Innerrhoden",
+    "region": "appenzell",
+    "coordinates": {
+      "lat": 47.276,
+      "lng": 9.4004
+    },
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sch%C3%A4fler&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Berggasthaus Schäfler (AI) - Schwende-Rüte"
+  },
+  {
+    "index": 94,
+    "id": "spot-ascher-ebenalp",
+    "slug": "ascher-ebenalp",
+    "name": "Äscher–Ebenalp",
+    "canton": "Appenzell Innerrhoden",
+    "region": "appenzell",
+    "coordinates": {
+      "lat": 47.284,
+      "lng": 9.4148
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=%C3%84scher%E2%80%93Ebenalp&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Viewpoint Äscher (AI) - Schwende-Rüte"
+  },
+  {
+    "index": 95,
+    "id": "spot-lungernsee",
+    "slug": "lungernsee",
+    "name": "Lungernsee",
+    "canton": "Obwalden",
+    "region": "obwalden",
+    "coordinates": {
+      "lat": 46.7875,
+      "lng": 8.159
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lungernsee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "manual_review",
+    "federalMatchLabel": "Populated Place Lungern (OW) - Lungern"
+  },
+  {
+    "index": 96,
+    "id": "spot-alggialp",
+    "slug": "alggialp",
+    "name": "Älggialp",
+    "canton": "Obwalden",
+    "region": "obwalden",
+    "coordinates": {
+      "lat": 46.8013,
+      "lng": 8.2308
+    },
+    "coordinateType": "village",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=%C3%84lggialp&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Berggasthaus Älggialp (OW) - Sachseln"
+  },
+  {
+    "index": 97,
+    "id": "spot-bannalpsee",
+    "slug": "bannalpsee",
+    "name": "Bannalpsee",
+    "canton": "Nidwalden",
+    "region": "nidwalden",
+    "coordinates": {
+      "lat": 46.867,
+      "lng": 8.428
+    },
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Bannalpsee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Berggasthaus Bannalpsee (NW) - Wolfenschiessen"
+  },
+  {
+    "index": 98,
+    "id": "spot-isenthal",
+    "slug": "isenthal",
+    "name": "Isenthal",
+    "canton": "Uri",
+    "region": "uri",
+    "coordinates": {
+      "lat": 46.9107,
+      "lng": 8.5614
+    },
+    "coordinateType": "village",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Isenthal&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Populated Place Isenthal (UR) - Isenthal"
+  },
+  {
+    "index": 99,
+    "id": "spot-sihlwald",
+    "slug": "sihlwald",
+    "name": "Sihlwald",
+    "canton": "Zürich",
+    "region": "zurich",
+    "coordinates": {
+      "lat": 47.2688,
+      "lng": 8.5581
+    },
+    "coordinateType": "heritage_area_reference",
+    "category": "forest",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sihlwald&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Building Restaurant Sihlwald (ZH) - Horgen"
+  },
+  {
+    "index": 100,
+    "id": "spot-stein-am-rhein",
+    "slug": "stein-am-rhein",
+    "name": "Stein am Rhein",
+    "canton": "Schaffhausen",
+    "region": "schaffhausen",
+    "coordinates": {
+      "lat": 47.6593,
+      "lng": 8.859
+    },
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Stein+am+Rhein&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Riigass (SH) - Stein am Rhein"
+  }
+]

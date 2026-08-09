@@ -1,10 +1,11 @@
 import type { LocationImage } from "@/types";
+import generatedImages from "./sourced-images.generated.json";
 
 /**
  * Photographs are selected only when the Commons file description identifies
  * the exact destination. Every entry keeps its author, licence and source page.
  */
-export const SOURCED_IMAGES: Record<string, LocationImage[]> = {
+const EDITORIALLY_REVIEWED_IMAGES: Record<string, LocationImage[]> = {
   "spot-oeschinensee": [
     {
       id: "img-oeschinensee-commons",
@@ -106,4 +107,14 @@ export const SOURCED_IMAGES: Record<string, LocationImage[]> = {
       isHero: true,
     },
   ],
+};
+
+/**
+ * Generated entries come from the exact destination's Wikidata P18 statement
+ * and retain the Wikimedia Commons creator, licence and file-description URL.
+ * Hand-reviewed entries win when both datasets contain the same location.
+ */
+export const SOURCED_IMAGES: Record<string, LocationImage[]> = {
+  ...(generatedImages as Record<string, LocationImage[]>),
+  ...EDITORIALLY_REVIEWED_IMAGES,
 };

@@ -27,7 +27,7 @@ export function Hero() {
             Made for Switzerland
           </span>
           <span className="hidden text-[11px] uppercase tracking-[0.18em] text-white/60 sm:block">
-            A deliberately small, source-checked collection
+            100 sourced Swiss destinations · uncertainty shown
           </span>
         </motion.div>
 
@@ -60,8 +60,8 @@ export function Hero() {
             transition={{ duration: reduce ? 0 : 0.8, delay: reduce ? 0 : 0.25, ease: EASE }}
           >
             <p className="text-base leading-relaxed text-stone-200 sm:text-lg">
-              A deliberately small Swiss guide with authentic photographs, precise
-              map references and practical details linked to their sources.
+              A focused Swiss guide with 100 destination pages, location-linked
+              photography and practical details that distinguish facts from open questions.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col">

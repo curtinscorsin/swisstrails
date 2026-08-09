@@ -66,14 +66,15 @@ export function RouteVerificationDetails({
 }: RouteVerificationProps) {
   const status = statusStyle[verification.status];
   const StatusIcon = status.icon;
+  const destinationOnly = verification.routeType === "Destination reference only";
 
   return (
     <section className={cn("space-y-5", className)} aria-labelledby="verified-route-heading">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <p className="t-eyebrow">Source-checked visit</p>
+          <p className="t-eyebrow">{destinationOnly ? "Sourced destination record" : "Source-checked visit"}</p>
           <h2 id="verified-route-heading" className="mt-1 text-lg font-semibold text-fg">
-            Planning details
+            {destinationOnly ? "Known and unresolved" : "Planning details"}
           </h2>
         </div>
         <span
@@ -95,8 +96,9 @@ export function RouteVerificationDetails({
               Checked {formatCheckedDate(verification.checkedAt)}
             </p>
             <p className="mt-1 text-xs leading-relaxed text-stone-400">
-              {verification.statusNote} Conditions can change; use the official status link below
-              immediately before departure.
+              {verification.statusNote} Conditions can change; {destinationOnly
+                ? "check the responsible local authority before departure."
+                : "use the official status link below immediately before departure."}
             </p>
           </div>
         </div>
@@ -142,13 +144,14 @@ export function RouteVerificationDetails({
             </a>
             <p className="mt-1">
               Coordinate type: {formatCoordinateType(destinationType)}. This point identifies
-              the named place; the separate access coordinate below is where the documented
-              visit begins.
+              the named place; {destinationOnly
+                ? "it is not presented as a verified trailhead or entrance."
+                : "the separate access coordinate below is where the documented visit begins."}
             </p>
           </InfoBlock>
         )}
 
-        <InfoBlock title="Start and transport" icon={<MapPinned className="h-4 w-4" />}>
+        <InfoBlock title={destinationOnly ? "Access status" : "Start and transport"} icon={<MapPinned className="h-4 w-4" />}>
           <p className="font-medium text-stone-200">{verification.start.name}</p>
           <a
             href={mapUrl(

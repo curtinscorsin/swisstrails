@@ -23,6 +23,7 @@ const ALL_DIFFICULTIES: { id: Difficulty; label: string }[] = [
   { id: "moderate", label: "Moderate" },
   { id: "challenging", label: "Challenging" },
   { id: "expert", label: "Expert" },
+  { id: "not-rated", label: "Not rated" },
 ];
 const DIFFICULTIES = ALL_DIFFICULTIES.filter((difficulty) =>
   PUBLISHED_DIFFICULTIES.has(difficulty.id)
@@ -54,6 +55,7 @@ const DIFF_COLORS: Record<Difficulty, string> = {
   moderate: "text-yellow-300",
   challenging: "text-orange-300",
   expert: "text-red-300",
+  "not-rated": "text-stone-300",
 };
 
 interface FilterDrawerProps {

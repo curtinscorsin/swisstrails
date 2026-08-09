@@ -20,6 +20,7 @@ const DIFFICULTY_ORDER: Record<Difficulty, number> = {
   moderate: 1,
   challenging: 2,
   expert: 3,
+  "not-rated": 1.5,
 };
 
 const PACE_ORDER: Record<HikePace, number> = {
