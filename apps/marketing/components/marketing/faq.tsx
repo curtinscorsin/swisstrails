@@ -39,7 +39,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Are you adding more locations?",
-    a: "Yes, but there is no quota. A location is published only after its identity, coordinates, access details, current rules and photograph have been checked. The present 92-place review queue remains hidden until that work is complete.",
+    a: "Yes, but there is no quota. A location is published only after its identity, coordinates, access details, current rules and photograph have been checked. Unfinished research remains part of our private editorial work, not the public collection.",
   },
 ];
 

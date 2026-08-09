@@ -27,7 +27,7 @@ export function Hero() {
             Made for Switzerland
           </span>
           <span className="hidden text-[11px] uppercase tracking-[0.18em] text-white/60 sm:block">
-            8 source-checked places · 92 in review
+            A deliberately small, source-checked collection
           </span>
         </motion.div>
 

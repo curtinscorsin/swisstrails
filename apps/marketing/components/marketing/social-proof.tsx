@@ -6,7 +6,7 @@ import { Camera, ExternalLink, SearchCheck, Shield } from "lucide-react";
 const STATS = [
   { value: "8", label: "Published places" },
   { value: "8", label: "Authentic licensed photographs" },
-  { value: "92", label: "Hidden while under review" },
+  { value: "4+", label: "Recorded sources per place" },
   { value: "09.08.26", label: "Latest editorial check" },
 ];
 
