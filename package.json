@@ -17,22 +17,5 @@
   },
   "engines": {
     "node": ">=18"
-  },
-  "pnpm": {
-    "overrides": {
-      "react-leaflet>react": "^19.1.0",
-      "react-leaflet>react-dom": "^19.1.0",
-      "@react-leaflet/core>react": "^19.1.0",
-      "@react-leaflet/core>react-dom": "^19.1.0"
-    },
-    "onlyBuiltDependencies": [
-      "@tailwindcss/oxide",
-      "sharp",
-      "unrs-resolver",
-      "@prisma/client",
-      "@prisma/engines",
-      "esbuild",
-      "prisma"
-    ]
   }
 }

@@ -2,6 +2,21 @@ packages:
   - "apps/*"
   - "packages/*"
 
+overrides:
+  "react-leaflet>react": "^19.1.0"
+  "react-leaflet>react-dom": "^19.1.0"
+  "@react-leaflet/core>react": "^19.1.0"
+  "@react-leaflet/core>react-dom": "^19.1.0"
+
+onlyBuiltDependencies:
+  - "@prisma/client"
+  - "@prisma/engines"
+  - "@tailwindcss/oxide"
+  - esbuild
+  - prisma
+  - sharp
+  - unrs-resolver
+
 allowBuilds:
   '@prisma/client': set this to true or false
   '@prisma/engines': set this to true or false
@@ -9,8 +24,3 @@ allowBuilds:
   prisma: set this to true or false
   sharp: set this to true or false
   unrs-resolver: set this to true or false
-
-onlyBuiltDependencies:
-  - "@tailwindcss/oxide"
-  - sharp
-  - unrs-resolver
