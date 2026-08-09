@@ -1,7 +1,7 @@
 {
   "name": "Swiss Trails",
   "short_name": "Swiss Trails",
-  "description": "500+ hidden gems across Switzerland",
+  "description": "A source-checked guide to Swiss places",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#06080F",

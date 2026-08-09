@@ -117,7 +117,7 @@ export default async function LocationPage({ params }: Props) {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           <Stat
             icon={<Gauge className="w-4 h-4" />}
-            label="Difficulty"
+            label="Access effort"
             value={diff.label}
             valueClass={DIFF_COLOR[location.difficulty]}
           />
@@ -135,15 +135,17 @@ export default async function LocationPage({ params }: Props) {
               value={`${location.elevation.toLocaleString()} m`}
             />
           )}
-          <Stat
-            icon={<Clock className="w-4 h-4" />}
-            label="Walking time"
-            value={
-              location.verification
-                ? formatDuration(location.verification.durationMinutes)
-                : `${location.visitDurationHours.min}–${location.visitDurationHours.max} h`
-            }
-          />
+          {(location.verification?.durationMinutes != null || location.visitDurationHours.max > 0) && (
+            <Stat
+              icon={<Clock className="w-4 h-4" />}
+              label="Walking time"
+              value={
+                location.verification?.durationMinutes != null
+                  ? formatDuration(location.verification.durationMinutes)
+                  : `${location.visitDurationHours.min}–${location.visitDurationHours.max} h`
+              }
+            />
+          )}
           <Stat
             icon={<MapPin className="w-4 h-4" />}
             label="Canton"
@@ -165,6 +167,7 @@ export default async function LocationPage({ params }: Props) {
             verification={location.verification}
             destination={location.coordinates}
             destinationName={`${location.name} map point`}
+            destinationType={location.coordinateType}
           />
         )}
 
@@ -223,7 +226,7 @@ export default async function LocationPage({ params }: Props) {
             <summary className="flex items-center justify-between gap-2 px-4 min-h-[48px] py-3 cursor-pointer list-none text-sm font-medium text-stone-200">
               <span className="flex items-center gap-2">
                 <Lightbulb className="w-4 h-4 text-alpine-400" />
-                Insider tips
+                Practical tips
               </span>
               <span className="text-fg-muted text-xs group-open:hidden">Show</span>
               <span className="text-fg-muted text-xs hidden group-open:inline">Hide</span>
@@ -246,15 +249,15 @@ export default async function LocationPage({ params }: Props) {
             href="/explore"
             className="flex items-center justify-center gap-2 h-11 px-4 flex-shrink-0 rounded-lg bg-white/[0.06] hover:bg-white/[0.1] text-stone-300 font-medium text-sm transition-colors"
           >
-            Explore routes
+            Explore places
           </Link>
         </div>
 
         <div className="rounded-xl border border-white/[0.07] bg-white/[0.03] p-5">
           <p className="text-fg text-sm font-medium mb-1">Why the collection is intentionally small</p>
           <p className="text-fg-muted text-xs leading-relaxed">
-            Swiss Trails publishes a route only after its place, route data, access notes and
-            source links can be checked. More routes will appear as that review is completed.
+            Swiss Trails publishes a place only after its identity, visit details, access notes,
+            photograph and source links can be checked. More places will appear as that review is completed.
           </p>
         </div>
       </div>

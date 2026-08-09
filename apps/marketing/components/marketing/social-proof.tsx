@@ -1,20 +1,20 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { RefreshCw, Shield, Star, Zap } from "lucide-react";
+import { Camera, ExternalLink, SearchCheck, Shield } from "lucide-react";
 
 const STATS = [
-  { value: "500+", label: "Field-noted places" },
-  { value: "18", label: "Swiss regions" },
-  { value: "4.9", label: "Explorer rating" },
-  { value: "CHF 29", label: "Once, forever" },
+  { value: "8", label: "Published places" },
+  { value: "8", label: "Authentic licensed photographs" },
+  { value: "92", label: "Hidden while under review" },
+  { value: "09.08.26", label: "Latest editorial check" },
 ];
 
 const TRUST = [
-  { icon: Zap, label: "Immediate access" },
-  { icon: Shield, label: "Secure payment" },
-  { icon: Star, label: "Loved by locals" },
-  { icon: RefreshCw, label: "New places included" },
+  { icon: SearchCheck, label: "Federal map references" },
+  { icon: ExternalLink, label: "Source links included" },
+  { icon: Camera, label: "Location-matched photographs" },
+  { icon: Shield, label: "Uncertain data stays unpublished" },
 ];
 
 export function SocialProof() {

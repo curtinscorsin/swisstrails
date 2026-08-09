@@ -36,12 +36,22 @@ export type Region =
   | "glarus"
   | "jura"
   | "neuchatel"
-  | "solothurn";
+  | "solothurn"
+  | "schaffhausen";
 
 export interface Coordinates {
   lat: number;
   lng: number;
 }
+
+export type CoordinateType =
+  | "attraction"
+  | "summit"
+  | "lake_center"
+  | "village"
+  | "valley_reference"
+  | "viewpoint"
+  | "heritage_area_reference";
 
 export interface LocationImage {
   id: string;
@@ -72,17 +82,17 @@ export interface RouteVerification {
   canton: string;
   routeType: string;
   season: string;
-  distanceKm: number;
-  durationMinutes: number;
+  distanceKm: number | null;
+  durationMinutes: number | null;
   ascentM: number | null;
   descentM: number | null;
   elevationNote?: string;
-  sacGrade: string;
+  sacGrade: string | null;
   status: "open" | "open-with-advisory" | "closed" | "check-current";
   statusNote: string;
   checkedAt: string;
   start: Trailhead;
-  finish: string;
+  finish: string | null;
   accessibility: string;
   feeInfo: string;
   restrictions: string[];
@@ -102,6 +112,7 @@ export interface Location {
   difficulty: Difficulty;
   region: Region;
   coordinates: Coordinates;
+  coordinateType: CoordinateType;
   heroImage: LocationImage;
   gallery: LocationImage[];
   tags: string[];

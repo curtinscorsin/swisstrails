@@ -1,13 +1,13 @@
 import { Map, Users, ShoppingBag, Star, Plus, Settings } from "lucide-react";
 import Link from "next/link";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 
 const STATS = [
   {
     label: "Total Locations",
-    value: String(PLACEHOLDER_LOCATIONS.length),
+    value: String(CURATED_LOCATIONS.length),
     icon: Map,
-    trend: "Seeded catalogue",
+    trend: "Source-checked catalogue",
   },
   { label: "Total Users", value: "0", icon: Users, trend: "Awaiting launch" },
   { label: "Total Sales", value: "CHF 0", icon: ShoppingBag, trend: "—" },

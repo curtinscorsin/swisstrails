@@ -44,7 +44,7 @@ export const PRICING = {
   currency: "CHF",
   period: "one-time" as const,
   features: [
-    "Access to the verified route collection",
+    "Access to the source-checked place collection",
     "Official sources, restrictions & coordinates",
     "New routes added after source review",
     "Works on all devices — mobile & desktop",

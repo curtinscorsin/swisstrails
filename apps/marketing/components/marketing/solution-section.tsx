@@ -7,8 +7,8 @@ import { Reveal } from "@/components/shared/reveal";
 const FEATURES = [
   {
     icon: MapPin,
-    title: "Field-noted places",
-    body: "Coordinates, approach notes, season, light and practical details for every location.",
+    title: "Source-recorded places",
+    body: "Destination coordinates, access points, season and practical details with their sources.",
   },
   {
     icon: Search,
@@ -50,8 +50,8 @@ export function SolutionSection() {
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mt-7 max-w-lg text-lg leading-relaxed text-fg-muted">
-                Swiss Trails turns years of scouting into one calm, beautifully
-                organised guide. Open it, choose your mood, and know exactly where to go.
+                Swiss Trails brings official visitor information, federal map references
+                and licensed photography into one calm, clearly organised guide.
               </p>
             </Reveal>
 
@@ -83,14 +83,14 @@ export function SolutionSection() {
               className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-[1.025]"
               style={{
                 backgroundImage:
-                  "url('https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1600&q=88')",
+                  "url('https://upload.wikimedia.org/wikipedia/commons/0/0f/20190725_Oeschinensee-Panorama%2C_Kandersteg_%2806540-42_stitch%29.jpg')",
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/10 to-black/80" />
 
             <div className="absolute left-5 right-5 top-5 flex items-center justify-between sm:left-8 sm:right-8 sm:top-8">
               <span className="rounded-full border border-white/20 bg-black/25 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white backdrop-blur-lg">
-                In season now
+                Check current status
               </span>
               <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/25 text-white backdrop-blur-lg">
                 <Heart className="h-4 w-4" />
@@ -101,10 +101,10 @@ export function SolutionSection() {
               <div className="flex items-start justify-between gap-5">
                 <div>
                   <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-alpine-300">
-                    Valais · Moderate
+                    Bern · Moderate access
                   </p>
                   <h3 className="mt-2 font-heading text-3xl leading-none text-fg sm:text-4xl">
-                    Arolla’s quiet side
+                    Oeschinensee
                   </h3>
                 </div>
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold-200 text-trail-950">
@@ -113,19 +113,27 @@ export function SolutionSection() {
               </div>
               <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-5 text-sm">
                 <div>
-                  <p className="text-stone-500">Walk</p>
-                  <p className="mt-1 text-fg">1h 45m</p>
+                  <p className="text-stone-500">Upper path</p>
+                  <p className="mt-1 text-fg">30 min</p>
                 </div>
                 <div>
                   <p className="text-stone-500">Elevation</p>
-                  <p className="mt-1 text-fg">2,150 m</p>
+                  <p className="mt-1 text-fg">1,578 m</p>
                 </div>
                 <div>
-                  <p className="text-stone-500">Best light</p>
-                  <p className="mt-1 text-fg">Morning</p>
+                  <p className="text-stone-500">Map point</p>
+                  <p className="mt-1 text-fg">Lake centre</p>
                 </div>
               </div>
             </div>
+            <a
+              href="https://commons.wikimedia.org/wiki/File:20190725_Oeschinensee-Panorama,_Kandersteg_(06540-42_stitch).jpg"
+              target="_blank"
+              rel="noreferrer"
+              className="absolute bottom-2 right-3 text-[10px] text-white/55 hover:text-white"
+            >
+              Günter Seggebäing · CC BY-SA 3.0
+            </a>
           </motion.div>
         </div>
       </div>

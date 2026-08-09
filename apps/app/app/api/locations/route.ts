@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 
 export async function GET(req: NextRequest) {
   const supabase = await createClient();
@@ -14,16 +15,16 @@ export async function GET(req: NextRequest) {
   const difficulty = searchParams.get("difficulty");
   const q = searchParams.get("q")?.toLowerCase();
 
-  let query = supabase
-    .from("locations")
-    .select("*, location_images(*)", { count: "exact" })
-    .eq("is_published", true);
-  if (category) query = query.eq("category", category);
-  if (region) query = query.eq("region", region);
-  if (difficulty) query = query.eq("difficulty", difficulty);
-  if (q) query = query.or(`name.ilike.%${q}%,tagline.ilike.%${q}%,description.ilike.%${q}%`);
+  const locations = CURATED_LOCATIONS.filter((location) => {
+    if (category && location.category !== category) return false;
+    if (region && location.region !== region) return false;
+    if (difficulty && location.difficulty !== difficulty) return false;
+    if (!q) return true;
+    return [location.name, location.tagline, location.description]
+      .join(" ")
+      .toLowerCase()
+      .includes(q);
+  }).sort((a, b) => Number(b.isFeatured) - Number(a.isFeatured));
 
-  const { data, error, count } = await query.order("is_featured", { ascending: false });
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ locations: data, total: count ?? data.length });
+  return NextResponse.json({ locations, total: locations.length });
 }

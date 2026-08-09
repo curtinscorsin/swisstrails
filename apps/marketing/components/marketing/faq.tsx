@@ -11,15 +11,15 @@ import {
 const FAQ_ITEMS = [
   {
     q: "What exactly do I get?",
-    a: "You get instant access to our curated map of 500+ handpicked locations across Switzerland. Each location includes photos, descriptions, insider tips, coordinates, difficulty ratings, best times to visit, what to bring, travel time estimates, and more. Everything you need, nothing you don't.",
+    a: "You get access to the currently published source-checked collection. At launch that means 8 places, each with an authentic licensed photograph, map reference, separate access information, practical notes, uncertainty labels and links to the sources used.",
   },
   {
     q: "Is this really a one-time payment?",
-    a: "Yes. CHF 29 once, access forever. We add new locations regularly (usually 5–10 per month) and you automatically get them included — no additional cost, no subscription. Ever.",
+    a: "Yes. CHF 29 once, access forever. Future locations that complete the manual review are included without an additional charge. We do not promise a monthly quantity because accuracy comes first.",
   },
   {
     q: "Do I need special equipment or experience?",
-    a: "Most locations are accessible with standard outdoor gear. Each location clearly states its difficulty level, what you'll need to bring, and how to get there. We have options for all fitness levels — from gentle 30-minute walks to full-day hikes.",
+    a: "Requirements differ by place. Each entry records the verified access effort, relevant accessibility limits, safety notes and what to bring. Recheck its linked official source and current conditions before travelling.",
   },
   {
     q: "Can I use this on my phone?",
@@ -27,11 +27,11 @@ const FAQ_ITEMS = [
   },
   {
     q: "What if I don't have a car?",
-    a: "Many locations are accessible by public transport — bus, train, or cable car. Each location has clear travel instructions including public transport options and journey times from major cities.",
+    a: "All currently published places record a public-transport starting point. Where an exact journey time has not been verified, we leave it out instead of estimating it.",
   },
   {
     q: "How is this different from a regular hiking app?",
-    a: "Swiss Trails isn't a hiking app. It's a curated collection of experiences — a mix of lakes, viewpoints, falls, drives, gorges, and night sky spots. Think less 'fitness tracker' and more 'insider guide from someone who spent years finding the good stuff.'",
+    a: "Swiss Trails is a curated place guide, not a fitness tracker and not a claim of personal on-site verification. It brings together map references, official visitor information and licensed photography in one consistent format.",
   },
   {
     q: "What's your refund policy?",
@@ -39,7 +39,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Are you adding more locations?",
-    a: "Yes — we add 5–10 new locations every month. The map grows over time and you'll always have access to the latest additions with your one-time payment.",
+    a: "Yes, but there is no quota. A location is published only after its identity, coordinates, access details, current rules and photograph have been checked. The present 92-place review queue remains hidden until that work is complete.",
   },
 ];
 
@@ -77,9 +77,7 @@ export function FAQ() {
                     hello@swiss-trails.com
                   </a>
                 </p>
-                <p className="text-fg-subtle text-xs">
-                  We reply within a few hours
-                </p>
+                <p className="text-fg-subtle text-xs">Questions and corrections are welcome.</p>
               </div>
             </Reveal>
           </div>

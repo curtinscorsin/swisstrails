@@ -237,25 +237,27 @@ export function LocationDetailSheet({
               <div className="px-5 pb-4 space-y-5">
                 {/* Key stats */}
                 <div className="grid grid-cols-2 gap-2">
-                  <Stat icon={<Gauge className="w-4 h-4" />} label="Difficulty" value={diff.label} valueClass={DIFF_COLORS[location.difficulty]} />
+                  <Stat icon={<Gauge className="w-4 h-4" />} label="Access effort" value={diff.label} valueClass={DIFF_COLORS[location.difficulty]} />
                   {location.distanceKm != null && (
                     <Stat icon={<Ruler className="w-4 h-4" />} label="Distance" value={`${location.distanceKm} km`} />
                   )}
                   {location.elevation != null && (
                     <Stat icon={<Mountain className="w-4 h-4" />} label="Elevation" value={`${location.elevation.toLocaleString()} m`} />
                   )}
-                  <Stat
-                    icon={<Clock className="w-4 h-4" />}
-                    label="Walking time"
-                    value={
-                      location.verification
-                        ? formatDuration(location.verification.durationMinutes)
-                        : `${location.visitDurationHours.min}–${location.visitDurationHours.max} h`
-                    }
-                  />
+                  {(location.verification?.durationMinutes != null || location.visitDurationHours.max > 0) && (
+                    <Stat
+                      icon={<Clock className="w-4 h-4" />}
+                      label="Walking time"
+                      value={
+                        location.verification?.durationMinutes != null
+                          ? formatDuration(location.verification.durationMinutes)
+                          : `${location.visitDurationHours.min}–${location.visitDurationHours.max} h`
+                      }
+                    />
+                  )}
                   {awayKm ? (
                     <Stat icon={<Navigation className="w-4 h-4" />} label="From you" value={`${awayKm} away`} />
-                  ) : !location.verification ? (
+                  ) : !location.verification && location.travelTimeMinutes > 0 ? (
                     <Stat icon={<Car className="w-4 h-4" />} label="By car" value={`~${formatDuration(location.travelTimeMinutes)}`} />
                   ) : null}
                 </div>
@@ -267,9 +269,10 @@ export function LocationDetailSheet({
 
                 {location.verification && (
                   <RouteVerificationDetails
-                    verification={location.verification}
-                    destination={location.coordinates}
-                    destinationName={`${location.name} map point`}
+                  verification={location.verification}
+                  destination={location.coordinates}
+                  destinationName={`${location.name} map point`}
+                  destinationType={location.coordinateType}
                   />
                 )}
 
@@ -371,7 +374,7 @@ export function LocationDetailSheet({
                     lat: location.verification?.start.coordinates.lat ?? location.coordinates.lat,
                     lng: location.verification?.start.coordinates.lng ?? location.coordinates.lng,
                     name: location.verification
-                      ? `${location.name} trailhead — ${location.verification.start.name}`
+                      ? `${location.name} access point — ${location.verification.start.name}`
                       : location.name,
                   });
                 }}

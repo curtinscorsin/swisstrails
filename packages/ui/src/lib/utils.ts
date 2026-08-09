@@ -88,6 +88,7 @@ export const regionConfig: Record<Region, { label: string; canton: string }> = {
   jura: { label: "Jura", canton: "JU" },
   neuchatel: { label: "Neuchâtel", canton: "NE" },
   solothurn: { label: "Solothurn", canton: "SO" },
+  schaffhausen: { label: "Schaffhausen", canton: "SH" },
 };
 
 export function slugify(text: string): string {

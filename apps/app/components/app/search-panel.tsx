@@ -148,7 +148,7 @@ export function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
                     </div>
 
                     <div className="mt-3">
-                      <p className="text-fg-subtle text-xs mb-2">Difficulty</p>
+                      <p className="text-fg-subtle text-xs mb-2">Access effort</p>
                       <div className="flex flex-wrap gap-1.5">
                         {(["easy", "moderate", "challenging", "expert"] as const)
                           .filter((difficulty) =>

@@ -1,455 +1,587 @@
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { SOURCED_IMAGES } from "@/data/sourced-images";
 import type { Location, LocationSource, RouteVerification } from "@/types";
 
-const CHECKED_AT = "2026-07-27";
+const CHECKED_AT = "2026-08-09";
+const CREATED_AT = "2026-08-09T00:00:00.000Z";
 
-const parkRules: LocationSource = {
-  label: "Swiss National Park — protection regulations",
-  url: "https://nationalpark.ch/en/protection-regulations/",
-  checkedAt: CHECKED_AT,
-};
-
-const trailStatus: LocationSource = {
-  label: "Swiss National Park — current trail status",
-  url: "https://nationalpark.ch/en/visit/trails-routes/",
-  checkedAt: CHECKED_AT,
-};
-
-const accessibilitySource: LocationSource = {
-  label: "Swiss National Park — accessibility",
-  url: "https://nationalpark.ch/en/accessibility/",
-  checkedAt: CHECKED_AT,
-};
-
-const federalMap: LocationSource = {
-  label: "Federal Geoportal — place coordinates",
-  url: "https://map.geo.admin.ch/",
-  checkedAt: CHECKED_AT,
-};
-
-function federalCoordinate(label: string, searchText: string): LocationSource {
-  return {
-    label: `Federal Geoportal — ${label}`,
-    url: `https://api3.geo.admin.ch/rest/services/api/SearchServer?searchText=${encodeURIComponent(searchText)}&type=locations&origins=gg25`,
-    checkedAt: CHECKED_AT,
-  };
+function source(label: string, url: string): LocationSource {
+  return { label, url, checkedAt: CHECKED_AT };
 }
 
-const commonRestrictions = [
-  "Stay on marked paths and designated rest areas.",
-  "Daytime visits only; the park is closed to visitors in winter.",
-  "Dogs are prohibited, including on a lead.",
-  "No bathing, fires, cycling, drones, littering or removing natural objects.",
-];
+function federalPlaceSource(label: string, searchText: string): LocationSource {
+  return source(
+    `Federal Geoportal — ${label}`,
+    `https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=${encodeURIComponent(searchText)}`
+  );
+}
 
-const commonSafety = [
-  "Mountain weather and temperatures can change quickly.",
-  "Mobile coverage is limited; carry an offline map and do not rely on this PWA as your only navigation tool.",
-  "On-site closures and signs take precedence over information shown here.",
-];
+function federalStopSource(label: string, searchText: string): LocationSource {
+  return source(
+    `Federal Office of Transport — ${label}`,
+    `https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=featuresearch&features=ch.bav.haltestellen-oev&limit=20&searchText=${encodeURIComponent(searchText)}`
+  );
+}
 
-function original(id: string): Location {
-  const location = PLACEHOLDER_LOCATIONS.find((item) => item.id === id);
-  if (!location) throw new Error(`Missing source location: ${id}`);
-  return location;
+function imageFor(id: string) {
+  const image = SOURCED_IMAGES[id]?.[0];
+  if (!image) throw new Error(`Missing verified image for ${id}`);
+  return image;
 }
 
 function verification(
-  route: Omit<RouteVerification, "country" | "canton" | "checkedAt" | "restrictions" | "safety" | "sources"> & {
-    restrictions?: string[];
-    safety?: string[];
-    sources: LocationSource[];
-  }
+  input: Omit<RouteVerification, "country" | "checkedAt">
 ): RouteVerification {
-  return {
-    country: "Switzerland",
-    canton: "Graubünden",
-    checkedAt: CHECKED_AT,
-    restrictions: [...commonRestrictions, ...(route.restrictions ?? [])],
-    safety: [...commonSafety, ...(route.safety ?? [])],
-    ...route,
-    sources: [...route.sources, trailStatus, parkRules, accessibilitySource, federalMap],
-  };
+  return { country: "Switzerland", checkedAt: CHECKED_AT, ...input };
 }
+
+const sharedSafety = [
+  "Check the linked official page again before travelling; access, weather and operating information can change.",
+  "On-site signs and instructions take precedence over this catalogue.",
+];
 
 export const CURATED_LOCATIONS: Location[] = [
   {
-    ...original("loc-002"),
-    slug: "alp-trupchun",
-    name: "Alp Trupchun",
-    tagline: "A 14 km return route through the Swiss National Park",
+    id: "spot-oeschinensee",
+    slug: "oeschinensee",
+    name: "Oeschinensee",
+    tagline: "A mountain lake reached from Kandersteg by gondola or a signed walk",
     description:
-      "A marked return route from Prasüras follows Val Trupchun to Alp Trupchun through alpine forest and open pasture. The valley is especially popular during the red-deer rut in late September; wildlife sightings are possible, never guaranteed.",
+      "Oeschinensee lies above Kandersteg beneath Blüemlisalp, Fründenhorn and Doldenhorn. The mapped point is the federal lake centre—not the cable-car station, hiking start or car park.",
     longDescription:
-      "This is the National Park’s official Alp Trupchun route. It begins at Prasüras and returns by the same valley after reaching Alp Trupchun. The route is technically easy, but its 14 km length and 550 m of ascent still require normal mountain-hiking fitness.",
-    coordinates: { lat: 46.5953979, lng: 10.0775614 },
+      "The official operator separates the lake from its access points. From Kandersteg railway station, walk 10–15 minutes or use the seasonal local bus to the gondola valley station. From the mountain station, the upper path to the shore takes about 30 minutes. Walking from the valley station to the lake takes about 90 minutes with roughly 450 metres of ascent.",
+    category: "hidden-lake",
     difficulty: "moderate",
+    region: "bern",
+    coordinates: { lat: 46.49835968017578, lng: 7.72667121887207 },
+    coordinateType: "lake_center",
+    heroImage: imageFor("spot-oeschinensee"),
+    gallery: [],
+    tags: ["lake", "Kandersteg", "gondola", "UNESCO region"],
     bestSeason: ["summer", "autumn"],
-    visitDurationHours: { min: 4, max: 4 },
-    distanceKm: 14,
-    elevation: 1692,
-    highlights: ["Val Trupchun landscape", "Alp Trupchun", "Parkhütte Varusch on the approach"],
+    travelTimeMinutes: 0,
+    visitDurationHours: { min: 0, max: 0 },
+    highlights: ["Oeschinensee shoreline", "Blüemlisalp panorama", "Signed access paths"],
     tips: [
-      "Check the separate Express Parc Naziunel timetable; the SBB journey planner can be incomplete.",
-      "Late September is busy because of the deer rut. Observe wildlife quietly and from the path.",
+      "Reserve the required ascent time slot during the published summer reservation period.",
+      "Arrive by public transport when possible; the operator warns that parking is limited.",
     ],
-    whatToBring: ["Mountain footwear", "Weatherproof layers", "Food and water", "Offline route map"],
+    whatToBring: ["Weatherproof layers", "Suitable walking shoes", "Water", "Sun protection"],
     accessInfo:
-      "Start at Prasüras (1,692 m), beside the S-chanf, Parc Naziunal bus stop and public car park. Motor traffic is prohibited beyond Prasüras.",
+      "Primary access starts at Kandersteg (Talstation Oeschinen), 46.497478, 7.682684. The nearest mainline stop is Kandersteg railway station, 46.495396, 7.671812. Parking is at the valley station or designated hiking car parks in the village; the private road to the lake is closed to motor vehicles and bicycles.",
     parkingAvailable: true,
     publicTransport: true,
+    elevation: 1578,
+    isFeatured: true,
+    isNew: true,
+    viewCount: 0,
+    saveCount: 0,
+    createdAt: CREATED_AT,
+    updatedAt: CREATED_AT,
     verification: verification({
-      routeType: "Return route",
-      season: "June–October",
-      distanceKm: 14,
-      durationMinutes: 240,
-      ascentM: 550,
-      descentM: 550,
-      sacGrade: "T2 · white-red-white · technically easy",
-      status: "open",
-      statusNote: "Official route status was Open when checked.",
-      start: {
-        name: "Prasüras (S-chanf, Parc Naziunal)",
-        coordinates: { lat: 46.6173248, lng: 10.0086317 },
-        parking: "Free public car park at Prasüras; driving is prohibited beyond it.",
-        publicTransport:
-          "Engadinbus to S-chanf, Parc Naziunal. The separate Express Parc Naziunel timetable may be more complete than SBB.",
-      },
-      finish: "Alp Trupchun, then return to Prasüras",
-      accessibility:
-        "Not wheelchair- or pushchair-accessible. The park classifies its routes as mountain or alpine paths.",
-      feeInfo:
-        "No self-guided trail admission fee is published on the official route page. Transport, food and guided excursions are separate paid services.",
-      uncertainties: [],
-      sources: [
-        {
-          label: "Swiss National Park — Alp Trupchun route",
-          url: "https://nationalpark.ch/en/park/?offer=42086&reset=1",
-          checkedAt: CHECKED_AT,
-        },
-        {
-          label: "Swiss National Park — Prasüras parking and access",
-          url: "https://nationalpark.ch/besuchen/exkursionen/trupchun/",
-          checkedAt: CHECKED_AT,
-        },
-        federalCoordinate("Alp Trupchun coordinate", "Alp Trupchun"),
-        federalCoordinate("Prasüras trailhead coordinate", "Prasüras S-chanf"),
-      ],
-    }),
-  },
-  {
-    ...original("loc-003"),
-    slug: "chamanna-cluozza",
-    name: "Chamanna Cluozza",
-    tagline: "A steep 8.5 km approach from Zernez to the park’s serviced hut",
-    description:
-      "From Zernez, a maintained mountain path crosses steep valley flanks to Chamanna Cluozza, the only serviced hut inside the Swiss National Park. The route is well marked, but several passages require a head for heights.",
-    longDescription:
-      "The official route is one-way from Zernez to Chamanna Cluozza. A visit therefore requires a return hike, an overnight stay with a planned onward route, or another separately verified itinerary. Hut availability is not implied by the trail being open.",
-    coordinates: { lat: 46.6628723, lng: 10.1176424 },
-    category: "forest",
-    difficulty: "moderate",
-    bestSeason: ["summer", "autumn"],
-    visitDurationHours: { min: 3.5, max: 3.5 },
-    distanceKm: 8.5,
-    elevation: 1882,
-    highlights: ["Val Cluozza gorge", "Chamanna Cluozza", "Maintained mountain path"],
-    tips: [
-      "Avoid the hottest part of the day on exposed slopes.",
-      "Check and book the hut separately if you plan to stay overnight.",
-    ],
-    whatToBring: ["Mountain footwear", "Weatherproof layers", "Food and water", "Offline route map"],
-    accessInfo:
-      "Start at Zernez railway station or the Swiss National Park Centre (1,471 m). The published route ends at Chamanna Cluozza.",
-    parkingAvailable: true,
-    publicTransport: true,
-    verification: verification({
-      routeType: "One-way hut approach",
-      season: "June–October",
-      distanceKm: 8.5,
-      durationMinutes: 210,
-      ascentM: 800,
-      descentM: 400,
-      sacGrade: "T2 · white-red-white · medium route",
-      status: "open-with-advisory",
-      statusNote:
-        "The official route overview said Open, while the route detail page said Closed (“Winterruhe”). Check with the park before travelling.",
-      start: {
-        name: "Zernez railway station / Swiss National Park Centre",
-        coordinates: { lat: 46.697914, lng: 10.090912 },
-        parking:
-          "Parking availability and fees at the selected Zernez start were not confirmed by the route source.",
-        publicTransport: "Rhaetian Railway to Zernez station.",
-      },
-      finish: "Chamanna Cluozza (1,882 m)",
-      accessibility:
-        "Not wheelchair- or pushchair-accessible. Steep valley flanks and exposed passages require a head for heights.",
-      feeInfo:
-        "No self-guided trail admission fee is published. Hut accommodation, meals and guided services are priced separately.",
-      uncertainties: [
-        "The park’s route overview and route detail page showed conflicting open/closed status when checked.",
-        "The exact car park and current parking fee at the chosen Zernez starting point remain unverified.",
-        "The official route is one-way; a safe return or onward itinerary must be planned separately.",
-      ],
-      safety: ["The route crosses steep valley flanks; turn back if exposure or conditions exceed your ability."],
-      sources: [
-        {
-          label: "Swiss National Park — Chamanna Cluozza route",
-          url: "https://nationalpark.ch/en/park/?offer=42347&reset=1",
-          checkedAt: CHECKED_AT,
-        },
-        federalCoordinate("Chamanna Cluozza coordinate", "Chamanna Cluozza"),
-        federalCoordinate("Zernez station coordinate", "Bahnhof Zernez"),
-      ],
-    }),
-  },
-  {
-    ...original("loc-004"),
-    slug: "lais-da-macun",
-    name: "Lais da Macun",
-    tagline: "A demanding 21 km crossing of the high Macun lake plateau",
-    description:
-      "This demanding point-to-point route from Zernez to Lavin crosses Munt Baselgia and the Macun plateau, where 23 mountain lakes and tarns lie above the treeline. Snow or ice can remain near the pass even in summer.",
-    longDescription:
-      "The official route is an eight-hour high-mountain crossing, not a casual lake walk. A seasonal taxi can reduce the ascent from Zernez, but it does not remove the exposed, rough or potentially icy sections.",
-    coordinates: { lat: 46.7265434, lng: 10.1330652 },
-    difficulty: "expert",
-    bestSeason: ["summer", "autumn"],
-    visitDurationHours: { min: 8, max: 8 },
-    distanceKm: 21,
-    elevation: 2945,
-    highlights: ["Macun’s 23 lakes and tarns", "Munt Baselgia crossing", "Point-to-point finish in Lavin"],
-    tips: [
-      "Start early and verify snow conditions before leaving.",
-      "A seasonal taxi can reduce the climb, but must be checked and booked independently.",
-    ],
-    whatToBring: ["Mountain boots", "Warm weatherproof layers", "Food and water", "Offline route map"],
-    accessInfo:
-      "Official route from Zernez (1,471 m) to Lavin (1,431 m). Both villages have railway stations; a seasonal taxi may shorten the initial ascent.",
-    parkingAvailable: false,
-    publicTransport: true,
-    verification: verification({
-      routeType: "Point-to-point mountain crossing",
-      season: "July–October",
-      distanceKm: 21,
-      durationMinutes: 480,
-      ascentM: 1550,
-      descentM: 1600,
-      sacGrade: "T3+ · white-red-white · difficult",
-      status: "open-with-advisory",
-      statusNote: "Open when checked, with sections reported as snow-covered.",
-      start: {
-        name: "Zernez railway station",
-        coordinates: { lat: 46.697914, lng: 10.090912 },
-        parking: "No parking claim is made; the route is documented from the railway station.",
-        publicTransport: "Rhaetian Railway to Zernez; return by train from Lavin.",
-      },
-      finish: "Lavin railway station (1,431 m)",
-      accessibility:
-        "Not wheelchair- or pushchair-accessible. Requires sure-footedness, a head for heights and strong mountain fitness.",
-      feeInfo:
-        "No self-guided trail admission fee is published. Seasonal taxi and guided services cost extra.",
-      uncertainties: [
-        "Seasonal taxi operation, price and booking availability were not verified; check locally before relying on it.",
-      ],
-      safety: [
-        "Snow and ice are possible at any time near Munt Baselgia.",
-        "This is a long, committing crossing; do not start without a stable forecast and sufficient daylight.",
-      ],
-      sources: [
-        {
-          label: "Swiss National Park — Lais da Macun route",
-          url: "https://nationalpark.ch/en/park/?offer=42120&reset=1",
-          checkedAt: CHECKED_AT,
-        },
-        federalCoordinate("Macun coordinate", "Macun"),
-        federalCoordinate("Zernez station coordinate", "Bahnhof Zernez"),
-      ],
-    }),
-  },
-  {
-    ...original("loc-005"),
-    slug: "val-tantermozza",
-    name: "Val Tantermozza",
-    tagline: "A short marked route to Chamanna Tantermozza",
-    description:
-      "This short return route starts at God d’Arduond and follows a marked path through open conifer forest to Chamanna Tantermozza. The valley beyond the trail end is closed to visitors, and unstable rock can force temporary closures.",
-    longDescription:
-      "Val Tantermozza is included only as the official three-kilometre route to Chamanna Tantermozza—not as access to the protected valley beyond. Check the live route status immediately before travelling.",
-    coordinates: { lat: 46.6635628, lng: 10.0784502 },
-    difficulty: "easy",
-    bestSeason: ["summer", "autumn"],
-    visitDurationHours: { min: 1.25, max: 1.25 },
-    distanceKm: 3,
-    elevation: 1773,
-    highlights: ["Open conifer forest", "Chamanna Tantermozza", "Short official park route"],
-    tips: [
-      "Check the live status immediately before setting out; rock instability causes closures.",
-      "Do not continue beyond the marked trail end.",
-    ],
-    whatToBring: ["Mountain footwear", "Weatherproof layer", "Water", "Offline route map"],
-    accessInfo:
-      "Start at God d’Arduond (1,625 m), reached by the power-station road or on foot from Zernez. The route returns from Chamanna Tantermozza.",
-    parkingAvailable: false,
-    publicTransport: false,
-    verification: verification({
-      routeType: "Short return route",
-      season: "June–October",
-      distanceKm: 3,
-      durationMinutes: 75,
-      ascentM: 200,
-      descentM: 200,
-      sacGrade: "T2 · white-red-white · technically medium",
-      status: "open",
-      statusNote: "Open when checked; the authority warns that unstable rock often causes closures.",
-      start: {
-        name: "God d’Arduond",
-        coordinates: { lat: 46.6738243, lng: 10.0767651 },
-        parking:
-          "No verified public parking was found at the trailhead. Do not assume roadside parking is permitted.",
-        publicTransport:
-          "No direct public-transport stop was confirmed at the trailhead; the authority also describes a longer approach on foot from Zernez.",
-      },
-      finish: "Chamanna Tantermozza, then return to God d’Arduond",
-      accessibility:
-        "Not wheelchair- or pushchair-accessible. Although short, it is a mountain path with medium technical demand.",
-      feeInfo: "No self-guided trail admission fee is published.",
-      restrictions: ["The valley beyond the official trail end is closed to the public."],
-      uncertainties: [
-        "Legal parking and direct public-transport access at God d’Arduond remain unverified.",
-      ],
-      safety: ["Rock instability can close the route without much notice; check the official live status."],
-      sources: [
-        {
-          label: "Swiss Parks Network — Val Tantermozza route",
-          url: "https://www.parks.swiss/en/map/offer-detail/05-val-tantermozza-42345",
-          checkedAt: CHECKED_AT,
-        },
-        federalCoordinate("Chamanna Tantermozza coordinate", "Chamanna Tantermozza"),
-        federalCoordinate("God d’Arduond trailhead coordinate", "God d'Arduond"),
-      ],
-    }),
-  },
-  {
-    ...original("loc-006"),
-    slug: "munt-la-schera",
-    name: "Munt la Schera",
-    tagline: "A 13 km crossing from Buffalora to Il Fuorn",
-    description:
-      "This point-to-point route crosses steppe-like slopes and former mining terrain from Buffalora to Il Fuorn, with an optional detour to the summit of Munt la Schera. Public transport serves both ends.",
-    longDescription:
-      "The summit detour provides the highest viewpoint but is optional. The official walking time and elevation figures cover a substantial mountain day even though the technical grading is easy.",
-    coordinates: { lat: 46.6451378, lng: 10.2107744 },
-    difficulty: "moderate",
-    bestSeason: ["summer", "autumn"],
-    visitDurationHours: { min: 4.75, max: 4.75 },
-    distanceKm: 13,
-    elevation: 2587,
-    highlights: ["Munt la Schera summit option", "Former mining terrain", "Buffalora to Il Fuorn crossing"],
-    tips: [
-      "Use public transport to avoid returning to the starting point for a car.",
-      "The summit can be omitted if weather or time deteriorates.",
-    ],
-    whatToBring: ["Mountain footwear", "Weatherproof layers", "Food and water", "Offline route map"],
-    accessInfo:
-      "Start at Buffalora P10 (1,967 m) and finish at Il Fuorn (1,794 m). PostBus serves both points on the Ofenpass road.",
-    parkingAvailable: true,
-    publicTransport: true,
-    verification: verification({
-      routeType: "Point-to-point mountain route",
-      season: "June–October",
-      distanceKm: 13,
-      durationMinutes: 285,
+      canton: "Bern",
+      routeType: "Destination access from Kandersteg",
+      season: "Summer and autumn recommended; check live operating status year-round",
+      distanceKm: null,
+      durationMinutes: 30,
       ascentM: null,
       descentM: null,
-      elevationNote:
-        "The current official page publishes only “Vertical height 700 m”; it does not separate total ascent and descent.",
-      sacGrade: "T2 · white-red-white · medium route",
-      status: "open",
-      statusNote: "Official route status was Open when checked.",
+      elevationNote: "The 30-minute figure is the official walk from the gondola mountain station to the shore, not a complete return hike.",
+      sacGrade: null,
+      status: "check-current",
+      statusNote: "Trails, gondola, rowing boats and the seasonal taxi have separate live statuses.",
       start: {
-        name: "Buffalora P10",
-        coordinates: { lat: 46.6483192, lng: 10.2668056 },
-        parking:
-          "P10 is identified as a park-road parking area; current capacity and any fee were not confirmed.",
-        publicTransport: "PostBus to Buffalora P10.",
+        name: "Kandersteg (Talstation Oeschinen)",
+        coordinates: { lat: 46.49747848510742, lng: 7.682683944702148 },
+        parking: "Paid valley-station parking and designated hiking car parks in Kandersteg; spaces are limited.",
+        publicTransport: "Kandersteg railway station; seasonal local bus or a 10–15 minute walk to the valley station.",
       },
-      finish: "Il Fuorn P6 / Hotel Parc Naziunal (1,794 m)",
+      finish: "Oeschinensee shore",
       accessibility:
-        "Not wheelchair- or pushchair-accessible. The route is technically easy but requires medium fitness.",
-      feeInfo: "No self-guided trail admission fee is published. Transport and hospitality cost extra.",
-      uncertainties: [
-        "Exact cumulative ascent and descent could not be verified separately; the official page currently gives only a 700 m vertical-height summary.",
-        "Current parking fee and capacity at P10 were not verified.",
+        "The upper path from the mountain station is described as suitable for pushchairs. The seasonal electric taxi gives priority to people with disabilities; capacity is limited.",
+      feeInfo: "The lake itself has no listed admission fee. Gondola, parking, taxi and boat services are paid separately.",
+      restrictions: [
+        "The private road to the lake is closed to motor vehicles and bicycles.",
+        "A reserved ascent time slot is required from 20 June to 20 September 2026 in addition to a valid gondola ticket.",
       ],
+      safety: sharedSafety,
+      uncertainties: ["Live operating status must be rechecked on the day of travel."],
       sources: [
-        {
-          label: "Swiss National Park — Munt la Schera route",
-          url: "https://nationalpark.ch/en/park/?offer=42363&reset=1",
-          checkedAt: CHECKED_AT,
-        },
-        federalCoordinate("Munt la Schera coordinate", "Munt la Schera"),
-        federalCoordinate("Buffalora trailhead coordinate", "Buffalora P10"),
+        source("Oeschinensee — live status, trails and arrival", "https://www.oeschinensee.ch/en/live/"),
+        source("Oeschinensee — arrival and parking", "https://www.oeschinensee.ch/anreise/"),
+        federalPlaceSource("Oeschinensee lake centre", "Oeschinensee"),
+        federalPlaceSource("Kandersteg gondola valley station", "Kandersteg Oeschinen Talstation"),
+        federalStopSource("Kandersteg railway station", "Kandersteg Bahnhof"),
+        source("Photograph and licence", imageFor("spot-oeschinensee").sourceUrl!),
       ],
     }),
   },
   {
-    ...original("loc-007"),
-    slug: "val-minger",
-    name: "Val Mingèr",
-    tagline: "An 11 km return route from Pradatsch to Sur il Foss",
+    id: "spot-rhine-falls",
+    slug: "rhine-falls",
+    name: "Rhine Falls",
+    tagline: "Two official banks, distinct access conditions and year-round viewing",
     description:
-      "A marked return route climbs from Pradatsch through Val Mingèr to Sur il Foss. The technical grade is easy, but the 700 m ascent still requires normal mountain fitness. Wildlife may be seen; no sighting is guaranteed.",
+      "The Rhine Falls can be visited from Neuhausen on the north bank or Schloss Laufen on the south bank. This card points to Rheinfall-Felsen, the federal-map viewpoint feature—not to either station or car park.",
     longDescription:
-      "The route begins on the S-charl road at the Val Mingèr public-transport stop. It follows the same protected-area rules as every Swiss National Park trail, including the strict requirement to remain on marked paths.",
-    coordinates: { lat: 46.7092323, lng: 10.283021 },
-    difficulty: "moderate",
-    bestSeason: ["summer", "autumn"],
-    visitDurationHours: { min: 3.75, max: 3.75 },
-    distanceKm: 11,
-    elevation: 2315,
-    highlights: ["Val Mingèr", "Sur il Foss", "Marked National Park route"],
+      "There is no single universal Rhine Falls entrance. The north bank in Neuhausen provides free viewing and a barrier-free rail approach; the south bank at Schloss Laufen has ticketed platforms and different step-free limits. The access details below keep those two visits separate.",
+    category: "waterfall",
+    difficulty: "easy",
+    region: "zurich",
+    coordinates: { lat: 47.6780891418457, lng: 8.614919662475586 },
+    coordinateType: "viewpoint",
+    heroImage: imageFor("spot-rhine-falls"),
+    gallery: [],
+    tags: ["waterfall", "Neuhausen", "Schloss Laufen", "year-round"],
+    bestSeason: ["year-round"],
+    travelTimeMinutes: 0,
+    visitDurationHours: { min: 0, max: 0 },
+    highlights: ["North-bank basin", "Schloss Laufen platforms", "Rheinfall-Felsen"],
     tips: [
-      "Carry binoculars if you hope to observe wildlife without approaching it.",
-      "Check the seasonal PostBus timetable before travelling.",
+      "Choose a bank before travelling because tickets and step-free routes differ.",
+      "Use Neuhausen Rheinfall station for the barrier-free north-bank approach.",
     ],
-    whatToBring: ["Mountain footwear", "Weatherproof layers", "Food and water", "Offline route map"],
+    whatToBring: ["Weather protection", "Shoes with grip near wet viewing areas"],
     accessInfo:
-      "Start at Pradatsch / Scuol, Val Mingèr (1,650 m) on the S-charl road. The route returns after reaching Sur il Foss.",
+      "For the north bank, use Neuhausen Rheinfall station at 47.679806, 8.616942 and the signed descent to the basin. Rhine Falls P1–P4 are the official Neuhausen parking areas. The south bank uses Schloss Laufen am Rheinfall station and the castle visitor facilities.",
     parkingAvailable: true,
     publicTransport: true,
+    isFeatured: true,
+    isNew: true,
+    viewCount: 0,
+    saveCount: 0,
+    createdAt: CREATED_AT,
+    updatedAt: CREATED_AT,
     verification: verification({
-      routeType: "Return route",
-      season: "June–October",
-      distanceKm: 11,
-      durationMinutes: 225,
-      ascentM: 700,
-      descentM: 700,
-      sacGrade: "T2 · white-red-white · technically easy",
+      canton: "Schaffhausen / Zürich",
+      routeType: "Destination visit — north or south bank",
+      season: "Accessible around the clock, 365 days a year; paid facilities have their own hours",
+      distanceKm: null,
+      durationMinutes: null,
+      ascentM: null,
+      descentM: null,
+      sacGrade: null,
       status: "open",
-      statusNote: "Official route status was Open when checked.",
+      statusNote: "The natural site is freely accessible year-round; paid south-bank platforms and boats operate separately.",
       start: {
-        name: "Pradatsch / Scuol, Val Mingèr",
-        coordinates: { lat: 46.7305679, lng: 10.3055496 },
-        parking:
-          "A parking area is identified at the route start; current capacity and any fee were not confirmed.",
-        publicTransport: "Seasonal PostBus to Scuol, Val Mingèr.",
+        name: "Neuhausen Rheinfall station (north-bank access)",
+        coordinates: { lat: 47.679805755615234, lng: 8.616942405700684 },
+        parking: "Official Rhine Falls car parks P1–P4 in Neuhausen; posted tariffs apply.",
+        publicTransport: "Neuhausen Rheinfall is the barrier-free north-bank rail stop; Schloss Laufen am Rheinfall serves the south bank.",
       },
-      finish: "Sur il Foss (2,315 m), then return to Pradatsch",
+      finish: null,
       accessibility:
-        "Not wheelchair- or pushchair-accessible. The route is technically easy but has 700 m of ascent.",
-      feeInfo: "No self-guided trail admission fee is published. Transport and guided services cost extra.",
-      uncertainties: [
-        "Current parking fee and capacity at the Val Mingèr trailhead were not verified.",
-      ],
+        "The north-bank station and route to the basin are described as barrier-free. The south-bank panorama path has lift access, but the basin and boat pier are not accessible from that side.",
+      feeInfo: "North-bank viewing has no entrance fee. Schloss Laufen platforms and Historama require a ticket; boats are separate.",
+      restrictions: ["Boat lines have different dog rules; check the official list before boarding."],
+      safety: sharedSafety,
+      uncertainties: [],
       sources: [
-        {
-          label: "Swiss National Park — Val Mingèr route",
-          url: "https://nationalpark.ch/en/park/?offer=42366&reset=1",
-          checkedAt: CHECKED_AT,
-        },
-        federalCoordinate("Val Mingèr coordinate", "Val Mingèr"),
-        federalCoordinate("Val Mingèr trailhead coordinate", "Scuol Val Mingèr"),
+        source("Rhine Falls — access, fees and accessibility", "https://rheinfall.ch/en/inform/journey/map"),
+        source("Rhine Falls — parking and current notices", "https://rheinfall.ch/en/inform/parking/list"),
+        federalPlaceSource("Rheinfall-Felsen viewpoint", "Rheinfall"),
+        federalStopSource("Neuhausen Rheinfall station", "Neuhausen Rheinfall"),
+        source("Photograph and licence", imageFor("spot-rhine-falls").sourceUrl!),
+      ],
+    }),
+  },
+  {
+    id: "spot-chapel-bridge",
+    slug: "chapel-bridge-lucerne",
+    name: "Chapel Bridge",
+    tagline: "Lucerne’s covered footbridge across the Reuss",
+    description:
+      "The Chapel Bridge links the Lucerne Theatre side of the Reuss with St. Peter’s Chapel and Rathausquai, passing the Water Tower. The map point is the federal bridge feature itself.",
+    longDescription:
+      "This is a public pedestrian landmark in central Lucerne, not a hiking route. Lucerne Tourism identifies it as wheelchair accessible, and the main railway station is the clearest verified arrival point for a short city-centre walk.",
+    category: "photo-spot",
+    difficulty: "easy",
+    region: "lucerne",
+    coordinates: { lat: 47.05156707763672, lng: 8.307458877563477 },
+    coordinateType: "attraction",
+    heroImage: imageFor("spot-chapel-bridge"),
+    gallery: [],
+    tags: ["bridge", "Lucerne", "old town", "wheelchair accessible"],
+    bestSeason: ["year-round"],
+    travelTimeMinutes: 0,
+    visitDurationHours: { min: 0, max: 0 },
+    highlights: ["Covered timber bridge", "Water Tower", "Historic triangular paintings"],
+    tips: ["Walk from Lucerne railway station rather than driving into the centre."],
+    whatToBring: ["Nothing specialised; the bridge is in the city centre"],
+    accessInfo:
+      "Start at Lucerne railway station, 47.050755, 8.310246. The bridge is a short signed city-centre walk away. It has no dedicated visitor car park; use a public city car park if arriving by car.",
+    parkingAvailable: false,
+    publicTransport: true,
+    isFeatured: false,
+    isNew: true,
+    viewCount: 0,
+    saveCount: 0,
+    createdAt: CREATED_AT,
+    updatedAt: CREATED_AT,
+    verification: verification({
+      canton: "Lucerne",
+      routeType: "Pedestrian city landmark",
+      season: "Year-round",
+      distanceKm: null,
+      durationMinutes: null,
+      ascentM: null,
+      descentM: null,
+      sacGrade: null,
+      status: "open",
+      statusNote: "Public pedestrian bridge; temporary event or maintenance controls remain possible.",
+      start: {
+        name: "Lucerne railway station",
+        coordinates: { lat: 47.05075454711914, lng: 8.310245513916016 },
+        parking: "No dedicated attraction parking verified; use an official public city car park.",
+        publicTransport: "Luzern, Bahnhof is the nearest major transport hub.",
+      },
+      finish: "Either bridgehead",
+      accessibility: "Lucerne Tourism lists the bridge as wheelchair accessible and centrally located.",
+      feeInfo: "No admission fee is published for crossing the pedestrian bridge.",
+      restrictions: ["Keep the narrow bridge passage clear and follow temporary city signage."],
+      safety: sharedSafety,
+      uncertainties: [],
+      sources: [
+        source("Lucerne Tourism — Chapel Bridge", "https://www.luzern.com/en/poi/chapel-bridge"),
+        federalPlaceSource("Chapel Bridge", "Kapellbrücke Luzern"),
+        federalStopSource("Lucerne railway station", "Luzern Bahnhof"),
+        source("Photograph and licence", imageFor("spot-chapel-bridge").sourceUrl!),
+      ],
+    }),
+  },
+  {
+    id: "spot-chillon",
+    slug: "chateau-de-chillon",
+    name: "Château de Chillon",
+    tagline: "A lakeside fortress between Montreux and Villeneuve",
+    description:
+      "Château de Chillon stands directly on Lake Geneva at Veytaux. The federal coordinate identifies the historic castle precinct, while the station, bus stop and roadside parking are recorded separately.",
+    longDescription:
+      "Chillon is a ticketed historic monument with seasonal opening hours. Rail, bus and boat approaches are available, but the castle’s stone interiors are only partly accessible; the official visit information should be checked again before travelling.",
+    category: "photo-spot",
+    difficulty: "easy",
+    region: "vaud",
+    coordinates: { lat: 46.41454315185547, lng: 6.9274444580078125 },
+    coordinateType: "attraction",
+    heroImage: imageFor("spot-chillon"),
+    gallery: [],
+    tags: ["castle", "Lake Geneva", "museum", "Veytaux"],
+    bestSeason: ["year-round"],
+    travelTimeMinutes: 0,
+    visitDurationHours: { min: 0, max: 0 },
+    highlights: ["Castle courtyards", "Lake Geneva setting", "Historic interior"],
+    tips: ["Use public transport when possible; the castle says roadside parking is limited."],
+    whatToBring: ["Ticket or valid museum pass", "Shoes suitable for stone stairs"],
+    accessInfo:
+      "The closest rail stop is Veytaux-Chillon at 46.417622, 6.927858, about six minutes on foot. Bus stop Veytaux, château de Chillon is at 46.414127, 6.928749. Limited free roadside parking is available for up to three hours with the required permit.",
+    parkingAvailable: true,
+    publicTransport: true,
+    isFeatured: true,
+    isNew: true,
+    viewCount: 0,
+    saveCount: 0,
+    createdAt: CREATED_AT,
+    updatedAt: CREATED_AT,
+    verification: verification({
+      canton: "Vaud",
+      routeType: "Ticketed monument visit",
+      season: "Open year-round except 25 December and 1 January; hours vary by month",
+      distanceKm: null,
+      durationMinutes: null,
+      ascentM: null,
+      descentM: null,
+      sacGrade: null,
+      status: "open-with-advisory",
+      statusNote: "Admission hours and last entry vary seasonally; book and recheck the official page.",
+      start: {
+        name: "Château de Chillon entrance",
+        coordinates: { lat: 46.41454315185547, lng: 6.9274444580078125 },
+        parking: "Limited free roadside car and coach parking for up to three hours; a permit is required.",
+        publicTransport: "Veytaux-Chillon railway station or Veytaux, château de Chillon bus stop; peak-season boats also call at Chillon.",
+      },
+      finish: "Château de Chillon exit",
+      accessibility:
+        "The historic interior is not easily accessible to wheelchair or walker users. Cobbled courtyards, the café and adapted toilets are accessible; official virtual-tour terminals cover inaccessible areas.",
+      feeInfo: "Paid admission applies. Current prices and accepted passes are listed on the official visit page.",
+      restrictions: ["Assistance-dog eligibility follows the castle’s published rules."],
+      safety: [...sharedSafety, "Courtyard cobbles can be slippery when wet."],
+      uncertainties: [],
+      sources: [
+        source("Chillon — hours, prices, arrival and accessibility", "https://www.chillon.ch/en/visit/"),
+        source("Chillon — visitor FAQ", "https://www.chillon.ch/en/faq/"),
+        federalPlaceSource("Château de Chillon precinct", "Château de Chillon"),
+        federalStopSource("Veytaux-Chillon station and castle bus stop", "Veytaux-Chillon"),
+        source("Photograph and licence", imageFor("spot-chillon").sourceUrl!),
+      ],
+    }),
+  },
+  {
+    id: "spot-landwasser-viaduct",
+    slug: "landwasser-viaduct",
+    name: "Landwasser Viaduct",
+    tagline: "A railway landmark with distinct north, south and Hennings viewpoints",
+    description:
+      "The Landwasser Viaduct carries the Rhaetian Railway into a tunnel above the Landwasser valley. This card marks the federal railway structure; the recommended viewing point and stop are separate.",
+    longDescription:
+      "The viaduct is best understood as a railway landmark with several viewing approaches rather than a single trailhead. The published 600-metre access route from the seasonal shuttle stop includes steps and a steep descent, while Hennings platform is the quickest named viewpoint.",
+    category: "viewpoint",
+    difficulty: "moderate",
+    region: "graubunden",
+    coordinates: { lat: 46.680946350097656, lng: 9.67599868774414 },
+    coordinateType: "attraction",
+    heroImage: imageFor("spot-landwasser-viaduct"),
+    gallery: [],
+    tags: ["railway", "viaduct", "UNESCO", "Filisur"],
+    bestSeason: ["summer", "autumn"],
+    travelTimeMinutes: 0,
+    visitDurationHours: { min: 0, max: 0 },
+    distanceKm: 0.6,
+    highlights: ["Hennings viewing platform", "Viaduct shuttle", "RhB UNESCO railway"],
+    tips: [
+      "The quickest verified route is from the seasonal Schmitten GR Landwasserviadukt stop to Hennings platform.",
+      "Check the shuttle timetable; it does not run daily throughout its whole season.",
+    ],
+    whatToBring: ["Shoes with grip", "Weather protection", "Valid rail ticket if using the shuttle"],
+    accessInfo:
+      "Start at Schmitten (Albula) Landwasserviadukt stop, 46.680286, 9.672232. Hennings platform is about five minutes away on a maintained path. The official 600 m route from the stop to the picnic area takes about 15 minutes and includes steps and a steep descent. Parking is available at the Landwasser Viaduct car park; Hennings is about 25 minutes from it.",
+    parkingAvailable: true,
+    publicTransport: true,
+    isFeatured: true,
+    isNew: true,
+    viewCount: 0,
+    saveCount: 0,
+    createdAt: CREATED_AT,
+    updatedAt: CREATED_AT,
+    verification: verification({
+      canton: "Graubünden",
+      routeType: "One-way access from viaduct shuttle stop to picnic area",
+      season: "Shuttle: 14 May–25 October 2026 on the published operating days",
+      distanceKm: 0.6,
+      durationMinutes: 15,
+      ascentM: 7,
+      descentM: 65,
+      sacGrade: "T2 · steps and steep sections",
+      status: "open-with-advisory",
+      statusNote: "The footpath is independent of the seasonal shuttle; check rail and trail status before travel.",
+      start: {
+        name: "Schmitten (Albula) Landwasserviadukt stop",
+        coordinates: { lat: 46.6802864074707, lng: 9.672231674194336 },
+        parking: "Landwasser Viaduct car park; the Hennings platform is about 25 minutes away on foot.",
+        publicTransport: "Seasonal viaduct shuttle to Schmitten (Albula) Landwasserviadukt.",
+      },
+      finish: "Schmitten GR viaduct picnic area",
+      accessibility:
+        "The shuttle itself is accessible, but the path to the viewing platform has steps and is not barrier-free.",
+      feeInfo: "The viewing paths are free. A valid second-class ticket is required for the viaduct shuttle.",
+      restrictions: ["Remain on signed paths and never enter the active railway alignment."],
+      safety: [...sharedSafety, "The access path has steps and steep sections."],
+      uncertainties: [],
+      sources: [
+        source("Rhaetian Railway — viaduct shuttle and accessibility", "https://www.rhb.ch/en/excursions/viaduct-shuttle/"),
+        source("Landwasser World — verified 600 m access route", "https://shop.landwasserwelt.ch/en/pages/groups"),
+        source("Landwasser World — Hennings viewing platform approaches", "https://shop.landwasserwelt.ch/en/products/aussichtsplattform-hennings"),
+        federalPlaceSource("Landwasser Viaduct structure and viewpoints", "Landwasserviadukt"),
+        federalStopSource("Landwasser viaduct stop", "Landwasserviadukt"),
+        source("Photograph and licence", imageFor("spot-landwasser-viaduct").sourceUrl!),
+      ],
+    }),
+  },
+  {
+    id: "spot-bern-old-city",
+    slug: "old-city-of-bern",
+    name: "Old City of Bern",
+    tagline: "A UNESCO-listed living city inside the bend of the Aare",
+    description:
+      "Bern’s Old City preserves its medieval street plan, arcades and fountains while remaining a lived-in city centre. The map point is a federal old-town area reference, not a single building.",
+    longDescription:
+      "For a concrete and reproducible visit, the practical details use Bern Welcome’s published accessible circular route from the railway station. That route is distinct from the broader UNESCO property and provides verified distance, duration and elevation figures.",
+    category: "photo-spot",
+    difficulty: "easy",
+    region: "bern",
+    coordinates: { lat: 46.94916534423828, lng: 7.4490461349487305 },
+    coordinateType: "heritage_area_reference",
+    heroImage: imageFor("spot-bern-old-city"),
+    gallery: [],
+    tags: ["UNESCO", "city walk", "arcades", "accessible route"],
+    bestSeason: ["year-round"],
+    travelTimeMinutes: 0,
+    visitDurationHours: { min: 2, max: 2 },
+    distanceKm: 4.2,
+    highlights: ["Zytglogge", "Sandstone arcades", "Aare viewpoints"],
+    tips: ["Start at Bern station and use the published accessible city route for a clearly defined itinerary."],
+    whatToBring: ["Comfortable walking shoes", "Weather protection"],
+    accessInfo:
+      "The verified route starts at Bern railway station, 46.948833, 7.439132. Bern Welcome’s accessible city route is 4.2 km, takes 2 hours and has 48 m ascent and descent. No dedicated old-town parking is recommended; use rail or a signed city car park.",
+    parkingAvailable: false,
+    publicTransport: true,
+    isFeatured: false,
+    isNew: true,
+    viewCount: 0,
+    saveCount: 0,
+    createdAt: CREATED_AT,
+    updatedAt: CREATED_AT,
+    verification: verification({
+      canton: "Bern",
+      routeType: "Accessible circular city route",
+      season: "Year-round",
+      distanceKm: 4.2,
+      durationMinutes: 120,
+      ascentM: 48,
+      descentM: 48,
+      sacGrade: "Easy city route",
+      status: "open",
+      statusNote: "Public city route; temporary construction and event diversions can occur.",
+      start: {
+        name: "Bern railway station",
+        coordinates: { lat: 46.94883346557617, lng: 7.439131736755371 },
+        parking: "No dedicated heritage-site parking; use official city car parks outside pedestrian areas.",
+        publicTransport: "Bern railway station is the route start and principal transport hub.",
+      },
+      finish: "Bern railway station",
+      accessibility:
+        "The published route is designed to avoid most cobbled sections, although the historic centre includes gradients and uneven surfaces.",
+      feeInfo: "The public streets and route are free. Museums, tours and attractions may charge separately.",
+      restrictions: ["Respect pedestrian zones, local traffic controls and the privacy of residents."],
+      safety: [...sharedSafety, "Cobbles and gradients can be slippery in wet or icy conditions."],
+      uncertainties: [],
+      sources: [
+        source("UNESCO — Old City of Berne", "https://whc.unesco.org/en/list/267"),
+        source("Bern Welcome — accessible 4.2 km city route", "https://bern.com/en/inform/barrier-free-bern/accessible-city-tour-bern"),
+        federalPlaceSource("Bern old-town reference", "Altstadt Bern"),
+        federalStopSource("Bern railway station", "Bern"),
+        source("Photograph and licence", imageFor("spot-bern-old-city").sourceUrl!),
+      ],
+    }),
+  },
+  {
+    id: "spot-bellinzona-fortress",
+    slug: "three-castles-of-bellinzona",
+    name: "Three Castles of Bellinzona",
+    tagline: "A three-site fortress visit beginning at Castelgrande",
+    description:
+      "Bellinzona’s UNESCO fortress comprises Castelgrande, Montebello and Sasso Corbaro. Because one point cannot represent three separate castles, this card deliberately uses Castelgrande as the mapped starting reference.",
+    longDescription:
+      "The three castles occupy separate elevations and do not share one entrance, timetable or accessibility profile. This entry starts at Castelgrande and treats Montebello and Sasso Corbaro as additional sites whose seasonal opening information must be checked individually.",
+    category: "viewpoint",
+    difficulty: "moderate",
+    region: "ticino",
+    coordinates: { lat: 46.19284439086914, lng: 9.02198314666748 },
+    coordinateType: "heritage_area_reference",
+    heroImage: imageFor("spot-bellinzona-fortress"),
+    gallery: [],
+    tags: ["UNESCO", "castles", "Bellinzona", "museum"],
+    bestSeason: ["year-round"],
+    travelTimeMinutes: 0,
+    visitDurationHours: { min: 0, max: 0 },
+    highlights: ["Castelgrande", "Montebello", "Sasso Corbaro"],
+    tips: ["Treat the three castles as separate sites; check which interiors are open in winter."],
+    whatToBring: ["Comfortable walking shoes", "Water in warm weather"],
+    accessInfo:
+      "Begin at Castelgrande, 46.192844, 9.021983. Bellinzona, Stazione is at 46.194824, 9.028221. Piazza del Sole is the closest verified central parking reference. Montebello and Sasso Corbaro are higher separate sites reached on foot, by road, public transport or the seasonal tourist train.",
+    parkingAvailable: true,
+    publicTransport: true,
+    isFeatured: true,
+    isNew: true,
+    viewCount: 0,
+    saveCount: 0,
+    createdAt: CREATED_AT,
+    updatedAt: CREATED_AT,
+    verification: verification({
+      canton: "Ticino",
+      routeType: "Three separate fortress sites; Castelgrande start",
+      season: "Castelgrande operates year-round; Montebello and Sasso Corbaro interiors are seasonal",
+      distanceKm: null,
+      durationMinutes: null,
+      ascentM: null,
+      descentM: null,
+      sacGrade: null,
+      status: "open-with-advisory",
+      statusNote: "From 28 March to 8 November 2026 all three castles are listed open daily 10:00–18:00; winter access differs.",
+      start: {
+        name: "Castelgrande",
+        coordinates: { lat: 46.19284439086914, lng: 9.02198314666748 },
+        parking: "Use signed central Bellinzona parking; Piazza del Sole is the closest verified central reference.",
+        publicTransport: "Bellinzona, Stazione; continue on foot or by local transport depending on the castle.",
+      },
+      finish: null,
+      accessibility:
+        "Official tourism information states that accessibility is only partial and links each castle to detailed Pro Infirmis information.",
+      feeInfo: "Courtyards and paid interiors differ. The Fortress Pass covers museums, exhibitions, walls and towers as specified by the operator.",
+      restrictions: ["Opening periods and accessible areas differ between the three castles."],
+      safety: [...sharedSafety, "Routes between the castles include slopes, steps and uneven historic surfaces."],
+      uncertainties: [],
+      sources: [
+        source("Bellinzona e Valli — 2026 Fortress Pass and opening period", "https://booking.bellinzonaevalli.ch/en/products/bellinzona-pass"),
+        source("Bellinzona e Valli — Montebello access and accessibility", "https://www.bellinzonaevalli.ch/en/commons/details/The-Castle-of-Montebello/2796.html"),
+        source("Bellinzona e Valli — Sasso Corbaro access", "https://www.bellinzonaevalli.ch/en/commons/details/The-Castle-of-Sasso-Corbaro/2797.html"),
+        federalPlaceSource("Castelgrande historic precinct", "Castel Grande"),
+        federalStopSource("Bellinzona railway station", "Bellinzona Stazione"),
+        source("Photograph and licence", imageFor("spot-bellinzona-fortress").sourceUrl!),
+      ],
+    }),
+  },
+  {
+    id: "spot-stein-am-rhein",
+    slug: "stein-am-rhein-old-town",
+    name: "Stein am Rhein",
+    tagline: "A compact old-town visit centred on Rathausplatz",
+    description:
+      "Stein am Rhein’s historic centre is known for its painted façades and Rathausplatz. The mapped point is the federal settlement reference for the old town—not the railway station or a parking area.",
+    longDescription:
+      "This is a compact public old-town visit rather than a defined hiking route. The railway station south of the Rhine is the most dependable arrival reference; visitor parking sits around the historic core and remains subject to current municipal signs and tariffs.",
+    category: "photo-spot",
+    difficulty: "easy",
+    region: "schaffhausen",
+    coordinates: { lat: 47.65896987915039, lng: 8.857444763183594 },
+    coordinateType: "village",
+    heroImage: imageFor("spot-stein-am-rhein"),
+    gallery: [],
+    tags: ["old town", "painted façades", "Rhine", "Schaffhausen"],
+    bestSeason: ["year-round"],
+    travelTimeMinutes: 0,
+    visitDurationHours: { min: 0, max: 0 },
+    highlights: ["Rathausplatz", "Painted façades", "Rhine waterfront"],
+    tips: ["Arrive by rail and walk across the Rhine into the old town to avoid searching for central parking."],
+    whatToBring: ["Comfortable city shoes", "Weather protection"],
+    accessInfo:
+      "Stein am Rhein railway station is at 47.655857, 8.855719, south of the Rhine. The city promotes a signed walking connection to the old town. Public parking is managed around, rather than inside, the historic centre; follow the current municipal parking signs.",
+    parkingAvailable: true,
+    publicTransport: true,
+    isFeatured: false,
+    isNew: true,
+    viewCount: 0,
+    saveCount: 0,
+    createdAt: CREATED_AT,
+    updatedAt: CREATED_AT,
+    verification: verification({
+      canton: "Schaffhausen",
+      routeType: "Old-town destination visit",
+      season: "Year-round",
+      distanceKm: null,
+      durationMinutes: null,
+      ascentM: null,
+      descentM: null,
+      sacGrade: null,
+      status: "open",
+      statusNote: "The public old town is open; individual museums, shops and boat services have separate hours.",
+      start: {
+        name: "Stein am Rhein railway station",
+        coordinates: { lat: 47.65585708618164, lng: 8.855718612670898 },
+        parking: "Use signed municipal visitor parking around the old town; availability and tariffs vary.",
+        publicTransport: "Stein am Rhein, Bahnhof; local buses and seasonal Rhine boats provide additional access.",
+      },
+      finish: null,
+      accessibility:
+        "The station-to-old-town link is a normal urban walking route. Historic paving and individual heritage buildings may limit step-free access.",
+      feeInfo: "The public streets are free. Museums, tours and boat services may charge separately.",
+      restrictions: ["Observe pedestrian-zone and parking controls in the historic centre."],
+      safety: sharedSafety,
+      uncertainties: [],
+      sources: [
+        source("City of Stein am Rhein — transport and parking policy", "https://www.steinamrhein.ch/public/upload/assets/4924/Leitbild%20Siedlungsentwicklung.pdf"),
+        source("URh — Stein am Rhein public-transport arrival", "https://www.urh.ch/stein-am-rhein"),
+        federalPlaceSource("Stein am Rhein settlement reference", "Stein am Rhein"),
+        federalStopSource("Stein am Rhein railway station", "Stein am Rhein Bahnhof"),
+        source("Photograph and licence", imageFor("spot-stein-am-rhein").sourceUrl!),
       ],
     }),
   },

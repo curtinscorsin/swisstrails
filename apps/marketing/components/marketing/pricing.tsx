@@ -27,7 +27,7 @@ export function Pricing() {
           <Reveal delay={0.2}>
             <p className="t-body text-fg-muted max-w-md mx-auto">
               No subscription, upgrade tier or recurring charge. Buy the guide once
-              and every future location is yours too.
+              and every future source-checked location is included too.
             </p>
           </Reveal>
         </div>
@@ -96,10 +96,10 @@ export function Pricing() {
             </div>
           </motion.div>
 
-          {/* Social proof under card */}
+          {/* Editorial promise under card */}
           <Reveal delay={0.3}>
             <p className="mt-7 text-center text-sm text-fg-muted">
-              <span className="text-stone-200">3,200+</span> explorers already inside
+              <span className="text-stone-200">No inflated catalogue:</span> uncertain places stay hidden
             </p>
           </Reveal>
         </div>

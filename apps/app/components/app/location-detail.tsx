@@ -178,7 +178,7 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
           <div className="grid grid-cols-2 gap-2">
             <Stat
               icon={<Gauge className="w-4 h-4" />}
-              label="Difficulty"
+              label="Access effort"
               value={diff.label}
               valueClass={DIFF_COLOR[location.difficulty]}
             />
@@ -196,22 +196,24 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
                 value={`${location.elevation.toLocaleString()} m`}
               />
             )}
-            <Stat
-              icon={<Clock className="w-4 h-4" />}
-              label="Walking time"
-              value={
-                location.verification
-                  ? formatDuration(location.verification.durationMinutes)
-                  : `${location.visitDurationHours.min}–${location.visitDurationHours.max} h`
-              }
-            />
+            {(location.verification?.durationMinutes != null || location.visitDurationHours.max > 0) && (
+              <Stat
+                icon={<Clock className="w-4 h-4" />}
+                label="Walking time"
+                value={
+                  location.verification?.durationMinutes != null
+                    ? formatDuration(location.verification.durationMinutes)
+                    : `${location.visitDurationHours.min}–${location.visitDurationHours.max} h`
+                }
+              />
+            )}
             {awayKm ? (
               <Stat
                 icon={<Navigation className="w-4 h-4" />}
                 label="From you"
                 value={`${awayKm} away`}
               />
-            ) : !location.verification ? (
+            ) : !location.verification && location.travelTimeMinutes > 0 ? (
               <Stat
                 icon={<Car className="w-4 h-4" />}
                 label="By car"
@@ -230,6 +232,7 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
               verification={location.verification}
               destination={location.coordinates}
               destinationName={`${location.name} map point`}
+              destinationType={location.coordinateType}
             />
           )}
 
@@ -284,7 +287,7 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
           {/* Weather */}
           <WeatherWidget lat={location.coordinates.lat} lng={location.coordinates.lng} />
 
-          {/* Insider tips + What to bring — collapsed by default to declutter */}
+          {/* Practical tips + What to bring — collapsed by default to declutter */}
           {(location.tips.length > 0 || location.whatToBring.length > 0) && (
             <div className="rounded-xl border border-white/[0.06] overflow-hidden">
               <button
@@ -357,7 +360,7 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
               lat: location.verification?.start.coordinates.lat ?? location.coordinates.lat,
               lng: location.verification?.start.coordinates.lng ?? location.coordinates.lng,
               name: location.verification
-                ? `${location.name} trailhead — ${location.verification.start.name}`
+                ? `${location.name} access point — ${location.verification.start.name}`
                 : location.name,
             });
           }}

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PLACEHOLDER_LOCATIONS } from "@/data/locations";
+import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { categoryConfig, difficultyConfig, cn } from "@/lib/utils";
 import { useImageOverridesStore } from "@/store/image-overrides-store";
 import { LocationImageEditor } from "@/components/admin/location-image-editor";
@@ -16,7 +16,7 @@ import type { Location } from "@/types";
 export default function AdminLocationsPage() {
   const [editing, setEditing] = useState<Location | null>(null);
   const [query, setQuery] = useState("");
-  // Debounce the name search so typing across 500 rows stays responsive.
+  // Debounce the name search so this remains responsive as the reviewed catalogue grows.
   const [debouncedQuery, setDebouncedQuery] = useState("");
   useEffect(() => {
     const id = setTimeout(() => setDebouncedQuery(query), 200);
@@ -27,8 +27,8 @@ export default function AdminLocationsPage() {
 
   const results = useMemo(() => {
     const q = debouncedQuery.toLowerCase().trim();
-    if (!q) return PLACEHOLDER_LOCATIONS;
-    return PLACEHOLDER_LOCATIONS.filter(
+    if (!q) return CURATED_LOCATIONS;
+    return CURATED_LOCATIONS.filter(
       (loc) =>
         loc.name.toLowerCase().includes(q) ||
         loc.slug.toLowerCase().includes(q) ||
@@ -44,9 +44,9 @@ export default function AdminLocationsPage() {
           <div>
             <h1 className="t-h2 text-fg">Locations</h1>
             <p className="text-fg-muted text-sm mt-1">
-              {results.length === PLACEHOLDER_LOCATIONS.length
-                ? `${PLACEHOLDER_LOCATIONS.length} locations total`
-                : `${results.length} of ${PLACEHOLDER_LOCATIONS.length} locations`}
+              {results.length === CURATED_LOCATIONS.length
+                ? `${CURATED_LOCATIONS.length} verified locations`
+                : `${results.length} of ${CURATED_LOCATIONS.length} verified locations`}
             </p>
           </div>
           <div className="flex items-center gap-3">

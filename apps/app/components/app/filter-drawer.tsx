@@ -157,10 +157,10 @@ export function FilterDrawer({ isOpen, onClose, resultCount }: FilterDrawerProps
                   </div>
                 </div>
 
-                {/* Difficulty */}
+                {/* Access effort */}
                 <div className="mb-5">
                   <p className="text-fg-muted text-[11px] font-medium tracking-[0.12em] uppercase mb-2.5">
-                    Difficulty
+                    Access effort
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {DIFFICULTIES.map(({ id, label }) => {

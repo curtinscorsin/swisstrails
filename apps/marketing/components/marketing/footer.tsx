@@ -12,11 +12,19 @@ export function Footer() {
         className="relative overflow-hidden border-y border-white/[0.08] bg-cover bg-center py-24 text-center lg:py-36"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1491555103944-7c647fd857e6?auto=format&fit=crop&w=2200&q=88')",
+            "url('https://upload.wikimedia.org/wikipedia/commons/4/48/001_Chateau_de_Chillon_and_Dents_du_Midi_Photo_by_Giles_Laurent.jpg')",
         }}
       >
         <div className="pointer-events-none absolute inset-0 bg-trail-950/70" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-trail-950 via-transparent to-trail-950/35" />
+        <a
+          href="https://commons.wikimedia.org/wiki/File:001_Chateau_de_Chillon_and_Dents_du_Midi_Photo_by_Giles_Laurent.jpg"
+          target="_blank"
+          rel="noreferrer"
+          className="absolute bottom-3 right-4 z-10 text-[10px] text-white/55 hover:text-white"
+        >
+          Giles Laurent · CC BY-SA 4.0
+        </a>
         <div className="relative mx-auto max-w-3xl px-6">
           <p className="t-eyebrow mb-7 text-gold-200">The trail starts here</p>
           <h2 className="font-heading text-[clamp(3.3rem,7vw,7rem)] leading-[0.88] tracking-[-0.045em] text-white">
@@ -25,8 +33,8 @@ export function Footer() {
             <span className="text-white/55">More time out there.</span>
           </h2>
           <p className="mx-auto mb-10 mt-7 max-w-lg text-lg leading-relaxed text-white/70">
-            500+ Swiss locations, researched and organised for the weekends you
-            will actually remember.
+            A smaller Swiss collection with authentic imagery, transparent sources
+            and practical details that have earned their place.
           </p>
           <Button
             asChild
@@ -51,8 +59,8 @@ export function Footer() {
               />
             </Link>
             <p className="text-fg-muted text-sm max-w-xs">
-              Curated collection of Switzerland&apos;s most beautiful,
-              underrated, and unforgettable locations.
+              A curated collection of Swiss places with dated sources,
+              authentic photography and transparent uncertainty.
             </p>
           </div>
 

@@ -120,7 +120,7 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
   const lat = target?.lat ?? 0;
   const lng = target?.lng ?? 0;
   const targetName = location?.verification
-    ? `${location.name} trailhead — ${location.verification.start.name}`
+    ? `${location.name} access point — ${location.verification.start.name}`
     : location?.name ?? "";
 
   return (
@@ -221,7 +221,7 @@ export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
                 label="Download GPX"
                 hint="For Garmin & GPS apps"
                 onClick={() =>
-                  downloadGpx(lat, lng, targetName, `${location.slug}-trailhead`)
+                  downloadGpx(lat, lng, targetName, `${location.slug}-access-point`)
                 }
               />
               <Row

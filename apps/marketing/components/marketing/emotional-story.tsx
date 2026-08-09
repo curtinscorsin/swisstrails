@@ -4,9 +4,9 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Reveal } from "@/components/shared/reveal";
 
 const MOMENTS = [
-  "The sunrise you nearly missed",
-  "The lake no one else knew about",
-  "The night sky that made everyone quiet",
+  "The first view across the water",
+  "The detail you only notice on foot",
+  "The route you can plan with confidence",
 ];
 
 export function EmotionalStory() {
@@ -18,13 +18,21 @@ export function EmotionalStory() {
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2400&q=88')",
+            "url('https://upload.wikimedia.org/wikipedia/commons/9/91/Old_City_and_the_Aare_river_-_Bern%2C_Switzerland_-_panoramio.jpg')",
         }}
         initial={reduce ? false : { scale: 1.06 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: reduce ? 0 : 1.4, ease: [0.16, 1, 0.3, 1] }}
       />
+      <a
+        href="https://commons.wikimedia.org/wiki/File:Old_City_and_the_Aare_river_-_Bern,_Switzerland_-_panoramio.jpg"
+        target="_blank"
+        rel="noreferrer"
+        className="absolute bottom-3 right-4 z-10 text-[10px] text-white/55 hover:text-white"
+      >
+        Sergey Ashmarin · CC BY-SA 3.0
+      </a>
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,8,0.86)_0%,rgba(8,10,8,0.58)_48%,rgba(8,10,8,0.2)_100%)]" />
       <div className="absolute inset-0 bg-gradient-to-t from-trail-950/70 via-transparent to-trail-950/20" />
 
@@ -42,8 +50,8 @@ export function EmotionalStory() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/72">
-              The best places are not items on a list. They are cold swims, wrong turns,
-              shared flasks and the view that stopped the conversation.
+              A useful guide should do more than collect pins. It should help you understand
+              where a place is, how a visit begins and which details still need checking.
             </p>
           </Reveal>
 

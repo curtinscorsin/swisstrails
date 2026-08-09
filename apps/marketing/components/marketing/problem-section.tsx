@@ -7,20 +7,20 @@ import { Reveal } from "@/components/shared/reveal";
 
 const PAIN_POINTS = [
   {
-    title: "Same places, every weekend",
-    body: "Interlaken again? The Instagram crowd? You know Switzerland is incredible — but somehow you end up in the same ten spots every summer.",
+    title: "A pin without context",
+    body: "A destination coordinate is not necessarily a trail start, station or car park. Treating them as the same point creates avoidable confusion.",
   },
   {
-    title: "Summer slipping away",
-    body: "June turns to September in a blink. How many weekends did you actually remember? How many times did you say 'I'll go next weekend'?",
+    title: "Details change",
+    body: "Opening periods, transport, permits, fees and closures can change. Useful entries need dated sources and clear reminders to recheck.",
   },
   {
-    title: "Hours of research, no results",
-    body: "Down the rabbit hole of blog posts, Reddit threads, and half-baked Google Maps lists. You spend more time researching than actually going.",
+    title: "Generic images mislead",
+    body: "A beautiful landscape photograph is not evidence that it shows the named place. Every published image should have an identifiable subject and licence.",
   },
   {
-    title: "Missing the places worth finding",
-    body: "The spots that become stories — the ones you talk about years later — are never the ones you stumble across. They take insider knowledge.",
+    title: "Volume hides uncertainty",
+    body: "A large catalogue can look impressive while repeating estimates and weak matches. Unverified fields are more honest when left blank or unpublished.",
   },
 ];
 
@@ -52,7 +52,7 @@ export function ProblemSection() {
           <Reveal delay={0.2}>
             <p className="max-w-lg text-lg leading-relaxed text-fg-muted lg:justify-self-end">
               Good weekends should not begin with three hours of tabs, vague pins and
-              crowded “secret” spots. We did the scouting so you can simply go.
+              generic photographs. We record what is known—and say what still is not.
             </p>
           </Reveal>
         </div>
@@ -87,8 +87,8 @@ export function ProblemSection() {
         <Reveal delay={0.5}>
           <div className="mt-16 grid gap-6 rounded-[24px] border border-white/10 bg-stone-50 p-7 text-trail-950 sm:grid-cols-[1fr_auto] sm:items-center lg:p-10">
             <p className="font-heading text-3xl leading-[1.02] sm:text-4xl">
-              500+ researched places.
-              <span className="text-stone-600"> One calm decision.</span>
+              Eight places, checked carefully.
+              <span className="text-stone-600"> Accuracy before volume.</span>
             </p>
             <p className="text-sm text-stone-600 sm:text-right">
               CHF 29 once

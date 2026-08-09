@@ -99,9 +99,9 @@ export function LocationCard({
               {cat.label} ·{" "}
               {awayKm
                 ? `${awayKm} away`
-                : location.verification
-                  ? `${formatDuration(location.verification.durationMinutes)} hike`
-                  : `~${formatDuration(location.travelTimeMinutes)} by car`}
+                : location.verification?.durationMinutes != null
+                  ? `${formatDuration(location.verification.durationMinutes)} walk`
+                  : "Access checked"}
             </p>
             <div className="flex items-center gap-2 mt-1.5">
               <span className={cn("text-xs font-medium", diff.color)}>
@@ -232,9 +232,9 @@ export function LocationCard({
                 ) : (
                   <span className="flex items-center gap-1">
                     <Clock className="w-3 h-3" />
-                    {location.verification
-                      ? `${formatDuration(location.verification.durationMinutes)} hike`
-                      : `~${formatDuration(location.travelTimeMinutes)} by car`}
+                    {location.verification?.durationMinutes != null
+                      ? `${formatDuration(location.verification.durationMinutes)} walk`
+                      : "Access checked"}
                   </span>
                 )}
                 <span className={cn("font-medium", diff.color)}>{diff.label}</span>

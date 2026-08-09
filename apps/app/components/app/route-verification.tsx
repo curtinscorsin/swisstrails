@@ -7,13 +7,14 @@ import {
   MapPinned,
   ShieldCheck,
 } from "lucide-react";
-import type { Coordinates, RouteVerification } from "@/types";
+import type { CoordinateType, Coordinates, RouteVerification } from "@/types";
 import { cn, formatDuration } from "@/lib/utils";
 
 interface RouteVerificationProps {
   verification: RouteVerification;
   destination?: Coordinates;
   destinationName?: string;
+  destinationType?: CoordinateType;
   className?: string;
 }
 
@@ -60,6 +61,7 @@ export function RouteVerificationDetails({
   verification,
   destination,
   destinationName = "Published map point",
+  destinationType,
   className,
 }: RouteVerificationProps) {
   const status = statusStyle[verification.status];
@@ -69,7 +71,7 @@ export function RouteVerificationDetails({
     <section className={cn("space-y-5", className)} aria-labelledby="verified-route-heading">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <p className="t-eyebrow">Source-checked route</p>
+          <p className="t-eyebrow">Source-checked visit</p>
           <h2 id="verified-route-heading" className="mt-1 text-lg font-semibold text-fg">
             Planning details
           </h2>
@@ -101,10 +103,14 @@ export function RouteVerificationDetails({
       </div>
 
       <dl className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-        <Datum label="Route" value={verification.routeType} />
+        <Datum label="Visit type" value={verification.routeType} />
         <Datum label="Season" value={verification.season} />
-        <Datum label="Distance" value={`${verification.distanceKm} km`} />
-        <Datum label="Walking time" value={formatDuration(verification.durationMinutes)} />
+        {verification.distanceKm != null && (
+          <Datum label="Distance" value={`${verification.distanceKm} km`} />
+        )}
+        {verification.durationMinutes != null && (
+          <Datum label="Walking time" value={formatDuration(verification.durationMinutes)} />
+        )}
         <Datum
           label="Ascent"
           value={verification.ascentM == null ? "Not separately stated" : `${verification.ascentM} m`}
@@ -113,7 +119,7 @@ export function RouteVerificationDetails({
           label="Descent"
           value={verification.descentM == null ? "Not separately stated" : `${verification.descentM} m`}
         />
-        <Datum label="Grade" value={verification.sacGrade} />
+        {verification.sacGrade && <Datum label="Grade" value={verification.sacGrade} />}
       </dl>
 
       {verification.elevationNote && (
@@ -135,8 +141,9 @@ export function RouteVerificationDetails({
               <ExternalLink className="h-3 w-3" />
             </a>
             <p className="mt-1">
-              This point identifies the named destination; the separate trailhead coordinates
-              below are the place to begin the route.
+              Coordinate type: {formatCoordinateType(destinationType)}. This point identifies
+              the named place; the separate access coordinate below is where the documented
+              visit begins.
             </p>
           </InfoBlock>
         )}
@@ -165,9 +172,11 @@ export function RouteVerificationDetails({
           <p className="mt-1">
             <span className="text-stone-300">Parking:</span> {verification.start.parking}
           </p>
-          <p className="mt-1">
-            <span className="text-stone-300">Finish:</span> {verification.finish}
-          </p>
+          {verification.finish && (
+            <p className="mt-1">
+              <span className="text-stone-300">Finish:</span> {verification.finish}
+            </p>
+          )}
         </InfoBlock>
 
         <InfoBlock title="Access and cost" icon={<ShieldCheck className="h-4 w-4" />}>
@@ -181,7 +190,7 @@ export function RouteVerificationDetails({
         </InfoBlock>
       </div>
 
-      <RuleList title="Park rules" items={verification.restrictions} />
+      <RuleList title="Local rules" items={verification.restrictions} />
       <RuleList title="Safety" items={verification.safety} />
 
       {verification.uncertainties.length > 0 && (
@@ -222,6 +231,11 @@ export function RouteVerificationDetails({
       </div>
     </section>
   );
+}
+
+function formatCoordinateType(type?: CoordinateType) {
+  if (!type) return "not specified";
+  return type.replaceAll("_", " ");
 }
 
 function Datum({ label, value }: { label: string; value: string }) {

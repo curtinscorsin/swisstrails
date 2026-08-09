@@ -184,7 +184,7 @@ function TripPageInner() {
       stops.map((l) => ({
         lat: routeStart(l).lat,
         lng: routeStart(l).lng,
-        name: l.verification ? `${l.name} trailhead` : l.name,
+        name: l.verification ? `${l.name} access point` : l.name,
       })),
     [stops]
   );

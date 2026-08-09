@@ -2,14 +2,12 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertTriangle, BadgeCheck, Search, SlidersHorizontal, X, Sparkles } from "lucide-react";
+import { AlertTriangle, BadgeCheck, Search, SlidersHorizontal, X } from "lucide-react";
 import { useMapStore } from "@/store/map-store";
 import { useGeoStore } from "@/store/geo-store";
 import { CURATED_LOCATIONS } from "@/data/curated-locations";
 import { filterLocations, countActiveFilters } from "@/lib/filters";
 import { sortLocations, type SortMode } from "@/lib/sort";
-import { currentSeason, isInSeason } from "@/lib/season";
-import { seasonConfig } from "@/lib/utils";
 import { FilterDrawer } from "@/components/app/filter-drawer";
 import { SortControl } from "@/components/app/sort-control";
 import { LocationDetailSheet } from "@/components/app/location-detail-sheet";
@@ -20,12 +18,6 @@ import { haptics } from "@/lib/haptics";
 import type { Location } from "@/types";
 
 const ASPECT_RATIOS = ["3/4", "4/5", "2/3", "4/5", "3/4", "1/1", "4/5", "3/5"];
-
-// Per-season key so a dismissed rail re-offers when the season changes.
-const SEASON_DISMISS_KEY = "swiss-trails-season-rail-dismissed";
-
-// How many spots to show in the "In season now" rail.
-const SEASON_RAIL_LIMIT = 12;
 
 // Infinite-scroll page size for the masonry — keeps the DOM light and avoids
 // mounting every card (and fetching its images) up front, which would
@@ -38,7 +30,6 @@ export default function ExplorePage() {
   const [showFilters, setShowFilters] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>("featured");
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
-  const [seasonRailDismissed, setSeasonRailDismissed] = useState(false);
 
   const filteredLocations = useMemo(
     () =>
@@ -55,26 +46,6 @@ export default function ExplorePage() {
     [activeFilters]
   );
 
-  // "In season now" — month-of-year based, applied uniformly to every category.
-  // Featured spots first so the rail leads with the strongest picks.
-  const season = currentSeason();
-  const inSeasonLocations = useMemo(
-    () =>
-      CURATED_LOCATIONS.filter((loc) => isInSeason(loc, season))
-        .slice()
-        .sort((a, b) => Number(b.isFeatured) - Number(a.isFeatured))
-        .slice(0, SEASON_RAIL_LIMIT),
-    [season]
-  );
-
-  // Only surface the rail on the unfiltered, unsearched default view so it never
-  // competes with an active search/filter result set.
-  const showSeasonRail =
-    !seasonRailDismissed &&
-    !searchQuery &&
-    activeFilterCount === 0 &&
-    inSeasonLocations.length > 0;
-
   // Continuous loading: render a window of cards and grow it as the user nears
   // the end, so larger future curated releases remain lightweight.
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -88,16 +59,6 @@ export default function ExplorePage() {
     setVisibleCount(MASONRY_PAGE);
     scrollRef.current?.scrollTo({ top: 0, behavior: "auto" });
   }, [filteredLocations]);
-
-  // Persist the in-season rail dismissal per season (re-offers next season).
-  useEffect(() => {
-    try {
-      if (localStorage.getItem(SEASON_DISMISS_KEY) === season)
-        setSeasonRailDismissed(true);
-    } catch {
-      /* localStorage unavailable — leave the rail shown */
-    }
-  }, [season]);
 
   // Grow the window when the sentinel nears view. Rooted on the inner scroll
   // container since the document itself is locked on tab routes.
@@ -125,10 +86,10 @@ export default function ExplorePage() {
         <div className="mb-4 hidden items-end justify-between lg:flex">
           <div>
             <p className="t-eyebrow mb-2">Curated Switzerland</p>
-            <h1 className="font-heading text-4xl leading-none text-fg">Find your next trail.</h1>
+            <h1 className="font-heading text-4xl leading-none text-fg">Places worth knowing.</h1>
           </div>
           <p className="max-w-sm text-right text-sm leading-relaxed text-fg-muted">
-            Official route data, precise access details and transparent advisories.
+            A smaller collection, checked against official sources and published only when its identity is clear.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -210,76 +171,44 @@ export default function ExplorePage() {
         )}
       </AnimatePresence>
 
-      {/* Masonry wall — full width, no max-width cap */}
+      {/* Curated collection */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto overscroll-contain">
-        {/* "In season now" rail — dismissible, sits above the masonry */}
-        <AnimatePresence initial={false}>
-          {showSeasonRail && (
-            <motion.section
-              aria-label={`In season now — ${seasonConfig[season].label}`}
-              className="overflow-hidden"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="pb-3 pt-4">
-                <div className="mb-3 flex items-center justify-between px-3 sm:px-5 lg:px-7">
-                  <p className="flex items-center gap-1.5 text-[11px] font-medium tracking-[0.12em] uppercase text-fg-muted">
-                    <Sparkles className="w-3 h-3 text-gold-400" />
-                    In season now
-                    <span className="text-stone-600 normal-case tracking-normal">
-                      · {seasonConfig[season].label}
-                    </span>
-                  </p>
-                  <button
-                    onClick={() => {
-                      haptics.tap();
-                      setSeasonRailDismissed(true);
-                      try {
-                        localStorage.setItem(SEASON_DISMISS_KEY, season);
-                      } catch {
-                        /* non-fatal */
-                      }
-                    }}
-                    aria-label="Dismiss in-season suggestions"
-                    className="w-11 h-11 -mr-2 flex items-center justify-center text-stone-500 hover:text-fg transition-colors"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-                <div
-                  className="flex gap-3 overflow-x-auto px-3 pb-2 sm:px-5 lg:px-7"
-                  style={{ scrollbarWidth: "none" }}
-                >
-                  {inSeasonLocations.map((loc) => (
-                    <button
-                      key={loc.id}
-                      onClick={() => setSelectedLocation(loc)}
-                      className="group relative h-28 w-44 flex-shrink-0 overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04] text-left shadow-sm transition-transform active:scale-[0.98]"
-                    >
-                      <ResolvedLocationPhoto
-                        location={loc}
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                        sizes="176px"
-                        compactFallback
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-2">
-                        <p className="text-white text-xs font-medium leading-tight line-clamp-2">
-                          {loc.name}
-                        </p>
-                        <p className="text-white/70 text-[11px] mt-0.5">
-                          {regionConfig[loc.region].label}
-                        </p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+        {!searchQuery && activeFilterCount === 0 && (
+          <section className="px-3 pt-4 sm:px-5 lg:px-7 lg:pt-6" aria-labelledby="editorial-standard">
+            <div className="overflow-hidden rounded-[1.4rem] border border-white/[0.08] bg-gradient-to-br from-alpine-950 via-trail-900 to-trail-950 p-5 sm:p-6 lg:flex lg:items-end lg:justify-between lg:gap-8 lg:p-8">
+              <div className="max-w-2xl">
+                <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-alpine-300">
+                  <BadgeCheck className="h-4 w-4" />
+                  Source-checked collection
+                </p>
+                <h2 id="editorial-standard" className="font-heading text-3xl leading-[1.05] text-fg sm:text-4xl">
+                  Eight places we can stand behind.
+                </h2>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-fg-muted sm:text-base">
+                  Each published photograph shows the named place. Coordinates, access and practical notes are separated clearly and linked to their sources.
+                </p>
               </div>
-            </motion.section>
-          )}
-        </AnimatePresence>
+              <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-0 lg:w-72">
+                <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
+                  <p className="font-heading text-3xl text-fg">8</p>
+                  <p className="mt-1 text-xs leading-snug text-fg-muted">published places</p>
+                </div>
+                <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
+                  <p className="font-heading text-3xl text-fg">92</p>
+                  <p className="mt-1 text-xs leading-snug text-fg-muted">still under review</p>
+                </div>
+                <p className="col-span-2 px-1 pt-1 text-[11px] text-stone-500">Last editorial check: 9 August 2026</p>
+              </div>
+            </div>
+            <div className="flex items-end justify-between pb-1 pt-6">
+              <div>
+                <p className="t-eyebrow">Published collection</p>
+                <p className="mt-1 text-sm text-fg-muted">Select a place for its verified visit details and source links.</p>
+              </div>
+              <span className="hidden text-xs text-stone-500 sm:block">{CURATED_LOCATIONS.length} places</span>
+            </div>
+          </section>
+        )}
 
         {filteredLocations.length === 0 ? (
           <div className="flex flex-col items-center justify-center min-h-[50vh] p-8 text-center">
@@ -304,6 +233,7 @@ export default function ExplorePage() {
                 key={loc.id}
                 location={loc}
                 aspectRatio={ASPECT_RATIOS[i % ASPECT_RATIOS.length]}
+                priority={i < 4}
                 onClick={() => setSelectedLocation(loc)}
               />
             ))}
@@ -334,10 +264,11 @@ export default function ExplorePage() {
 interface MasonryCardProps {
   location: Location;
   aspectRatio: string;
+  priority: boolean;
   onClick: () => void;
 }
 
-function MasonryCard({ location, aspectRatio, onClick }: MasonryCardProps) {
+function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardProps) {
   return (
     <motion.button
       className="relative mb-2.5 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/[0.07] bg-surface-1 shadow-sm sm:mb-3.5"
@@ -349,6 +280,7 @@ function MasonryCard({ location, aspectRatio, onClick }: MasonryCardProps) {
         location={location}
         className="relative z-[1] object-cover transition-transform duration-700 hover:scale-[1.025]"
         sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 25vw"
+        priority={priority}
       />
 
       <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/85 via-black/5 to-transparent" />

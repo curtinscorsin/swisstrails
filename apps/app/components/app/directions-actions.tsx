@@ -19,7 +19,7 @@ export function DirectionsActions({ location }: DirectionsActionsProps) {
   const [openInSheet, setOpenInSheet] = useState(false);
   const target = location.verification?.start.coordinates ?? location.coordinates;
   const targetName = location.verification
-    ? `${location.name} trailhead — ${location.verification.start.name}`
+    ? `${location.name} access point — ${location.verification.start.name}`
     : location.name;
 
   return (

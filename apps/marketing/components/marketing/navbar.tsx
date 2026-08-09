@@ -28,7 +28,7 @@ export function Navbar() {
   const navLinks = [
     { label: "The guide", href: "#solution" },
     { label: "Locations", href: "#whats-inside" },
-    { label: "Stories", href: "#testimonials" },
+    { label: "Standards", href: "#stats" },
     { label: "Access", href: "#pricing" },
   ];
 
