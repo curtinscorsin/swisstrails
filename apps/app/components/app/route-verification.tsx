@@ -25,7 +25,7 @@ const statusStyle = {
     className: "border-alpine-700/60 bg-alpine-950/40 text-alpine-300",
   },
   "open-with-advisory": {
-    label: "Check advisory",
+    label: "Specific advisory",
     icon: AlertTriangle,
     className: "border-amber-700/50 bg-amber-950/35 text-amber-300",
   },
@@ -35,9 +35,9 @@ const statusStyle = {
     className: "border-red-800/60 bg-red-950/40 text-red-300",
   },
   "check-current": {
-    label: "Check current status",
-    icon: AlertTriangle,
-    className: "border-amber-700/50 bg-amber-950/35 text-amber-300",
+    label: "Recheck before travel",
+    icon: CalendarCheck,
+    className: "border-white/[0.09] bg-white/[0.035] text-stone-300",
   },
 } as const;
 
@@ -71,14 +71,26 @@ export function RouteVerificationDetails({
       verification.start.coordinates.lat === destination.lat &&
       verification.start.coordinates.lng === destination.lng
   );
+  const hasSourcedContext = verification.routeType.startsWith("Reviewed:");
+  const displayRouteType = verification.routeType.replace(/^Reviewed:\s*/, "");
 
   return (
     <section className={cn("space-y-5", className)} aria-labelledby="verified-route-heading">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <p className="t-eyebrow">{destinationOnly ? "Sourced destination record" : "Source-checked visit"}</p>
+          <p className="t-eyebrow">
+            {destinationOnly && hasSourcedContext
+              ? "Destination pin + sourced context"
+              : destinationOnly
+                ? "Sourced destination record"
+                : "Source-checked visit"}
+          </p>
           <h2 id="verified-route-heading" className="mt-1 text-lg font-semibold text-fg">
-            {destinationOnly ? "Known and unresolved" : "Planning details"}
+            {destinationOnly && hasSourcedContext
+              ? "Route facts and open questions"
+              : destinationOnly
+                ? "Known and unresolved"
+                : "Planning details"}
           </h2>
         </div>
         <span
@@ -109,7 +121,7 @@ export function RouteVerificationDetails({
       </div>
 
       <dl className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-        <Datum label="Visit type" value={verification.routeType} />
+        <Datum label="Visit type" value={displayRouteType} />
         <Datum label="Season" value={verification.season} />
         {verification.distanceKm != null && (
           <Datum label="Distance" value={`${verification.distanceKm} km`} />
@@ -155,23 +167,29 @@ export function RouteVerificationDetails({
           </InfoBlock>
         )}
 
-        <InfoBlock title={destinationOnly ? "Access status" : "Start and transport"} icon={<MapPinned className="h-4 w-4" />}>
+        <InfoBlock title={destinationOnly ? "Named start — coordinate unresolved" : "Verified start and transport"} icon={<MapPinned className="h-4 w-4" />}>
           <p className="font-medium text-stone-200">{verification.start.name}</p>
-          <a
-            href={mapUrl(
-              verification.start.coordinates.lat,
-              verification.start.coordinates.lng
-            )}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-1 inline-flex items-center gap-1 text-xs text-alpine-300 hover:text-alpine-200"
-          >
-            {coordinateLabel(
-              verification.start.coordinates.lat,
-              verification.start.coordinates.lng
-            )}
-            <ExternalLink className="h-3 w-3" />
-          </a>
+          {destinationOnly ? (
+            <p className="mt-1 text-amber-200/75">
+              No separate start coordinate is stored. The directions action therefore opens the destination map point, not this named start.
+            </p>
+          ) : (
+            <a
+              href={mapUrl(
+                verification.start.coordinates.lat,
+                verification.start.coordinates.lng
+              )}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-1 inline-flex items-center gap-1 text-xs text-alpine-300 hover:text-alpine-200"
+            >
+              {coordinateLabel(
+                verification.start.coordinates.lat,
+                verification.start.coordinates.lng
+              )}
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
           <p className="mt-2">
             <span className="text-stone-300">Public transport:</span>{" "}
             {verification.start.publicTransport}

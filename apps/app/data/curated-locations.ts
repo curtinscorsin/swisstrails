@@ -1,5 +1,6 @@
 import { SOURCED_IMAGES } from "@/data/sourced-images";
 import { REVIEWED_LOCATION_ENRICHMENTS } from "@/data/reviewed-location-enrichments";
+import { CATALOGUE_LOCATION_ENRICHMENTS } from "@/data/catalogue-location-enrichments";
 import masterCatalogue from "@/data/master-catalogue.json";
 import type {
   CoordinateType,
@@ -299,7 +300,7 @@ const DETAILED_LOCATIONS: Location[] = [
       ascentM: null,
       descentM: null,
       sacGrade: null,
-      status: "open-with-advisory",
+      status: "check-current",
       statusNote: "Admission hours and last entry vary seasonally; book and recheck the official page.",
       start: {
         name: "Château de Chillon entrance",
@@ -369,7 +370,7 @@ const DETAILED_LOCATIONS: Location[] = [
       ascentM: 7,
       descentM: 65,
       sacGrade: "T2 · steps and steep sections",
-      status: "open-with-advisory",
+      status: "check-current",
       statusNote: "The footpath is independent of the seasonal shuttle; check rail and trail status before travel.",
       start: {
         name: "Schmitten (Albula) Landwasserviadukt stop",
@@ -503,7 +504,7 @@ const DETAILED_LOCATIONS: Location[] = [
       ascentM: null,
       descentM: null,
       sacGrade: null,
-      status: "open-with-advisory",
+      status: "check-current",
       statusNote: "From 28 March to 8 November 2026 all three castles are listed open daily 10:00–18:00; winter access differs.",
       start: {
         name: "Castelgrande",
@@ -665,7 +666,8 @@ const placeTypeCopy: Record<CoordinateType, { tagline: string; description: stri
 function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
   const copy = placeTypeCopy[entry.coordinateType];
   const image = SOURCED_IMAGES[entry.id]?.[0];
-  const reviewed = REVIEWED_LOCATION_ENRICHMENTS[entry.id];
+  const reviewed =
+    REVIEWED_LOCATION_ENRICHMENTS[entry.id] ?? CATALOGUE_LOCATION_ENRICHMENTS[entry.id];
   const sources: LocationSource[] = [
     source(
       "Swiss federal map — published destination point",
@@ -741,10 +743,12 @@ function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
         ? "Published route figures describe the named route in the source—not the straight-line distance to the destination pin. The pin remains a destination reference."
         : "No walking route or access effort is published for this record.",
       sacGrade: reviewed?.route.grade ?? null,
-      status: "check-current",
-      statusNote: reviewed
-        ? "The destination and cited planning details were reviewed online. The map pin is not claimed as the route start; check live conditions and the official source before departure."
-        : "The destination identity and reference point are source-linked. Visit logistics and current operating conditions still require confirmation.",
+      status: reviewed?.status ?? "check-current",
+      statusNote:
+        reviewed?.statusNote ??
+        (reviewed
+          ? "The destination and cited planning details were reviewed online. The map pin is not claimed as the route start; check live conditions and the official source before departure."
+          : "The destination identity and reference point are source-linked. Visit logistics and current operating conditions still require confirmation."),
       start: {
         name: reviewed?.route.startName ?? "Destination reference—not a verified trailhead",
         coordinates: entry.coordinates,

@@ -158,6 +158,11 @@ export function LocationDetailSheet({
 
   // Resolved by source priority (admin override → sourced; Supabase later).
   const photos = useLocationImages(location);
+  const hasVerifiedStart = Boolean(
+    location?.verification &&
+      (location.verification.start.coordinates.lat !== location.coordinates.lat ||
+        location.verification.start.coordinates.lng !== location.coordinates.lng)
+  );
 
   return (
     <AnimatePresence>
@@ -374,7 +379,7 @@ export function LocationDetailSheet({
                   requestDirections({
                     lat: location.verification?.start.coordinates.lat ?? location.coordinates.lat,
                     lng: location.verification?.start.coordinates.lng ?? location.coordinates.lng,
-                    name: location.verification
+                    name: location.verification && hasVerifiedStart
                       ? `${location.name} access point — ${location.verification.start.name}`
                       : location.name,
                   });
@@ -382,7 +387,7 @@ export function LocationDetailSheet({
                 className="pressable flex-1 flex items-center justify-center gap-2 min-h-[44px] py-3.5 bg-alpine-600 hover:bg-alpine-500 text-white text-sm font-medium rounded-lg transition-colors"
               >
                 <Navigation className="w-4 h-4" />
-                Directions to start
+                {hasVerifiedStart ? "Directions to start" : "Directions to map point"}
               </button>
               <button
                 data-no-drag

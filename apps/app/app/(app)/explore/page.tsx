@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertTriangle, BadgeCheck, Search, SlidersHorizontal, X } from "lucide-react";
+import { AlertTriangle, BadgeCheck, MapPin, Search, SlidersHorizontal, X } from "lucide-react";
 import { useMapStore } from "@/store/map-store";
 import { useGeoStore } from "@/store/geo-store";
 import { CURATED_LOCATIONS } from "@/data/curated-locations";
@@ -269,12 +269,24 @@ interface MasonryCardProps {
 }
 
 function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardProps) {
+  const routeType = location.verification?.routeType.replace(/^Reviewed:\s*/, "") ?? "";
+  const isSourcedRoute = location.verification?.routeType.startsWith("Reviewed:") ?? false;
+  const isVisitContext = /destination|visit|managed|attraction/i.test(routeType);
+  const isClosed = location.verification?.status === "closed";
+  const hasAdvisory = location.verification?.status === "open-with-advisory";
+  const hasVerifiedStart = Boolean(
+    location.verification &&
+      (location.verification.start.coordinates.lat !== location.coordinates.lat ||
+        location.verification.start.coordinates.lng !== location.coordinates.lng)
+  );
+
   return (
     <motion.button
       className="relative mb-2.5 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/[0.07] bg-surface-1 shadow-sm sm:mb-3.5"
       style={{ aspectRatio }}
       onClick={onClick}
       whileTap={{ scale: 0.97 }}
+      aria-label={`Open ${location.name}. ${hasVerifiedStart ? "Access point verified." : isSourcedRoute ? (isVisitContext ? "Visit context sourced." : "Route context sourced.") : "Destination source linked."} Map marker is a destination pin.`}
     >
       <ResolvedLocationPhoto
         location={location}
@@ -290,24 +302,53 @@ function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardPr
           <span
             className={cn(
               "inline-flex items-center gap-1 rounded-full border px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.08em] backdrop-blur-md",
-              location.verification.status === "open" || location.difficulty === "not-rated"
-                ? "border-white/15 bg-black/45 text-white/80"
-                : "border-amber-500/35 bg-amber-950/75 text-amber-200"
+              isClosed
+                ? "border-red-500/40 bg-red-950/80 text-red-100"
+                : hasAdvisory
+                  ? "border-amber-500/35 bg-amber-950/75 text-amber-200"
+                  : "border-white/15 bg-black/45 text-white/85"
             )}
           >
-            {location.verification.status === "open" || location.difficulty === "not-rated" ? (
-              <BadgeCheck className="h-3 w-3" />
-            ) : (
+            {isClosed || hasAdvisory ? (
               <AlertTriangle className="h-3 w-3" />
+            ) : (
+              <BadgeCheck className="h-3 w-3" />
             )}
-            {location.difficulty === "not-rated"
-              ? "Source linked"
-              : location.verification.status === "open"
-                ? "Source checked"
-                : "Advisory"}
+            <span className="sm:hidden">
+              {isClosed
+                ? "Closed"
+                : hasAdvisory
+                  ? "Advisory"
+                : hasVerifiedStart
+                  ? "Access"
+                  : isSourcedRoute
+                    ? isVisitContext
+                      ? "Visit"
+                      : "Route"
+                    : "Source"}
+            </span>
+            <span className="hidden sm:inline">
+              {isClosed
+                ? "Closed"
+                : hasAdvisory
+                  ? "Specific advisory"
+                : hasVerifiedStart
+                  ? "Access verified"
+                  : isSourcedRoute
+                  ? isVisitContext
+                    ? "Visit sourced"
+                    : "Route sourced"
+                  : "Source linked"}
+            </span>
           </span>
         </div>
       )}
+
+      <span className="absolute right-2.5 top-2.5 z-[3] inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/45 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.08em] text-white/75 backdrop-blur-md">
+        <MapPin className="h-3 w-3" />
+        <span className="sm:hidden">Pin</span>
+        <span className="hidden sm:inline">Destination pin</span>
+      </span>
 
       <div className="absolute bottom-0 left-0 right-0 z-[3] p-3 text-left sm:p-4">
         <p className="line-clamp-2 text-sm font-medium leading-tight text-white sm:text-base">{location.name}</p>

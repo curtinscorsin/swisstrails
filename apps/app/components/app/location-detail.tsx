@@ -92,6 +92,11 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
   // Photos for the strip — resolved by source priority (admin override →
   // sourced; Supabase later). See lib/location-images.ts.
   const photos = useLocationImages(location);
+  const hasVerifiedStart = Boolean(
+    location.verification &&
+      (location.verification.start.coordinates.lat !== location.coordinates.lat ||
+        location.verification.start.coordinates.lng !== location.coordinates.lng)
+  );
 
   function share() {
     const url = `${window.location.origin}/location/${location.slug}`;
@@ -359,14 +364,14 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
             requestDirections({
               lat: location.verification?.start.coordinates.lat ?? location.coordinates.lat,
               lng: location.verification?.start.coordinates.lng ?? location.coordinates.lng,
-              name: location.verification
+              name: location.verification && hasVerifiedStart
                 ? `${location.name} access point — ${location.verification.start.name}`
                 : location.name,
             });
           }}
         >
           <Navigation className="w-4 h-4" />
-          Directions to start
+          {hasVerifiedStart ? "Directions to start" : "Directions to map point"}
         </Button>
         <button
           type="button"

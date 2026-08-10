@@ -41,6 +41,8 @@ const publishedSourceUrls: string[] = [];
 let fallbackCount = 0;
 let destinationOnlyCount = 0;
 let reviewedContextCount = 0;
+const fallbackNames: string[] = [];
+let landscapeImageCount = 0;
 
 for (const location of CURATED_LOCATIONS) {
   const prefix = `${location.id} (${location.name})`;
@@ -48,6 +50,9 @@ for (const location of CURATED_LOCATIONS) {
 
   assert(Boolean(location.description), `${prefix}: missing description`);
   assert(Boolean(location.longDescription), `${prefix}: missing visit context`);
+  assert(Boolean(location.slug) && !location.slug.includes("/"), `${prefix}: invalid detail-route slug`);
+  assert(location.highlights.length >= 3, `${prefix}: fewer than three useful highlights`);
+  assert(location.tips.length > 0, `${prefix}: practical tips are missing`);
   assert(isSwissCoordinate(location.coordinates.lat, location.coordinates.lng), `${prefix}: destination coordinate is outside Switzerland`);
   assert(verification, `${prefix}: missing verification record`);
   if (!verification) continue;
@@ -94,13 +99,17 @@ for (const location of CURATED_LOCATIONS) {
   }
 
   const photos = resolveSourcedImages(location);
-  if (photos.length === 0) fallbackCount += 1;
+  if (photos.length === 0) {
+    fallbackCount += 1;
+    fallbackNames.push(location.name);
+  }
   for (const photo of photos) {
     assert(photo.alt === location.name, `${prefix}: photo alt and published name disagree`);
     assert(photo.url.startsWith("https://upload.wikimedia.org/"), `${prefix}: non-Wikimedia published photo`);
     assert(Boolean(photo.credit), `${prefix}: photo is missing creator/licence credit`);
     assert(photo.sourceUrl?.startsWith("https://commons.wikimedia.org/wiki/File:"), `${prefix}: photo is missing a Commons source page`);
     assert((photo.width ?? 0) >= 1000, `${prefix}: photo is under 1000px wide`);
+    if ((photo.width ?? 0) / (photo.height ?? 1) >= 1.15) landscapeImageCount += 1;
     publishedImageUrls.push(photo.url);
     if (photo.sourceUrl) publishedSourceUrls.push(photo.sourceUrl);
   }
@@ -121,25 +130,29 @@ console.log(`- ${reviewedContextCount} places include destination-specific route
 console.log(`- ${destinationOnlyCount} places publish sourced identity only and label logistics unresolved`);
 console.log(`- ${publishedImageUrls.length} unique, credited location photographs`);
 console.log(`- ${fallbackCount} places use the honest designed image placeholder`);
+console.log(`- Placeholder locations: ${fallbackNames.join(", ") || "none"}`);
+console.log(`- ${landscapeImageCount} source photographs are natively landscape; portrait sources use responsive focal cropping`);
+console.log(`- ${CURATED_LOCATIONS.length} unique /location/[slug] detail routes are generated`);
 
 if (process.argv.includes("--network")) {
   const urls = [...new Set([...publishedImageUrls, ...publishedSourceUrls])];
   const broken: string[] = [];
+  const automationBlocked: string[] = [];
   let cursor = 0;
 
   async function check(url: string) {
-    for (let attempt = 0; attempt < 3; attempt += 1) {
+    for (let attempt = 0; attempt < 2; attempt += 1) {
       try {
         let response = await fetch(url, {
           method: "HEAD",
           redirect: "follow",
           headers: { "User-Agent": "Mozilla/5.0 SwissTrailsContentAudit/1.0" },
-          signal: AbortSignal.timeout(20_000),
+          signal: AbortSignal.timeout(12_000),
         });
         await response.body?.cancel();
         // Some official sites reject automated HEAD requests while serving the
         // same page normally in a browser. Retry those with a small GET request.
-        if (response.status === 403 || response.status === 405) {
+        if (response.status === 401 || response.status === 403 || response.status === 405 || response.status === 406) {
           response = await fetch(url, {
             method: "GET",
             redirect: "follow",
@@ -147,11 +160,15 @@ if (process.argv.includes("--network")) {
               "User-Agent": "Mozilla/5.0 SwissTrailsContentAudit/1.0",
               Range: "bytes=0-1023",
             },
-            signal: AbortSignal.timeout(20_000),
+            signal: AbortSignal.timeout(12_000),
           });
           await response.body?.cancel();
         }
         if (response.ok) return;
+        if (response.status === 401 || response.status === 403 || response.status === 406) {
+          automationBlocked.push(`${response.status} ${url}`);
+          return;
+        }
         if (response.status === 429 || response.status >= 500) {
           await new Promise((resolve) => setTimeout(resolve, 1_000 * (attempt + 1)));
           continue;
@@ -159,7 +176,7 @@ if (process.argv.includes("--network")) {
         broken.push(`${response.status} ${url}`);
         return;
       } catch {
-        if (attempt === 2) broken.push(`unreachable ${url}`);
+        if (attempt === 1) broken.push(`unreachable ${url}`);
       }
     }
   }
@@ -171,11 +188,14 @@ if (process.argv.includes("--network")) {
     }
   }
 
-  await Promise.all(Array.from({ length: 2 }, () => worker()));
+  await Promise.all(Array.from({ length: 8 }, () => worker()));
   if (broken.length > 0) {
     console.error(`Network audit failed with ${broken.length} issue(s):`);
     for (const issue of broken) console.error(`- ${issue}`);
     process.exit(1);
   }
-  console.log(`- ${urls.length} published image and source URLs responded successfully`);
+  if (automationBlocked.length > 0) {
+    console.log(`- ${automationBlocked.length} official source URLs rejected automated checks but were not reported as broken`);
+  }
+  console.log(`- ${urls.length - automationBlocked.length} published image and source URLs responded successfully`);
 }

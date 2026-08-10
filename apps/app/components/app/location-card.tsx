@@ -32,6 +32,10 @@ export function LocationCard({
   const diff = difficultyConfig[location.difficulty];
   const cat = categoryConfig[location.category];
   const hasReviewedContext = location.verification?.routeType.startsWith("Reviewed:") ?? false;
+  const reviewedType = location.verification?.routeType.replace(/^Reviewed:\s*/, "") ?? "";
+  const hasVisitContext = /destination|visit|managed|attraction/i.test(reviewedType);
+  const isClosed = location.verification?.status === "closed";
+  const hasAdvisory = location.verification?.status === "open-with-advisory";
 
   // Real, honest distance when we know where the user is; otherwise fall back
   // to the static travel-time estimate (relabelled "~X by car", no "away").
@@ -151,23 +155,31 @@ export function LocationCard({
                 <span
                   className={cn(
                     "inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide backdrop-blur-sm",
-                    location.verification.status === "open" || location.difficulty === "not-rated"
-                      ? "bg-black/50 text-white/80"
-                      : "bg-amber-950/80 text-amber-200"
+                    isClosed
+                      ? "bg-red-950/85 text-red-200"
+                      : hasAdvisory
+                        ? "bg-amber-950/80 text-amber-200"
+                        : "bg-black/50 text-white/80"
                   )}
                 >
-                  {location.verification.status === "open" || location.difficulty === "not-rated" ? (
-                    <BadgeCheck className="h-2.5 w-2.5" />
-                  ) : (
+                  {isClosed || hasAdvisory ? (
                     <AlertTriangle className="h-2.5 w-2.5" />
+                  ) : (
+                    <BadgeCheck className="h-2.5 w-2.5" />
                   )}
-                  {hasReviewedContext
-                    ? "Route sourced"
+                  {isClosed
+                    ? "Closed"
+                    : hasAdvisory
+                      ? "Advisory"
+                      : hasReviewedContext
+                    ? hasVisitContext
+                      ? "Visit sourced"
+                      : "Route sourced"
                     : location.difficulty === "not-rated"
                       ? "Source-linked"
                     : location.verification.status === "open"
                       ? "Checked"
-                      : "Advisory"}
+                      : "Recheck before travel"}
                 </span>
               </div>
             )}

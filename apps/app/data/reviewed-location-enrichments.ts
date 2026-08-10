@@ -1,4 +1,4 @@
-import type { Difficulty, LocationSource, Season } from "@/types";
+import type { Difficulty, LocationSource, RouteVerification, Season } from "@/types";
 
 export interface ReviewedLocationEnrichment {
   tagline: string;
@@ -12,6 +12,8 @@ export interface ReviewedLocationEnrichment {
   accessInfo: string;
   parkingAvailable: boolean;
   publicTransport: boolean;
+  status?: RouteVerification["status"];
+  statusNote?: string;
   route: {
     label: string;
     season: string;
