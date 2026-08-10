@@ -37,6 +37,7 @@ for (const file of [
   "apps/app/public/icon-192x192.png",
   "apps/app/public/icon-512x512.png",
   "apps/app/app/offline/page.tsx",
+  "apps/app/app/service-unavailable/page.tsx",
   "apps/marketing/app/privacy/page.tsx",
   "apps/marketing/app/terms/page.tsx",
 ]) {

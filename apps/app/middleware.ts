@@ -18,6 +18,20 @@ export async function middleware(request: NextRequest) {
     process.env.NEXT_PUBLIC_MOCK_MODE === "true";
   if (mockPreview) return NextResponse.next();
 
+  const hasSupabaseConfig = Boolean(
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
+  if (!hasSupabaseConfig) {
+    if (request.nextUrl.pathname === "/service-unavailable") {
+      return NextResponse.next();
+    }
+    const unavailable = request.nextUrl.clone();
+    unavailable.pathname = "/service-unavailable";
+    unavailable.search = "";
+    return NextResponse.redirect(unavailable, 307);
+  }
+
   const { response, user, supabase } = await updateSession(request);
   const pathname = request.nextUrl.pathname;
   const isPaidPage = PAID_PATHS.some((path) => pathname.startsWith(path));

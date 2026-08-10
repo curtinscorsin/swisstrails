@@ -8,6 +8,7 @@ import { WeatherWidget } from "@/components/app/weather-widget";
 import { PhotoStrip } from "@/components/app/photo-strip";
 import { LocationPhoto } from "@/components/app/location-photo";
 import { RouteVerificationDetails } from "@/components/app/route-verification";
+import { MountainPhotographyGuide } from "@/components/app/mountain-photography-guide";
 import {
   getPrimaryLocationImage,
   resolveSourcedImages,
@@ -249,6 +250,8 @@ export default async function LocationPage({ params }: Props) {
             </ul>
           </details>
         )}
+
+        <MountainPhotographyGuide />
 
         {/* CTA row — Get directions is the primary action */}
         <div className="pt-4 flex gap-3">
