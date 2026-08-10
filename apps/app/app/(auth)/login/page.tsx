@@ -16,6 +16,20 @@ const IS_MOCK =
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function getFriendlyAuthError(message: string) {
+  const normalized = message.toLowerCase();
+
+  if (normalized.includes("rate limit") || normalized.includes("too many requests")) {
+    return "Too many sign-in emails were requested. Please wait one minute, then try again.";
+  }
+
+  if (normalized.includes("provider is not enabled")) {
+    return "This sign-in option is not available yet. Please continue with email.";
+  }
+
+  return "We could not start sign-in. Please try again in a moment.";
+}
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string>();
@@ -36,7 +50,7 @@ export default function LoginPage() {
     setIsEmailLoading(true);
     const supabase = createClient();
     const next = new URLSearchParams(window.location.search).get("next");
-    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/checkout";
+    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/explore";
     const { error } = await supabase.auth.signInWithOtp({
       email: trimmed,
       options: {
@@ -46,7 +60,7 @@ export default function LoginPage() {
     });
     setIsEmailLoading(false);
     if (error) {
-      setEmailError(error.message);
+      setEmailError(getFriendlyAuthError(error.message));
       haptics.warn();
       return;
     }
@@ -58,7 +72,7 @@ export default function LoginPage() {
     setIsGoogleLoading(true);
     const supabase = createClient();
     const next = new URLSearchParams(window.location.search).get("next");
-    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/checkout";
+    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/explore";
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -66,7 +80,7 @@ export default function LoginPage() {
       },
     });
     if (error) {
-      setEmailError(error.message);
+      setEmailError(getFriendlyAuthError(error.message));
       setIsGoogleLoading(false);
       haptics.warn();
     }
