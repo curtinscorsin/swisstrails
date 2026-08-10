@@ -194,10 +194,10 @@ export default function ExplorePage() {
                   <p className="mt-1 text-xs leading-snug text-fg-muted">published places</p>
                 </div>
                 <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
-                  <p className="font-heading text-3xl text-fg">61</p>
+                  <p className="font-heading text-3xl text-fg">97</p>
                   <p className="mt-1 text-xs leading-snug text-fg-muted">licensed location photographs</p>
                 </div>
-                <p className="col-span-2 px-1 pt-1 text-[11px] text-stone-500">Last editorial check: 9 August 2026</p>
+                <p className="col-span-2 px-1 pt-1 text-[11px] text-stone-500">Last editorial check: 10 August 2026</p>
               </div>
             </div>
             <div className="flex items-end justify-between pb-1 pt-6">

@@ -1,0 +1,434 @@
+{
+  "spot-seealpsee": [
+    {
+      "id": "img-seealpsee-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Seealpsee_Juni2018_05.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Seealpsee",
+      "width": 4912,
+      "height": 3264,
+      "credit": "albinfo · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Seealpsee_Juni2018_05.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-creux-du-van": [
+    {
+      "id": "img-creux-du-van-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a4/041_Panoramic_view_of_217_million_pixels_from_Creux_du_Van_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Creux du Van",
+      "width": 38750,
+      "height": 5601,
+      "credit": "Giles Laurent · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:041_Panoramic_view_of_217_million_pixels_from_Creux_du_Van_Photo_by_Giles_Laurent.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-lauterbrunnen-valley": [
+    {
+      "id": "img-lauterbrunnen-valley-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Lauterbrunnen-valley.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Lauterbrunnen Valley",
+      "width": 1840,
+      "height": 1232,
+      "credit": "Keith Halstead · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lauterbrunnen-valley.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-pilatus": [
+    {
+      "id": "img-pilatus-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Esel-Pilatus_Kulm.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Pilatus",
+      "width": 5000,
+      "height": 2906,
+      "credit": "Tobi 87 · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Esel-Pilatus_Kulm.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-stoos-fronalpstock": [
+    {
+      "id": "img-stoos-fronalpstock-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/22/Stoos_Fronalpstock_Canton_Schwyz.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Stoos–Fronalpstock",
+      "width": 4608,
+      "height": 3456,
+      "credit": "Waldindu · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stoos_Fronalpstock_Canton_Schwyz.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-titlis": [
+    {
+      "id": "img-titlis-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/00_0481_Titlis_-_Westseite.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Titlis",
+      "width": 2000,
+      "height": 3000,
+      "credit": "W. Bulach · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:00_0481_Titlis_-_Westseite.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-lake-lucerne": [
+    {
+      "id": "img-lake-lucerne-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Lucerne_and_Pilatus_from_Rigi_20210905.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Lake Lucerne",
+      "width": 4600,
+      "height": 3318,
+      "credit": "Daniel Kraft · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lucerne_and_Pilatus_from_Rigi_20210905.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-lavaux-vineyard-terraces": [
+    {
+      "id": "img-lavaux-vineyard-terraces-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Lavaux_Switzerland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Lavaux Vineyard Terraces",
+      "width": 5463,
+      "height": 3073,
+      "credit": "Lorenz Poffet · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lavaux_Switzerland.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-grindelwald-first": [
+    {
+      "id": "img-grindelwald-first-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/00_3403_Grindelwald-First_%28Schweiz%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Grindelwald First",
+      "width": 4500,
+      "height": 3000,
+      "credit": "W. Bulach · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:00_3403_Grindelwald-First_(Schweiz).jpg",
+      "isHero": true
+    }
+  ],
+  "spot-bachalpsee": [
+    {
+      "id": "img-bachalpsee-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Bachalpsee_reflection.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Bachalpsee",
+      "width": 2592,
+      "height": 1944,
+      "credit": "Ryan Gsell · CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bachalpsee_reflection.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-blausee": [
+    {
+      "id": "img-blausee-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/Blausee_Lake_Boat_2015.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Blausee",
+      "width": 2000,
+      "height": 1491,
+      "credit": "MartyRus · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blausee_Lake_Boat_2015.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-bernina-pass-and-lago-bianco": [
+    {
+      "id": "img-bernina-pass-and-lago-bianco-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Bernina-Berninabahn-Lago_Bianco-view_from_the_dam_south-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Bernina Pass and Lago Bianco",
+      "width": 4592,
+      "height": 2576,
+      "credit": "Asurnipal · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bernina-Berninabahn-Lago_Bianco-view_from_the_dam_south-01.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-verzasca-valley": [
+    {
+      "id": "img-verzasca-valley-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Ponte_dei_Salti_Lavertezzo_TI.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Verzasca Valley",
+      "width": 1600,
+      "height": 1200,
+      "credit": "Paebi · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ponte_dei_Salti_Lavertezzo_TI.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-abbey-district-of-st-gallen": [
+    {
+      "id": "img-abbey-district-of-st-gallen-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/22/2019_-_Abbey_Cathedral_of_St.Gall%2C_St_Gallen%2C_Switzerland_%28_Ank_Kumar_%29_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Abbey District of St. Gallen",
+      "width": 3605,
+      "height": 2704,
+      "credit": "Ank Kumar · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2019_-_Abbey_Cathedral_of_St.Gall,_St_Gallen,_Switzerland_(_Ank_Kumar_)_01.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-rosenlaui-glacier-gorge": [
+    {
+      "id": "img-rosenlaui-glacier-gorge-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Rosenlaui_Glacier_and_Gorge%2C_Bernese_Oberland%2C_Switzerland-LCCN2001701288.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Rosenlaui Glacier Gorge",
+      "width": 2699,
+      "height": 3636,
+      "credit": "Photochrom Print Collection · Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rosenlaui_Glacier_and_Gorge,_Bernese_Oberland,_Switzerland-LCCN2001701288.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-giessbach-falls": [
+    {
+      "id": "img-giessbach-falls-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Kanton_Bern_Giessbachf%C3%A4lle_16.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Giessbach Falls",
+      "width": 3444,
+      "height": 2586,
+      "credit": "Zairon · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kanton_Bern_Giessbachf%C3%A4lle_16.JPG",
+      "isHero": true
+    }
+  ],
+  "spot-gantrischseeli": [
+    {
+      "id": "img-gantrischseeli-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Gantrischseeli_1.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Gantrischseeli",
+      "width": 5130,
+      "height": 3420,
+      "credit": "Pascal Frey · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gantrischseeli_1.JPG",
+      "isHero": true
+    }
+  ],
+  "spot-gorges-de-l-areuse": [
+    {
+      "id": "img-gorges-de-l-areuse-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Gorges_Areuse_wooden_bridge_20200529.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Gorges de l’Areuse",
+      "width": 2685,
+      "height": 4285,
+      "credit": "Daniel Kraft · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gorges_Areuse_wooden_bridge_20200529.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-st-ursanne": [
+    {
+      "id": "img-st-ursanne-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Saint-Ursanne_Doubs2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "St-Ursanne",
+      "width": 3888,
+      "height": 2592,
+      "credit": "Lutz Fischer-Lamprecht · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Saint-Ursanne_Doubs2.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-vallon-de-nant": [
+    {
+      "id": "img-vallon-de-nant-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Nant.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Vallon de Nant",
+      "width": 1352,
+      "height": 987,
+      "credit": "Earth explorer · Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nant.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-ogoz-island": [
+    {
+      "id": "img-ogoz-island-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Ch%C3%A2teau_de_Pont-en-Ogoz_-_rivage_-_mars_2021.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Ogoz Island",
+      "width": 5677,
+      "height": 3785,
+      "credit": "Christian David · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%C3%A2teau_de_Pont-en-Ogoz_-_rivage_-_mars_2021.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-gastlosen": [
+    {
+      "id": "img-gastlosen-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Die_Gastlosen-Bergkette_bei_Jaun.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Gastlosen",
+      "width": 6016,
+      "height": 4000,
+      "credit": "Barbara Steinemann · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Die_Gastlosen-Bergkette_bei_Jaun.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-champex-lac": [
+    {
+      "id": "img-champex-lac-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Champex_See.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Champex-Lac",
+      "width": 2576,
+      "height": 1932,
+      "credit": "X-Weinzar · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Champex_See.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-foroglio-waterfall": [
+    {
+      "id": "img-foroglio-waterfall-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Cascata_di_Foroglio_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Foroglio Waterfall",
+      "width": 2272,
+      "height": 1704,
+      "credit": "pyraniton · CC BY 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cascata_di_Foroglio_-_panoramio.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-val-calnegia": [
+    {
+      "id": "img-val-calnegia-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Calnegia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Val Calnègia",
+      "width": 3888,
+      "height": 2592,
+      "credit": "Ikiwaner · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Calnegia.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-piora-valley-and-lago-ritom": [
+    {
+      "id": "img-piora-valley-and-lago-ritom-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Lago_Ritom_%2B_Lago_di_Tom.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Piora Valley and Lago Ritom",
+      "width": 4032,
+      "height": 3024,
+      "credit": "Albinfo · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_Ritom_%2B_Lago_di_Tom.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-monte-generoso": [
+    {
+      "id": "img-monte-generoso-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Monte_Generoso_LCD.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Monte Generoso",
+      "width": 4752,
+      "height": 3168,
+      "credit": "Murdockcrc · CC BY 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Monte_Generoso_LCD.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-viamala-gorge": [
+    {
+      "id": "img-viamala-gorge-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/CH_Viamala_Gorge_descent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Viamala Gorge",
+      "width": 5572,
+      "height": 2000,
+      "credit": "Daniel Schwen · CC BY-SA 2.5",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:CH_Viamala_Gorge_descent.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-klontalersee": [
+    {
+      "id": "img-klontalersee-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Kl%C3%B6ntalersee_Glarus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Klöntalersee",
+      "width": 5746,
+      "height": 4244,
+      "credit": "Bodenwald · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kl%C3%B6ntalersee_Glarus.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-swiss-tectonic-arena-sardona": [
+    {
+      "id": "img-swiss-tectonic-arena-sardona-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Glarner_Haupt%C3%BCberschiebung_am_Segnes_2008_SE.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Swiss Tectonic Arena Sardona",
+      "width": 3262,
+      "height": 2174,
+      "credit": "Hans G. Oberlack · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Glarner_Haupt%C3%BCberschiebung_am_Segnes_2008_SE.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-pizol-five-lakes": [
+    {
+      "id": "img-pizol-five-lakes-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Schotensee.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Pizol Five Lakes",
+      "width": 1500,
+      "height": 1499,
+      "credit": "Smry · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Schotensee.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-saxer-lucke": [
+    {
+      "id": "img-saxer-lucke-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/ETH-BIB-Saxer_L%C3%BCcke_und_I._Kreuzberg_von_Nordwest-Dia_247-14720.tif?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Saxer Lücke",
+      "width": 3650,
+      "height": 2835,
+      "credit": "Leo Wehrli · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:ETH-BIB-Saxer_L%C3%BCcke_und_I._Kreuzberg_von_Nordwest-Dia_247-14720.tif",
+      "isHero": true
+    }
+  ],
+  "spot-isenthal": [
+    {
+      "id": "img-isenthal-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Isenthal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Isenthal",
+      "width": 5781,
+      "height": 3252,
+      "credit": "FkMohr · CC BY-SA 3.0 de",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Isenthal.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-grande-caricaie": [
+    {
+      "id": "img-grande-caricaie-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Chabrey%2C_la_Grande_Cari%C3%A7aie.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Grande Cariçaie",
+      "width": 3264,
+      "height": 2448,
+      "credit": "Chalantau · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chabrey,_la_Grande_Cari%C3%A7aie.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-earth-pyramids-of-euseigne": [
+    {
+      "id": "img-earth-pyramids-of-euseigne-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Pyramides_d%27Euseigne_2021b.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Earth Pyramids of Euseigne",
+      "width": 4000,
+      "height": 3000,
+      "credit": "Whgler · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pyramides_d%27Euseigne_2021b.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-santa-petronilla-waterfall": [
+    {
+      "id": "img-santa-petronilla-waterfall-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Biasca_Sta_Petronilla.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Santa Petronilla Waterfall",
+      "width": 2816,
+      "height": 2112,
+      "credit": "Paebi · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Biasca_Sta_Petronilla.JPG",
+      "isHero": true
+    }
+  ]
+}

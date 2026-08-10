@@ -1,5 +1,6 @@
 import type { LocationImage } from "@/types";
 import generatedImages from "./sourced-images.generated.json";
+import reviewedImages from "./reviewed-images.generated.json";
 
 /**
  * Photographs are selected only when the Commons file description identifies
@@ -116,5 +117,6 @@ const EDITORIALLY_REVIEWED_IMAGES: Record<string, LocationImage[]> = {
  */
 export const SOURCED_IMAGES: Record<string, LocationImage[]> = {
   ...(generatedImages as Record<string, LocationImage[]>),
+  ...(reviewedImages as Record<string, LocationImage[]>),
   ...EDITORIALLY_REVIEWED_IMAGES,
 };

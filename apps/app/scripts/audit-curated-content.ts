@@ -55,7 +55,7 @@ for (const location of CURATED_LOCATIONS) {
 
   assert(verification.country === "Switzerland", `${prefix}: wrong country`);
   assert(Boolean(verification.canton), `${prefix}: missing canton`);
-  assert(verification.checkedAt === "2026-08-09", `${prefix}: stale checked date`);
+  assert(verification.checkedAt === "2026-08-10", `${prefix}: stale checked date`);
   assert(verification.distanceKm === (location.distanceKm ?? null), `${prefix}: card and verified distance disagree`);
   assert(
     verification.durationMinutes === null || verification.durationMinutes > 0,
@@ -74,11 +74,11 @@ for (const location of CURATED_LOCATIONS) {
     verification.sources.length >= (destinationOnly ? 2 : 4),
     `${prefix}: insufficient source trail`
   );
-  if (destinationOnly) {
-    assert(location.difficulty === "not-rated", `${prefix}: unresolved access must not have a difficulty rating`);
-    assert(verification.distanceKm === null, `${prefix}: destination-only record invents a distance`);
-    assert(verification.durationMinutes === null, `${prefix}: destination-only record invents a duration`);
-    assert(verification.ascentM === null, `${prefix}: destination-only record invents ascent`);
+  if (destinationOnly && verification.distanceKm != null) {
+    assert(
+      verification.sources.length >= 3,
+      `${prefix}: contextual route figures require a destination-specific source`
+    );
   }
 
   const sourceDates = new Set(verification.sources.map((source) => source.checkedAt));

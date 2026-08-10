@@ -381,6 +381,20 @@
       linear-gradient(155deg, #11160f 0%, #0b0e0a 50%, #070907 100%);
   }
 
+  .marketing-sunset-hero {
+    background-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=88");
+    background-position: center 42%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: saturate(1.04) contrast(1.03);
+  }
+
+  @media (max-width: 640px) {
+    .marketing-sunset-hero {
+      background-position: 58% center;
+    }
+  }
+
   .focus-ring {
     outline: none;
     transition: box-shadow var(--duration-fast) var(--ease-out-expo);

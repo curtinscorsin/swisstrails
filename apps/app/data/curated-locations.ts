@@ -1,4 +1,5 @@
 import { SOURCED_IMAGES } from "@/data/sourced-images";
+import { REVIEWED_LOCATION_ENRICHMENTS } from "@/data/reviewed-location-enrichments";
 import masterCatalogue from "@/data/master-catalogue.json";
 import type {
   CoordinateType,
@@ -9,7 +10,7 @@ import type {
   RouteVerification,
 } from "@/types";
 
-const CHECKED_AT = "2026-08-09";
+const CHECKED_AT = "2026-08-10";
 const CREATED_AT = "2026-08-09T00:00:00.000Z";
 
 function source(label: string, url: string): LocationSource {
@@ -664,6 +665,7 @@ const placeTypeCopy: Record<CoordinateType, { tagline: string; description: stri
 function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
   const copy = placeTypeCopy[entry.coordinateType];
   const image = SOURCED_IMAGES[entry.id]?.[0];
+  const reviewed = REVIEWED_LOCATION_ENRICHMENTS[entry.id];
   const sources: LocationSource[] = [
     source(
       "Swiss federal map — published destination point",
@@ -677,6 +679,9 @@ function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
   if (image?.sourceUrl) {
     sources.push(source("Wikimedia Commons — photograph, creator and licence", image.sourceUrl));
   }
+  if (reviewed) {
+    sources.push(...reviewed.sources.map((item) => source(item.label, item.url)));
+  }
 
   const matchUncertainty =
     entry.federalMatchStatus === "candidate_match"
@@ -687,12 +692,12 @@ function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
     id: entry.id,
     slug: entry.slug,
     name: entry.name,
-    tagline: copy.tagline,
-    description: `${entry.name} is listed in ${entry.canton}. ${copy.description}`,
-    longDescription:
+    tagline: reviewed?.tagline ?? copy.tagline,
+    description: reviewed?.description ?? `${entry.name} is listed in ${entry.canton}. ${copy.description}`,
+    longDescription: reviewed?.longDescription ??
       "Swiss Trails currently publishes the destination identity, representative point and source trail for this place. Exact route distance, duration, elevation gain, parking, public transport, fees, accessibility and seasonal access are deliberately left unresolved until each claim has a suitable current source.",
     category: entry.category,
-    difficulty: "not-rated",
+    difficulty: reviewed?.difficulty ?? "not-rated",
     region: entry.region,
     coordinates: entry.coordinates,
     coordinateType: entry.coordinateType,
@@ -703,20 +708,21 @@ function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
       isHero: true,
     },
     gallery: [],
-    tags: [entry.name, entry.canton, entry.coordinateType.replaceAll("_", " "), "source-linked"],
-    bestSeason: ["check-current"],
+    tags: [entry.name, entry.canton, entry.coordinateType.replaceAll("_", " "), reviewed ? "official-route-source" : "source-linked"],
+    bestSeason: reviewed?.bestSeason ?? ["check-current"],
     travelTimeMinutes: 0,
     visitDurationHours: { min: 0, max: 0 },
-    highlights: [
+    highlights: reviewed?.highlights ?? [
       `Named destination in ${entry.canton}`,
       `${entry.coordinateType.replaceAll("_", " ")} map reference`,
       image ? "Location-linked licensed photograph" : "Honest placeholder—no unverified photograph",
     ],
-    tips: ["Open the linked federal map and current local information before travelling."],
-    whatToBring: [],
-    accessInfo: "No route start, parking place or public-transport stop is claimed for this record yet.",
-    parkingAvailable: false,
-    publicTransport: false,
+    tips: reviewed?.tips ?? ["Open the linked federal map and current local information before travelling."],
+    whatToBring: reviewed?.whatToBring ?? [],
+    accessInfo: reviewed?.accessInfo ?? "No route start, parking place or public-transport stop is claimed for this record yet.",
+    parkingAvailable: reviewed?.parkingAvailable ?? false,
+    publicTransport: reviewed?.publicTransport ?? false,
+    distanceKm: reviewed?.route.distanceKm ?? undefined,
     isFeatured: false,
     isNew: true,
     viewCount: 0,
@@ -726,32 +732,35 @@ function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
     verification: verification({
       canton: entry.canton,
       routeType: "Destination reference only",
-      season: "Not independently verified—check current local information",
-      distanceKm: null,
-      durationMinutes: null,
-      ascentM: null,
-      descentM: null,
-      elevationNote: "No walking route or access effort is published for this record.",
-      sacGrade: null,
+      season: reviewed?.route.season ?? "Not independently verified—check current local information",
+      distanceKm: reviewed?.route.distanceKm ?? null,
+      durationMinutes: reviewed?.route.durationMinutes ?? null,
+      ascentM: reviewed?.route.ascentM ?? null,
+      descentM: reviewed?.route.descentM ?? null,
+      elevationNote: reviewed
+        ? "Published route figures describe the named route in the source—not the straight-line distance to the destination pin. The pin remains a destination reference."
+        : "No walking route or access effort is published for this record.",
+      sacGrade: reviewed?.route.grade ?? null,
       status: "check-current",
-      statusNote: "The destination identity and reference point are source-linked. Visit logistics and current operating conditions still require confirmation.",
+      statusNote: reviewed
+        ? "The destination and cited planning details were reviewed online. The map pin is not claimed as the route start; check live conditions and the official source before departure."
+        : "The destination identity and reference point are source-linked. Visit logistics and current operating conditions still require confirmation.",
       start: {
-        name: "Destination reference—not a verified trailhead",
+        name: reviewed?.route.startName ?? "Destination reference—not a verified trailhead",
         coordinates: entry.coordinates,
-        parking: "Not independently verified. Check official local visitor information and on-site signs.",
-        publicTransport: "Not independently verified. Plan the journey with the current public-transport timetable.",
+        parking: reviewed?.route.parking ?? "Not independently verified. Check official local visitor information and on-site signs.",
+        publicTransport: reviewed?.route.publicTransport ?? "Not independently verified. Plan the journey with the current public-transport timetable.",
       },
-      finish: null,
-      accessibility: "Not independently verified for this destination record.",
-      feeInfo: "Not independently verified; fees and operating periods can change.",
-      restrictions: [
+      finish: reviewed?.route.finish ?? null,
+      accessibility: reviewed?.route.accessibility ?? "Not independently verified for this destination record.",
+      feeInfo: reviewed?.route.feeInfo ?? "Not independently verified; fees and operating periods can change.",
+      restrictions: reviewed?.route.restrictions ?? [
         "Check current closures, protected-area rules, permits and seasonal restrictions with the responsible local authority before travel.",
       ],
-      safety: sharedSafety,
-      uncertainties: [
-        matchUncertainty,
-        "Route distance, duration, elevation gain and an exact access point are not yet published.",
-      ],
+      safety: reviewed?.route.safety ?? sharedSafety,
+      uncertainties: reviewed
+        ? [matchUncertainty, ...reviewed.route.uncertainties]
+        : [matchUncertainty, "Route distance, duration, elevation gain and an exact access point are not yet published."],
       sources,
     }),
   };

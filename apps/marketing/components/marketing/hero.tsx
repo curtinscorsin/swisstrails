@@ -11,8 +11,9 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-trail-950">
-      <div className="absolute inset-0 hero-gradient scale-[1.02]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,8,0.08)_0%,rgba(8,10,8,0.04)_38%,rgba(8,10,8,0.88)_100%)]" />
+      <div className="marketing-sunset-hero absolute inset-0 scale-[1.02]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,8,0.16)_0%,rgba(8,10,8,0.02)_34%,rgba(8,10,8,0.34)_58%,rgba(8,10,8,0.94)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_24%,transparent_0%,rgba(7,10,8,0.16)_48%,rgba(7,10,8,0.58)_100%)]" />
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-trail-950" />
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1440px] flex-col px-5 pb-8 pt-28 sm:px-8 lg:px-12 lg:pb-12 lg:pt-36">
@@ -100,6 +101,14 @@ export function Hero() {
           </span>
           Discover the collection
         </motion.a>
+        <a
+          href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
+          target="_blank"
+          rel="noreferrer"
+          className="absolute bottom-8 right-5 hidden text-[10px] uppercase tracking-[0.14em] text-white/45 transition-colors hover:text-white/80 sm:block lg:right-12"
+        >
+          Archived hero · Unsplash
+        </a>
       </div>
     </section>
   );
