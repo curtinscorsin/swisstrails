@@ -1,4 +1,5 @@
 import type { Category } from "@/types";
+import { CATALOGUE_METRICS } from "@swiss-trails/types";
 
 export const CATEGORIES: Category[] = [
   {
@@ -44,9 +45,9 @@ export const PRICING = {
   currency: "CHF",
   period: "one-time" as const,
   features: [
-    "Instant access to 100 sourced destinations",
-    "Separate destination and access coordinates",
-    "New places only after manual verification",
+    `Access to ${CATALOGUE_METRICS.publishedLocations} source-linked destinations`,
+    `${CATALOGUE_METRICS.verifiedAccessPoints} separately verified access points; unresolved starts are labelled`,
+    "New places only after documented source review",
     "Works on all devices — mobile & desktop",
     "Save favourites & plan adventures",
     "No subscription. Ever.",

@@ -1,43 +1,68 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
-const PROTECTED_PATHS = ["/explore", "/map", "/favorites", "/trip", "/profile", "/hike-buddy"];
+const PAID_PATHS = ["/explore", "/map", "/favorites", "/trip", "/hike-buddy", "/location"];
+const ACCOUNT_PATHS = ["/profile", "/account", "/checkout"];
 const AUTH_PATHS = ["/login", "/signup"];
+type AccessProfile = { role: "user" | "admin"; has_purchased: boolean };
+
+function redirectPreservingSession(response: NextResponse, url: URL) {
+  const redirect = NextResponse.redirect(url);
+  for (const cookie of response.cookies.getAll()) redirect.cookies.set(cookie);
+  return redirect;
+}
 
 export async function middleware(request: NextRequest) {
-  if (process.env.NEXT_PUBLIC_MOCK_MODE === "true") return NextResponse.next();
+  const mockPreview =
+    process.env.NODE_ENV !== "production" &&
+    process.env.NEXT_PUBLIC_MOCK_MODE === "true";
+  if (mockPreview) return NextResponse.next();
 
   const { response, user, supabase } = await updateSession(request);
   const pathname = request.nextUrl.pathname;
-  const isProtected = PROTECTED_PATHS.some((path) => pathname.startsWith(path));
+  const isPaidPage = PAID_PATHS.some((path) => pathname.startsWith(path));
+  const isAccountPage = ACCOUNT_PATHS.some((path) => pathname.startsWith(path));
   const isAuthPage = AUTH_PATHS.some((path) => pathname.startsWith(path));
   const isAdminPage = pathname.startsWith("/admin");
 
-  if ((isProtected || isAdminPage) && !user) {
+  if ((isPaidPage || isAccountPage || isAdminPage) && !user) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("next", pathname);
-    return NextResponse.redirect(url);
+    return redirectPreservingSession(response, url);
+  }
+
+  let profile: AccessProfile | null = null;
+  if (user && (isPaidPage || isAccountPage || isAdminPage || isAuthPage)) {
+    const { data } = await (supabase as any)
+      .from("profiles")
+      .select("role,has_purchased")
+      .eq("id", user.id)
+      .maybeSingle();
+    profile = data as AccessProfile | null;
   }
 
   if (isAdminPage && user) {
-    const { data: profile } = await (supabase as any)
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single();
     if (profile?.role !== "admin") {
-      return NextResponse.redirect(new URL("/explore", request.url));
+      const target = profile?.has_purchased ? "/explore" : "/checkout";
+      return redirectPreservingSession(response, new URL(target, request.url));
     }
   }
 
+  if (isPaidPage && user && !profile?.has_purchased && profile?.role !== "admin") {
+    const url = new URL("/checkout", request.url);
+    url.searchParams.set("next", pathname);
+    return redirectPreservingSession(response, url);
+  }
+
   if (isAuthPage && user) {
-    return NextResponse.redirect(new URL("/explore", request.url));
+    const target = profile?.has_purchased || profile?.role === "admin" ? "/explore" : "/checkout";
+    return redirectPreservingSession(response, new URL(target, request.url));
   }
 
   return response;
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|fonts|images|og-image|site.webmanifest).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|fonts|images|og-image|site.webmanifest|sw.js).*)"],
 };

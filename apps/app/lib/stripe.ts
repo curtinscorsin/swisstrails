@@ -1,9 +1,16 @@
 import Stripe from "stripe";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
-  typescript: true,
-});
+let stripeClient: Stripe | undefined;
+
+export function getStripe() {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) throw new Error("Stripe is not configured");
+  stripeClient ??= new Stripe(secretKey, {
+    apiVersion: "2024-06-20",
+    typescript: true,
+  });
+  return stripeClient;
+}
 
 export const STRIPE_CONFIG = {
   PRODUCT_ID: process.env.STRIPE_PRODUCT_ID ?? "",
@@ -15,12 +22,16 @@ export const STRIPE_CONFIG = {
 
 export async function createCheckoutSession(
   userId: string,
-  email: string
+  email: string,
+  customerId?: string | null
 ): Promise<string> {
-  const session = await stripe.checkout.sessions.create({
+  if (!STRIPE_CONFIG.PRICE_ID) throw new Error("Stripe price is not configured");
+
+  const session = await getStripe().checkout.sessions.create({
     mode: "payment",
     payment_method_types: ["card"],
-    customer_email: email,
+    ...(customerId ? { customer: customerId } : { customer_email: email }),
+    client_reference_id: userId,
     line_items: [
       {
         price: STRIPE_CONFIG.PRICE_ID,
@@ -43,6 +54,7 @@ export async function getOrCreateCustomer(
   email: string,
   name?: string
 ): Promise<string> {
+  const stripe = getStripe();
   const existing = await stripe.customers.list({ email, limit: 1 });
   if (existing.data.length > 0) return existing.data[0].id;
 
@@ -54,7 +66,8 @@ export function constructWebhookEvent(
   payload: string | Buffer,
   signature: string
 ): Stripe.Event {
-  return stripe.webhooks.constructEvent(
+  if (!STRIPE_CONFIG.WEBHOOK_SECRET) throw new Error("Stripe webhook is not configured");
+  return getStripe().webhooks.constructEvent(
     payload,
     signature,
     STRIPE_CONFIG.WEBHOOK_SECRET

@@ -2,19 +2,24 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Camera, ExternalLink, SearchCheck, Shield } from "lucide-react";
+import { CATALOGUE_METRICS } from "@swiss-trails/types";
 
 const STATS = [
-  { value: "100", label: "Published destinations" },
-  { value: "61", label: "Licensed location photographs" },
-  { value: "100", label: "Source-linked map records" },
-  { value: "09.08.26", label: "Latest editorial check" },
+  { value: String(CATALOGUE_METRICS.publishedLocations), label: "Published destinations" },
+  { value: String(CATALOGUE_METRICS.creditedPhotographs), label: "Credited location photographs" },
+  { value: String(CATALOGUE_METRICS.verifiedAccessPoints), label: "Separately verified access points" },
+  {
+    value: new Intl.DateTimeFormat("en-CH", { day: "2-digit", month: "2-digit", year: "2-digit" })
+      .format(new Date(`${CATALOGUE_METRICS.lastEditorialCheck}T12:00:00Z`)),
+    label: "Latest editorial check",
+  },
 ];
 
 const TRUST = [
   { icon: SearchCheck, label: "Federal map references" },
   { icon: ExternalLink, label: "Source links included" },
   { icon: Camera, label: "Location-matched photographs" },
-  { icon: Shield, label: "Uncertain data stays unpublished" },
+  { icon: Shield, label: "Uncertainty remains visible" },
 ];
 
 export function SocialProof() {

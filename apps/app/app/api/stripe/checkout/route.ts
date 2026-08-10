@@ -1,9 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createCheckoutSession } from "@/lib/stripe";
 import { createClient } from "@/lib/supabase/server";
+import { missingSalesConfiguration, salesConfigurationReady } from "@/lib/launch-server";
+
+function validRequestOrigin(req: NextRequest) {
+  const configuredUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const origin = req.headers.get("origin");
+  if (!configuredUrl || !origin) return false;
+  return new URL(origin).origin === new URL(configuredUrl).origin;
+}
 
 export async function POST(req: NextRequest) {
   try {
+    if (!salesConfigurationReady()) {
+      console.error("Checkout disabled; missing launch configuration:", missingSalesConfiguration());
+      return NextResponse.json(
+        { error: "Purchases are not open yet. Please try again later." },
+        { status: 503 }
+      );
+    }
+    if (!validRequestOrigin(req)) {
+      return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
+    }
+
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
@@ -12,14 +31,22 @@ export async function POST(req: NextRequest) {
         { status: 401 }
       );
     }
-    const body = await req.json();
-    const email = body.email ?? user.email;
-
-    if (!email) {
+    if (!user.email) {
       return NextResponse.json({ error: "Email required" }, { status: 400 });
     }
 
-    const url = await createCheckoutSession(user.id, email);
+    const { data: profile, error: profileError } = await (supabase as any)
+      .from("profiles")
+      .select("has_purchased,stripe_customer_id")
+      .eq("id", user.id)
+      .single();
+    if (profileError) throw profileError;
+    const purchaseProfile = profile as { has_purchased: boolean; stripe_customer_id: string | null };
+    if (purchaseProfile.has_purchased) {
+      return NextResponse.json({ error: "Access is already active", redirect: "/explore" }, { status: 409 });
+    }
+
+    const url = await createCheckoutSession(user.id, user.email, purchaseProfile.stripe_customer_id);
 
     return NextResponse.json({ url });
   } catch (error) {

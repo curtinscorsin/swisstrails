@@ -53,16 +53,16 @@ const MENU_ITEMS = [
   {
     icon: Settings,
     label: "Account settings",
-    href: "#",
-    description: "Email, password, preferences",
-    soon: true,
+    href: "/account",
+    description: "Export or delete account data",
+    soon: false,
   },
   {
     icon: Shield,
     label: "Privacy & data",
-    href: "#",
-    description: "Manage your data",
-    soon: true,
+    href: "https://swiss-trails.com/privacy",
+    description: "How Swiss Trails handles information",
+    soon: false,
   },
 ];
 

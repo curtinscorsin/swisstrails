@@ -4,6 +4,7 @@ import { Logo } from "@/components/brand/logo";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const salesEnabled = process.env.NEXT_PUBLIC_SALES_ENABLED === "true";
 
   return (
     <footer>
@@ -42,7 +43,7 @@ export function Footer() {
             size="xl"
             className="shadow-xl"
           >
-            <a href="#pricing">Get Swiss Trails — CHF 29</a>
+            <a href="#pricing">{salesEnabled ? "Get Swiss Trails — CHF 29" : "View launch status"}</a>
           </Button>
         </div>
       </div>

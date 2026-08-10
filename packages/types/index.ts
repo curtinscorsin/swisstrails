@@ -213,6 +213,23 @@ export interface Favorite {
 }
 
 /* ─────────────────────────────────────────────
+   PUBLISHED CATALOGUE FACTS
+
+   These values are deliberately shared by the app, marketing site, and
+   content audit so public claims cannot quietly drift away from the product.
+───────────────────────────────────────────── */
+
+export const CATALOGUE_METRICS = {
+  publishedLocations: 100,
+  verifiedAccessPoints: 8,
+  sourcedContextLocations: 92,
+  creditedPhotographs: 247,
+  locationsWithThreePhotographs: 72,
+  placeholderLocations: 3,
+  lastEditorialCheck: "2026-08-10",
+} as const;
+
+/* ─────────────────────────────────────────────
    SOCIAL TYPES — reactions / counts
 ───────────────────────────────────────────── */
 

@@ -10,6 +10,7 @@
     "lint": "next lint",
     "check-types": "tsc --noEmit",
     "audit:content": "node --import tsx scripts/audit-curated-content.ts",
+    "audit:launch": "node --import tsx scripts/audit-launch-readiness.ts",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "db:generate": "prisma generate",

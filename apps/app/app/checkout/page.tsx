@@ -5,31 +5,20 @@ import { Check, Shield, Zap, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/brand/logo";
 import { PRICING } from "@/data/categories";
 import { haptics } from "@/lib/haptics";
 
-const IS_MOCK = process.env.NEXT_PUBLIC_MOCK_MODE === "true";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const IS_MOCK =
+  process.env.NODE_ENV !== "production" &&
+  process.env.NEXT_PUBLIC_MOCK_MODE === "true";
+const SALES_ENABLED = process.env.NEXT_PUBLIC_SALES_ENABLED === "true";
 
 export default function CheckoutPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState<string>();
   const [formError, setFormError] = useState<string>();
 
-  const emailValid = EMAIL_RE.test(email.trim());
-
   async function handleCheckout() {
-    const trimmed = email.trim();
-    if (!EMAIL_RE.test(trimmed)) {
-      setEmailError("Enter a valid email address");
-      haptics.warn();
-      return;
-    }
-    setEmailError(undefined);
     setFormError(undefined);
     haptics.tap();
     setIsLoading(true);
@@ -37,19 +26,26 @@ export default function CheckoutPage() {
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed }),
+        body: "{}",
       });
-      if (!res.ok) throw new Error("checkout-failed");
-      const { url } = await res.json();
+      const payload = await res.json() as { url?: string; error?: string; redirect?: string };
+      if (payload.redirect) {
+        window.location.href = payload.redirect;
+        return;
+      }
+      if (!res.ok) throw new Error(payload.error || "checkout-failed");
+      const { url } = payload;
       if (url) {
         window.location.href = url;
         return; // keep the spinner during navigation
       }
       throw new Error("no-url");
-    } catch {
+    } catch (error) {
       haptics.warn();
       setFormError(
-        "We couldn't start your checkout. Please check your connection and try again."
+        error instanceof Error && error.message !== "checkout-failed"
+          ? error.message
+          : "We couldn't start your checkout. Please check your connection and try again."
       );
       setIsLoading(false);
     }
@@ -126,30 +122,6 @@ export default function CheckoutPage() {
               ))}
             </ul>
 
-            <div className="mb-4">
-              <label htmlFor="checkout-email" className="block text-fg-muted text-xs mb-1.5">
-                Your email address
-              </label>
-              <Input
-                id="checkout-email"
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (emailError) setEmailError(undefined);
-                  if (formError) setFormError(undefined);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && emailValid && !isLoading) handleCheckout();
-                }}
-                placeholder="you@example.com"
-                error={emailError}
-                aria-invalid={!!emailError}
-              />
-            </div>
-
             {/* Checkout / network error */}
             {formError && (
               <div
@@ -167,11 +139,19 @@ export default function CheckoutPage() {
               className="w-full"
               onClick={handleCheckout}
               loading={isLoading}
-              disabled={!emailValid}
+              disabled={!SALES_ENABLED && !IS_MOCK}
             >
               <Zap className="w-4 h-4" />
-              Pay CHF 29 — Get Instant Access
+              {SALES_ENABLED || IS_MOCK ? "Continue to secure payment" : "Sales opening soon"}
             </Button>
+
+            <p className="mt-3 text-center text-[11px] leading-relaxed text-fg-subtle">
+              By continuing, you agree to the{" "}
+              <a href="https://swiss-trails.com/terms" className="underline hover:text-fg">Terms</a>
+              {" "}and acknowledge the{" "}
+              <a href="https://swiss-trails.com/privacy" className="underline hover:text-fg">Privacy Policy</a>.
+              Stripe shows the final CHF total before payment.
+            </p>
 
             <div className="mt-4 flex items-center justify-center gap-2">
               <Shield className="w-3.5 h-3.5 text-fg-muted" />

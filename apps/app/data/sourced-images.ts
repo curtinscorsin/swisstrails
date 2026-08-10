@@ -1,6 +1,7 @@
 import type { LocationImage } from "@/types";
 import generatedImages from "./sourced-images.generated.json";
 import reviewedImages from "./reviewed-images.generated.json";
+import galleryImages from "./gallery-images.generated.json";
 
 /**
  * Photographs are selected only when the Commons file description identifies
@@ -115,8 +116,22 @@ const EDITORIALLY_REVIEWED_IMAGES: Record<string, LocationImage[]> = {
  * and retain the Wikimedia Commons creator, licence and file-description URL.
  * Hand-reviewed entries win when both datasets contain the same location.
  */
-export const SOURCED_IMAGES: Record<string, LocationImage[]> = {
-  ...(generatedImages as Record<string, LocationImage[]>),
-  ...(reviewedImages as Record<string, LocationImage[]>),
-  ...EDITORIALLY_REVIEWED_IMAGES,
-};
+const IMAGE_SETS = [
+  generatedImages as Record<string, LocationImage[]>,
+  reviewedImages as Record<string, LocationImage[]>,
+  galleryImages as Record<string, LocationImage[]>,
+  EDITORIALLY_REVIEWED_IMAGES,
+];
+
+export const SOURCED_IMAGES: Record<string, LocationImage[]> = Object.fromEntries(
+  [...new Set(IMAGE_SETS.flatMap((set) => Object.keys(set)))].map((locationId) => {
+    const seen = new Set<string>();
+    const images = IMAGE_SETS.flatMap((set) => set[locationId] ?? []).filter((image) => {
+      const url = image.url.split("?")[0];
+      if (seen.has(url)) return false;
+      seen.add(url);
+      return true;
+    });
+    return [locationId, images];
+  })
+);

@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect } from "react";
-import { Check, ArrowRight, Map } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Check, ArrowRight, Map, LoaderCircle, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/brand/logo";
 import { haptics } from "@/lib/haptics";
 
-function useConfetti() {
+const IS_MOCK =
+  process.env.NODE_ENV !== "production" &&
+  process.env.NEXT_PUBLIC_MOCK_MODE === "true";
+
+function useConfetti(enabled: boolean) {
   useEffect(() => {
+    if (!enabled) return;
     // Honor reduced-motion — skip the celebratory animation entirely.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -72,11 +77,48 @@ function useConfetti() {
       cancelAnimationFrame(frame);
       canvas.remove();
     };
-  }, []);
+  }, [enabled]);
 }
 
 export default function CheckoutSuccessPage() {
-  useConfetti();
+  const [status, setStatus] = useState<"checking" | "active" | "pending">(
+    IS_MOCK ? "active" : "checking"
+  );
+  useConfetti(status === "active");
+
+  useEffect(() => {
+    if (IS_MOCK) return;
+    const sessionId = new URLSearchParams(window.location.search).get("session_id");
+    if (!sessionId) {
+      setStatus("pending");
+      return;
+    }
+
+    let cancelled = false;
+    async function confirm(attempt = 0): Promise<void> {
+      try {
+        const response = await fetch("/api/stripe/confirm", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId }),
+        });
+        const data = await response.json() as { active?: boolean };
+        if (!cancelled && data.active) {
+          setStatus("active");
+          return;
+        }
+      } catch {
+        // Stripe webhooks can still activate access after a transient failure.
+      }
+      if (!cancelled && attempt < 4) {
+        window.setTimeout(() => void confirm(attempt + 1), 1500);
+      } else if (!cancelled) {
+        setStatus("pending");
+      }
+    }
+    void confirm();
+    return () => { cancelled = true; };
+  }, []);
 
   return (
     <div className="min-h-dvh bg-trail-950 flex items-center justify-center px-4 py-[max(2rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))]">
@@ -105,7 +147,11 @@ export default function CheckoutSuccessPage() {
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 300, damping: 20 }}
         >
-          <Check className="w-10 h-10 text-alpine-300" strokeWidth={2.5} />
+          {status === "checking" ? (
+            <LoaderCircle className="w-10 h-10 animate-spin text-alpine-300" />
+          ) : (
+            <Check className="w-10 h-10 text-alpine-300" strokeWidth={2.5} />
+          )}
         </motion.div>
 
         <motion.div
@@ -114,30 +160,42 @@ export default function CheckoutSuccessPage() {
           transition={{ delay: 0.3, duration: 0.6 }}
         >
           <h1 className="t-h1 text-fg mb-4">
-            Welcome to
+            {status === "active" ? "Welcome to" : "Confirming your"}
             <br />
-            <span className="text-gradient-alpine">Swiss Trails.</span>
+            <span className="text-gradient-alpine">
+              {status === "active" ? "Swiss Trails." : "access."}
+            </span>
           </h1>
 
           <p className="t-body text-fg-muted max-w-sm mx-auto mb-10">
-            Your verified Swiss route collection is ready, with source links,
-            access notes and current advisories for safer planning.
+            {status === "active"
+              ? "Your source-linked Swiss collection is ready, with access notes and uncertainty shown clearly."
+              : status === "checking"
+                ? "Stripe has returned you to Swiss Trails. We are securely confirming the payment before opening the guide."
+                : "Activation is taking longer than expected. Your payment is not lost; refresh this page or contact support if access does not appear shortly."}
           </p>
 
           <div className="space-y-3">
-            <Button
-              asChild
-              variant="gold"
-              size="xl"
-              className="w-full"
-              onClick={() => haptics.success()}
-            >
-              <Link href="/explore">
-                <Map className="w-4 h-4" />
-                Open The Map
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
+            {status === "active" ? (
+              <Button asChild variant="gold" size="xl" className="w-full" onClick={() => haptics.success()}>
+                <Link href="/explore">
+                  <Map className="w-4 h-4" />
+                  Open the guide
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            ) : (
+              <Button
+                variant="gold"
+                size="xl"
+                className="w-full"
+                loading={status === "checking"}
+                onClick={() => window.location.reload()}
+              >
+                <RefreshCw className="w-4 h-4" />
+                Check activation again
+              </Button>
+            )}
 
             <Button
               asChild
@@ -151,7 +209,9 @@ export default function CheckoutSuccessPage() {
           </div>
 
           <p className="text-fg-muted text-xs mt-8">
-            Your access has been activated. Check your email for a confirmation.
+            {status === "active"
+              ? "Access is active. Stripe sends the payment receipt to your account email."
+              : "Need help? Email hello@swiss-trails.com from your account address."}
           </p>
         </motion.div>
       </motion.div>

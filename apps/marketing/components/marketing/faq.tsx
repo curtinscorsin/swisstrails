@@ -7,11 +7,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { CATALOGUE_METRICS } from "@swiss-trails/types";
 
 const FAQ_ITEMS = [
   {
     q: "What exactly do I get?",
-    a: "You get access to 100 Swiss destination pages. Every page includes a sourced map record and uncertainty labels. Sixty-one currently have a high-resolution, location-linked licensed photograph; the others use an honest branded placeholder until a suitable image is approved.",
+    a: `You get access to ${CATALOGUE_METRICS.publishedLocations} Swiss destination pages. Every page includes a sourced map record and uncertainty labels. The catalogue currently contains ${CATALOGUE_METRICS.creditedPhotographs} credited, location-linked photographs; ${CATALOGUE_METRICS.locationsWithThreePhotographs} destinations have galleries of at least three. ${CATALOGUE_METRICS.placeholderLocations} use an honest branded placeholder until a suitable image is approved.`,
   },
   {
     q: "Is this really a one-time payment?",
@@ -23,7 +24,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Can I use this on my phone?",
-    a: "Absolutely. Swiss Trails is built mobile-first and works seamlessly on iOS and Android through your browser — no app download needed. You can even add it to your home screen for one-tap access. The map, location details, and your saved favourites all work perfectly on mobile.",
+    a: "Yes. Swiss Trails is built mobile-first for iOS and Android browsers and can be added to your home screen. An internet connection is currently required for live maps, weather, source links and full location pages; the app shows a clear offline screen instead of stale planning information.",
   },
   {
     q: "What if I don't have a car?",
@@ -35,11 +36,11 @@ const FAQ_ITEMS = [
   },
   {
     q: "What's your refund policy?",
-    a: "We stand behind our curation completely. If you visit 3 locations and genuinely don't love the experience, we'll give you a full refund — no questions asked. We're that confident in what's inside.",
+    a: "If you visit three locations and genuinely do not find the guide useful, email us from the purchasing account and identify those locations. We will process the advertised full refund through Stripe; this does not limit any mandatory legal remedy.",
   },
   {
     q: "Are you adding more locations?",
-    a: "Yes, but there is no quota. A location is published only after its identity, coordinates, access details, current rules and photograph have been checked. Unfinished research remains part of our private editorial work, not the public collection.",
+    a: "Yes, but there is no quota. Identity and the published destination map point require a source record. Route, access, rules and photography are added only when separately supported; anything unresolved stays visibly labelled rather than being guessed.",
   },
 ];
 

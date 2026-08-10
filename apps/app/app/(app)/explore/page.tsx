@@ -16,6 +16,7 @@ import { TripPill } from "@/components/app/trip-pill";
 import { regionConfig, cn } from "@/lib/utils";
 import { haptics } from "@/lib/haptics";
 import type { Location } from "@/types";
+import { CATALOGUE_METRICS } from "@swiss-trails/types";
 
 const ASPECT_RATIOS = ["3/4", "4/5", "2/3", "4/5", "3/4", "1/1", "4/5", "3/5"];
 
@@ -190,12 +191,12 @@ export default function ExplorePage() {
               </div>
               <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-0 lg:w-72">
                 <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
-                  <p className="font-heading text-3xl text-fg">100</p>
+                  <p className="font-heading text-3xl text-fg">{CATALOGUE_METRICS.publishedLocations}</p>
                   <p className="mt-1 text-xs leading-snug text-fg-muted">published places</p>
                 </div>
                 <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
-                  <p className="font-heading text-3xl text-fg">97</p>
-                  <p className="mt-1 text-xs leading-snug text-fg-muted">licensed location photographs</p>
+                  <p className="font-heading text-3xl text-fg">{CATALOGUE_METRICS.creditedPhotographs}</p>
+                  <p className="mt-1 text-xs leading-snug text-fg-muted">credited location photographs</p>
                 </div>
                 <p className="col-span-2 px-1 pt-1 text-[11px] text-stone-500">Last editorial check: 10 August 2026</p>
               </div>

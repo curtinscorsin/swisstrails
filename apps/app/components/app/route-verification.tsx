@@ -6,6 +6,7 @@ import {
   ExternalLink,
   MapPinned,
   ShieldCheck,
+  MessageSquareWarning,
 } from "lucide-react";
 import type { CoordinateType, Coordinates, RouteVerification } from "@/types";
 import { cn, formatDuration } from "@/lib/utils";
@@ -254,6 +255,14 @@ export function RouteVerificationDetails({
           ))}
         </ul>
       </div>
+
+      <a
+        href={`mailto:hello@swiss-trails.com?subject=${encodeURIComponent(`Correction: ${destinationName}`)}&body=${encodeURIComponent(`I found information that may need correction on ${destinationName}.\n\nPage checked by Swiss Trails: ${verification.checkedAt}\n\nWhat appears incorrect:\n\nSource that supports the correction (if available):\n`)}`}
+        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/[0.08] px-4 text-sm font-medium text-stone-300 transition-colors hover:border-white/[0.16] hover:bg-white/[0.04] hover:text-fg"
+      >
+        <MessageSquareWarning className="h-4 w-4" />
+        Report incorrect information
+      </a>
     </section>
   );
 }

@@ -3,6 +3,7 @@
 import { CURATED_LOCATIONS } from "../data/curated-locations";
 import { CATEGORIES } from "../data/categories";
 import { resolveSourcedImages } from "../lib/location-image-data";
+import { CATALOGUE_METRICS } from "@swiss-trails/types";
 
 const failures: string[] = [];
 
@@ -24,7 +25,10 @@ function isSwissCoordinate(lat: number, lng: number) {
   return lat >= 45.7 && lat <= 47.9 && lng >= 5.7 && lng <= 10.7;
 }
 
-assert(CURATED_LOCATIONS.length === 100, `Expected 100 published places, found ${CURATED_LOCATIONS.length}`);
+assert(
+  CURATED_LOCATIONS.length === CATALOGUE_METRICS.publishedLocations,
+  `Expected ${CATALOGUE_METRICS.publishedLocations} published places, found ${CURATED_LOCATIONS.length}`
+);
 
 for (const field of ["id", "slug", "name"] as const) {
   const repeated = duplicates(CURATED_LOCATIONS.map((location) => location[field]));
@@ -43,6 +47,8 @@ let destinationOnlyCount = 0;
 let reviewedContextCount = 0;
 const fallbackNames: string[] = [];
 let landscapeImageCount = 0;
+let locationsWithThreePhotographs = 0;
+const limitedGalleryNames: string[] = [];
 
 for (const location of CURATED_LOCATIONS) {
   const prefix = `${location.id} (${location.name})`;
@@ -99,6 +105,8 @@ for (const location of CURATED_LOCATIONS) {
   }
 
   const photos = resolveSourcedImages(location);
+  if (photos.length >= 3) locationsWithThreePhotographs += 1;
+  else limitedGalleryNames.push(`${location.name} (${photos.length})`);
   if (photos.length === 0) {
     fallbackCount += 1;
     fallbackNames.push(location.name);
@@ -116,6 +124,27 @@ for (const location of CURATED_LOCATIONS) {
 }
 
 assert(duplicates(publishedImageUrls).length === 0, "A published photo is reused across routes");
+assert(
+  CURATED_LOCATIONS.length - destinationOnlyCount - reviewedContextCount ===
+    CATALOGUE_METRICS.verifiedAccessPoints,
+  "Shared verified-access-point count is stale"
+);
+assert(
+  reviewedContextCount === CATALOGUE_METRICS.sourcedContextLocations,
+  "Shared sourced-context count is stale"
+);
+assert(
+  publishedImageUrls.length === CATALOGUE_METRICS.creditedPhotographs,
+  "Shared credited-photograph count is stale"
+);
+assert(
+  locationsWithThreePhotographs === CATALOGUE_METRICS.locationsWithThreePhotographs,
+  "Shared three-photo gallery count is stale"
+);
+assert(
+  fallbackCount === CATALOGUE_METRICS.placeholderLocations,
+  "Shared placeholder count is stale"
+);
 
 if (failures.length > 0) {
   console.error(`Curated content audit failed with ${failures.length} issue(s):`);
@@ -129,6 +158,8 @@ console.log(`- ${CURATED_LOCATIONS.length - destinationOnlyCount - reviewedConte
 console.log(`- ${reviewedContextCount} places include destination-specific route or visit context while keeping the map pin separate`);
 console.log(`- ${destinationOnlyCount} places publish sourced identity only and label logistics unresolved`);
 console.log(`- ${publishedImageUrls.length} unique, credited location photographs`);
+console.log(`- ${locationsWithThreePhotographs} locations have at least three photographs`);
+console.log(`- Galleries below three photographs: ${limitedGalleryNames.join(", ") || "none"}`);
 console.log(`- ${fallbackCount} places use the honest designed image placeholder`);
 console.log(`- Placeholder locations: ${fallbackNames.join(", ") || "none"}`);
 console.log(`- ${landscapeImageCount} source photographs are natively landscape; portrait sources use responsive focal cropping`);

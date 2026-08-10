@@ -10,7 +10,9 @@ import { Logo } from "@/components/brand/logo";
 import { haptics } from "@/lib/haptics";
 import { createClient } from "@/lib/supabase/client";
 
-const IS_MOCK = process.env.NEXT_PUBLIC_MOCK_MODE === "true";
+const IS_MOCK =
+  process.env.NODE_ENV !== "production" &&
+  process.env.NEXT_PUBLIC_MOCK_MODE === "true";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -34,7 +36,7 @@ export default function LoginPage() {
     setIsEmailLoading(true);
     const supabase = createClient();
     const next = new URLSearchParams(window.location.search).get("next");
-    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/explore";
+    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/checkout";
     const { error } = await supabase.auth.signInWithOtp({
       email: trimmed,
       options: {
@@ -56,7 +58,7 @@ export default function LoginPage() {
     setIsGoogleLoading(true);
     const supabase = createClient();
     const next = new URLSearchParams(window.location.search).get("next");
-    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/explore";
+    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/checkout";
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -90,7 +92,7 @@ export default function LoginPage() {
             />
           </Link>
           <h1 className="t-h2 text-fg mb-2">Welcome to Swiss Trails</h1>
-          <p className="text-fg-muted text-sm">Sign in or create your free account</p>
+          <p className="text-fg-muted text-sm">Sign in or create an account to continue</p>
         </div>
 
         {/* Mock mode demo entry */}

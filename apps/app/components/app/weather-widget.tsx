@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 interface WeatherWidgetProps {
   lat: number;
   lng: number;
+  locationName?: string;
   className?: string;
 }
 
@@ -45,7 +46,7 @@ function dayLabel(iso: string, index: number): string {
   return d.toLocaleDateString("en-US", { weekday: "short" });
 }
 
-export function WeatherWidget({ lat, lng, className }: WeatherWidgetProps) {
+export function WeatherWidget({ lat, lng, locationName, className }: WeatherWidgetProps) {
   const [data, setData] = useState<WeatherData | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
 
@@ -132,6 +133,10 @@ export function WeatherWidget({ lat, lng, className }: WeatherWidgetProps) {
               })}
             </div>
           )}
+          <p className="mt-3 border-t border-white/[0.06] pt-3 text-[10px] leading-relaxed text-fg-muted">
+            Live Open-Meteo forecast for the {locationName ? `${locationName} destination pin` : "destination pin"}.
+            Mountain conditions can differ sharply by elevation; check official warnings and route status before leaving.
+          </p>
         </div>
       )}
     </div>

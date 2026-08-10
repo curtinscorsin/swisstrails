@@ -30,3 +30,7 @@ pnpm-debug.log*
 .DS_Store
 *.pem
 .vercel
+
+# local Codex and package-manager caches
+.codex/
+.pnpm-store/

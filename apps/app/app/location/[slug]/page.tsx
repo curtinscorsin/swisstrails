@@ -121,11 +121,18 @@ export default async function LocationPage({ params }: Props) {
             value={diff.label}
             valueClass={DIFF_COLOR[location.difficulty]}
           />
-          {location.distanceKm && (
+          {location.distanceKm != null && (
             <Stat
               icon={<Ruler className="w-4 h-4" />}
               label="Distance"
               value={`${location.distanceKm} km`}
+            />
+          )}
+          {location.verification?.ascentM != null && (
+            <Stat
+              icon={<Mountain className="w-4 h-4" />}
+              label="Ascent"
+              value={`${location.verification.ascentM.toLocaleString()} m`}
             />
           )}
           {location.elevation && (
@@ -201,6 +208,7 @@ export default async function LocationPage({ params }: Props) {
         <WeatherWidget
           lat={location.coordinates.lat}
           lng={location.coordinates.lng}
+          locationName={location.name}
         />
 
         {/* Highlights — short */}

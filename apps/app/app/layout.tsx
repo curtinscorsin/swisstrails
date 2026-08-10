@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { MockBanner } from "@/components/shared/mock-banner";
+import { ServiceWorkerRegistration } from "@/components/app/service-worker-registration";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,7 +9,8 @@ export const metadata: Metadata = {
     default: "Swiss Trails",
     template: "%s | Swiss Trails",
   },
-  description: "A carefully verified collection of Swiss hikes with official sources, route data and current advisories.",
+  description: "A source-reviewed collection of Swiss destinations with dated references, route context and visible uncertainty.",
+  robots: { index: false, follow: false, noarchive: true },
   openGraph: {
     type: "website",
     locale: "en_CH",
@@ -55,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className="bg-trail-950 text-fg antialiased">
         {children}
+        <ServiceWorkerRegistration />
         <MockBanner />
       </body>
     </html>

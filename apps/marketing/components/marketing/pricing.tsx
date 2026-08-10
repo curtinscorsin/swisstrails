@@ -9,6 +9,7 @@ import { APP_URL } from "@/lib/config";
 
 export function Pricing() {
   const reduce = useReducedMotion();
+  const salesEnabled = process.env.NEXT_PUBLIC_SALES_ENABLED === "true";
   return (
     <section id="pricing" className="relative scroll-mt-20 overflow-hidden py-24 lg:scroll-mt-24 lg:py-40">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
@@ -75,22 +76,23 @@ export function Pricing() {
               </ul>
 
               {/* CTA */}
-              <Button
-                asChild
-                variant="gold"
-                size="xl"
-                className="w-full bg-trail-950 text-stone-50 shadow-none hover:bg-trail-800"
-              >
-                <a href={`${APP_URL}/checkout`}>
-                  Get lifetime access — CHF 29
-                </a>
-              </Button>
+              {salesEnabled ? (
+                <Button asChild variant="gold" size="xl" className="w-full bg-trail-950 text-stone-50 shadow-none hover:bg-trail-800">
+                  <a href={`${APP_URL}/checkout`}>Get lifetime access — CHF 29</a>
+                </Button>
+              ) : (
+                <Button variant="gold" size="xl" className="w-full bg-trail-950 text-stone-50 shadow-none" disabled>
+                  Sales opening soon
+                </Button>
+              )}
 
               {/* Reassurance */}
               <div className="mt-5 flex items-center justify-center gap-2">
                 <Shield className="h-3.5 w-3.5 text-stone-500" />
                 <p className="text-center text-xs text-stone-500">
-                  Secured by Stripe · Visit 3 spots, love it or get refunded
+                  {salesEnabled
+                    ? "Secured by Stripe · Visit 3 spots, love it or get refunded"
+                    : "Checkout stays closed until the production and legal review is complete"}
                 </p>
               </div>
             </div>
@@ -99,7 +101,7 @@ export function Pricing() {
           {/* Editorial promise under card */}
           <Reveal delay={0.3}>
             <p className="mt-7 text-center text-sm text-fg-muted">
-              <span className="text-stone-200">No inflated catalogue:</span> uncertain places stay hidden
+              <span className="text-stone-200">No invented detail:</span> uncertainty stays visible
             </p>
           </Reveal>
         </div>
