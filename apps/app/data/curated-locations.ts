@@ -731,7 +731,7 @@ function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
     updatedAt: CREATED_AT,
     verification: verification({
       canton: entry.canton,
-      routeType: "Destination reference only",
+      routeType: reviewed ? `Reviewed: ${reviewed.route.label}` : "Destination reference only",
       season: reviewed?.route.season ?? "Not independently verified—check current local information",
       distanceKm: reviewed?.route.distanceKm ?? null,
       durationMinutes: reviewed?.route.durationMinutes ?? null,

@@ -31,6 +31,7 @@ export function LocationCard({
   const fav = isFavorite(location.id);
   const diff = difficultyConfig[location.difficulty];
   const cat = categoryConfig[location.category];
+  const hasReviewedContext = location.verification?.routeType.startsWith("Reviewed:") ?? false;
 
   // Real, honest distance when we know where the user is; otherwise fall back
   // to the static travel-time estimate (relabelled "~X by car", no "away").
@@ -160,8 +161,10 @@ export function LocationCard({
                   ) : (
                     <AlertTriangle className="h-2.5 w-2.5" />
                   )}
-                  {location.difficulty === "not-rated"
-                    ? "Source-linked"
+                  {hasReviewedContext
+                    ? "Route sourced"
+                    : location.difficulty === "not-rated"
+                      ? "Source-linked"
                     : location.verification.status === "open"
                       ? "Checked"
                       : "Advisory"}

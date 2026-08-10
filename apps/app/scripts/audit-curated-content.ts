@@ -40,6 +40,7 @@ const publishedImageUrls: string[] = [];
 const publishedSourceUrls: string[] = [];
 let fallbackCount = 0;
 let destinationOnlyCount = 0;
+let reviewedContextCount = 0;
 
 for (const location of CURATED_LOCATIONS) {
   const prefix = `${location.id} (${location.name})`;
@@ -52,6 +53,7 @@ for (const location of CURATED_LOCATIONS) {
   if (!verification) continue;
   const destinationOnly = verification.routeType === "Destination reference only";
   if (destinationOnly) destinationOnlyCount += 1;
+  if (verification.routeType.startsWith("Reviewed:")) reviewedContextCount += 1;
 
   assert(verification.country === "Switzerland", `${prefix}: wrong country`);
   assert(Boolean(verification.canton), `${prefix}: missing canton`);
@@ -70,11 +72,13 @@ for (const location of CURATED_LOCATIONS) {
   assert(Boolean(verification.feeInfo), `${prefix}: fee status is not documented`);
   assert(verification.restrictions.length > 0, `${prefix}: restrictions are missing`);
   assert(verification.safety.length > 0, `${prefix}: safety notes are missing`);
-  assert(
-    verification.sources.length >= (destinationOnly ? 2 : 4),
-    `${prefix}: insufficient source trail`
-  );
-  if (destinationOnly && verification.distanceKm != null) {
+  const minimumSources = destinationOnly
+    ? 2
+    : verification.routeType.startsWith("Reviewed:")
+      ? 3
+      : 4;
+  assert(verification.sources.length >= minimumSources, `${prefix}: insufficient source trail`);
+  if (verification.routeType.startsWith("Reviewed:") && verification.distanceKm != null) {
     assert(
       verification.sources.length >= 3,
       `${prefix}: contextual route figures require a destination-specific source`
@@ -112,7 +116,8 @@ if (failures.length > 0) {
 
 console.log("Curated content audit passed");
 console.log(`- ${CURATED_LOCATIONS.length} published, source-backed places`);
-console.log(`- ${CURATED_LOCATIONS.length - destinationOnlyCount} places include detailed visit verification`);
+console.log(`- ${CURATED_LOCATIONS.length - destinationOnlyCount - reviewedContextCount} places include a separately verified access point`);
+console.log(`- ${reviewedContextCount} places include destination-specific route or visit context while keeping the map pin separate`);
 console.log(`- ${destinationOnlyCount} places publish sourced identity only and label logistics unresolved`);
 console.log(`- ${publishedImageUrls.length} unique, credited location photographs`);
 console.log(`- ${fallbackCount} places use the honest designed image placeholder`);

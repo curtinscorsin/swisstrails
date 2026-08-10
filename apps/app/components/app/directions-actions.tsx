@@ -17,7 +17,11 @@ interface DirectionsActionsProps {
  */
 export function DirectionsActions({ location }: DirectionsActionsProps) {
   const [openInSheet, setOpenInSheet] = useState(false);
-  const destinationOnly = location.verification?.routeType === "Destination reference only";
+  const destinationOnly = Boolean(
+    location.verification &&
+      location.verification.start.coordinates.lat === location.coordinates.lat &&
+      location.verification.start.coordinates.lng === location.coordinates.lng
+  );
   const target = location.verification?.start.coordinates ?? location.coordinates;
   const targetName = location.verification && !destinationOnly
     ? `${location.name} access point — ${location.verification.start.name}`

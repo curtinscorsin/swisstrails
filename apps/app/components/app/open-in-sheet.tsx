@@ -92,7 +92,11 @@ function Row({ icon: Icon, label, hint, href, onClick, done }: RowProps) {
 
 export function OpenInSheet({ location, onClose }: OpenInSheetProps) {
   const [copied, setCopied] = useState(false);
-  const destinationOnly = location?.verification?.routeType === "Destination reference only";
+  const destinationOnly = Boolean(
+    location?.verification &&
+      location.verification.start.coordinates.lat === location.coordinates.lat &&
+      location.verification.start.coordinates.lng === location.coordinates.lng
+  );
 
   // Body-scroll-lock while open (ref-counted so it composes with other sheets).
   useEffect(() => {

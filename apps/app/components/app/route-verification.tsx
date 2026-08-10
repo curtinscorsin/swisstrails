@@ -66,7 +66,11 @@ export function RouteVerificationDetails({
 }: RouteVerificationProps) {
   const status = statusStyle[verification.status];
   const StatusIcon = status.icon;
-  const destinationOnly = verification.routeType === "Destination reference only";
+  const destinationOnly = Boolean(
+    destination &&
+      verification.start.coordinates.lat === destination.lat &&
+      verification.start.coordinates.lng === destination.lng
+  );
 
   return (
     <section className={cn("space-y-5", className)} aria-labelledby="verified-route-heading">
