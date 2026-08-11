@@ -33,7 +33,7 @@ export function EmotionalStory() {
       >
         Sergey Ashmarin · CC BY-SA 3.0
       </a>
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,8,0.86)_0%,rgba(8,10,8,0.58)_48%,rgba(8,10,8,0.2)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.9)_0%,rgba(6,17,30,0.62)_48%,rgba(7,20,35,0.22)_100%)]" />
       <div className="absolute inset-0 bg-gradient-to-t from-trail-950/70 via-transparent to-trail-950/20" />
 
       <div className="relative mx-auto flex min-h-[85svh] max-w-[1440px] items-center px-5 py-24 sm:px-8 lg:px-12 lg:py-36">

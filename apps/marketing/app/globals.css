@@ -28,3 +28,69 @@
 }
 
 @import "../../../packages/ui/src/globals.css";
+
+/* Marketing-only colour direction.
+   The product app keeps the shared forest palette; the public site uses a
+   colder alpine-night system inspired by blue hour in the Swiss mountains. */
+.marketing-theme {
+  --color-trail-950: #050b14;
+  --color-trail-900: #081321;
+  --color-trail-800: #0d1c2d;
+  --color-trail-700: #14283d;
+  --color-trail-600: #213a52;
+
+  --color-alpine-950: #08182a;
+  --color-alpine-900: #0d2741;
+  --color-alpine-800: #153a5d;
+  --color-alpine-700: #245276;
+  --color-alpine-600: #3c6d91;
+  --color-alpine-500: #5b89aa;
+  --color-alpine-400: #7fa7c2;
+  --color-alpine-300: #a5c3d6;
+  --color-alpine-200: #c7dbe7;
+  --color-alpine-100: #e0ebf2;
+  --color-alpine-50: #f1f6f9;
+
+  --color-stone-950: #07101b;
+  --color-stone-900: #111c28;
+  --color-stone-800: #253342;
+  --color-stone-700: #3d4c5c;
+  --color-stone-600: #607080;
+  --color-stone-500: #82909d;
+  --color-stone-400: #a6b1ba;
+  --color-stone-300: #c4ccd2;
+  --color-stone-200: #d9dfe4;
+  --color-stone-100: #e9edf0;
+  --color-stone-50: #f5f7f8;
+
+  --color-border: rgba(205, 224, 238, 0.12);
+  --color-border-subtle: rgba(205, 224, 238, 0.07);
+  --color-border-strong: rgba(205, 224, 238, 0.23);
+  --color-surface-1: rgba(185, 213, 232, 0.04);
+  --color-surface-2: rgba(185, 213, 232, 0.07);
+  --color-surface-3: rgba(185, 213, 232, 0.11);
+  --color-surface-hover: rgba(185, 213, 232, 0.095);
+
+  --color-fg: #f3f6f8;
+  --color-accent-glow: rgba(91, 137, 170, 0.3);
+  --shadow-glow-alpine: 0 18px 54px rgba(36, 82, 118, 0.28);
+
+  background:
+    radial-gradient(circle at 82% 12%, rgba(44, 92, 132, 0.13), transparent 34rem),
+    var(--color-trail-950);
+}
+
+.marketing-theme .hero-gradient {
+  background:
+    radial-gradient(ellipse at 74% 16%, rgba(50, 101, 143, 0.26) 0%, transparent 43%),
+    radial-gradient(ellipse at 18% 72%, rgba(171, 125, 72, 0.09) 0%, transparent 42%),
+    linear-gradient(155deg, #0d1c2d 0%, #081321 50%, #050b14 100%);
+}
+
+.marketing-theme .card-glass {
+  background: rgba(8, 19, 33, 0.74);
+}
+
+.marketing-theme .card-glass-strong {
+  background: rgba(8, 19, 33, 0.92);
+}

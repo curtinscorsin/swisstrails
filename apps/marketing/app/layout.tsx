@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B0D0A",
+  themeColor: "#050B14",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -58,7 +58,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-trail-950 text-fg antialiased">
+      <body className="marketing-theme bg-trail-950 text-fg antialiased">
         {children}
       </body>
     </html>
