@@ -3,7 +3,7 @@
 import {
   Clock, Navigation, Share2, Mountain,
   ChevronLeft, Bus, Car, Lightbulb, Package, ChevronDown,
-  MoreHorizontal, Route, MapPinned, Ruler, Gauge,
+  MoreHorizontal, Route, MapPinned, Ruler, Gauge, CalendarDays,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -179,7 +179,13 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
         className="flex-1 overflow-y-auto overscroll-contain"
       >
         <div className="px-4 pb-5 space-y-5">
-          {/* Key stats — distance / elevation / duration / from-you */}
+          {location.tagline && (
+            <p className="text-base font-medium leading-relaxed text-stone-200">
+              {location.tagline}
+            </p>
+          )}
+
+          {/* Key stats — only sourced or explicitly stored values */}
           <div className="grid grid-cols-2 gap-2">
             <Stat
               icon={<Gauge className="w-4 h-4" />}
@@ -187,17 +193,24 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
               value={diff.label}
               valueClass={DIFF_COLOR[location.difficulty]}
             />
-            {location.distanceKm != null && (
+            {(location.verification?.distanceKm ?? location.distanceKm) != null && (
               <Stat
                 icon={<Ruler className="w-4 h-4" />}
-                label="Distance"
-                value={`${location.distanceKm} km`}
+                label="Route distance"
+                value={`${location.verification?.distanceKm ?? location.distanceKm} km`}
+              />
+            )}
+            {location.verification?.ascentM != null && (
+              <Stat
+                icon={<Mountain className="w-4 h-4" />}
+                label="Elevation gain"
+                value={`${location.verification.ascentM.toLocaleString()} m`}
               />
             )}
             {location.elevation != null && (
               <Stat
                 icon={<Mountain className="w-4 h-4" />}
-                label="Elevation"
+                label="Destination elevation"
                 value={`${location.elevation.toLocaleString()} m`}
               />
             )}
@@ -227,9 +240,24 @@ export function LocationDetail({ location, onClose, scrollRef }: LocationDetailP
             ) : null}
           </div>
 
-          {/* Description */}
-          {location.description && (
-            <p className="text-stone-300 text-sm leading-relaxed">{location.description}</p>
+          {(location.description || location.longDescription) && (
+            <Section title="About this place">
+              <div className="space-y-3 text-sm leading-relaxed">
+                {location.description && <p className="text-stone-300">{location.description}</p>}
+                {location.longDescription && <p className="text-stone-400">{location.longDescription}</p>}
+              </div>
+            </Section>
+          )}
+
+          {location.verification && (
+            <Section title="Plan your visit" icon={<CalendarDays className="h-3.5 w-3.5" />}>
+              <div className="overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.025]">
+                <PlanningRow label="Start" value={location.verification.start.name} />
+                <PlanningRow label="Season" value={location.verification.season} />
+                <PlanningRow label="Public transport" value={location.verification.start.publicTransport} />
+                <PlanningRow label="Parking" value={location.verification.start.parking} />
+              </div>
+            </Section>
           )}
 
           {location.verification && (
@@ -447,5 +475,14 @@ function InfoChip({ icon, children }: { icon: React.ReactNode; children: React.R
       {icon}
       {children}
     </span>
+  );
+}
+
+function PlanningRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="grid grid-cols-[7.25rem_1fr] gap-3 border-b border-white/[0.06] px-3.5 py-3 last:border-b-0">
+      <span className="text-xs font-medium text-fg-muted">{label}</span>
+      <span className="text-xs leading-relaxed text-stone-300">{value}</span>
+    </div>
   );
 }

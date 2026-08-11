@@ -15,7 +15,7 @@ import {
 } from "@/lib/location-image-data";
 import {
   MapPin, Clock, Mountain, ArrowLeft, Navigation, Gauge,
-  Car, Bus, Lightbulb, Ruler,
+  Car, Bus, Lightbulb, Ruler, CalendarDays,
 } from "lucide-react";
 
 interface Props {
@@ -69,6 +69,7 @@ export default async function LocationPage({ params }: Props) {
     moderate: "text-yellow-400",
     challenging: "text-orange-400",
     expert: "text-red-400",
+    "not-rated": "text-stone-400",
   };
 
   return (
@@ -118,15 +119,15 @@ export default async function LocationPage({ params }: Props) {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           <Stat
             icon={<Gauge className="w-4 h-4" />}
-            label="Access effort"
+            label="Difficulty"
             value={diff.label}
             valueClass={DIFF_COLOR[location.difficulty]}
           />
-          {location.distanceKm != null && (
+          {(location.verification?.distanceKm ?? location.distanceKm) != null && (
             <Stat
               icon={<Ruler className="w-4 h-4" />}
-              label="Distance"
-              value={`${location.distanceKm} km`}
+              label="Route distance"
+              value={`${location.verification?.distanceKm ?? location.distanceKm} km`}
             />
           )}
           {location.verification?.ascentM != null && (
@@ -168,6 +169,21 @@ export default async function LocationPage({ params }: Props) {
 
         {location.longDescription && (
           <p className="text-stone-400 text-sm leading-relaxed">{location.longDescription}</p>
+        )}
+
+        {location.verification && (
+          <section>
+            <p className="mb-3 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-fg-muted">
+              <CalendarDays className="h-3.5 w-3.5" />
+              Plan your visit
+            </p>
+            <div className="overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.025]">
+              <PlanningRow label="Start" value={location.verification.start.name} />
+              <PlanningRow label="Season" value={location.verification.season} />
+              <PlanningRow label="Public transport" value={location.verification.start.publicTransport} />
+              <PlanningRow label="Parking" value={location.verification.start.parking} />
+            </div>
+          </section>
         )}
 
         {location.verification && (
@@ -272,6 +288,15 @@ export default async function LocationPage({ params }: Props) {
           </p>
         </div>
       </div>
+    </div>
+  );
+}
+
+function PlanningRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="grid grid-cols-[7.25rem_1fr] gap-3 border-b border-white/[0.06] px-3.5 py-3 last:border-b-0">
+      <span className="text-xs font-medium text-fg-muted">{label}</span>
+      <span className="text-xs leading-relaxed text-stone-300">{value}</span>
     </div>
   );
 }

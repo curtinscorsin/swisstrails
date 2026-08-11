@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useDragControls, type PanInfo } from "framer-motion";
 import {
   X, MapPin, ArrowRight, Clock, Mountain, Navigation,
-  Route, MapPinned, Share2, Car, Bus, Gauge, Ruler,
+  Route, MapPinned, Share2, Car, Bus, Gauge, Ruler, CalendarDays,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { SPRING, EASE_OUT } from "@/lib/motion";
@@ -241,14 +241,23 @@ export function LocationDetailSheet({
             {/* ── SCROLLABLE BODY ── */}
             <div ref={scrollRef} className="flex-1 overflow-y-auto overscroll-contain">
               <div className="px-5 pb-4 space-y-5">
-                {/* Key stats */}
+                {location.tagline && (
+                  <p className="text-base font-medium leading-relaxed text-stone-200">
+                    {location.tagline}
+                  </p>
+                )}
+
+                {/* Key stats — only sourced or explicitly stored values */}
                 <div className="grid grid-cols-2 gap-2">
                   <Stat icon={<Gauge className="w-4 h-4" />} label="Access effort" value={diff.label} valueClass={DIFF_COLORS[location.difficulty]} />
-                  {location.distanceKm != null && (
-                    <Stat icon={<Ruler className="w-4 h-4" />} label="Distance" value={`${location.distanceKm} km`} />
+                  {(location.verification?.distanceKm ?? location.distanceKm) != null && (
+                    <Stat icon={<Ruler className="w-4 h-4" />} label="Route distance" value={`${location.verification?.distanceKm ?? location.distanceKm} km`} />
+                  )}
+                  {location.verification?.ascentM != null && (
+                    <Stat icon={<Mountain className="w-4 h-4" />} label="Elevation gain" value={`${location.verification.ascentM.toLocaleString()} m`} />
                   )}
                   {location.elevation != null && (
-                    <Stat icon={<Mountain className="w-4 h-4" />} label="Elevation" value={`${location.elevation.toLocaleString()} m`} />
+                    <Stat icon={<Mountain className="w-4 h-4" />} label="Destination elevation" value={`${location.elevation.toLocaleString()} m`} />
                   )}
                   {(location.verification?.durationMinutes != null || location.visitDurationHours.max > 0) && (
                     <Stat
@@ -268,9 +277,24 @@ export function LocationDetailSheet({
                   ) : null}
                 </div>
 
-                {/* Description */}
-                {location.description && (
-                  <p className="text-stone-300 text-sm leading-relaxed">{location.description}</p>
+                {(location.description || location.longDescription) && (
+                  <Section title="About this place">
+                    <div className="space-y-3 text-sm leading-relaxed">
+                      {location.description && <p className="text-stone-300">{location.description}</p>}
+                      {location.longDescription && <p className="text-stone-400">{location.longDescription}</p>}
+                    </div>
+                  </Section>
+                )}
+
+                {location.verification && (
+                  <Section title="Plan your visit" icon={<CalendarDays className="h-3.5 w-3.5" />}>
+                    <div className="overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.025]">
+                      <PlanningRow label="Start" value={location.verification.start.name} />
+                      <PlanningRow label="Season" value={location.verification.season} />
+                      <PlanningRow label="Public transport" value={location.verification.start.publicTransport} />
+                      <PlanningRow label="Parking" value={location.verification.start.parking} />
+                    </div>
+                  </Section>
                 )}
 
                 {location.verification && (
@@ -476,5 +500,14 @@ function InfoChip({ icon, children }: { icon: React.ReactNode; children: React.R
       {icon}
       {children}
     </span>
+  );
+}
+
+function PlanningRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="grid grid-cols-[7.25rem_1fr] gap-3 border-b border-white/[0.06] px-3.5 py-3 last:border-b-0">
+      <span className="text-xs font-medium text-fg-muted">{label}</span>
+      <span className="text-xs leading-relaxed text-stone-300">{value}</span>
+    </div>
   );
 }

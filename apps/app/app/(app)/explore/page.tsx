@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertTriangle, BadgeCheck, MapPin, Search, SlidersHorizontal, X } from "lucide-react";
+import { AlertTriangle, BadgeCheck, Clock, Gauge, MapPin, Ruler, Search, SlidersHorizontal, X } from "lucide-react";
 import { useMapStore } from "@/store/map-store";
 import { useGeoStore } from "@/store/geo-store";
 import { CURATED_LOCATIONS } from "@/data/curated-locations";
@@ -13,7 +13,7 @@ import { SortControl } from "@/components/app/sort-control";
 import { LocationDetailSheet } from "@/components/app/location-detail-sheet";
 import { ResolvedLocationPhoto } from "@/components/app/location-photo";
 import { TripPill } from "@/components/app/trip-pill";
-import { regionConfig, cn } from "@/lib/utils";
+import { regionConfig, difficultyConfig, formatDuration, cn } from "@/lib/utils";
 import { haptics } from "@/lib/haptics";
 import type { Location } from "@/types";
 import { CATALOGUE_METRICS } from "@swiss-trails/types";
@@ -189,16 +189,18 @@ export default function ExplorePage() {
                   Every page links its destination sources. Route and access details appear only when supported; unresolved information is labelled clearly.
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-0 lg:w-72">
+              <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-0 lg:w-80">
                 <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
                   <p className="font-heading text-3xl text-fg">{CATALOGUE_METRICS.publishedLocations}</p>
                   <p className="mt-1 text-xs leading-snug text-fg-muted">published places</p>
                 </div>
                 <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
-                  <p className="font-heading text-3xl text-fg">{CATALOGUE_METRICS.creditedPhotographs}</p>
-                  <p className="mt-1 text-xs leading-snug text-fg-muted">credited location photographs</p>
+                  <p className="font-heading text-3xl text-fg">{CATALOGUE_METRICS.sourcedContextLocations}</p>
+                  <p className="mt-1 text-xs leading-snug text-fg-muted">with sourced route or visit context</p>
                 </div>
-                <p className="col-span-2 px-1 pt-1 text-[11px] text-stone-500">Last editorial check: 10 August 2026</p>
+                <p className="col-span-2 px-1 pt-1 text-[11px] leading-relaxed text-stone-500">
+                  {CATALOGUE_METRICS.verifiedAccessPoints} separate access points verified · {CATALOGUE_METRICS.creditedPhotographs} credited photographs · checked 10 August 2026
+                </p>
               </div>
             </div>
             <div className="flex items-end justify-between pb-1 pt-6">
@@ -280,6 +282,9 @@ function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardPr
       (location.verification.start.coordinates.lat !== location.coordinates.lat ||
         location.verification.start.coordinates.lng !== location.coordinates.lng)
   );
+  const routeDistance = location.verification?.distanceKm ?? location.distanceKm;
+  const routeDuration = location.verification?.durationMinutes;
+  const difficulty = difficultyConfig[location.difficulty];
 
   return (
     <motion.button
@@ -354,6 +359,24 @@ function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardPr
       <div className="absolute bottom-0 left-0 right-0 z-[3] p-3 text-left sm:p-4">
         <p className="line-clamp-2 text-sm font-medium leading-tight text-white sm:text-base">{location.name}</p>
         <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.12em] text-gold-200/85">{regionConfig[location.region].label}</p>
+        <div className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[10px] font-medium text-white/75 sm:text-[11px]">
+          <span className="inline-flex items-center gap-1">
+            <Gauge className="h-3 w-3" />
+            {difficulty.label}
+          </span>
+          {routeDistance != null && (
+            <span className="inline-flex items-center gap-1">
+              <Ruler className="h-3 w-3" />
+              {routeDistance} km
+            </span>
+          )}
+          {routeDuration != null && (
+            <span className="inline-flex items-center gap-1">
+              <Clock className="h-3 w-3" />
+              {formatDuration(routeDuration)}
+            </span>
+          )}
+        </div>
       </div>
     </motion.button>
   );
