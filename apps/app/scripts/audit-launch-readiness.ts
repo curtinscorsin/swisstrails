@@ -27,6 +27,12 @@ check(middleware.includes('process.env.NODE_ENV !== "production"'), "Demo Mode m
 check(middleware.includes('"/location"'), "Location detail routes must be included in paid access control");
 check(middleware.includes("has_purchased"), "Paid routes must check the purchase entitlement");
 
+const loginPage = read("apps/app/app/(auth)/login/page.tsx");
+check(
+  loginPage.includes("NEXT_PUBLIC_GOOGLE_AUTH_ENABLED"),
+  "Google sign-in must be protected by a production feature flag"
+);
+
 const migration = read("apps/app/supabase/migrations/20260810111955_production_access_security.sql");
 check(migration.includes("private.has_paid_access"), "Database paid-access policy is missing");
 check(migration.includes("grant update (name, avatar_url)"), "Sensitive profile columns are not restricted");
@@ -38,6 +44,8 @@ for (const file of [
   "apps/app/public/icon-512x512.png",
   "apps/app/app/offline/page.tsx",
   "apps/app/app/service-unavailable/page.tsx",
+  "apps/app/app/api/health/route.ts",
+  "apps/app/app/.well-known/security.txt/route.ts",
   "apps/marketing/app/privacy/page.tsx",
   "apps/marketing/app/terms/page.tsx",
 ]) {
@@ -59,6 +67,7 @@ if (process.argv.includes("--production")) {
     "NEXT_PUBLIC_SUPABASE_ANON_KEY",
     "SUPABASE_SERVICE_ROLE_KEY",
     "NEXT_PUBLIC_APP_URL",
+    "NEXT_PUBLIC_GOOGLE_AUTH_ENABLED",
     "NEXT_PUBLIC_SALES_ENABLED",
     "STRIPE_SECRET_KEY",
     "STRIPE_WEBHOOK_SECRET",

@@ -77,6 +77,7 @@ Set:
 ```text
 NEXT_PUBLIC_MOCK_MODE=false
 NEXT_PUBLIC_SALES_ENABLED=false
+NEXT_PUBLIC_GOOGLE_AUTH_ENABLED=false
 NEXT_PUBLIC_APP_URL=https://app.swiss-trails.com
 NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...
@@ -93,6 +94,11 @@ LEGAL_OPERATOR_ADDRESS=...
 LEGAL_OPERATOR_COUNTRY=Switzerland
 SUPPORT_EMAIL=hello@swiss-trails.com
 ```
+
+Keep `NEXT_PUBLIC_GOOGLE_AUTH_ENABLED=false` until the Google OAuth client is
+configured in Google Cloud, enabled in Supabase and tested on production. The
+login page hides the button while this switch is false, so customers never see
+a broken authentication option.
 
 ### Marketing (`swiss-trails.com`)
 
@@ -153,3 +159,7 @@ Then test on a real iPhone and Android phone:
 Finally configure uptime/error alerts and keep a tested database-backup recovery
 procedure. Do not announce the public launch until a full purchase and refund
 have succeeded in live mode.
+
+Use `https://app.swiss-trails.com/api/health` for an uptime monitor. A `200`
+response means both the application configuration and Supabase Auth health
+check succeeded; a `503` means the service needs attention.
