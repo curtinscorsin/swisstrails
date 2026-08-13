@@ -2420,5 +2420,357 @@
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:STEIN_AM_RHEIN_(SUIZA).jpg",
       "isHero": false
     }
+  ],
+  "spot-lauterbrunnen-valley": [
+    {
+      "id": "img-lauterbrunnen-valley-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Lauterbrunnen-valley.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Lauterbrunnen Valley",
+      "width": 1840,
+      "height": 1232,
+      "credit": "Keith Halstead · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lauterbrunnen-valley.jpg",
+      "isHero": true
+    },
+    {
+      "id": "img-lauterbrunnen-valley-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Lauterbrunnen_28.07.2009_15-26-36.jpg",
+      "alt": "Lauterbrunnen Valley",
+      "width": 4310,
+      "height": 2868,
+      "credit": "Hansueli Krapf · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lauterbrunnen_28.07.2009_15-26-36.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-lauterbrunnen-valley-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Lauterbrunnen_28.07.2009_15-40-22.JPG",
+      "alt": "Lauterbrunnen Valley",
+      "width": 4288,
+      "height": 2848,
+      "credit": "Hansueli Krapf · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lauterbrunnen_28.07.2009_15-40-22.JPG",
+      "isHero": false
+    }
+  ],
+  "spot-stoos-fronalpstock": [
+    {
+      "id": "img-stoos-fronalpstock-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/22/Stoos_Fronalpstock_Canton_Schwyz.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Stoos–Fronalpstock",
+      "width": 4608,
+      "height": 3456,
+      "credit": "Waldindu · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stoos_Fronalpstock_Canton_Schwyz.jpg",
+      "isHero": true
+    },
+    {
+      "id": "img-stoos-fronalpstock-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Fronalpstock01.jpg",
+      "alt": "Stoos–Fronalpstock",
+      "width": 2272,
+      "height": 1704,
+      "credit": "Markus Schweiß · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fronalpstock01.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-stoos-fronalpstock-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/PanoramaBrunnen.jpg",
+      "alt": "Stoos–Fronalpstock",
+      "width": 11190,
+      "height": 4266,
+      "credit": "Xtr6440 · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:PanoramaBrunnen.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-lavaux-vineyard-terraces": [
+    {
+      "id": "img-lavaux-vineyard-terraces-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Lavaux_Switzerland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Lavaux Vineyard Terraces",
+      "width": 5463,
+      "height": 3073,
+      "credit": "Lorenz Poffet · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lavaux_Switzerland.jpg",
+      "isHero": true
+    },
+    {
+      "id": "img-lavaux-vineyard-terraces-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Belv%C3%A9d%C3%A8re_de_Lavaux_01.jpg",
+      "alt": "Lavaux Vineyard Terraces",
+      "width": 4500,
+      "height": 3111,
+      "credit": "Joël Grandcollot · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Belv%C3%A9d%C3%A8re_de_Lavaux_01.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-lavaux-vineyard-terraces-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Autumn_in_the_vineyards_%2844914504795%29.jpg",
+      "alt": "Lavaux Vineyard Terraces",
+      "width": 6000,
+      "height": 4000,
+      "credit": "visamatti · CC BY-SA 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Autumn_in_the_vineyards_(44914504795).jpg",
+      "isHero": false
+    }
+  ],
+  "spot-grindelwald-first": [
+    {
+      "id": "img-grindelwald-first-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/00_3403_Grindelwald-First_%28Schweiz%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Grindelwald First",
+      "width": 4500,
+      "height": 3000,
+      "credit": "W. Bulach · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:00_3403_Grindelwald-First_(Schweiz).jpg",
+      "isHero": true
+    },
+    {
+      "id": "img-grindelwald-first-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/69/Berghaus_First_%287622568370%29.jpg",
+      "alt": "Grindelwald First",
+      "width": 3000,
+      "height": 2241,
+      "credit": "Peter Gronemann from Switzerland · CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Berghaus_First_(7622568370).jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-grindelwald-first-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Beautiful_Grindelwald.jpg",
+      "alt": "Grindelwald First",
+      "width": 4000,
+      "height": 3000,
+      "credit": "Zacharie Grossen · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beautiful_Grindelwald.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-rhine-gorge-ruinaulta": [
+    {
+      "id": "img-rhine-gorge-ruinaulta-wikidata",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Flims_Conn.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Rhine Gorge (Ruinaulta)",
+      "width": 1600,
+      "height": 1200,
+      "credit": "upload by Adrian Michael · CC BY 2.5",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flims_Conn.jpg",
+      "isHero": true
+    },
+    {
+      "id": "img-rhine-gorge-ruinaulta-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/CH_GR_Flims_Ruinaulta.JPG",
+      "alt": "Rhine Gorge (Ruinaulta)",
+      "width": 2048,
+      "height": 1536,
+      "credit": "GoodRJ · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:CH_GR_Flims_Ruinaulta.JPG",
+      "isHero": false
+    },
+    {
+      "id": "img-rhine-gorge-ruinaulta-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/2011-07-25_16-08-38_Switzerland_Kanton_Graub%C3%BCnden_Sagogn_Valendas_01.JPG",
+      "alt": "Rhine Gorge (Ruinaulta)",
+      "width": 4276,
+      "height": 2848,
+      "credit": "Hansueli Krapf This file was uploaded with Commonist . · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2011-07-25_16-08-38_Switzerland_Kanton_Graub%C3%BCnden_Sagogn_Valendas_01.JPG",
+      "isHero": false
+    }
+  ],
+  "spot-bernina-pass-and-lago-bianco": [
+    {
+      "id": "img-bernina-pass-and-lago-bianco-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Bernina-Berninabahn-Lago_Bianco-view_from_the_dam_south-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Bernina Pass and Lago Bianco",
+      "width": 4592,
+      "height": 2576,
+      "credit": "Asurnipal · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bernina-Berninabahn-Lago_Bianco-view_from_the_dam_south-01.jpg",
+      "isHero": true
+    },
+    {
+      "id": "img-bernina-pass-and-lago-bianco-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Bernina_Hospiz.jpg",
+      "alt": "Bernina Pass and Lago Bianco",
+      "width": 2592,
+      "height": 1944,
+      "credit": "Adrian Michael · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bernina_Hospiz.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-bernina-pass-and-lago-bianco-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Berninapass-003.jpg",
+      "alt": "Bernina Pass and Lago Bianco",
+      "width": 3264,
+      "height": 2448,
+      "credit": "Tilman2007/Dr. Volkmar Rudolf · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Berninapass-003.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-grande-caricaie": [
+    {
+      "id": "img-grande-caricaie-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Chabrey%2C_la_Grande_Cari%C3%A7aie.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Grande Cariçaie",
+      "width": 3264,
+      "height": 2448,
+      "credit": "Chalantau · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chabrey,_la_Grande_Cari%C3%A7aie.jpg",
+      "isHero": true
+    },
+    {
+      "id": "img-grande-caricaie-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/59/Gde_Cari%C3%A7aie_vers_Cheyres_1.JPG",
+      "alt": "Grande Cariçaie",
+      "width": 3190,
+      "height": 2349,
+      "credit": "Cú Faoil · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gde_Cari%C3%A7aie_vers_Cheyres_1.JPG",
+      "isHero": false
+    },
+    {
+      "id": "img-grande-caricaie-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/15/Gde_Cari%C3%A7aie_vers_Cheyres_2.JPG",
+      "alt": "Grande Cariçaie",
+      "width": 2749,
+      "height": 1744,
+      "credit": "Cú Faoil · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gde_Cari%C3%A7aie_vers_Cheyres_2.JPG",
+      "isHero": false
+    }
+  ],
+  "spot-earth-pyramids-of-euseigne": [
+    {
+      "id": "img-earth-pyramids-of-euseigne-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Pyramides_d%27Euseigne_2021b.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Earth Pyramids of Euseigne",
+      "width": 4000,
+      "height": 3000,
+      "credit": "Whgler · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pyramides_d%27Euseigne_2021b.jpg",
+      "isHero": true
+    },
+    {
+      "id": "img-earth-pyramids-of-euseigne-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Euseigne-Tunnel.JPG",
+      "alt": "Earth Pyramids of Euseigne",
+      "width": 1632,
+      "height": 1224,
+      "credit": "Gabriele Delhey · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Euseigne-Tunnel.JPG",
+      "isHero": false
+    },
+    {
+      "id": "img-earth-pyramids-of-euseigne-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Pyramideseuseigne.jpg",
+      "alt": "Earth Pyramids of Euseigne",
+      "width": 2816,
+      "height": 2112,
+      "credit": "Oscar · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pyramideseuseigne.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-piora-valley-and-lago-ritom": [
+    {
+      "id": "img-piora-valley-and-lago-ritom-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Lago_Ritom_%2B_Lago_di_Tom.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "alt": "Piora Valley and Lago Ritom",
+      "width": 4032,
+      "height": 3024,
+      "credit": "Albinfo · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_Ritom_%2B_Lago_di_Tom.jpg",
+      "isHero": true
+    },
+    {
+      "id": "img-piora-valley-and-lago-ritom-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Ritom.jpg",
+      "alt": "Piora Valley and Lago Ritom",
+      "width": 2560,
+      "height": 1920,
+      "credit": "TonnyB · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ritom.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-piora-valley-and-lago-ritom-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Ritom_21.06.08_023.jpg",
+      "alt": "Piora Valley and Lago Ritom",
+      "width": 2048,
+      "height": 1536,
+      "credit": "Claudio Vosti · CC BY-SA 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ritom_21.06.08_023.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-monte-san-giorgio": [
+    {
+      "id": "img-monte-san-giorgio-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/PanoramaLuganerSee.jpg",
+      "alt": "Monte San Giorgio",
+      "width": 16606,
+      "height": 2301,
+      "credit": "No machine-readable author provided. OisinM assumed (based on copyright claims). · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:PanoramaLuganerSee.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-monte-san-giorgio-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Lago_di_Lugano.jpg",
+      "alt": "Monte San Giorgio",
+      "width": 2182,
+      "height": 1700,
+      "credit": "Valser · Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Lugano.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-monte-san-giorgio-gallery-3",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Lago_di_Lugano2.jpg",
+      "alt": "Monte San Giorgio",
+      "width": 2182,
+      "height": 1700,
+      "credit": "Valser · Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Lugano2.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-alggialp": [
+    {
+      "id": "img-alggialp-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/%C3%84lggi_Alp.JPG",
+      "alt": "Älggialp",
+      "width": 3264,
+      "height": 2448,
+      "credit": "Staycoolandbegood · Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C3%84lggi_Alp.JPG",
+      "isHero": false
+    },
+    {
+      "id": "img-alggialp-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/2016_Alp_Aelggi_Obwalden.jpg",
+      "alt": "Älggialp",
+      "width": 4928,
+      "height": 3264,
+      "credit": "Beneaththeroses · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2016_Alp_Aelggi_Obwalden.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-alggialp-gallery-3",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/44/2016_Aelggi_Mittelpunkt_der_Schweiz.jpg",
+      "alt": "Älggialp",
+      "width": 4928,
+      "height": 3264,
+      "credit": "Beneaththeroses · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2016_Aelggi_Mittelpunkt_der_Schweiz.jpg",
+      "isHero": false
+    }
   ]
 }

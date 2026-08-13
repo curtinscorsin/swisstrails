@@ -13,6 +13,38 @@ const USER_AGENT = "SwissTrailsGalleryAudit/1.0 (editorial image provenance)";
 const ACCEPTED_LICENSE = /^(CC0|CC BY(?:-SA)?(?: [1-4]\.0)?|Public domain)$/i;
 const REJECT_TITLE = /\b(map|karte|logo|flag|coat of arms|diagram|plan|icon|locator|sign|poster|stamp)\b/i;
 
+// Some destinations use a Commons category name that differs from the public
+// catalogue title or have an ambiguous Wikidata P373 value. These mappings were
+// reviewed against the Commons category page and keep the generator constrained
+// to the exact place rather than broad keyword search results.
+const REVIEWED_CATEGORY_OVERRIDES = {
+  "spot-lauterbrunnen-valley": "Lauterbrunnental",
+  "spot-pilatus": "Pilatus (mountain)",
+  "spot-stoos-fronalpstock": "Fronalpstock (Schwyz)",
+  "spot-lavaux-vineyard-terraces": "Lavaux",
+  "spot-grindelwald-first": "First (Grindelwald)",
+  "spot-rhine-gorge-ruinaulta": "Ruinaulta",
+  "spot-bernina-pass-and-lago-bianco": "Lago Bianco (Bernina)",
+  "spot-verzasca-valley": "Val Verzasca",
+  "spot-abbey-district-of-st-gallen": "Abbey of St. Gall",
+  "spot-rosenlaui-glacier-gorge": "Rosenlaui Glacier Gorge",
+  "spot-giessbach-falls": "Giessbach Falls",
+  "spot-gantrischseeli": "Gantrischseeli",
+  "spot-grande-caricaie": "Grande Cariçaie",
+  "spot-ogoz-island": "Île d'Ogoz",
+  "spot-earth-pyramids-of-euseigne": "Pyramides d'Euseigne",
+  "spot-gorges-du-durnand": "Gorges du Durnand",
+  "spot-foroglio-waterfall": "Foroglio waterfall",
+  "spot-piora-valley-and-lago-ritom": "Lago Ritom",
+  "spot-lago-di-tome": "Lago di Tomè",
+  "spot-monte-san-giorgio": "Monte San Giorgio (Prealpi Luganesi)",
+  "spot-santa-petronilla-waterfall": "Cascata di Santa Petronilla",
+  "spot-viamala-gorge": "Viamala",
+  "spot-pizol-five-lakes": "Pizol five lakes hike",
+  "spot-ascher-ebenalp": "Berggasthaus Aescher-Wildkirchli",
+  "spot-alggialp": "Älggi-Alp",
+};
+
 const catalogue = JSON.parse(await readFile(cataloguePath, "utf8"));
 const existingSets = await Promise.all(existingPaths.map(async (path) => JSON.parse(await readFile(path, "utf8"))));
 const existingById = Object.assign({}, ...existingSets);
@@ -64,6 +96,10 @@ async function api(host, params) {
 }
 
 async function wikidataEntity(location) {
+  const reviewedCategory = REVIEWED_CATEGORY_OVERRIDES[location.id];
+  if (reviewedCategory) {
+    return { id: "reviewed-category", category: reviewedCategory, coordinate: location.coordinates, distanceKm: 0 };
+  }
   const searchUrl = new URL("https://www.wikidata.org/w/api.php");
   for (const [key, value] of Object.entries({
     action: "wbsearchentities", format: "json", origin: "*", language: "en", uselang: "en",
@@ -139,15 +175,15 @@ const galleries = { ...priorGalleries };
 const report = [];
 for (const [position, location] of catalogue.entries()) {
   try {
-    const entity = await wikidataEntity(location);
-    if (!entity) {
-      report.push({ id: location.id, name: location.name, status: "no-coordinate-matched-commons-category" });
-      continue;
-    }
     const current = existingById[location.id] ?? [];
     const needed = Math.max(0, 3 - current.length);
     if (needed === 0) {
-      report.push({ id: location.id, name: location.name, status: "already-complete", wikidata: entity.id, category: entity.category });
+      report.push({ id: location.id, name: location.name, status: "already-complete" });
+      continue;
+    }
+    const entity = await wikidataEntity(location);
+    if (!entity) {
+      report.push({ id: location.id, name: location.name, status: "no-coordinate-matched-commons-category" });
       continue;
     }
     const files = await categoryFiles(entity.category);

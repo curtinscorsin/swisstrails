@@ -223,9 +223,9 @@ export const CATALOGUE_METRICS = {
   publishedLocations: 100,
   verifiedAccessPoints: 13,
   sourcedContextLocations: 87,
-  creditedPhotographs: 247,
-  locationsWithThreePhotographs: 72,
-  placeholderLocations: 3,
+  creditedPhotographs: 271,
+  locationsWithThreePhotographs: 83,
+  placeholderLocations: 1,
   lastEditorialCheck: "2026-08-10",
 } as const;
 
