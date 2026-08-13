@@ -53,10 +53,20 @@ export function useLocationImages(location: Location | null): LocationImage[] {
 
   // 1. Supabase / user uploads (future, flag-gated).
   const supabase = resolveSupabaseImages(location);
-  if (supabase.length > 0) return supabase;
+  const publishable = (images: LocationImage[]) => images.filter((image) =>
+    Boolean(
+      image.url?.startsWith("https://") &&
+      image.credit?.trim() &&
+      image.sourceUrl?.startsWith("https://") &&
+      !/unknown|no machine-readable|assumed|anonymous/i.test(image.credit)
+    )
+  );
+  const sourcedSupabase = publishable(supabase);
+  if (sourcedSupabase.length > 0) return sourcedSupabase;
 
   // 2. Admin override (localStorage).
-  if (override && override.length > 0) return override;
+  const sourcedOverride = publishable(override ?? []);
+  if (sourcedOverride.length > 0) return sourcedOverride;
 
   // 3. Destination-verified Wikimedia / explicit gallery images, deduped.
   return resolveSourcedImages(location);

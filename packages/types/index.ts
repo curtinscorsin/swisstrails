@@ -223,10 +223,10 @@ export const CATALOGUE_METRICS = {
   publishedLocations: 86,
   verifiedAccessPoints: 7,
   sourcedContextLocations: 79,
-  creditedPhotographs: 232,
-  locationsWithThreePhotographs: 69,
+  creditedPhotographs: 226,
+  locationsWithThreePhotographs: 65,
   placeholderLocations: 1,
-  lastEditorialCheck: "2026-08-10",
+  lastEditorialCheck: "2026-08-14",
 } as const;
 
 /* ─────────────────────────────────────────────

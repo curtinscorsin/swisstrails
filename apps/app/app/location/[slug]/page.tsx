@@ -85,6 +85,18 @@ export default async function LocationPage({ params }: Props) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-trail-950 via-trail-950/30 to-black/20" />
 
+        {primaryImage?.credit && primaryImage.sourceUrl && (
+          <a
+            href={primaryImage.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="absolute right-3 top-[max(0.75rem,env(safe-area-inset-top))] max-w-[55vw] rounded-full bg-black/55 px-3 py-1.5 text-[10px] leading-tight text-white/80 backdrop-blur-sm transition-colors hover:text-white"
+            aria-label={`Open source for hero photograph by ${primaryImage.credit}`}
+          >
+            Photo: {primaryImage.credit} ↗
+          </a>
+        )}
+
         {/* Back */}
         <div className="absolute top-0 left-0 right-0 px-2 pt-[max(0.5rem,env(safe-area-inset-top))] flex items-center justify-between">
           <Link

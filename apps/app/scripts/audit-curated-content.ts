@@ -139,6 +139,10 @@ for (const location of CURATED_LOCATIONS) {
     assert(photo.url.startsWith("https://upload.wikimedia.org/"), `${prefix}: non-Wikimedia published photo`);
     assert(/\.(?:jpe?g|png|webp)(?:\?|$)/i.test(photo.url), `${prefix}: browser-unsafe image format`);
     assert(Boolean(photo.credit), `${prefix}: photo is missing creator/licence credit`);
+    assert(
+      !/unknown|no machine-readable|assumed|anonymous/i.test(photo.credit ?? ""),
+      `${prefix}: photo creator is unresolved`
+    );
     assert(photo.sourceUrl?.startsWith("https://commons.wikimedia.org/wiki/File:"), `${prefix}: photo is missing a Commons source page`);
     assert((photo.width ?? 0) >= 1000, `${prefix}: photo is under 1000px wide`);
     if ((photo.width ?? 0) / (photo.height ?? 1) >= 1.15) landscapeImageCount += 1;

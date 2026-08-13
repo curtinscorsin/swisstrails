@@ -19,6 +19,8 @@ export function resolveSourcedImages(location: Location): LocationImage[] {
     // those files in the research data, but never expose them as card or hero
     // images where they would appear broken to visitors.
     if (!/\.(?:jpe?g|png|webp)(?:\?|$)/i.test(image.url)) continue;
+    if (!image.credit || !image.sourceUrl) continue;
+    if (/unknown|no machine-readable|assumed|anonymous/i.test(image.credit)) continue;
     seen.add(image.url);
     // The curated record is the canonical place name. Generated source data may
     // still contain an older spelling, so keep the credit/URL but align the

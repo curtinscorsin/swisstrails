@@ -62,6 +62,22 @@ export function PhotoStrip({ photos, className }: PhotoStripProps) {
         ))}
       </div>
 
+      <div className="mt-2 space-y-1" aria-label="Photography credits">
+        {photos.map((image, index) => (
+          <a
+            key={`credit-${image.id ?? image.url}`}
+            href={image.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="flex min-h-7 items-center gap-2 text-[10px] leading-snug text-stone-500 transition-colors hover:text-stone-300"
+          >
+            <span className="w-4 shrink-0 text-right tabular-nums text-stone-600">{index + 1}</span>
+            <span className="truncate">{image.credit}</span>
+            <span aria-hidden className="shrink-0">↗</span>
+          </a>
+        ))}
+      </div>
+
       <Lightbox
         photos={photos}
         index={lightboxIndex}
