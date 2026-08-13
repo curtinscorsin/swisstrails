@@ -17,7 +17,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Named viewpoints and mountain destinations with honest map-point explanations.",
     icon: "🏔",
-    count: 29,
+    count: 28,
     gradient: "from-alpine-900/40 to-trail-900/40",
   },
   {
@@ -35,7 +35,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Alpine valleys, forests and distinctive outdoor places that reward a slower journey.",
     icon: "📸",
-    count: 20,
+    count: 19,
     gradient: "from-rose-950/50 to-trail-900/40",
   },
 ];

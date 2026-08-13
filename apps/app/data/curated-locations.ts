@@ -775,7 +775,7 @@ const detailedByName = new Map(DETAILED_LOCATIONS.map((location) => [location.na
 // The paid guide is intentionally an outdoor collection. These valid Swiss
 // sights remain in the research archive, but are not published as hiking or
 // nature destinations merely to inflate the catalogue count.
-const ARCHIVED_SIGHTSEEING_IDS = new Set([
+const ARCHIVED_CATALOGUE_IDS = new Set([
   "spot-chapel-bridge",
   "spot-chateau-de-chillon",
   "spot-three-castles-of-bellinzona",
@@ -785,10 +785,15 @@ const ARCHIVED_SIGHTSEEING_IDS = new Set([
   "spot-st-ursanne",
   "spot-brissago-islands",
   "spot-stein-am-rhein",
+  // Broader records that duplicate a more precise outdoor destination.
+  // Bachalpsee already carries the First–Bachalpsee route, while Ponte dei
+  // Salti represents the exact Lavertezzo point used by the Verzasca card.
+  "spot-grindelwald-first",
+  "spot-verzasca-valley",
 ]);
 
 export const CURATED_LOCATIONS: Location[] = (masterCatalogue as MasterCatalogueEntry[])
-  .filter((entry) => !ARCHIVED_SIGHTSEEING_IDS.has(entry.id))
+  .filter((entry) => !ARCHIVED_CATALOGUE_IDS.has(entry.id))
   .map((entry) => detailedByName.get(entry.name) ?? buildSourceBackedLocation(entry));
 
 export const CURATED_LOCATION_IDS = new Set(CURATED_LOCATIONS.map((location) => location.id));

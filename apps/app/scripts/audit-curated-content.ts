@@ -25,6 +25,15 @@ function isSwissCoordinate(lat: number, lng: number) {
   return lat >= 45.7 && lat <= 47.9 && lng >= 5.7 && lng <= 10.7;
 }
 
+function coordinateDistanceKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
+  const radians = (degrees: number) => degrees * Math.PI / 180;
+  const dLat = radians(b.lat - a.lat);
+  const dLng = radians(b.lng - a.lng);
+  const value = Math.sin(dLat / 2) ** 2 +
+    Math.cos(radians(a.lat)) * Math.cos(radians(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 6371 * 2 * Math.asin(Math.sqrt(value));
+}
+
 assert(
   CURATED_LOCATIONS.length === CATALOGUE_METRICS.publishedLocations,
   `Expected ${CATALOGUE_METRICS.publishedLocations} published places, found ${CURATED_LOCATIONS.length}`
@@ -33,6 +42,17 @@ assert(
 for (const field of ["id", "slug", "name"] as const) {
   const repeated = duplicates(CURATED_LOCATIONS.map((location) => location[field]));
   assert(repeated.length === 0, `Duplicate ${field}: ${repeated.join(", ")}`);
+}
+
+for (let index = 0; index < CURATED_LOCATIONS.length; index += 1) {
+  for (let other = index + 1; other < CURATED_LOCATIONS.length; other += 1) {
+    const first = CURATED_LOCATIONS[index];
+    const second = CURATED_LOCATIONS[other];
+    assert(
+      coordinateDistanceKm(first.coordinates, second.coordinates) >= 0.1,
+      `Near-duplicate destination pins: ${first.name} and ${second.name}`
+    );
+  }
 }
 
 for (const category of CATEGORIES) {
