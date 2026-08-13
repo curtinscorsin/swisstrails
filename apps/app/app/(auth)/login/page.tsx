@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Mail, ArrowRight, MailOpen } from "lucide-react";
+import { Mail, ArrowRight, KeyRound } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -35,11 +35,23 @@ function getFriendlyAuthError(message: string) {
   return "We could not start sign-in. Please try again in a moment.";
 }
 
+function getFriendlyCodeError(message: string) {
+  const normalized = message.toLowerCase();
+
+  if (normalized.includes("expired") || normalized.includes("invalid")) {
+    return "That code is invalid or has expired. Check the code and try again.";
+  }
+
+  return "We could not verify that code. Please try again.";
+}
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string>();
-  const [step, setStep] = useState<"init" | "email-sent">("init");
+  const [step, setStep] = useState<"init" | "code-sent">("init");
+  const [otp, setOtp] = useState("");
   const [isEmailLoading, setIsEmailLoading] = useState(false);
+  const [isOtpLoading, setIsOtpLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
   useEffect(() => {
@@ -78,7 +90,37 @@ export default function LoginPage() {
       haptics.warn();
       return;
     }
-    setStep("email-sent");
+    setStep("code-sent");
+  }
+
+  async function handleCodeVerification(e: React.FormEvent) {
+    e.preventDefault();
+    if (!/^\d{6}$/.test(otp)) {
+      setEmailError("Enter the six-digit code from your email.");
+      haptics.warn();
+      return;
+    }
+
+    setEmailError(undefined);
+    setIsOtpLoading(true);
+    haptics.tap();
+    const supabase = createClient();
+    const { error } = await supabase.auth.verifyOtp({
+      email: email.trim(),
+      token: otp,
+      type: "email",
+    });
+    setIsOtpLoading(false);
+
+    if (error) {
+      setEmailError(getFriendlyCodeError(error.message));
+      haptics.warn();
+      return;
+    }
+
+    const next = new URLSearchParams(window.location.search).get("next");
+    const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/explore";
+    window.location.assign(safeNext);
   }
 
   async function handleGoogleSignIn() {
@@ -151,7 +193,7 @@ export default function LoginPage() {
           </motion.div>
         )}
 
-        {step === "email-sent" ? (
+        {step === "code-sent" ? (
           <motion.div
             className="card-solid rounded-xl p-8 text-center"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -163,39 +205,55 @@ export default function LoginPage() {
               animate={{ scale: 1 }}
               transition={{ delay: 0.1, type: "spring", stiffness: 300, damping: 20 }}
             >
-              <MailOpen className="w-9 h-9 text-alpine-300" strokeWidth={2} />
+              <KeyRound className="w-9 h-9 text-alpine-300" strokeWidth={2} />
             </motion.div>
-            <h2 className="t-h3 text-fg mb-2">Check your email</h2>
+            <h2 className="t-h3 text-fg mb-2">Enter your sign-in code</h2>
             <p className="text-fg-muted text-sm mb-6">
-              We sent a sign-in link to{" "}
+              We sent a six-digit code to{" "}
               <span className="text-fg font-medium">{email.trim()}</span>
             </p>
 
-            {IS_MOCK && (
+            <form onSubmit={handleCodeVerification} className="space-y-3 mb-5" noValidate>
+              <Input
+                type="text"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                placeholder="000000"
+                value={otp}
+                onChange={(e) => {
+                  setOtp(e.target.value.replace(/\D/g, "").slice(0, 6));
+                  if (emailError) setEmailError(undefined);
+                }}
+                className="text-center text-xl tracking-[0.35em]"
+                error={emailError}
+                aria-label="Six-digit sign-in code"
+                aria-invalid={!!emailError}
+                maxLength={6}
+              />
               <Button
-                asChild
+                type="submit"
                 variant="alpine"
                 size="lg"
-                className="w-full mb-4"
-                onClick={() => haptics.tap()}
+                className="w-full"
+                loading={isOtpLoading}
               >
-                <Link href="/explore">
-                  Continue to app
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                Verify and continue
+                <ArrowRight className="w-4 h-4" />
               </Button>
-            )}
+            </form>
 
             <p className="text-fg-muted text-xs">
-              Didn&apos;t receive it?{" "}
+              Wrong email or no code?{" "}
               <button
                 className="text-alpine-400 hover:underline pressable"
                 onClick={() => {
                   haptics.tap();
+                  setOtp("");
+                  setEmailError(undefined);
                   setStep("init");
                 }}
               >
-                Try again
+                Start again
               </button>
             </p>
           </motion.div>
@@ -257,7 +315,7 @@ export default function LoginPage() {
             </form>
 
             <p className="text-fg-muted text-xs text-center">
-              We&apos;ll send you a magic link — no password needed
+              We&apos;ll send you a six-digit code — no password needed
             </p>
           </div>
         )}
