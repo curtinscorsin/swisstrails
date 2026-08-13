@@ -63,8 +63,11 @@ for (const location of CURATED_LOCATIONS) {
   assert(verification, `${prefix}: missing verification record`);
   if (!verification) continue;
   const destinationOnly = verification.routeType === "Destination reference only";
+  const hasSeparateAccessPoint =
+    verification.start.coordinates.lat !== location.coordinates.lat ||
+    verification.start.coordinates.lng !== location.coordinates.lng;
   if (destinationOnly) destinationOnlyCount += 1;
-  if (verification.routeType.startsWith("Reviewed:")) reviewedContextCount += 1;
+  if (verification.routeType.startsWith("Reviewed:") && !hasSeparateAccessPoint) reviewedContextCount += 1;
 
   assert(verification.country === "Switzerland", `${prefix}: wrong country`);
   assert(Boolean(verification.canton), `${prefix}: missing canton`);

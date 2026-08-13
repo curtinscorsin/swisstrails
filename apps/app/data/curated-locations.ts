@@ -751,7 +751,7 @@ function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
           : "The destination identity and reference point are source-linked. Visit logistics and current operating conditions still require confirmation."),
       start: {
         name: reviewed?.route.startName ?? "Destination reference—not a verified trailhead",
-        coordinates: entry.coordinates,
+        coordinates: reviewed?.route.startCoordinates ?? entry.coordinates,
         parking: reviewed?.route.parking ?? "Not independently verified. Check official local visitor information and on-site signs.",
         publicTransport: reviewed?.route.publicTransport ?? "Not independently verified. Plan the journey with the current public-transport timetable.",
       },

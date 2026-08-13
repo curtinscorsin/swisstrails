@@ -221,8 +221,8 @@ export interface Favorite {
 
 export const CATALOGUE_METRICS = {
   publishedLocations: 100,
-  verifiedAccessPoints: 8,
-  sourcedContextLocations: 92,
+  verifiedAccessPoints: 13,
+  sourcedContextLocations: 87,
   creditedPhotographs: 247,
   locationsWithThreePhotographs: 72,
   placeholderLocations: 3,
