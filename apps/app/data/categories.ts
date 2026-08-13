@@ -16,7 +16,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Summits and viewpoints with sourced destination references.",
     icon: "🏔",
-    count: 25,
+    count: 24,
     gradient: "from-alpine-900/40 to-trail-900/40",
   },
   {
@@ -24,7 +24,7 @@ export const CATEGORIES: Category[] = [
     name: "Waterfalls",
     description: "Named waterfalls with access questions and current-status checks kept visible.",
     icon: "🌊",
-    count: 8,
+    count: 7,
     gradient: "from-cyan-900/40 to-trail-900/40",
   },
   {
@@ -66,7 +66,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Broad valleys and alpine landscapes where one pin cannot represent every route.",
     icon: "🌿",
-    count: 7,
+    count: 6,
     gradient: "from-orange-950/50 to-trail-900/40",
   },
 ];
@@ -76,7 +76,7 @@ export const PRICING = {
   currency: "CHF",
   period: "one-time" as const,
   features: [
-    "Access to 89 source-linked outdoor destinations",
+    "Access to 86 source-linked outdoor destinations",
     "Federal map references and visible uncertainties",
     "New routes added after source review",
     "Works on all devices — mobile & desktop",

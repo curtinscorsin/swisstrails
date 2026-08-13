@@ -790,6 +790,9 @@ const ARCHIVED_CATALOGUE_IDS = new Set([
   // Salti represents the exact Lavertezzo point used by the Verzasca card.
   "spot-grindelwald-first",
   "spot-verzasca-valley",
+  "spot-lauterbrunnen-valley",
+  "spot-gornergrat",
+  "spot-foroglio-waterfall",
 ]);
 
 export const CURATED_LOCATIONS: Location[] = (masterCatalogue as MasterCatalogueEntry[])

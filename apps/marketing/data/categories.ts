@@ -17,7 +17,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Named viewpoints and mountain destinations with honest map-point explanations.",
     icon: "🏔",
-    count: 28,
+    count: 27,
     gradient: "from-alpine-900/40 to-trail-900/40",
   },
   {
@@ -26,7 +26,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Waterfalls and river-cut landscapes with source-linked map points and current access notes.",
     icon: "🌊",
-    count: 16,
+    count: 15,
     gradient: "from-teal-900/40 to-trail-900/40",
   },
   {
@@ -35,7 +35,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Alpine valleys, forests and distinctive outdoor places that reward a slower journey.",
     icon: "📸",
-    count: 19,
+    count: 18,
     gradient: "from-rose-950/50 to-trail-900/40",
   },
 ];

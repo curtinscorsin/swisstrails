@@ -220,11 +220,11 @@ export interface Favorite {
 ───────────────────────────────────────────── */
 
 export const CATALOGUE_METRICS = {
-  publishedLocations: 89,
-  verifiedAccessPoints: 8,
-  sourcedContextLocations: 81,
-  creditedPhotographs: 238,
-  locationsWithThreePhotographs: 70,
+  publishedLocations: 86,
+  verifiedAccessPoints: 7,
+  sourcedContextLocations: 79,
+  creditedPhotographs: 232,
+  locationsWithThreePhotographs: 69,
   placeholderLocations: 1,
   lastEditorialCheck: "2026-08-10",
 } as const;
