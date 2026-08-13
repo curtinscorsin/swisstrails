@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Mail, ArrowRight, MailOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -41,6 +41,15 @@ export default function LoginPage() {
   const [step, setStep] = useState<"init" | "email-sent">("init");
   const [isEmailLoading, setIsEmailLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+
+  useEffect(() => {
+    const error = new URLSearchParams(window.location.search).get("error");
+    if (error === "confirmation_failed") {
+      setEmailError("That sign-in link is invalid or has expired. Request one new link below and use only the newest email.");
+    } else if (error === "oauth_failed") {
+      setEmailError("Google sign-in could not be completed. Please continue with email.");
+    }
+  }, []);
 
   async function handleEmailSignIn(e: React.FormEvent) {
     e.preventDefault();
