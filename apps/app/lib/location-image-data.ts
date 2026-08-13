@@ -15,6 +15,10 @@ export function resolveSourcedImages(location: Location): LocationImage[] {
 
   for (const image of [...(SOURCED_IMAGES[location.id] ?? []), ...location.gallery]) {
     if (!image?.url || seen.has(image.url)) continue;
+    // Browsers do not reliably display archive formats such as TIFF. Keep
+    // those files in the research data, but never expose them as card or hero
+    // images where they would appear broken to visitors.
+    if (!/\.(?:jpe?g|png|webp)(?:\?|$)/i.test(image.url)) continue;
     seen.add(image.url);
     // The curated record is the canonical place name. Generated source data may
     // still contain an older spelling, so keep the credit/URL but align the

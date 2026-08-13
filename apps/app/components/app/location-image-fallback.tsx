@@ -41,11 +41,14 @@ export function LocationImageFallback({
         </span>
         {!compact && (
           <>
-            <span className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
-              {category.label}
+            <span className="mt-3 max-w-[80%] font-heading text-xl leading-tight text-white/90">
+              {location.name}
             </span>
-            <span className="mt-1 text-[10px] text-white/40">
-              {regionConfig[location.region].label}
+            <span className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55">
+              {category.label} · {regionConfig[location.region].label}
+            </span>
+            <span className="mt-2 rounded-full border border-white/10 bg-black/15 px-2.5 py-1 text-[9px] uppercase tracking-[0.12em] text-white/40">
+              Verified photography pending
             </span>
           </>
         )}

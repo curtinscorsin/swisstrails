@@ -90,7 +90,7 @@ export default function ExplorePage() {
             <h1 className="font-heading text-4xl leading-none text-fg">Places worth knowing.</h1>
           </div>
           <p className="max-w-sm text-right text-sm leading-relaxed text-fg-muted">
-            One hundred Swiss destinations with source links and visible uncertainty instead of invented details.
+            A focused outdoor collection with source links and visible uncertainty instead of invented details.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -183,7 +183,7 @@ export default function ExplorePage() {
                   Source-linked collection
                 </p>
                 <h2 id="editorial-standard" className="font-heading text-3xl leading-[1.05] text-fg sm:text-4xl">
-                  One hundred places, honestly scoped.
+                  {CATALOGUE_METRICS.publishedLocations} outdoor places, honestly scoped.
                 </h2>
                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-fg-muted sm:text-base">
                   Every page links its destination sources. Route and access details appear only when supported; unresolved information is labelled clearly.

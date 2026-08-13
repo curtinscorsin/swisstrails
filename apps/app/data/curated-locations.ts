@@ -772,8 +772,23 @@ function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
 
 const detailedByName = new Map(DETAILED_LOCATIONS.map((location) => [location.name, location]));
 
-export const CURATED_LOCATIONS: Location[] = (masterCatalogue as MasterCatalogueEntry[]).map(
-  (entry) => detailedByName.get(entry.name) ?? buildSourceBackedLocation(entry)
-);
+// The paid guide is intentionally an outdoor collection. These valid Swiss
+// sights remain in the research archive, but are not published as hiking or
+// nature destinations merely to inflate the catalogue count.
+const ARCHIVED_SIGHTSEEING_IDS = new Set([
+  "spot-chapel-bridge",
+  "spot-chateau-de-chillon",
+  "spot-three-castles-of-bellinzona",
+  "spot-old-city-of-bern",
+  "spot-abbey-district-of-st-gallen",
+  "spot-gruyeres",
+  "spot-st-ursanne",
+  "spot-brissago-islands",
+  "spot-stein-am-rhein",
+]);
+
+export const CURATED_LOCATIONS: Location[] = (masterCatalogue as MasterCatalogueEntry[])
+  .filter((entry) => !ARCHIVED_SIGHTSEEING_IDS.has(entry.id))
+  .map((entry) => detailedByName.get(entry.name) ?? buildSourceBackedLocation(entry));
 
 export const CURATED_LOCATION_IDS = new Set(CURATED_LOCATIONS.map((location) => location.id));

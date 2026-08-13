@@ -117,6 +117,7 @@ for (const location of CURATED_LOCATIONS) {
   for (const photo of photos) {
     assert(photo.alt === location.name, `${prefix}: photo alt and published name disagree`);
     assert(photo.url.startsWith("https://upload.wikimedia.org/"), `${prefix}: non-Wikimedia published photo`);
+    assert(/\.(?:jpe?g|png|webp)(?:\?|$)/i.test(photo.url), `${prefix}: browser-unsafe image format`);
     assert(Boolean(photo.credit), `${prefix}: photo is missing creator/licence credit`);
     assert(photo.sourceUrl?.startsWith("https://commons.wikimedia.org/wiki/File:"), `${prefix}: photo is missing a Commons source page`);
     assert((photo.width ?? 0) >= 1000, `${prefix}: photo is under 1000px wide`);

@@ -153,7 +153,7 @@ function candidateImage(location, category, entry, index) {
   const description = stripHtml(metadata.ImageDescription?.value ?? "");
   const url = cleanUrl(info.url);
   if (!url || globallyUsed.has(url)) return null;
-  if (!info.mime?.startsWith("image/") || info.mime === "image/svg+xml") return null;
+  if (!/^image\/(?:jpeg|png|webp)$/i.test(info.mime ?? "")) return null;
   if ((info.width ?? 0) < 1600 || (info.height ?? 0) < 900 || info.width / info.height < 1.15) return null;
   if (!ACCEPTED_LICENSE.test(license) || REJECT_TITLE.test(page.title)) return null;
   const haystack = `${page.title} ${description}`.normalize("NFKD").replace(/\p{Diacritic}/gu, "").toLowerCase();

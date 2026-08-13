@@ -16,7 +16,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Summits and viewpoints with sourced destination references.",
     icon: "🏔",
-    count: 27,
+    count: 26,
     gradient: "from-alpine-900/40 to-trail-900/40",
   },
   {
@@ -37,10 +37,10 @@ export const CATEGORIES: Category[] = [
   },
   {
     id: "photo-spot",
-    name: "Heritage & Landmarks",
-    description: "Villages, bridges, castles and protected cultural destinations.",
+    name: "Outdoor Curiosities",
+    description: "Distinctive outdoor places that complement the hiking and nature collection.",
     icon: "📸",
-    count: 17,
+    count: 9,
     gradient: "from-rose-950/50 to-trail-900/40",
   },
   {
@@ -76,7 +76,7 @@ export const PRICING = {
   currency: "CHF",
   period: "one-time" as const,
   features: [
-    "Access to 100 source-linked destinations",
+    "Access to 91 source-linked outdoor destinations",
     "Federal map references and visible uncertainties",
     "New routes added after source review",
     "Works on all devices — mobile & desktop",

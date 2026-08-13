@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowUpRight, BadgeCheck, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CATALOGUE_METRICS } from "@swiss-trails/types";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -28,7 +29,7 @@ export function Hero() {
             Made for Switzerland
           </span>
           <span className="hidden text-[11px] uppercase tracking-[0.18em] text-white/60 sm:block">
-            100 carefully researched places
+            {CATALOGUE_METRICS.publishedLocations} carefully researched outdoor places
           </span>
         </motion.div>
 

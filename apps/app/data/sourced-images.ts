@@ -109,6 +109,18 @@ const EDITORIALLY_REVIEWED_IMAGES: Record<string, LocationImage[]> = {
       isHero: true,
     },
   ],
+  "spot-saxer-lucke": [
+    {
+      id: "img-saxer-lucke-browser-safe",
+      url: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Kreuzberge_Saxerl%C3%BCcke_1.JPG",
+      alt: "The Kreuzberge and Saxer Lücke above the Rhine Valley",
+      width: 4288,
+      height: 2848,
+      credit: "Böhringer Friedrich · CC BY-SA 2.5",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Kreuzberge_Saxerl%C3%BCcke_1.JPG",
+      isHero: true,
+    },
+  ],
 };
 
 /**
@@ -117,10 +129,10 @@ const EDITORIALLY_REVIEWED_IMAGES: Record<string, LocationImage[]> = {
  * Hand-reviewed entries win when both datasets contain the same location.
  */
 const IMAGE_SETS = [
+  EDITORIALLY_REVIEWED_IMAGES,
   generatedImages as Record<string, LocationImage[]>,
   reviewedImages as Record<string, LocationImage[]>,
   galleryImages as Record<string, LocationImage[]>,
-  EDITORIALLY_REVIEWED_IMAGES,
 ];
 
 export const SOURCED_IMAGES: Record<string, LocationImage[]> = Object.fromEntries(

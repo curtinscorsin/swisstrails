@@ -4,7 +4,7 @@ import { CATALOGUE_METRICS } from "@swiss-trails/types";
 export const CATEGORIES: Category[] = [
   {
     id: "hidden-lake",
-    name: "Hidden Lakes",
+    name: "Alpine Lakes",
     description:
       "Lake destinations with the water body kept separate from unverified access points and parking.",
     icon: "💧",
@@ -22,20 +22,20 @@ export const CATEGORIES: Category[] = [
   },
   {
     id: "waterfall",
-    name: "Waterfalls",
+    name: "Waterfalls & Gorges",
     description:
-      "Named waterfalls with source-linked map points and current access questions kept visible.",
+      "Waterfalls and river-cut landscapes with source-linked map points and current access notes.",
     icon: "🌊",
-    count: 8,
+    count: 16,
     gradient: "from-teal-900/40 to-trail-900/40",
   },
   {
     id: "photo-spot",
-    name: "Photo Locations",
+    name: "Valleys & Curiosities",
     description:
-      "Landmarks and old towns presented with a source trail and location-linked photography where approved.",
+      "Alpine valleys, forests and distinctive outdoor places that reward a slower journey.",
     icon: "📸",
-    count: 15,
+    count: 20,
     gradient: "from-rose-950/50 to-trail-900/40",
   },
 ];
