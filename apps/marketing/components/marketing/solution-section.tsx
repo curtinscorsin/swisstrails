@@ -7,23 +7,23 @@ import { Reveal } from "@/components/shared/reveal";
 const FEATURES = [
   {
     icon: MapPin,
-    title: "Source-recorded places",
-    body: "Destination references and source links, with access details added only when independently supported.",
+    title: "Choose a place",
+    body: "Browse real lakes, viewpoints, waterfalls and trails across Switzerland.",
   },
   {
     icon: Search,
-    title: "Find the right day out",
-    body: "Search by region and landscape, then inspect what is known before deciding where to go.",
+    title: "Check the essentials",
+    body: "See the route, difficulty, season, access notes and original sources before you leave.",
   },
   {
     icon: Heart,
-    title: "Build your own Switzerland",
-    body: "Save favourites, collect visited places and shape them into a weekend itinerary.",
+    title: "Save your favourites",
+    body: "Keep the places you love together and turn them into your next weekend outdoors.",
   },
   {
     icon: Smartphone,
-    title: "Ready on the trail",
-    body: "A focused mobile experience you can add to your home screen for one-tap access.",
+    title: "Take it with you",
+    body: "Use the guide on your phone and add it to your home screen for quick access.",
   },
 ];
 
@@ -39,19 +39,19 @@ export function SolutionSection() {
         <div className="grid gap-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-24">
           <div>
             <Reveal>
-              <p className="t-eyebrow mb-5">The guide</p>
+              <p className="t-eyebrow mb-5">See it. Plan it. Go.</p>
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="t-h1 max-w-xl text-fg">
-                Less planning.
+                From inspiration
                 <br />
-                <span className="text-stone-500">More outside.</span>
+                <span className="text-stone-500">to the trail.</span>
               </h2>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mt-7 max-w-lg text-lg leading-relaxed text-fg-muted">
-                Swiss Trails brings official visitor information, federal map references
-                and licensed photography into one calm, clearly organised guide.
+                Each place brings the useful details together, so you can quickly decide
+                whether it suits your day, your experience and the current season.
               </p>
             </Reveal>
 

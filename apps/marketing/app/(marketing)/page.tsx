@@ -14,10 +14,10 @@ export default function LandingPage() {
     <main className="relative">
       <Navbar />
       <Hero />
-      <SocialProof />
-      <ProblemSection />
       <SolutionSection />
       <WhatsIncluded />
+      <SocialProof />
+      <ProblemSection />
       <EmotionalStory />
       <Pricing />
       <FAQ />

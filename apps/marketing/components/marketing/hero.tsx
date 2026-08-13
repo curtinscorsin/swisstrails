@@ -28,7 +28,7 @@ export function Hero() {
             Made for Switzerland
           </span>
           <span className="hidden text-[11px] uppercase tracking-[0.18em] text-white/60 sm:block">
-            100 sourced Swiss destinations · uncertainty shown
+            100 carefully researched places
           </span>
         </motion.div>
 
@@ -40,7 +40,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduce ? 0 : 0.7, delay: reduce ? 0 : 0.08, ease: EASE }}
             >
-              Switzerland, checked place by place
+              A clearer way to explore Switzerland
             </motion.p>
             <motion.h1
               className="max-w-5xl font-heading text-[clamp(3.75rem,8.6vw,8.75rem)] leading-[0.82] tracking-[-0.055em] text-fg"
@@ -48,9 +48,9 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduce ? 0 : 0.9, delay: reduce ? 0 : 0.12, ease: EASE }}
             >
-              Your wildest
+              Find your next
               <br />
-              weekends, found.
+              Swiss escape.
             </motion.h1>
           </div>
 
@@ -61,26 +61,26 @@ export function Hero() {
             transition={{ duration: reduce ? 0 : 0.8, delay: reduce ? 0 : 0.25, ease: EASE }}
           >
             <p className="text-base leading-relaxed text-stone-200 sm:text-lg">
-              A focused Swiss guide with 100 destination pages, location-linked
-              photography and practical details that distinguish facts from open questions.
+              Discover hikes, quiet lakes and viewpoints with real photographs,
+              practical details and source links—all in one calm guide.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col">
               <Button asChild variant="gold" size="xl" className="justify-between gap-5 lg:w-full">
-                <a href="#pricing">
-                  Unlock Swiss Trails
+                <a href="#solution">
+                  See how the guide works
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </Button>
               <Button asChild variant="outline" size="xl" className="lg:w-full">
-                <a href="#solution">Explore the guide</a>
+                <a href="#whats-inside">Browse the collection</a>
               </Button>
             </div>
 
             <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-stone-300">
               <span className="flex items-center gap-1.5 text-gold-200">
                 <BadgeCheck className="h-4 w-4" />
-                Official sources recorded
+                Sources shown for every place
               </span>
               <span className="h-1 w-1 rounded-full bg-stone-400" />
               <span>CHF 29 once</span>
@@ -89,7 +89,7 @@ export function Hero() {
         </div>
 
         <motion.a
-          href="#stats"
+          href="#solution"
           aria-label="Scroll to discover more"
           className="mt-8 hidden w-fit items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-white/55 transition-colors hover:text-white md:flex"
           initial={reduce ? false : { opacity: 0 }}
