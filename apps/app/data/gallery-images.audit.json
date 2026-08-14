@@ -1,59 +1,41 @@
 {
-  "generatedAt": "2026-08-13T22:23:02.644Z",
+  "generatedAt": "2026-08-14T00:20:12.633Z",
   "method": "Wikidata P373 plus coordinate agreement, then exact Commons category",
   "report": [
     {
       "id": "spot-oeschinensee",
       "name": "Oeschinensee",
-      "status": "already-complete",
-      "wikidata": "Q14533",
-      "category": "Oeschinen Lake"
+      "status": "already-complete"
     },
     {
       "id": "spot-seealpsee",
       "name": "Seealpsee",
-      "status": "already-complete",
-      "wikidata": "Q870267",
-      "category": "Seealpsee"
+      "status": "already-complete"
     },
     {
       "id": "spot-creux-du-van",
       "name": "Creux du Van",
-      "status": "already-complete",
-      "wikidata": "Q387016",
-      "category": "Creux-du-Van"
+      "status": "already-complete"
     },
     {
       "id": "spot-matterhorn",
       "name": "Matterhorn",
-      "status": "already-complete",
-      "wikidata": "Q1374",
-      "category": "Matterhorn"
+      "status": "already-complete"
     },
     {
       "id": "spot-jungfraujoch",
       "name": "Jungfraujoch",
-      "status": "already-complete",
-      "wikidata": "Q3695590",
-      "category": "Jungfraujoch railway station"
+      "status": "already-complete"
     },
     {
       "id": "spot-lauterbrunnen-valley",
       "name": "Lauterbrunnen Valley",
-      "status": "complete",
-      "wikidata": "reviewed-category",
-      "wikidataDistanceKm": 0,
-      "category": "Lauterbrunnental",
-      "existing": 1,
-      "added": 2,
-      "total": 3
+      "status": "already-complete"
     },
     {
       "id": "spot-rhine-falls",
       "name": "Rhine Falls",
-      "status": "already-complete",
-      "wikidata": "Q214924",
-      "category": "Rhine Falls"
+      "status": "already-complete"
     },
     {
       "id": "spot-pilatus",
@@ -69,169 +51,107 @@
     {
       "id": "spot-rigi",
       "name": "Rigi",
-      "status": "already-complete",
-      "wikidata": "Q15291",
-      "category": "Rigi"
+      "status": "already-complete"
     },
     {
       "id": "spot-stoos-fronalpstock",
       "name": "Stoos–Fronalpstock",
-      "status": "complete",
-      "wikidata": "reviewed-category",
-      "wikidataDistanceKm": 0,
-      "category": "Fronalpstock (Schwyz)",
-      "existing": 1,
-      "added": 2,
-      "total": 3
+      "status": "already-complete"
     },
     {
       "id": "spot-titlis",
       "name": "Titlis",
-      "status": "already-complete",
-      "wikidata": "Q15138",
-      "category": "Titlis"
+      "status": "already-complete"
     },
     {
       "id": "spot-lake-lucerne",
       "name": "Lake Lucerne",
-      "status": "already-complete",
-      "wikidata": "Q14381",
-      "category": "Lake Lucerne"
+      "status": "already-complete"
     },
     {
       "id": "spot-chapel-bridge",
       "name": "Chapel Bridge",
-      "status": "already-complete",
-      "wikidata": "Q25225",
-      "category": "Kapellbrücke"
+      "status": "already-complete"
     },
     {
       "id": "spot-chateau-de-chillon",
       "name": "Château de Chillon",
-      "status": "already-complete",
-      "wikidata": "Q372647",
-      "category": "Château de Chillon"
+      "status": "already-complete"
     },
     {
       "id": "spot-lavaux-vineyard-terraces",
       "name": "Lavaux Vineyard Terraces",
-      "status": "complete",
-      "wikidata": "reviewed-category",
-      "wikidataDistanceKm": 0,
-      "category": "Lavaux",
-      "existing": 1,
-      "added": 2,
-      "total": 3
+      "status": "already-complete"
     },
     {
       "id": "spot-aletsch-glacier",
       "name": "Aletsch Glacier",
-      "status": "already-complete",
-      "wikidata": "Q204658",
-      "category": "Aletschgletscher"
+      "status": "already-complete"
     },
     {
       "id": "spot-gornergrat",
       "name": "Gornergrat",
-      "status": "already-complete",
-      "wikidata": "Q666796",
-      "category": "Gornergrat"
+      "status": "already-complete"
     },
     {
       "id": "spot-riffelsee",
       "name": "Riffelsee",
-      "status": "already-complete",
-      "wikidata": "Q672967",
-      "category": "Riffelsee"
+      "status": "already-complete"
     },
     {
       "id": "spot-schilthorn",
       "name": "Schilthorn",
-      "status": "already-complete",
-      "wikidata": "Q674801",
-      "category": "Schilthorn"
+      "status": "already-complete"
     },
     {
       "id": "spot-grindelwald-first",
       "name": "Grindelwald First",
-      "status": "complete",
-      "wikidata": "reviewed-category",
-      "wikidataDistanceKm": 0,
-      "category": "First (Grindelwald)",
-      "existing": 1,
-      "added": 2,
-      "total": 3
+      "status": "already-complete"
     },
     {
       "id": "spot-bachalpsee",
       "name": "Bachalpsee",
-      "status": "already-complete",
-      "wikidata": "Q690976",
-      "category": "Bachalpsee"
+      "status": "already-complete"
     },
     {
       "id": "spot-schynige-platte",
       "name": "Schynige Platte",
-      "status": "already-complete",
-      "wikidata": "Q7433308",
-      "category": "Schynige Platte railway station"
+      "status": "already-complete"
     },
     {
       "id": "spot-blausee",
       "name": "Blausee",
-      "status": "already-complete",
-      "wikidata": "Q689873",
-      "category": "Blausee (Bern)"
+      "status": "already-complete"
     },
     {
       "id": "spot-aare-gorge",
       "name": "Aare Gorge",
-      "status": "already-complete",
-      "wikidata": "Q301191",
-      "category": "Aareschlucht"
+      "status": "already-complete"
     },
     {
       "id": "spot-rhine-gorge-ruinaulta",
       "name": "Rhine Gorge (Ruinaulta)",
-      "status": "complete",
-      "wikidata": "reviewed-category",
-      "wikidataDistanceKm": 0,
-      "category": "Ruinaulta",
-      "existing": 1,
-      "added": 2,
-      "total": 3
+      "status": "already-complete"
     },
     {
       "id": "spot-caumasee",
       "name": "Caumasee",
-      "status": "already-complete",
-      "wikidata": "Q692270",
-      "category": "Caumasee"
+      "status": "already-complete"
     },
     {
       "id": "spot-landwasser-viaduct",
       "name": "Landwasser Viaduct",
-      "status": "already-complete",
-      "wikidata": "Q113645",
-      "category": "Landwasserviadukt"
+      "status": "already-complete"
     },
     {
       "id": "spot-bernina-pass-and-lago-bianco",
       "name": "Bernina Pass and Lago Bianco",
-      "status": "complete",
-      "wikidata": "reviewed-category",
-      "wikidataDistanceKm": 0,
-      "category": "Lago Bianco (Bernina)",
-      "existing": 1,
-      "added": 2,
-      "total": 3
+      "status": "already-complete"
     },
     {
       "id": "spot-swiss-national-park",
       "name": "Swiss National Park",
-      "status": "already-complete",
-      "wikidata": "Q83397",
-      "category": "Swiss National Park"
+      "status": "already-complete"
     },
     {
       "id": "spot-verzasca-valley",
@@ -247,23 +167,17 @@
     {
       "id": "spot-ponte-dei-salti",
       "name": "Ponte dei Salti",
-      "status": "already-complete",
-      "wikidata": "Q543214",
-      "category": "Ponte dei Salti"
+      "status": "already-complete"
     },
     {
       "id": "spot-three-castles-of-bellinzona",
       "name": "Three Castles of Bellinzona",
-      "status": "already-complete",
-      "wikidata": "Q510279",
-      "category": "Three Castles of Bellinzona"
+      "status": "already-complete"
     },
     {
       "id": "spot-old-city-of-bern",
       "name": "Old City of Bern",
-      "status": "already-complete",
-      "wikidata": "Q687973",
-      "category": "Old City of Bern"
+      "status": "already-complete"
     },
     {
       "id": "spot-abbey-district-of-st-gallen",
@@ -279,16 +193,12 @@
     {
       "id": "spot-gruyeres",
       "name": "Gruyères",
-      "status": "already-complete",
-      "wikidata": "Q69600",
-      "category": "Gruyères"
+      "status": "already-complete"
     },
     {
       "id": "spot-trummelbach-falls",
       "name": "Trümmelbach Falls",
-      "status": "already-complete",
-      "wikidata": "Q38141",
-      "category": "Trümmelbachfälle"
+      "status": "already-complete"
     },
     {
       "id": "spot-rosenlaui-glacier-gorge",
@@ -304,9 +214,7 @@
     {
       "id": "spot-gelmersee",
       "name": "Gelmersee",
-      "status": "already-complete",
-      "wikidata": "Q677862",
-      "category": "Gelmersee"
+      "status": "already-complete"
     },
     {
       "id": "spot-giessbach-falls",
@@ -322,16 +230,12 @@
     {
       "id": "spot-engstligen-falls",
       "name": "Engstligen Falls",
-      "status": "already-complete",
-      "wikidata": "Q38498",
-      "category": "Engstligen falls"
+      "status": "already-complete"
     },
     {
       "id": "spot-lauenensee",
       "name": "Lauenensee",
-      "status": "already-complete",
-      "wikidata": "Q487809",
-      "category": "Lauenensee"
+      "status": "already-complete"
     },
     {
       "id": "spot-gantrischseeli",
@@ -347,90 +251,62 @@
     {
       "id": "spot-gorges-de-l-areuse",
       "name": "Gorges de l’Areuse",
-      "status": "already-complete",
-      "wikidata": "Q3110993",
-      "category": "Gorges de l’Areuse"
+      "status": "already-complete"
     },
     {
       "id": "spot-saut-du-doubs",
       "name": "Saut du Doubs",
-      "status": "already-complete",
-      "wikidata": "Q2227821",
-      "category": "Saut du Doubs"
+      "status": "already-complete"
     },
     {
       "id": "spot-etang-de-la-gruere",
       "name": "Étang de la Gruère",
-      "status": "already-complete",
-      "wikidata": "Q288984",
-      "category": "Etang de la Gruère"
+      "status": "already-complete"
     },
     {
       "id": "spot-st-ursanne",
       "name": "St-Ursanne",
-      "status": "already-complete",
-      "wikidata": "Q661799",
-      "category": "Saint-Ursanne"
+      "status": "already-complete"
     },
     {
       "id": "spot-chasseral",
       "name": "Chasseral",
-      "status": "already-complete",
-      "wikidata": "Q15229",
-      "category": "Chasseral"
+      "status": "already-complete"
     },
     {
       "id": "spot-lac-de-joux",
       "name": "Lac de Joux",
-      "status": "already-complete",
-      "wikidata": "Q14472",
-      "category": "Lac de Joux"
+      "status": "already-complete"
     },
     {
       "id": "spot-dent-de-vaulion",
       "name": "Dent de Vaulion",
-      "status": "already-complete",
-      "wikidata": "Q669744",
-      "category": "Dent de Vaulion"
+      "status": "already-complete"
     },
     {
       "id": "spot-vallon-de-nant",
       "name": "Vallon de Nant",
-      "status": "already-complete",
-      "wikidata": "Q3553889",
-      "category": "Vallon de Nant"
+      "status": "already-complete"
     },
     {
       "id": "spot-lac-des-chavonnes",
       "name": "Lac des Chavonnes",
-      "status": "already-complete",
-      "wikidata": "Q2741317",
-      "category": "Lac des Chavonnes"
+      "status": "already-complete"
     },
     {
       "id": "spot-rochers-de-naye",
       "name": "Rochers-de-Naye",
-      "status": "already-complete",
-      "wikidata": "Q676030",
-      "category": "Rochers de Naye"
+      "status": "already-complete"
     },
     {
       "id": "spot-grande-caricaie",
       "name": "Grande Cariçaie",
-      "status": "complete",
-      "wikidata": "reviewed-category",
-      "wikidataDistanceKm": 0,
-      "category": "Grande Cariçaie",
-      "existing": 1,
-      "added": 2,
-      "total": 3
+      "status": "already-complete"
     },
     {
       "id": "spot-mont-vully",
       "name": "Mont Vully",
-      "status": "already-complete",
-      "wikidata": "Q476762",
-      "category": "Mont Vully"
+      "status": "already-complete"
     },
     {
       "id": "spot-ogoz-island",
@@ -446,83 +322,57 @@
     {
       "id": "spot-schwarzsee",
       "name": "Schwarzsee",
-      "status": "already-complete",
-      "wikidata": "Q2254412",
-      "category": "Schwarzsee (Plaffeien)"
+      "status": "already-complete"
     },
     {
       "id": "spot-gastlosen",
       "name": "Gastlosen",
-      "status": "already-complete",
-      "wikidata": "Q1495536",
-      "category": "Gastlosen"
+      "status": "already-complete"
     },
     {
       "id": "spot-gorges-de-la-jogne",
       "name": "Gorges de la Jogne",
-      "status": "already-complete",
-      "wikidata": "Q110077790",
-      "category": "Gorges de la Jogne"
+      "status": "already-complete"
     },
     {
       "id": "spot-lac-de-taney",
       "name": "Lac de Taney",
-      "status": "already-complete",
-      "wikidata": "Q3215563",
-      "category": "Lac de Taney"
+      "status": "already-complete"
     },
     {
       "id": "spot-derborence",
       "name": "Derborence",
-      "status": "already-complete",
-      "wikidata": "Q3023576",
-      "category": "Derborence"
+      "status": "already-complete"
     },
     {
       "id": "spot-earth-pyramids-of-euseigne",
       "name": "Earth Pyramids of Euseigne",
-      "status": "complete",
-      "wikidata": "reviewed-category",
-      "wikidataDistanceKm": 0,
-      "category": "Pyramides d'Euseigne",
-      "existing": 1,
-      "added": 2,
-      "total": 3
+      "status": "already-complete"
     },
     {
       "id": "spot-lac-de-moiry",
       "name": "Lac de Moiry",
-      "status": "already-complete",
-      "wikidata": "Q870046",
-      "category": "Lac de Moiry"
+      "status": "already-complete"
     },
     {
       "id": "spot-grande-dixence-dam",
       "name": "Grande Dixence Dam",
-      "status": "already-complete",
-      "wikidata": "Q675009",
-      "category": "Grande Dixence Dam"
+      "status": "already-complete"
     },
     {
       "id": "spot-lac-bleu-d-arolla",
       "name": "Lac Bleu d’Arolla",
-      "status": "already-complete",
-      "wikidata": "Q2855100",
-      "category": "Lac Bleu (Evolène)"
+      "status": "already-complete"
     },
     {
       "id": "spot-champex-lac",
       "name": "Champex-Lac",
-      "status": "already-complete",
-      "wikidata": "Q597228",
-      "category": "Champex-Lac"
+      "status": "already-complete"
     },
     {
       "id": "spot-bisse-du-torrent-neuf",
       "name": "Bisse du Torrent-Neuf",
-      "status": "already-complete",
-      "wikidata": "Q866651",
-      "category": "Bisse de Savièse"
+      "status": "already-complete"
     },
     {
       "id": "spot-gorges-du-durnand",
@@ -538,9 +388,7 @@
     {
       "id": "spot-val-ferret",
       "name": "Val Ferret",
-      "status": "already-complete",
-      "wikidata": "Q650607",
-      "category": "Val Ferret (Switzerland)"
+      "status": "already-complete"
     },
     {
       "id": "spot-foroglio-waterfall",
@@ -556,20 +404,12 @@
     {
       "id": "spot-val-calnegia",
       "name": "Val Calnègia",
-      "status": "already-complete",
-      "wikidata": "Q64495421",
-      "category": "Val Calnègia"
+      "status": "already-complete"
     },
     {
       "id": "spot-piora-valley-and-lago-ritom",
       "name": "Piora Valley and Lago Ritom",
-      "status": "complete",
-      "wikidata": "reviewed-category",
-      "wikidataDistanceKm": 0,
-      "category": "Lago Ritom",
-      "existing": 1,
-      "added": 2,
-      "total": 3
+      "status": "already-complete"
     },
     {
       "id": "spot-lago-di-tome",
@@ -585,27 +425,17 @@
     {
       "id": "spot-brissago-islands",
       "name": "Brissago Islands",
-      "status": "already-complete",
-      "wikidata": "Q673757",
-      "category": "Isole di Brissago"
+      "status": "already-complete"
     },
     {
       "id": "spot-monte-san-giorgio",
       "name": "Monte San Giorgio",
-      "status": "complete",
-      "wikidata": "reviewed-category",
-      "wikidataDistanceKm": 0,
-      "category": "Monte San Giorgio (Prealpi Luganesi)",
-      "existing": 0,
-      "added": 3,
-      "total": 3
+      "status": "already-complete"
     },
     {
       "id": "spot-monte-generoso",
       "name": "Monte Generoso",
-      "status": "already-complete",
-      "wikidata": "Q5532692",
-      "category": "Monte Generoso Vetta railway station"
+      "status": "already-complete"
     },
     {
       "id": "spot-santa-petronilla-waterfall",
@@ -621,37 +451,27 @@
     {
       "id": "spot-soglio",
       "name": "Soglio",
-      "status": "already-complete",
-      "wikidata": "Q688511",
-      "category": "Soglio, Switzerland"
+      "status": "already-complete"
     },
     {
       "id": "spot-val-roseg",
       "name": "Val Roseg",
-      "status": "already-complete",
-      "wikidata": "Q2507789",
-      "category": "Val Roseg"
+      "status": "already-complete"
     },
     {
       "id": "spot-morteratsch-glacier",
       "name": "Morteratsch Glacier",
-      "status": "already-complete",
-      "wikidata": "Q688624",
-      "category": "Morteratsch Glacier"
+      "status": "already-complete"
     },
     {
       "id": "spot-lai-da-palpuogna",
       "name": "Lai da Palpuogna",
-      "status": "already-complete",
-      "wikidata": "Q675812",
-      "category": "Lai da Palpuogna"
+      "status": "already-complete"
     },
     {
       "id": "spot-joriseen",
       "name": "Jöriseen",
-      "status": "already-complete",
-      "wikidata": "Q15229912",
-      "category": "Jöriseen"
+      "status": "already-complete"
     },
     {
       "id": "spot-viamala-gorge",
@@ -667,51 +487,37 @@
     {
       "id": "spot-lej-da-staz",
       "name": "Lej da Staz",
-      "status": "already-complete",
-      "wikidata": "Q493417",
-      "category": "Lej da Staz"
+      "status": "already-complete"
     },
     {
       "id": "spot-val-mustair",
       "name": "Val Müstair",
-      "status": "already-complete",
-      "wikidata": "Q257965",
-      "category": "Val Müstair"
+      "status": "already-complete"
     },
     {
       "id": "spot-klontalersee",
       "name": "Klöntalersee",
-      "status": "already-complete",
-      "wikidata": "Q664441",
-      "category": "Klöntalersee"
+      "status": "already-complete"
     },
     {
       "id": "spot-oberblegisee",
       "name": "Oberblegisee",
-      "status": "already-complete",
-      "wikidata": "Q108088961",
-      "category": "Amphibian spawning areas of national importance in Switzerland"
+      "status": "already-complete"
     },
     {
       "id": "spot-muttsee",
       "name": "Muttsee",
-      "status": "already-complete",
-      "wikidata": "Q1956096",
-      "category": "Muttseehütte"
+      "status": "already-complete"
     },
     {
       "id": "spot-swiss-tectonic-arena-sardona",
       "name": "Swiss Tectonic Arena Sardona",
-      "status": "already-complete",
-      "wikidata": "Q312118",
-      "category": "Glarner Hauptüberschiebung"
+      "status": "already-complete"
     },
     {
       "id": "spot-seerenbach-falls",
       "name": "Seerenbach Falls",
-      "status": "already-complete",
-      "wikidata": "Q2265504",
-      "category": "Seerenbachfälle"
+      "status": "already-complete"
     },
     {
       "id": "spot-pizol-five-lakes",
@@ -727,23 +533,17 @@
     {
       "id": "spot-saxer-lucke",
       "name": "Saxer Lücke",
-      "status": "already-complete",
-      "wikidata": "Q1453082",
-      "category": "Saxerlücke"
+      "status": "already-complete"
     },
     {
       "id": "spot-falensee",
       "name": "Fälensee",
-      "status": "already-complete",
-      "wikidata": "Q870273",
-      "category": "Fählensee"
+      "status": "already-complete"
     },
     {
       "id": "spot-schafler",
       "name": "Schäfler",
-      "status": "already-complete",
-      "wikidata": "Q1625268",
-      "category": "Schäfler"
+      "status": "already-complete"
     },
     {
       "id": "spot-ascher-ebenalp",
@@ -759,48 +559,150 @@
     {
       "id": "spot-lungernsee",
       "name": "Lungernsee",
-      "status": "already-complete",
-      "wikidata": "Q14527",
-      "category": "Lungerersee"
+      "status": "already-complete"
     },
     {
       "id": "spot-alggialp",
       "name": "Älggialp",
+      "status": "already-complete"
+    },
+    {
+      "id": "spot-bannalpsee",
+      "name": "Bannalpsee",
+      "status": "already-complete"
+    },
+    {
+      "id": "spot-isenthal",
+      "name": "Isenthal",
+      "status": "already-complete"
+    },
+    {
+      "id": "spot-sihlwald",
+      "name": "Sihlwald",
+      "status": "already-complete"
+    },
+    {
+      "id": "spot-stein-am-rhein",
+      "name": "Stein am Rhein",
+      "status": "already-complete"
+    },
+    {
+      "id": "spot-murgseen",
+      "name": "Murgseen",
+      "status": "partial",
+      "wikidata": "reviewed-category",
+      "wikidataDistanceKm": 0,
+      "category": "Murgseen",
+      "existing": 1,
+      "added": 0,
+      "total": 1
+    },
+    {
+      "id": "spot-greina-plateau",
+      "name": "Greina Plateau",
+      "status": "already-complete"
+    },
+    {
+      "id": "spot-lai-da-rims",
+      "name": "Lai da Rims",
+      "status": "already-complete"
+    },
+    {
+      "id": "spot-lagh-da-saoseo",
+      "name": "Lagh da Saoseo",
       "status": "complete",
       "wikidata": "reviewed-category",
       "wikidataDistanceKm": 0,
-      "category": "Älggi-Alp",
+      "category": "Lago di Saoseo",
       "existing": 0,
       "added": 3,
       "total": 3
     },
     {
-      "id": "spot-bannalpsee",
-      "name": "Bannalpsee",
-      "status": "already-complete",
-      "wikidata": "Q4856863",
-      "category": "Bannalpsee"
+      "id": "spot-gasterntal",
+      "name": "Gasterntal",
+      "status": "complete",
+      "wikidata": "reviewed-category",
+      "wikidataDistanceKm": 0,
+      "category": "Gasterntal",
+      "existing": 0,
+      "added": 3,
+      "total": 3
     },
     {
-      "id": "spot-isenthal",
-      "name": "Isenthal",
-      "status": "already-complete",
-      "wikidata": "Q65573",
-      "category": "Isenthal"
+      "id": "spot-batoeni",
+      "name": "Batöni Waterfalls",
+      "status": "partial",
+      "wikidata": "reviewed-category",
+      "wikidataDistanceKm": 0,
+      "category": "Batöni waterfalls",
+      "existing": 0,
+      "added": 0,
+      "total": 0
     },
     {
-      "id": "spot-sihlwald",
-      "name": "Sihlwald",
-      "status": "already-complete",
-      "wikidata": "Q7513438",
-      "category": "Sihlwald railway station"
+      "id": "spot-tine-de-conflens",
+      "name": "Tine de Conflens",
+      "status": "already-complete"
     },
     {
-      "id": "spot-stein-am-rhein",
-      "name": "Stein am Rhein",
-      "status": "already-complete",
-      "wikidata": "Q11939",
-      "category": "Stein am Rhein"
+      "id": "spot-cascade-du-dar",
+      "name": "Cascade du Dar",
+      "status": "partial",
+      "wikidata": "reviewed-category",
+      "wikidataDistanceKm": 0,
+      "category": "Cascade du Dar",
+      "existing": 2,
+      "added": 0,
+      "total": 2
+    },
+    {
+      "id": "spot-thur-waterfalls",
+      "name": "Thur Waterfalls",
+      "status": "complete",
+      "wikidata": "reviewed-category",
+      "wikidataDistanceKm": 0,
+      "category": "Thurwasserfälle",
+      "existing": 0,
+      "added": 3,
+      "total": 3
+    },
+    {
+      "id": "spot-arnisee",
+      "name": "Arnisee",
+      "status": "already-complete"
+    },
+    {
+      "id": "spot-golzerensee",
+      "name": "Golzerensee",
+      "status": "partial",
+      "wikidata": "reviewed-category",
+      "wikidataDistanceKm": 0,
+      "category": "Golzernsee",
+      "existing": 0,
+      "added": 0,
+      "total": 0
+    },
+    {
+      "id": "spot-lac-de-tseuzier",
+      "name": "Lac de Tseuzier",
+      "status": "already-complete"
+    },
+    {
+      "id": "spot-aiguilles-de-baulmes",
+      "name": "Aiguilles de Baulmes",
+      "status": "already-complete"
+    },
+    {
+      "id": "spot-chueebodensee",
+      "name": "Chüebodensee",
+      "status": "partial",
+      "wikidata": "reviewed-category",
+      "wikidataDistanceKm": 0,
+      "category": "Chüebodensee",
+      "existing": 0,
+      "added": 0,
+      "total": 0
     }
   ]
 }

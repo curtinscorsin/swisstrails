@@ -2772,5 +2772,331 @@
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:2016_Aelggi_Mittelpunkt_der_Schweiz.jpg",
       "isHero": false
     }
+  ],
+  "spot-murgseen": [
+    {
+      "id": "img-murgseen-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Wandern_im_sch%C3%B6nen_Murgtal.jpg",
+      "alt": "Murgseen",
+      "width": 4752,
+      "height": 3168,
+      "credit": "Uwelino · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wandern_im_sch%C3%B6nen_Murgtal.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-greina-plateau": [
+    {
+      "id": "img-greina-plateau-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Greina_Abschluss.jpg",
+      "alt": "Greina Plateau",
+      "width": 2448,
+      "height": 1836,
+      "credit": "Adrian Michael · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Greina_Abschluss.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-greina-plateau-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Greina_NE.jpg",
+      "alt": "Greina Plateau",
+      "width": 2592,
+      "height": 1944,
+      "credit": "Adrian Michael · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Greina_NE.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-greina-plateau-gallery-3",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Greina_%C3%9Cberblick_SW.jpg",
+      "alt": "Greina Plateau",
+      "width": 2592,
+      "height": 1944,
+      "credit": "Adrian Michael · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Greina_%C3%9Cberblick_SW.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-lai-da-rims": [
+    {
+      "id": "img-lai-da-rims-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Abendstimmung_%C3%BCber_dem_Lai_da_Rims_mit_Edelweiss.jpg",
+      "alt": "Lai da Rims",
+      "width": 4371,
+      "height": 2805,
+      "credit": "Ariocarpusandroides · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Abendstimmung_%C3%BCber_dem_Lai_da_Rims_mit_Edelweiss.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-lai-da-rims-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Blick_von_der_Fuorcla_Sassalba_auf_den_Lai_da_Rims.jpg",
+      "alt": "Lai da Rims",
+      "width": 3072,
+      "height": 2304,
+      "credit": "Greenplanet · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blick_von_der_Fuorcla_Sassalba_auf_den_Lai_da_Rims.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-lai-da-rims-gallery-3",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Lai_da_Rims_mit_Mondbeamer.jpg",
+      "alt": "Lai da Rims",
+      "width": 4609,
+      "height": 3249,
+      "credit": "Ariocarpusandroides · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lai_da_Rims_mit_Mondbeamer.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-tine-de-conflens": [
+    {
+      "id": "img-tine-de-conflens-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Tine_de_Conflens_%28lower_view%29.jpg",
+      "alt": "Tine de Conflens",
+      "width": 5590,
+      "height": 3734,
+      "credit": "James Forsyth · CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tine_de_Conflens_(lower_view).jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-tine-de-conflens-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Tine_de_Conflens2.jpg",
+      "alt": "Tine de Conflens",
+      "width": 5605,
+      "height": 3737,
+      "credit": "James Forsyth · CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tine_de_Conflens2.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-tine-de-conflens-gallery-3",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/TineDeConflens.jpg",
+      "alt": "Tine de Conflens",
+      "width": 5184,
+      "height": 3456,
+      "credit": "Björn Sothmann · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:TineDeConflens.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-cascade-du-dar": [
+    {
+      "id": "img-cascade-du-dar-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Cascade_du_Dar_%2830664608488%29.jpg",
+      "alt": "Cascade du Dar",
+      "width": 5184,
+      "height": 3456,
+      "credit": "Björn S... · CC BY-SA 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cascade_du_Dar_(30664608488).jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-cascade-du-dar-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Cascade_du_Dar_%2843623016805%29.jpg",
+      "alt": "Cascade du Dar",
+      "width": 5184,
+      "height": 3456,
+      "credit": "Björn S... · CC BY-SA 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cascade_du_Dar_(43623016805).jpg",
+      "isHero": false
+    }
+  ],
+  "spot-arnisee": [
+    {
+      "id": "img-arnisee-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Arnisee_%28Switzerland%29.jpg",
+      "alt": "Arnisee",
+      "width": 3072,
+      "height": 2304,
+      "credit": "McIntosh Natura · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arnisee_(Switzerland).jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-arnisee-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Arnisee%2C_Gurtnellen.jpg",
+      "alt": "Arnisee",
+      "width": 7914,
+      "height": 5279,
+      "credit": "Dino Reichmuth · CC0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arnisee,_Gurtnellen.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-arnisee-gallery-3",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Arnisee.jpg",
+      "alt": "Arnisee",
+      "width": 3648,
+      "height": 2736,
+      "credit": "Hp.Baumeler · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arnisee.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-lac-de-tseuzier": [
+    {
+      "id": "img-lac-de-tseuzier-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Zeuzier.jpg",
+      "alt": "Lac de Tseuzier",
+      "width": 1600,
+      "height": 1200,
+      "credit": "Terra3 · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zeuzier.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-lac-de-tseuzier-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Lac_de_Tseuzier_-_panoramio.jpg",
+      "alt": "Lac de Tseuzier",
+      "width": 6532,
+      "height": 1742,
+      "credit": "tonyfurrer · CC BY 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lac_de_Tseuzier_-_panoramio.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-lac-de-tseuzier-gallery-3",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Lac_de_Tseuzier_180%C2%B0-Panorama_-_panoramio.jpg",
+      "alt": "Lac de Tseuzier",
+      "width": 9218,
+      "height": 3154,
+      "credit": "sony@100 · CC BY 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lac_de_Tseuzier_180%C2%B0-Panorama_-_panoramio.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-aiguilles-de-baulmes": [
+    {
+      "id": "img-aiguilles-de-baulmes-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Aiguille_de_Baulmes.JPG",
+      "alt": "Aiguilles de Baulmes",
+      "width": 3088,
+      "height": 2056,
+      "credit": "La fée des montagnes · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aiguille_de_Baulmes.JPG",
+      "isHero": false
+    },
+    {
+      "id": "img-aiguilles-de-baulmes-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Aiguilles_de_Baulmes_face_sud.jpg",
+      "alt": "Aiguilles de Baulmes",
+      "width": 3456,
+      "height": 2304,
+      "credit": "Pmau · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aiguilles_de_Baulmes_face_sud.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-aiguilles-de-baulmes-gallery-3",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Aiguilles_de_Baulmes_vues_de_l%27ouest.jpg",
+      "alt": "Aiguilles de Baulmes",
+      "width": 3600,
+      "height": 2400,
+      "credit": "Pmau · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aiguilles_de_Baulmes_vues_de_l%27ouest.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-lagh-da-saoseo": [
+    {
+      "id": "img-lagh-da-saoseo-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Lago_di_Saoseo1.jpg",
+      "alt": "Lagh da Saoseo",
+      "width": 2496,
+      "height": 1664,
+      "credit": "Adrian Michael · CC BY 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Saoseo1.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-lagh-da-saoseo-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Lago_di_Saoseo2.jpg",
+      "alt": "Lagh da Saoseo",
+      "width": 2496,
+      "height": 1664,
+      "credit": "Adrian Michael · CC BY 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Saoseo2.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-lagh-da-saoseo-gallery-3",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/92/Lago_di_Saoseo3.jpg",
+      "alt": "Lagh da Saoseo",
+      "width": 2496,
+      "height": 1664,
+      "credit": "Adrian Michael · CC BY 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Saoseo3.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-gasterntal": [
+    {
+      "id": "img-gasterntal-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Gasterntal_Zufahrt.jpg",
+      "alt": "Gasterntal",
+      "width": 2448,
+      "height": 1836,
+      "credit": "upload by Adrian Michael · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gasterntal_Zufahrt.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-gasterntal-gallery-2",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Gasterntal_Waldhaus.jpg",
+      "alt": "Gasterntal",
+      "width": 2450,
+      "height": 1608,
+      "credit": "Adrian Michael · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gasterntal_Waldhaus.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-gasterntal-gallery-3",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Gasterntal_Wiesen.JPG",
+      "alt": "Gasterntal",
+      "width": 2496,
+      "height": 1664,
+      "credit": "Adrian Michael · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gasterntal_Wiesen.JPG",
+      "isHero": false
+    }
+  ],
+  "spot-thur-waterfalls": [
+    {
+      "id": "img-thur-waterfalls-gallery-1",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Thurf%C3%A4lle_Chammerlitobel.jpg",
+      "alt": "Thur Waterfalls",
+      "width": 7952,
+      "height": 5304,
+      "credit": "PantaRhei · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thurf%C3%A4lle_Chammerlitobel.jpg",
+      "isHero": false
+    }
+  ],
+  "spot-golzerensee": [
+    {
+      "id": "img-golzerensee-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Golzerensee-S.jpg",
+      "alt": "Golzerensee in the Maderanertal",
+      "width": 6000,
+      "height": 3376,
+      "credit": "FkMohr · CC BY-SA 3.0 DE",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golzerensee-S.jpg",
+      "isHero": true
+    }
+  ],
+  "spot-chueebodensee": [
+    {
+      "id": "img-chueebodensee-commons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Ch%C3%BCebodensee.JPG",
+      "alt": "Chüebodensee above Elm in Canton Glarus",
+      "width": 2560,
+      "height": 1920,
+      "credit": "Wandervogel · CC BY 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%C3%BCebodensee.JPG",
+      "isHero": true
+    }
   ]
 }

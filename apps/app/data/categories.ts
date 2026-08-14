@@ -1,4 +1,5 @@
 import type { Category } from "@/types";
+import { CATALOGUE_METRICS } from "@swiss-trails/types";
 
 export const CATEGORIES: Category[] = [
   {
@@ -7,7 +8,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Named lakes with the destination point kept separate from access logistics.",
     icon: "💧",
-    count: 26,
+    count: 33,
     gradient: "from-sky-900/40 to-blue-950/40",
   },
   {
@@ -16,7 +17,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Summits and viewpoints with sourced destination references.",
     icon: "🏔",
-    count: 24,
+    count: 25,
     gradient: "from-alpine-900/40 to-trail-900/40",
   },
   {
@@ -24,7 +25,7 @@ export const CATEGORIES: Category[] = [
     name: "Waterfalls",
     description: "Named waterfalls with access questions and current-status checks kept visible.",
     icon: "🌊",
-    count: 7,
+    count: 11,
     gradient: "from-cyan-900/40 to-trail-900/40",
   },
   {
@@ -66,7 +67,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Broad valleys and alpine landscapes where one pin cannot represent every route.",
     icon: "🌿",
-    count: 6,
+    count: 8,
     gradient: "from-orange-950/50 to-trail-900/40",
   },
 ];
@@ -76,7 +77,7 @@ export const PRICING = {
   currency: "CHF",
   period: "one-time" as const,
   features: [
-    "Access to 86 source-linked outdoor destinations",
+    `Access to ${CATALOGUE_METRICS.publishedLocations} source-linked outdoor destinations`,
     "Federal map references and visible uncertainties",
     "New routes added after source review",
     "Works on all devices — mobile & desktop",

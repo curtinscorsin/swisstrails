@@ -8,7 +8,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Lake destinations with the water body kept separate from unverified access points and parking.",
     icon: "💧",
-    count: 26,
+    count: 33,
     gradient: "from-sky-900/40 to-blue-950/40",
   },
   {
@@ -17,7 +17,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Named viewpoints and mountain destinations with honest map-point explanations.",
     icon: "🏔",
-    count: 27,
+    count: 28,
     gradient: "from-alpine-900/40 to-trail-900/40",
   },
   {
@@ -26,7 +26,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Waterfalls and river-cut landscapes with source-linked map points and current access notes.",
     icon: "🌊",
-    count: 15,
+    count: 19,
     gradient: "from-teal-900/40 to-trail-900/40",
   },
   {
@@ -35,7 +35,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Alpine valleys, forests and distinctive outdoor places that reward a slower journey.",
     icon: "📸",
-    count: 18,
+    count: 20,
     gradient: "from-rose-950/50 to-trail-900/40",
   },
 ];

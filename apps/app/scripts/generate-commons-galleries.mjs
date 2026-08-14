@@ -43,6 +43,20 @@ const REVIEWED_CATEGORY_OVERRIDES = {
   "spot-pizol-five-lakes": "Pizol five lakes hike",
   "spot-ascher-ebenalp": "Berggasthaus Aescher-Wildkirchli",
   "spot-alggialp": "Älggi-Alp",
+  "spot-murgseen": "Murgseen",
+  "spot-greina-plateau": "Greina",
+  "spot-lai-da-rims": "Lai da Rims",
+  "spot-lagh-da-saoseo": "Lago di Saoseo",
+  "spot-gasterntal": "Gasterntal",
+  "spot-batoeni": "Batöni waterfalls",
+  "spot-tine-de-conflens": "Tine de Conflens",
+  "spot-cascade-du-dar": "Cascade du Dar",
+  "spot-thur-waterfalls": "Thurwasserfälle",
+  "spot-arnisee": "Arnisee",
+  "spot-golzerensee": "Golzernsee",
+  "spot-lac-de-tseuzier": "Lac de Tseuzier",
+  "spot-aiguilles-de-baulmes": "Aiguilles de Baulmes",
+  "spot-chueebodensee": "Chüebodensee",
 };
 
 const catalogue = JSON.parse(await readFile(cataloguePath, "utf8"));
