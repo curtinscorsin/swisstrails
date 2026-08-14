@@ -8,7 +8,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Lake destinations with the water body kept separate from unverified access points and parking.",
     icon: "💧",
-    count: 33,
+    count: 35,
     gradient: "from-sky-900/40 to-blue-950/40",
   },
   {
@@ -26,7 +26,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Waterfalls and river-cut landscapes with source-linked map points and current access notes.",
     icon: "🌊",
-    count: 19,
+    count: 17,
     gradient: "from-teal-900/40 to-trail-900/40",
   },
   {

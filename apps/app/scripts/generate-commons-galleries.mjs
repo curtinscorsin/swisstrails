@@ -11,7 +11,7 @@ const outputPath = resolve("data/gallery-images.generated.json");
 const reportPath = resolve("data/gallery-images.audit.json");
 const USER_AGENT = "SwissTrailsGalleryAudit/1.0 (editorial image provenance)";
 const ACCEPTED_LICENSE = /^(CC0|CC BY(?:-SA)?(?: [1-4]\.0)?|Public domain)$/i;
-const REJECT_TITLE = /\b(map|karte|logo|flag|coat of arms|diagram|plan|icon|locator|sign|poster|stamp)\b/i;
+const REJECT_TITLE = /\b(map|karte|logo|flag|coat of arms|diagram|plan|icon|locator|sign|infotafel|information board|poster|stamp)\b/i;
 
 // Some destinations use a Commons category name that differs from the public
 // catalogue title or have an ambiguous Wikidata P373 value. These mappings were
@@ -27,7 +27,7 @@ const REVIEWED_CATEGORY_OVERRIDES = {
   "spot-bernina-pass-and-lago-bianco": "Lago Bianco (Bernina)",
   "spot-verzasca-valley": "Val Verzasca",
   "spot-abbey-district-of-st-gallen": "Abbey of St. Gall",
-  "spot-rosenlaui-glacier-gorge": "Rosenlaui Glacier Gorge",
+  "spot-rosenlaui-glacier-gorge": "Gletscherschlucht Rosenlaui",
   "spot-giessbach-falls": "Giessbach Falls",
   "spot-gantrischseeli": "Gantrischseeli",
   "spot-grande-caricaie": "Grande Cariçaie",
@@ -39,9 +39,9 @@ const REVIEWED_CATEGORY_OVERRIDES = {
   "spot-lago-di-tome": "Lago di Tomè",
   "spot-monte-san-giorgio": "Monte San Giorgio (Prealpi Luganesi)",
   "spot-santa-petronilla-waterfall": "Cascata di Santa Petronilla",
-  "spot-viamala-gorge": "Viamala",
-  "spot-pizol-five-lakes": "Pizol five lakes hike",
-  "spot-ascher-ebenalp": "Berggasthaus Aescher-Wildkirchli",
+  "spot-viamala-gorge": "Via Mala",
+  "spot-pizol-five-lakes": "5-Seen-Wanderung",
+  "spot-ascher-ebenalp": "Aescher",
   "spot-alggialp": "Älggi-Alp",
   "spot-murgseen": "Murgseen",
   "spot-greina-plateau": "Greina",
@@ -53,17 +53,19 @@ const REVIEWED_CATEGORY_OVERRIDES = {
   "spot-cascade-du-dar": "Cascade du Dar",
   "spot-thur-waterfalls": "Thurwasserfälle",
   "spot-arnisee": "Arnisee",
-  "spot-golzerensee": "Golzernsee",
+  "spot-golzerensee": "Golzerensee",
   "spot-lac-de-tseuzier": "Lac de Tseuzier",
   "spot-aiguilles-de-baulmes": "Aiguilles de Baulmes",
   "spot-chueebodensee": "Chüebodensee",
+  "spot-crestasee": "Crestasee",
+  "spot-seebergsee": "Seebergsee",
+  "spot-partnunsee": "Partnunsee",
 };
 
 const catalogue = JSON.parse(await readFile(cataloguePath, "utf8"));
 const existingSets = await Promise.all(existingPaths.map(async (path) => JSON.parse(await readFile(path, "utf8"))));
-const existingById = Object.assign({}, ...existingSets);
 const priorGalleries = existingSets.at(-1);
-const globallyUsed = new Set(Object.values(existingById).flat().map((image) => cleanUrl(image.url)));
+const globallyUsed = new Set(existingSets.flatMap((set) => Object.values(set).flat()).map((image) => cleanUrl(image.url)));
 let lastRequestAt = 0;
 
 async function requestJson(url) {
@@ -85,6 +87,19 @@ function cleanUrl(value) {
   const url = new URL(value);
   url.search = "";
   return url.toString();
+}
+
+function publishableExistingImages(id) {
+  const seen = new Set();
+  return existingSets.flatMap((set) => set[id] ?? []).filter((image) => {
+    const url = cleanUrl(image.url);
+    if (!url || seen.has(url)) return false;
+    if (!/\.(?:jpe?g|png|webp)$/i.test(new URL(url).pathname)) return false;
+    if (!image.credit || !image.sourceUrl) return false;
+    if (/unknown|no machine-readable|assumed|anonymous/i.test(image.credit)) return false;
+    seen.add(url);
+    return true;
+  });
 }
 
 function stripHtml(value = "") {
@@ -154,12 +169,26 @@ async function categoryFiles(category) {
   return Object.values(payload.query?.pages ?? {}).map((page) => ({ page, info: page.imageinfo?.[0] })).filter(({ info }) => info);
 }
 
+async function exactNameFiles(name) {
+  const payload = await api("commons.wikimedia.org", {
+    generator: "search",
+    gsrsearch: `\"${name}\" filetype:bitmap`,
+    gsrnamespace: "6",
+    gsrlimit: "100",
+    prop: "imageinfo",
+    iiprop: "url|size|mime|extmetadata",
+  });
+  return Object.values(payload.query?.pages ?? {})
+    .map((page) => ({ page, info: page.imageinfo?.[0] }))
+    .filter(({ info }) => info);
+}
+
 function normalizedTokens(value) {
   const ignored = new Set(["lake", "valley", "falls", "gorge", "glacier", "mount", "switzerland", "swiss", "and", "the", "old", "city"]);
   return value.normalize("NFKD").replace(/\p{Diacritic}/gu, "").toLowerCase().split(/[^a-z0-9]+/).filter((token) => token.length >= 4 && !ignored.has(token));
 }
 
-function candidateImage(location, category, entry, index) {
+function candidateImage(location, category, entry, index, trustedCategory = false) {
   const { page, info } = entry;
   const metadata = info.extmetadata ?? {};
   const license = stripHtml(metadata.LicenseShortName?.value ?? metadata.UsageTerms?.value ?? "");
@@ -168,11 +197,14 @@ function candidateImage(location, category, entry, index) {
   const url = cleanUrl(info.url);
   if (!url || globallyUsed.has(url)) return null;
   if (!/^image\/(?:jpeg|png|webp)$/i.test(info.mime ?? "")) return null;
-  if ((info.width ?? 0) < 1600 || (info.height ?? 0) < 900 || info.width / info.height < 1.15) return null;
+  // Portrait originals are acceptable: the responsive card component applies
+  // a controlled focal crop. Reject only images that lack enough resolution.
+  if ((info.width ?? 0) < 1000 || (info.height ?? 0) < 900) return null;
   if (!ACCEPTED_LICENSE.test(license) || REJECT_TITLE.test(page.title)) return null;
+  if (/unknown|no machine-readable|assumed|anonymous/i.test(artist)) return null;
   const haystack = `${page.title} ${description}`.normalize("NFKD").replace(/\p{Diacritic}/gu, "").toLowerCase();
   const identityTokens = [...new Set([...normalizedTokens(location.name), ...normalizedTokens(category)])];
-  if (identityTokens.length > 0 && !identityTokens.some((token) => haystack.includes(token))) return null;
+  if (!trustedCategory && identityTokens.length > 0 && !identityTokens.some((token) => haystack.includes(token))) return null;
   return {
     id: `img-${location.slug}-gallery-${index + 1}`,
     url,
@@ -189,7 +221,7 @@ const galleries = { ...priorGalleries };
 const report = [];
 for (const [position, location] of catalogue.entries()) {
   try {
-    const current = existingById[location.id] ?? [];
+    const current = publishableExistingImages(location.id);
     const needed = Math.max(0, 3 - current.length);
     if (needed === 0) {
       report.push({ id: location.id, name: location.name, status: "already-complete" });
@@ -203,11 +235,21 @@ for (const [position, location] of catalogue.entries()) {
     const files = await categoryFiles(entity.category);
     const selected = [];
     for (const entry of files) {
-      const image = candidateImage(location, entity.category, entry, selected.length);
+      const image = candidateImage(location, entity.category, entry, selected.length, true);
       if (!image) continue;
       globallyUsed.add(image.url);
       selected.push(image);
       if (selected.length === needed) break;
+    }
+    if (selected.length < needed) {
+      const searchFiles = await exactNameFiles(location.name);
+      for (const entry of searchFiles) {
+        const image = candidateImage(location, location.name, entry, selected.length);
+        if (!image) continue;
+        globallyUsed.add(image.url);
+        selected.push(image);
+        if (selected.length === needed) break;
+      }
     }
     if (selected.length > 0) galleries[location.id] = [...current, ...selected];
     report.push({

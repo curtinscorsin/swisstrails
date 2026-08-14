@@ -170,6 +170,10 @@ assert(
   "Shared three-photo gallery count is stale"
 );
 assert(
+  limitedGalleryNames.length === 0,
+  `Every published place must have at least three photographs: ${limitedGalleryNames.join(", ")}`
+);
+assert(
   fallbackCount === CATALOGUE_METRICS.placeholderLocations,
   "Shared placeholder count is stale"
 );

@@ -1208,20 +1208,20 @@
   },
   {
     "index": 72,
-    "id": "spot-lago-di-tome",
-    "slug": "lago-di-tome",
-    "name": "Lago di Tomè",
-    "canton": "Ticino",
-    "region": "ticino",
+    "id": "spot-crestasee",
+    "slug": "crestasee",
+    "name": "Crestasee",
+    "canton": "Graubünden",
+    "region": "graubunden",
     "coordinates": {
-      "lat": 46.3632,
-      "lng": 8.6899
+      "lat": 46.83141,
+      "lng": 9.32106
     },
     "coordinateType": "lake_center",
     "category": "hidden-lake",
-    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lago+di+Tom%C3%A8&type=locations&origins=gazetteer&limit=20",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lag+la+Cresta&type=locations&origins=gazetteer&limit=20",
     "federalMatchStatus": "candidate_match",
-    "federalMatchLabel": "Lake Lago di Tomé (TI) - Lavizzara"
+    "federalMatchLabel": "Lake Lag la Cresta (GR) - Flims, Trin"
   },
   {
     "index": 73,
@@ -1276,20 +1276,20 @@
   },
   {
     "index": 76,
-    "id": "spot-santa-petronilla-waterfall",
-    "slug": "santa-petronilla-waterfall",
-    "name": "Santa Petronilla Waterfall",
-    "canton": "Ticino",
-    "region": "ticino",
+    "id": "spot-seebergsee",
+    "slug": "seebergsee",
+    "name": "Seebergsee",
+    "canton": "Bern",
+    "region": "bern",
     "coordinates": {
-      "lat": 46.3494,
-      "lng": 8.9647
+      "lat": 46.57751,
+      "lng": 7.44330
     },
-    "coordinateType": "attraction",
-    "category": "waterfall",
-    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Santa+Petronilla+Waterfall&type=locations&origins=gazetteer&limit=20",
+    "coordinateType": "lake_center",
+    "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seebergsee&type=locations&origins=gazetteer&limit=20",
     "federalMatchStatus": "candidate_match",
-    "federalMatchLabel": "Waterfall Cascata di Santa Petronilla 3 (TI) - Biasca"
+    "federalMatchLabel": "Lake Seebergsee (BE) - Zweisimmen"
   },
   {
     "index": 77,
@@ -1735,11 +1735,11 @@
     "federalMatchStatus": "candidate_match", "federalMatchLabel": "Building Berghotel Gasterntal (BE) - Kandersteg"
   },
   {
-    "index": 106, "id": "spot-batoeni", "slug": "batoeni-waterfalls", "name": "Batöni Waterfalls",
-    "canton": "St. Gallen", "region": "st-gallen", "coordinates": { "lat": 46.95763, "lng": 9.35128 },
-    "coordinateType": "attraction", "category": "waterfall",
-    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Bat%C3%B6ni",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Local name Batöni (SG) - Mels"
+    "index": 106, "id": "spot-partnunsee", "slug": "partnunsee", "name": "Partnunsee",
+    "canton": "Graubünden", "region": "graubunden", "coordinates": { "lat": 47.00700, "lng": 9.85894 },
+    "coordinateType": "lake_center", "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Partnunsee",
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Partnunsee (GR) - Luzein"
   },
   {
     "index": 107, "id": "spot-tine-de-conflens", "slug": "tine-de-conflens", "name": "Tine de Conflens",
