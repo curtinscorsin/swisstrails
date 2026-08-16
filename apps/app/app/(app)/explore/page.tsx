@@ -199,7 +199,7 @@ export default function ExplorePage() {
                   <p className="mt-1 text-xs leading-snug text-fg-muted">with sourced route or visit context</p>
                 </div>
                 <p className="col-span-2 px-1 pt-1 text-[11px] leading-relaxed text-stone-500">
-                  {CATALOGUE_METRICS.verifiedAccessPoints} separate access points verified · {CATALOGUE_METRICS.creditedPhotographs} credited photographs · checked 10 August 2026
+                  {CATALOGUE_METRICS.verifiedAccessPoints} separate access points verified · {CATALOGUE_METRICS.creditedPhotographs} credited photographs · catalogue updated {new Date(`${CATALOGUE_METRICS.lastEditorialCheck}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
                 </p>
               </div>
             </div>

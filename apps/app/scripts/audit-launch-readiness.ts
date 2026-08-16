@@ -61,6 +61,15 @@ check(!marketingText.includes("Sixty-one"), "Stale photograph count remains in m
 check(!marketingText.includes("Separate destination and access coordinates"), "Over-broad access-coordinate claim remains");
 check(!marketingText.includes("New places only after manual verification"), "Unsupported manual-verification claim remains");
 
+const explorePage = read("apps/app/app/(app)/explore/page.tsx");
+check(
+  explorePage.includes("CATALOGUE_METRICS.lastEditorialCheck"),
+  "Explore must derive its catalogue update date from the shared metrics"
+);
+
+const launchSetup = read("LAUNCH_SETUP.md");
+check(!launchSetup.includes("three image placeholders"), "Launch checklist still claims image placeholders exist");
+
 if (process.argv.includes("--production")) {
   const required = [
     "NEXT_PUBLIC_SUPABASE_URL",
