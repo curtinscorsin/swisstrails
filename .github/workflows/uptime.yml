@@ -1,0 +1,25 @@
+name: Production uptime
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Application and Supabase health
+        run: curl --fail --silent --show-error --max-time 15 https://app.swiss-trails.com/api/health
+      - name: Marketing website
+        run: curl --fail --silent --show-error --max-time 15 https://www.swiss-trails.com/ > /dev/null
+      - name: Login page
+        run: curl --fail --silent --show-error --location --max-time 15 https://app.swiss-trails.com/login > /dev/null
+      - name: PWA manifest
+        run: curl --fail --silent --show-error --max-time 15 https://app.swiss-trails.com/site.webmanifest > /dev/null
+      - name: Offline fallback
+        run: curl --fail --silent --show-error --max-time 15 https://app.swiss-trails.com/offline > /dev/null

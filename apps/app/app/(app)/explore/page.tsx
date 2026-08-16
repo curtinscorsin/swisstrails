@@ -274,6 +274,7 @@ interface MasonryCardProps {
 function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardProps) {
   const routeType = location.verification?.routeType.replace(/^Reviewed:\s*/, "") ?? "";
   const isSourcedRoute = location.verification?.routeType.startsWith("Reviewed:") ?? false;
+  const isDestinationOnly = location.verification?.routeType === "Destination reference only";
   const isVisitContext = /destination|visit|managed|attraction/i.test(routeType);
   const isClosed = location.verification?.status === "closed";
   const hasAdvisory = location.verification?.status === "open-with-advisory";
@@ -292,7 +293,7 @@ function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardPr
       style={{ aspectRatio }}
       onClick={onClick}
       whileTap={{ scale: 0.97 }}
-      aria-label={`Open ${location.name}. ${hasVerifiedStart ? "Access point verified." : isSourcedRoute ? (isVisitContext ? "Visit context sourced." : "Route context sourced.") : "Destination source linked."} Map marker is a destination pin.`}
+      aria-label={`Open ${location.name}. ${hasVerifiedStart ? "Access point verified." : isSourcedRoute ? (isVisitContext ? "Visit context sourced." : "Route context sourced.") : "Destination identity sourced; route logistics unverified."} Map marker is a destination pin.`}
     >
       <ResolvedLocationPhoto
         location={location}
@@ -310,12 +311,12 @@ function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardPr
               "inline-flex items-center gap-1 rounded-full border px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.08em] backdrop-blur-md",
               isClosed
                 ? "border-red-500/40 bg-red-950/80 text-red-100"
-                : hasAdvisory
+                : hasAdvisory || isDestinationOnly
                   ? "border-amber-500/35 bg-amber-950/75 text-amber-200"
                   : "border-white/15 bg-black/45 text-white/85"
             )}
           >
-            {isClosed || hasAdvisory ? (
+            {isClosed || hasAdvisory || isDestinationOnly ? (
               <AlertTriangle className="h-3 w-3" />
             ) : (
               <BadgeCheck className="h-3 w-3" />
@@ -325,6 +326,8 @@ function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardPr
                 ? "Closed"
                 : hasAdvisory
                   ? "Advisory"
+                : isDestinationOnly
+                  ? "Unverified"
                 : hasVerifiedStart
                   ? "Access"
                   : isSourcedRoute
@@ -338,6 +341,8 @@ function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardPr
                 ? "Closed"
                 : hasAdvisory
                   ? "Specific advisory"
+                : isDestinationOnly
+                  ? "Logistics unverified"
                 : hasVerifiedStart
                   ? "Access verified"
                   : isSourcedRoute

@@ -32,6 +32,13 @@ check(
   loginPage.includes("NEXT_PUBLIC_GOOGLE_AUTH_ENABLED"),
   "Google sign-in must be protected by a production feature flag"
 );
+check(loginPage.includes("captchaToken"), "Email sign-in must pass the CAPTCHA token to Supabase");
+
+const verificationPanel = read("apps/app/components/app/route-verification.tsx");
+check(
+  verificationPanel.includes("Destination information only — route logistics unverified"),
+  "Destination-only pages must show a prominent unresolved-logistics warning"
+);
 
 const migration = read("apps/app/supabase/migrations/20260810111955_production_access_security.sql");
 check(migration.includes("private.has_paid_access"), "Database paid-access policy is missing");
@@ -83,6 +90,11 @@ if (process.argv.includes("--production")) {
     "STRIPE_PRICE_ID",
     "LEGAL_OPERATOR_NAME",
     "LEGAL_OPERATOR_ADDRESS",
+    "LEGAL_OPERATOR_COUNTRY",
+    "LEGAL_VAT_STATUS",
+    "REFUND_POLICY_SUMMARY",
+    "SUPPORT_EMAIL",
+    "NEXT_PUBLIC_TURNSTILE_SITE_KEY",
   ];
   for (const key of required) check(Boolean(process.env[key]?.trim()), `Production environment missing ${key}`);
   check(process.env.NEXT_PUBLIC_MOCK_MODE === "false", "Production NEXT_PUBLIC_MOCK_MODE must be false");

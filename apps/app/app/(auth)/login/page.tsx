@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Mail, ArrowRight, KeyRound } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/brand/logo";
 import { haptics } from "@/lib/haptics";
 import { createClient } from "@/lib/supabase/client";
+import { TurnstileChallenge } from "@/components/auth/turnstile-challenge";
 
 const IS_MOCK =
   process.env.NODE_ENV !== "production" &&
@@ -18,6 +19,7 @@ const IS_MOCK =
 // Supabase provider have both been configured and tested.
 const GOOGLE_AUTH_ENABLED =
   process.env.NEXT_PUBLIC_GOOGLE_AUTH_ENABLED === "true";
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -30,6 +32,10 @@ function getFriendlyAuthError(message: string) {
 
   if (normalized.includes("provider is not enabled")) {
     return "This sign-in option is not available yet. Please continue with email.";
+  }
+
+  if (normalized.includes("captcha")) {
+    return "Security verification failed. Complete the check and try again.";
   }
 
   return "We could not start sign-in. Please try again in a moment.";
@@ -53,6 +59,9 @@ export default function LoginPage() {
   const [isEmailLoading, setIsEmailLoading] = useState(false);
   const [isOtpLoading, setIsOtpLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaResetKey, setCaptchaResetKey] = useState(0);
+  const handleCaptchaToken = useCallback((token: string | null) => setCaptchaToken(token), []);
 
   useEffect(() => {
     const error = new URLSearchParams(window.location.search).get("error");
@@ -71,6 +80,11 @@ export default function LoginPage() {
       haptics.warn();
       return;
     }
+    if (TURNSTILE_SITE_KEY && !captchaToken) {
+      setEmailError("Complete the security verification first.");
+      haptics.warn();
+      return;
+    }
     setEmailError(undefined);
     haptics.tap();
     setIsEmailLoading(true);
@@ -82,9 +96,11 @@ export default function LoginPage() {
       options: {
         emailRedirectTo: `${window.location.origin}/auth/confirm?next=${encodeURIComponent(safeNext)}`,
         shouldCreateUser: true,
+        captchaToken: captchaToken ?? undefined,
       },
     });
     setIsEmailLoading(false);
+    setCaptchaResetKey((value) => value + 1);
     if (error) {
       setEmailError(getFriendlyAuthError(error.message));
       haptics.warn();
@@ -300,6 +316,11 @@ export default function LoginPage() {
                 icon={<Mail className="w-4 h-4" />}
                 error={emailError}
                 aria-invalid={!!emailError}
+              />
+              <TurnstileChallenge
+                siteKey={TURNSTILE_SITE_KEY}
+                onTokenChange={handleCaptchaToken}
+                resetKey={captchaResetKey}
               />
               <Button
                 type="submit"

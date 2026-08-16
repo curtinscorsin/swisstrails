@@ -105,6 +105,18 @@ export function RouteVerificationDetails({
         </span>
       </div>
 
+      {destinationOnly && !hasSourcedContext && (
+        <div className="rounded-xl border border-amber-700/55 bg-amber-950/35 p-4" role="note">
+          <p className="flex items-center gap-2 text-sm font-semibold text-amber-200">
+            <AlertTriangle className="h-4 w-4" />
+            Destination information only — route logistics unverified
+          </p>
+          <p className="mt-2 text-xs leading-relaxed text-amber-100/75">
+            This page confirms the named place and destination map point. It does not provide a verified hiking route, trailhead, parking place or public-transport starting point. Use the linked official sources before planning a visit.
+          </p>
+        </div>
+      )}
+
       <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-4">
         <div className="flex items-start gap-2.5">
           <CalendarCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-fg-muted" />
