@@ -73,7 +73,7 @@ export const CATEGORIES: Category[] = [
 ];
 
 export const PRICING = {
-  amount: 29,
+  amount: 19.9,
   currency: "CHF",
   period: "one-time" as const,
   features: [

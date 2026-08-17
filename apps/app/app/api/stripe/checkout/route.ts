@@ -61,8 +61,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ url });
   } catch (error) {
     console.error("Checkout error:", error);
+    const stripeFailure =
+      error && typeof error === "object"
+        ? {
+            type: "type" in error && typeof error.type === "string" ? error.type : undefined,
+            code: "code" in error && typeof error.code === "string" ? error.code : undefined,
+          }
+        : undefined;
     return NextResponse.json(
-      { error: "Failed to create checkout session" },
+      {
+        error: "Failed to create checkout session",
+        // Stripe's machine-readable type/code contain no key or card data and
+        // let operators distinguish account, permission and resource issues.
+        stripeFailure,
+      },
       { status: 500 }
     );
   }
