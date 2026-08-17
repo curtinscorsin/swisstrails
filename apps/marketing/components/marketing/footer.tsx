@@ -43,7 +43,7 @@ export function Footer() {
             size="xl"
             className="shadow-xl"
           >
-            <a href="#pricing">{salesEnabled ? "Get Swiss Trails — CHF 29" : "View launch status"}</a>
+            <a href="#pricing">{salesEnabled ? "Get Swiss Trails — CHF 19.90" : "View launch status"}</a>
           </Button>
         </div>
       </div>

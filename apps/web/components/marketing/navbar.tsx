@@ -118,7 +118,7 @@ export function Navbar() {
           <div className="flex flex-col gap-3">
             <Button asChild variant="gold" size="lg" className="w-full">
               <a href="#pricing" onClick={() => setIsMenuOpen(false)}>
-                Unlock the Map — CHF 29
+                Unlock the Map — CHF 19.90
               </a>
             </Button>
             <Link

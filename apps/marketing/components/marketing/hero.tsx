@@ -84,7 +84,7 @@ export function Hero() {
                 Sources shown for every place
               </span>
               <span className="h-1 w-1 rounded-full bg-stone-400" />
-              <span>CHF 29 once</span>
+              <span>CHF 19.90 once</span>
             </div>
           </motion.div>
         </div>

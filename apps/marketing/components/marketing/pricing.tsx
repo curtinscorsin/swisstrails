@@ -78,7 +78,7 @@ export function Pricing() {
               {/* CTA */}
               {salesEnabled ? (
                 <Button asChild variant="gold" size="xl" className="w-full bg-trail-950 text-stone-50 shadow-none hover:bg-trail-800">
-                  <a href={`${APP_URL}/checkout`}>Get lifetime access — CHF 29</a>
+                  <a href={`${APP_URL}/checkout`}>Get lifetime access — CHF 19.90</a>
                 </Button>
               ) : (
                 <Button variant="gold" size="xl" className="w-full bg-trail-950 text-stone-50 shadow-none" disabled>

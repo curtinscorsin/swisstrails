@@ -88,7 +88,7 @@ export function Pricing() {
                 className="w-full shadow-[0_0_40px_rgba(245,184,40,0.2)]"
               >
                 <a href="/checkout">
-                  Unlock The Map — CHF 29 →
+                  Unlock The Map — CHF 19.90 →
                 </a>
               </Button>
 

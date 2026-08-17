@@ -32,7 +32,7 @@ export function SocialProof() {
             { value: "3,200+", label: "Explorers" },
             { value: "500+", label: "Locations" },
             { value: "★ 4.9", label: "Average rating" },
-            { value: "CHF 29", label: "One-time, forever" },
+            { value: "CHF 19.90", label: "One-time, forever" },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}

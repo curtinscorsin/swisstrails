@@ -48,7 +48,7 @@ Stripe cannot accept real money until the account owner completes identity,
 business and bank verification.
 
 1. Complete Stripe account activation and payout-bank details.
-2. Create a **live-mode** one-time product and CHF 29 price.
+2. Create a **live-mode** one-time product and CHF 19.90 price.
 3. Create the live webhook endpoint:
    `https://app.swiss-trails.com/api/stripe/webhook`
 4. Subscribe it to:

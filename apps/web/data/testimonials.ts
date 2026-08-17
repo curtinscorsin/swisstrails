@@ -21,7 +21,7 @@ export const TESTIMONIALS: Testimonial[] = [
     city: "Bern",
     country: "Switzerland",
     content:
-      "Honestly the best CHF 29 I've ever spent. Three trips in, all of them completely unforgettable. My friends keep asking how I always find these spots — and I keep the secret to myself.",
+      "Honestly the best CHF 19.90 I've ever spent. Three trips in, all of them completely unforgettable. My friends keep asking how I always find these spots — and I keep the secret to myself.",
     rating: 5,
     date: "2024-08-03",
     verified: true,

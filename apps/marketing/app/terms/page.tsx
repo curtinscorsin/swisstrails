@@ -36,7 +36,7 @@ const sections = [
   {
     title: "4. Price, access and availability",
     body: [
-      "The advertised price is CHF 29 as a one-time payment. The checkout must display the total payable amount, including any non-optional charge, before purchase. No recurring fee is created by this product.",
+      "The advertised price is CHF 19.90 as a one-time payment. The checkout must display the total payable amount, including any non-optional charge, before purchase. No recurring fee is created by this product.",
       `VAT status: ${LEGAL_DETAILS.vatStatus}. The operator must reassess registration if its circumstances or applicable thresholds change.`,
       "Lifetime access means access for the commercially reasonable lifetime of this Swiss Trails digital product, not the lifetime of a person or a promise that every feature, provider or location will remain unchanged forever. Planned maintenance, security incidents or third-party outages can temporarily affect availability.",
     ],

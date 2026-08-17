@@ -71,6 +71,8 @@ check(!marketingText.includes("Separate destination and access coordinates"), "O
 check(!marketingText.includes("New places only after manual verification"), "Unsupported manual-verification claim remains");
 check(!/visit 3 spots|identify the three locations/i.test(marketingText), "Retired three-location refund claim remains");
 check(marketingText.includes("14 calendar days"), "Approved 14-day refund policy is missing");
+check(!/CHF\s*29\b/.test(marketingText), "Retired CHF 29 price remains in active marketing copy");
+check(marketingText.includes("CHF 19.90"), "Approved CHF 19.90 price is missing from active marketing copy");
 
 const explorePage = read("apps/app/app/(app)/explore/page.tsx");
 check(

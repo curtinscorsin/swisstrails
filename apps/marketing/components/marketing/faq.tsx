@@ -16,7 +16,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Is this really a one-time payment?",
-    a: "Yes. CHF 29 once, access forever. Future locations that complete the manual review are included without an additional charge. We do not promise a monthly quantity because accuracy comes first.",
+    a: "Yes. CHF 19.90 once, access forever. Future locations that complete the manual review are included without an additional charge. We do not promise a monthly quantity because accuracy comes first.",
   },
   {
     q: "Do I need special equipment or experience?",

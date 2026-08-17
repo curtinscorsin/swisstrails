@@ -91,7 +91,7 @@ export function ProblemSection() {
               <span className="text-stone-600"> Unknown details stay visible.</span>
             </p>
             <p className="text-sm text-stone-600 sm:text-right">
-              CHF 29 once
+              CHF 19.90 once
               <br />
               Lifetime access
             </p>

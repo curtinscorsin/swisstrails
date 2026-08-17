@@ -15,7 +15,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Is this really a one-time payment?",
-    a: "Yes. CHF 29 once, access forever. We add new locations regularly (usually 5–10 per month) and you automatically get them included — no additional cost, no subscription. Ever.",
+    a: "Yes. CHF 19.90 once, access forever. We add new locations regularly (usually 5–10 per month) and you automatically get them included — no additional cost, no subscription. Ever.",
   },
   {
     q: "Do I need special equipment or experience?",

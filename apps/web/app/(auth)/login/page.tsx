@@ -155,7 +155,7 @@ export default function LoginPage() {
           <p className="text-fg-subtle text-xs">
             Don&apos;t have access?{" "}
             <Link href="/#pricing" className="text-alpine-400 hover:underline">
-              Get Swiss Trails — CHF 29
+              Get Swiss Trails — CHF 19.90
             </Link>
           </p>
           <Link href="/" className="text-fg-subtle hover:text-fg text-xs transition-colors">

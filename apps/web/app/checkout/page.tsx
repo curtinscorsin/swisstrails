@@ -111,7 +111,7 @@ export default function CheckoutPage() {
               disabled={!email}
             >
               <Zap className="w-4 h-4" />
-              Pay CHF 29 — Get Instant Access
+              Pay CHF 19.90 — Get Instant Access
             </Button>
 
             <div className="mt-4 flex items-center justify-center gap-2">

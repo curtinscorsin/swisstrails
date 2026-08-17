@@ -129,7 +129,7 @@ export function Navbar() {
           <div className="flex flex-col gap-3">
             <Button asChild variant="gold" size="lg" className="w-full">
               <a href="#pricing" onClick={() => setIsMenuOpen(false)}>
-                Get lifetime access — CHF 29
+                Get lifetime access — CHF 19.90
               </a>
             </Button>
             <a

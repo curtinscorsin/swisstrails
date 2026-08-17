@@ -28,7 +28,7 @@ export function Footer() {
             size="xl"
             className="shadow-[0_0_40px_rgba(245,184,40,0.2)]"
           >
-            <a href="#pricing">Unlock The Map — CHF 29 →</a>
+            <a href="#pricing">Unlock The Map — CHF 19.90 →</a>
           </Button>
         </div>
       </div>
