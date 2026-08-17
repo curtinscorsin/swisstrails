@@ -19,7 +19,11 @@ const IS_MOCK =
 // Supabase provider have both been configured and tested.
 const GOOGLE_AUTH_ENABLED =
   process.env.NEXT_PUBLIC_GOOGLE_AUTH_ENABLED === "true";
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+// Turnstile site keys are public identifiers (the corresponding secret stays
+// in Supabase). Keep the production key as a fallback so login protection does
+// not silently disappear when a deployment environment is misconfigured.
+const TURNSTILE_SITE_KEY =
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "0x4AAAAAAES5HImSqJ7zw2H4";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
