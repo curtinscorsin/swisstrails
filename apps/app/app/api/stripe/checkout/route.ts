@@ -13,9 +13,15 @@ function validRequestOrigin(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     if (!salesConfigurationReady()) {
-      console.error("Checkout disabled; missing launch configuration:", missingSalesConfiguration());
+      const missingConfiguration = missingSalesConfiguration();
+      console.error("Checkout disabled; missing launch configuration:", missingConfiguration);
       return NextResponse.json(
-        { error: "Purchases are not open yet. Please try again later." },
+        {
+          error: "Purchases are not open yet. Please try again later.",
+          // Environment-variable names are not secrets. Returning names only
+          // makes production setup diagnosable without exposing their values.
+          missingConfiguration,
+        },
         { status: 503 }
       );
     }
