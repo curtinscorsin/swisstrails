@@ -267,6 +267,7 @@ if (process.argv.includes("--network")) {
   }
   if (automationBlocked.length > 0) {
     console.log(`- ${automationBlocked.length} official source URLs rejected automated checks but were not reported as broken`);
+    for (const issue of automationBlocked) console.log(`  - ${issue}`);
   }
   console.log(`- ${urls.length - automationBlocked.length} published image and source URLs responded successfully`);
 }

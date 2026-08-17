@@ -34,6 +34,13 @@ check(
 );
 check(loginPage.includes("captchaToken"), "Email sign-in must pass the CAPTCHA token to Supabase");
 
+const appNextConfig = read("apps/app/next.config.ts");
+check(
+  /script-src[^\n]+challenges\.cloudflare\.com/.test(appNextConfig) &&
+    /frame-src[^\n]+challenges\.cloudflare\.com/.test(appNextConfig),
+  "App Content Security Policy must permit the Turnstile script and iframe"
+);
+
 const verificationPanel = read("apps/app/components/app/route-verification.tsx");
 check(
   verificationPanel.includes("Destination information only — route logistics unverified"),

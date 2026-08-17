@@ -22,12 +22,12 @@ const nextConfig: NextConfig = {
       : "'self' 'unsafe-inline'";
     const contentSecurityPolicy = [
       "default-src 'self'",
-      `script-src ${scriptSrc}`,
+      `script-src ${scriptSrc} https://challenges.cloudflare.com`,
       "style-src 'self' 'unsafe-inline'",
       "font-src 'self' data:",
       "img-src 'self' data: blob: https://upload.wikimedia.org https://*.supabase.co https://*.mapbox.com https://lh3.googleusercontent.com https://avatars.githubusercontent.com",
       "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.mapbox.com https://events.mapbox.com https://api.open-meteo.com https://api.stripe.com",
-      "frame-src 'self' https://js.stripe.com https://hooks.stripe.com",
+      "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://challenges.cloudflare.com",
       "worker-src 'self' blob:",
       "manifest-src 'self'",
       "object-src 'none'",
