@@ -12,7 +12,9 @@ import { haptics } from "@/lib/haptics";
 const IS_MOCK =
   process.env.NODE_ENV !== "production" &&
   process.env.NEXT_PUBLIC_MOCK_MODE === "true";
-const SALES_ENABLED = process.env.NEXT_PUBLIC_SALES_ENABLED === "true";
+// Match the server-side fail-closed configuration check while retaining an
+// explicit public emergency switch for temporarily closing sales.
+const SALES_ENABLED = process.env.NEXT_PUBLIC_SALES_ENABLED !== "false";
 
 export default function CheckoutPage() {
   const [isLoading, setIsLoading] = useState(false);

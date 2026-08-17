@@ -18,7 +18,9 @@ const REQUIRED_SALES_ENV = [
 ] as const;
 
 export function isSalesEnabled() {
-  return process.env.NEXT_PUBLIC_SALES_ENABLED === "true";
+  // Production sales are open once every required secret and legal setting is
+  // present. Operators can still close checkout immediately with `false`.
+  return process.env.NEXT_PUBLIC_SALES_ENABLED !== "false";
 }
 
 export function missingSalesConfiguration() {
