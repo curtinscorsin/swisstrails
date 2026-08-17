@@ -29,7 +29,6 @@ export async function createCheckoutSession(
 
   const session = await getStripe().checkout.sessions.create({
     mode: "payment",
-    payment_method_types: ["card"],
     ...(customerId ? { customer: customerId } : { customer_email: email }),
     client_reference_id: userId,
     line_items: [

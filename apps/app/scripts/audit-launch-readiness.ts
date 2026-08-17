@@ -77,6 +77,18 @@ check(
 const launchSetup = read("LAUNCH_SETUP.md");
 check(!launchSetup.includes("three image placeholders"), "Launch checklist still claims image placeholders exist");
 
+const activeStripeIntegration = read("apps/app/lib/stripe.ts");
+check(
+  !activeStripeIntegration.includes("payment_method_types"),
+  "Stripe Checkout must use Dashboard-managed dynamic payment methods"
+);
+
+const reviewedContent = read("apps/app/data/reviewed-location-enrichments.ts");
+check(
+  !/no (?:modern )?legally reusable(?: exact-location)? photograph/i.test(reviewedContent),
+  "Published copy still claims that a location with a sourced gallery has no verified photograph"
+);
+
 if (process.argv.includes("--production")) {
   const required = [
     "NEXT_PUBLIC_SUPABASE_URL",

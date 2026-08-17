@@ -134,6 +134,10 @@ launch, a human editor should open all 100 pages and confirm:
 - no page implies that a destination pin is a verified trailhead;
 - the correction email is monitored and corrections have an owner.
 
+An AI-assisted visual review of all 304 photographs was completed on
+2026-08-17 and is recorded in `PHOTO_REVIEW.md`. It corrected six unsuitable
+or repetitive selections, but it does not replace accountable human sign-off.
+
 The automated catalogue audit currently reports 100 unique published places,
 304 unique credited photographs, no placeholders and no duplicate routes. All
 100 places now have destination-specific context from an official tourism,

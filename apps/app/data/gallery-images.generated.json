@@ -2006,12 +2006,12 @@
     },
     {
       "id": "img-val-mustair-gallery-2",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/M%C3%BCnstertaler_Birnbrot.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Santa_Maria_Val_Muestair.JPG",
       "alt": "Val Müstair",
-      "width": 3641,
-      "height": 1626,
-      "credit": "Sandstein · CC BY 3.0",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%BCnstertaler_Birnbrot.jpg",
+      "width": 2842,
+      "height": 1892,
+      "credit": "Wladyslaw · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Santa_Maria_Val_Muestair.JPG",
       "isHero": false
     }
   ],
@@ -2060,22 +2060,22 @@
     },
     {
       "id": "img-oberblegisee-gallery-1",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Balgach_-_h%C3%B6chstern_-_panoramio.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Oberblegisee_vom_Seblengrat.jpg",
       "alt": "Oberblegisee",
-      "width": 2400,
-      "height": 1800,
-      "credit": "mavromichali · CC BY-SA 3.0",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Balgach_-_h%C3%B6chstern_-_panoramio.jpg",
+      "width": 3264,
+      "height": 2448,
+      "credit": "Whgler · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oberblegisee_vom_Seblengrat.jpg",
       "isHero": false
     },
     {
       "id": "img-oberblegisee-gallery-2",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Cartigny%2C_Switzerland_-_panoramio.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/2561_Oberlegisee_mit_Hausstock.jpg",
       "alt": "Oberblegisee",
-      "width": 2272,
-      "height": 1704,
-      "credit": "Björn S. · CC BY-SA 3.0",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cartigny,_Switzerland_-_panoramio.jpg",
+      "width": 3088,
+      "height": 1920,
+      "credit": "Frei & Co., St. Gallen · Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2561_Oberlegisee_mit_Hausstock.jpg",
       "isHero": false
     }
   ],
@@ -2722,22 +2722,22 @@
   "spot-monte-san-giorgio": [
     {
       "id": "img-monte-san-giorgio-gallery-2",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Lago_di_Lugano.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Monte_San_Giorgio_Aussicht.jpg",
       "alt": "Monte San Giorgio",
-      "width": 2182,
-      "height": 1700,
-      "credit": "Valser · Public domain",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Lugano.jpg",
+      "width": 2048,
+      "height": 1536,
+      "credit": "David Büsser · CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Monte_San_Giorgio_Aussicht.jpg",
       "isHero": false
     },
     {
       "id": "img-monte-san-giorgio-gallery-3",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Lago_di_Lugano2.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Prehistoric_statifications_San_Giorgio_2.jpg",
       "alt": "Monte San Giorgio",
-      "width": 2182,
-      "height": 1700,
-      "credit": "Valser · Public domain",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Lugano2.jpg",
+      "width": 4272,
+      "height": 2848,
+      "credit": "MetiuCom · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Prehistoric_statifications_San_Giorgio_2.jpg",
       "isHero": false
     },
     {
@@ -3212,12 +3212,12 @@
     },
     {
       "id": "img-pilatus-gallery-1",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Pilatus_P3-03_P3-Flyers_HB-RBP_OTT_2013_02.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Pilatus_Autumn_Sunset.jpg",
       "alt": "Pilatus",
-      "width": 3800,
-      "height": 2138,
-      "credit": "Julian Herzog ( Website ) · CC BY 4.0",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pilatus_P3-03_P3-Flyers_HB-RBP_OTT_2013_02.jpg",
+      "width": 4032,
+      "height": 1960,
+      "credit": "Pascal Niederberger · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pilatus_Autumn_Sunset.jpg",
       "isHero": false
     },
     {
