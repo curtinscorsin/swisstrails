@@ -109,13 +109,13 @@
   ],
   "spot-bachalpsee": [
     {
-      "id": "img-bachalpsee-commons",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Bachalpsee_reflection.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "alt": "Bachalpsee",
-      "width": 2592,
-      "height": 1944,
-      "credit": "Ryan Gsell · CC BY 2.0",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bachalpsee_reflection.jpg",
+      "id": "img-iffigsee-aerial",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Aerial_photograph_of_Iffigsee%2C_Bernese_Oberland.jpg",
+      "alt": "Iffigsee",
+      "width": 4056,
+      "height": 3040,
+      "credit": "Evan Williams · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial_photograph_of_Iffigsee%2C_Bernese_Oberland.jpg",
       "isHero": true
     }
   ],

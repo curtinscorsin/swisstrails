@@ -73,13 +73,13 @@
   ],
   "spot-schilthorn": [
     {
-      "id": "img-schilthorn-wikidata",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Schilthorn_-_Piz_Gloria.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "alt": "Schilthorn",
-      "width": 4961,
-      "height": 2147,
-      "credit": "Schilthornbahn · CC BY-SA 4.0",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Schilthorn_-_Piz_Gloria.jpg",
+      "id": "img-augstmatthorn-hardergrat",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Auf_dem_Hardergrat.jpg",
+      "alt": "Augstmatthorn",
+      "width": 6016,
+      "height": 4000,
+      "credit": "Barbara Steinemann · CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Auf_dem_Hardergrat.jpg",
       "isHero": true
     }
   ],

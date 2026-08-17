@@ -91,7 +91,10 @@ for (const location of CURATED_LOCATIONS) {
 
   assert(verification.country === "Switzerland", `${prefix}: wrong country`);
   assert(Boolean(verification.canton), `${prefix}: missing canton`);
-  assert(verification.checkedAt === "2026-08-10", `${prefix}: stale checked date`);
+  assert(
+    /^\d{4}-\d{2}-\d{2}$/.test(verification.checkedAt) && verification.checkedAt <= "2026-08-17",
+    `${prefix}: missing or future-dated editorial check`
+  );
   assert(verification.distanceKm === (location.distanceKm ?? null), `${prefix}: card and verified distance disagree`);
   assert(
     verification.durationMinutes === null || verification.durationMinutes > 0,

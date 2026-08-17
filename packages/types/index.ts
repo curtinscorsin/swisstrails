@@ -226,7 +226,7 @@ export const CATALOGUE_METRICS = {
   creditedPhotographs: 304,
   locationsWithThreePhotographs: 100,
   placeholderLocations: 0,
-  lastEditorialCheck: "2026-08-14",
+  lastEditorialCheck: "2026-08-17",
 } as const;
 
 /* ─────────────────────────────────────────────

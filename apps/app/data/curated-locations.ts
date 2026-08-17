@@ -14,8 +14,8 @@ import type {
 const CHECKED_AT = "2026-08-10";
 const CREATED_AT = "2026-08-09T00:00:00.000Z";
 
-function source(label: string, url: string): LocationSource {
-  return { label, url, checkedAt: CHECKED_AT };
+function source(label: string, url: string, checkedAt = CHECKED_AT): LocationSource {
+  return { label, url, checkedAt };
 }
 
 function federalPlaceSource(label: string, searchText: string): LocationSource {
@@ -39,9 +39,10 @@ function imageFor(id: string) {
 }
 
 function verification(
-  input: Omit<RouteVerification, "country" | "checkedAt">
+  input: Omit<RouteVerification, "country" | "checkedAt">,
+  checkedAt = CHECKED_AT
 ): RouteVerification {
-  return { country: "Switzerland", checkedAt: CHECKED_AT, ...input };
+  return { country: "Switzerland", checkedAt, ...input };
 }
 
 const sharedSafety = [
@@ -610,6 +611,7 @@ interface MasterCatalogueEntry {
   federalSearchUrl: string | null;
   federalMatchStatus: "candidate_match" | "manual_review" | "no_match";
   federalMatchLabel: string | null;
+  checkedAt?: string;
 }
 
 function swisstopoMapUrl(lat: number, lng: number) {
@@ -665,24 +667,26 @@ const placeTypeCopy: Record<CoordinateType, { tagline: string; description: stri
 
 function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
   const copy = placeTypeCopy[entry.coordinateType];
+  const checkedAt = entry.checkedAt ?? CHECKED_AT;
   const image = SOURCED_IMAGES[entry.id]?.[0];
   const reviewed =
     REVIEWED_LOCATION_ENRICHMENTS[entry.id] ?? CATALOGUE_LOCATION_ENRICHMENTS[entry.id];
   const sources: LocationSource[] = [
     source(
       "Swiss federal map — published destination point",
-      swisstopoMapUrl(entry.coordinates.lat, entry.coordinates.lng)
+      swisstopoMapUrl(entry.coordinates.lat, entry.coordinates.lng),
+      checkedAt
     ),
   ];
 
   if (entry.federalSearchUrl) {
-    sources.push(source("Swiss federal gazetteer — name search", entry.federalSearchUrl));
+    sources.push(source("Swiss federal gazetteer — name search", entry.federalSearchUrl, checkedAt));
   }
   if (image?.sourceUrl) {
-    sources.push(source("Wikimedia Commons — photograph, creator and licence", image.sourceUrl));
+    sources.push(source("Wikimedia Commons — photograph, creator and licence", image.sourceUrl, checkedAt));
   }
   if (reviewed) {
-    sources.push(...reviewed.sources.map((item) => source(item.label, item.url)));
+    sources.push(...reviewed.sources.map((item) => source(item.label, item.url, checkedAt)));
   }
 
   const matchUncertainty =
@@ -766,7 +770,7 @@ function buildSourceBackedLocation(entry: MasterCatalogueEntry): Location {
         ? [matchUncertainty, ...reviewed.route.uncertainties]
         : [matchUncertainty, "Route distance, duration, elevation gain and an exact access point are not yet published."],
       sources,
-    }),
+    }, checkedAt),
   };
 }
 
@@ -786,8 +790,8 @@ const ARCHIVED_CATALOGUE_IDS = new Set([
   "spot-brissago-islands",
   "spot-stein-am-rhein",
   // Broader records that duplicate a more precise outdoor destination.
-  // Bachalpsee already carries the First–Bachalpsee route, while Ponte dei
-  // Salti represents the exact Lavertezzo point used by the Verzasca card.
+  // Iffigsee now replaces the overlapping First–Bachalpsee entry, while Ponte
+  // dei Salti represents the exact Lavertezzo point used by the Verzasca card.
   "spot-grindelwald-first",
   "spot-verzasca-valley",
   "spot-lauterbrunnen-valley",

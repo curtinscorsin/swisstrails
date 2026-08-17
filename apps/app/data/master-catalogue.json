@@ -308,19 +308,20 @@
   {
     "index": 19,
     "id": "spot-schilthorn",
-    "slug": "schilthorn",
-    "name": "Schilthorn",
+    "slug": "augstmatthorn",
+    "name": "Augstmatthorn",
     "canton": "Bern",
     "region": "bern",
     "coordinates": {
-      "lat": 46.5575,
-      "lng": 7.8353
+      "lat": 46.74225997924805,
+      "lng": 7.92861270904541
     },
     "coordinateType": "summit",
     "category": "viewpoint",
-    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schilthorn&type=locations&origins=gazetteer&limit=20",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Augstmatthorn&type=locations&origins=gazetteer&limit=20",
     "federalMatchStatus": "candidate_match",
-    "federalMatchLabel": "Main peak Schilthorn (BE) - Lauterbrunnen"
+    "federalMatchLabel": "Main peak Augstmatthorn (BE) - Oberried am Brienzersee",
+    "checkedAt": "2026-08-17"
   },
   {
     "index": 20,
@@ -342,19 +343,20 @@
   {
     "index": 21,
     "id": "spot-bachalpsee",
-    "slug": "bachalpsee",
-    "name": "Bachalpsee",
+    "slug": "iffigsee",
+    "name": "Iffigsee",
     "canton": "Bern",
     "region": "bern",
     "coordinates": {
-      "lat": 46.669,
-      "lng": 8.0236
+      "lat": 46.386573791503906,
+      "lng": 7.405986785888672
     },
     "coordinateType": "lake_center",
     "category": "hidden-lake",
-    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Bachalpsee&type=locations&origins=gazetteer&limit=20",
-    "federalMatchStatus": "manual_review",
-    "federalMatchLabel": "Populated Place Jaggisbachau (BE) - Frauenkappelen"
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Iffigsee&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Lake Iffigsee (BE) - Lenk",
+    "checkedAt": "2026-08-17"
   },
   {
     "index": 22,
