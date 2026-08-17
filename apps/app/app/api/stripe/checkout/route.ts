@@ -3,6 +3,10 @@ import { createCheckoutSession } from "@/lib/stripe";
 import { createClient } from "@/lib/supabase/server";
 import { missingSalesConfiguration, salesConfigurationReady } from "@/lib/launch-server";
 
+// Payment configuration and authentication must always be evaluated at request
+// time; never allow this endpoint to be treated as static deployment output.
+export const dynamic = "force-dynamic";
+
 function validRequestOrigin(req: NextRequest) {
   const configuredUrl = process.env.NEXT_PUBLIC_APP_URL;
   const origin = req.headers.get("origin");
