@@ -30,12 +30,24 @@ export default function CheckoutPage() {
         headers: { "Content-Type": "application/json" },
         body: "{}",
       });
-      const payload = await res.json() as { url?: string; error?: string; redirect?: string };
+      const payload = await res.json() as {
+        url?: string;
+        error?: string;
+        redirect?: string;
+        stripeFailure?: { type?: string; code?: string };
+      };
       if (payload.redirect) {
         window.location.href = payload.redirect;
         return;
       }
-      if (!res.ok) throw new Error(payload.error || "checkout-failed");
+      if (!res.ok) {
+        const diagnostic = payload.stripeFailure?.code ?? payload.stripeFailure?.type;
+        throw new Error(
+          diagnostic
+            ? `${payload.error || "Checkout failed"} (${diagnostic})`
+            : payload.error || "checkout-failed"
+        );
+      }
       const { url } = payload;
       if (url) {
         window.location.href = url;
