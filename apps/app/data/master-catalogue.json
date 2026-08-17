@@ -1223,7 +1223,8 @@
     "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lag+la+Cresta&type=locations&origins=gazetteer&limit=20",
     "federalMatchStatus": "candidate_match",
-    "federalMatchLabel": "Lake Lag la Cresta (GR) - Flims, Trin"
+    "federalMatchLabel": "Lake Lag la Cresta (GR) - Flims, Trin",
+    "checkedAt": "2026-08-17"
   },
   {
     "index": 73,
@@ -1291,7 +1292,8 @@
     "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seebergsee&type=locations&origins=gazetteer&limit=20",
     "federalMatchStatus": "candidate_match",
-    "federalMatchLabel": "Lake Seebergsee (BE) - Zweisimmen"
+    "federalMatchLabel": "Lake Seebergsee (BE) - Zweisimmen",
+    "checkedAt": "2026-08-17"
   },
   {
     "index": 77,
@@ -1706,97 +1708,97 @@
     "canton": "St. Gallen", "region": "st-gallen", "coordinates": { "lat": 47.04007, "lng": 9.15890 },
     "coordinateType": "lake_center", "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Murgsee",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Dam Murgsee Nord (SG) - Quarten"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Dam Murgsee Nord (SG) - Quarten", "checkedAt": "2026-08-17"
   },
   {
     "index": 102, "id": "spot-greina-plateau", "slug": "greina-plateau", "name": "Greina Plateau",
     "canton": "Graubünden / Ticino", "region": "graubunden", "coordinates": { "lat": 46.61724, "lng": 8.98808 },
     "coordinateType": "heritage_area_reference", "category": "alpine-meadow",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Plaun%20la%20Greina",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Area Plaun la Greina (GR,TI) - Sumvitg,Lumnezia,Blenio"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Area Plaun la Greina (GR,TI) - Sumvitg,Lumnezia,Blenio", "checkedAt": "2026-08-17"
   },
   {
     "index": 103, "id": "spot-lai-da-rims", "slug": "lai-da-rims", "name": "Lai da Rims",
     "canton": "Graubünden", "region": "graubunden", "coordinates": { "lat": 46.56528, "lng": 10.38817 },
     "coordinateType": "lake_center", "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Lai%20da%20Rims",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Lai da Rims (GR) - Val Müstair"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Lai da Rims (GR) - Val Müstair", "checkedAt": "2026-08-17"
   },
   {
     "index": 104, "id": "spot-lagh-da-saoseo", "slug": "lagh-da-saoseo", "name": "Lagh da Saoseo",
     "canton": "Graubünden", "region": "graubunden", "coordinates": { "lat": 46.39817, "lng": 10.12631 },
     "coordinateType": "lake_center", "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Lagh%20da%20Saoseo",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Lagh da Saoseo (GR) - Poschiavo"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Lagh da Saoseo (GR) - Poschiavo", "checkedAt": "2026-08-17"
   },
   {
     "index": 105, "id": "spot-gasterntal", "slug": "gasterntal", "name": "Gasterntal",
     "canton": "Bern", "region": "bern", "coordinates": { "lat": 46.44487, "lng": 7.72641 },
     "coordinateType": "valley_reference", "category": "alpine-meadow",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Gasterntal",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Building Berghotel Gasterntal (BE) - Kandersteg"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Building Berghotel Gasterntal (BE) - Kandersteg", "checkedAt": "2026-08-17"
   },
   {
     "index": 106, "id": "spot-partnunsee", "slug": "partnunsee", "name": "Partnunsee",
     "canton": "Graubünden", "region": "graubunden", "coordinates": { "lat": 47.00700, "lng": 9.85894 },
     "coordinateType": "lake_center", "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Partnunsee",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Partnunsee (GR) - Luzein"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Partnunsee (GR) - Luzein", "checkedAt": "2026-08-17"
   },
   {
     "index": 107, "id": "spot-tine-de-conflens", "slug": "tine-de-conflens", "name": "Tine de Conflens",
     "canton": "Vaud", "region": "vaud", "coordinates": { "lat": 46.65489, "lng": 6.49763 },
     "coordinateType": "attraction", "category": "waterfall",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Tine%20de%20Conflens",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Local name Tine de Conflens (VD) - La Sarraz"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Local name Tine de Conflens (VD) - La Sarraz", "checkedAt": "2026-08-17"
   },
   {
     "index": 108, "id": "spot-cascade-du-dar", "slug": "cascade-du-dar", "name": "Cascade du Dar",
     "canton": "Vaud", "region": "vaud", "coordinates": { "lat": 46.34714, "lng": 7.20058 },
     "coordinateType": "attraction", "category": "waterfall",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Cascade%20du%20Dar",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Waterfall Cascade du Dar (VD) - Ormont-Dessus"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Waterfall Cascade du Dar (VD) - Ormont-Dessus", "checkedAt": "2026-08-17"
   },
   {
     "index": 109, "id": "spot-thur-waterfalls", "slug": "thur-waterfalls", "name": "Thur Waterfalls",
     "canton": "St. Gallen", "region": "st-gallen", "coordinates": { "lat": 47.20229, "lng": 9.31189 },
     "coordinateType": "attraction", "category": "waterfall",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Thurwasserf%C3%A4lle",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Waterfall Thurwasserfälle (SG) - Wildhaus-Alt St. Johann"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Waterfall Thurwasserfälle (SG) - Wildhaus-Alt St. Johann", "checkedAt": "2026-08-17"
   },
   {
     "index": 110, "id": "spot-arnisee", "slug": "arnisee", "name": "Arnisee",
     "canton": "Uri", "region": "uri", "coordinates": { "lat": 46.77186, "lng": 8.64316 },
     "coordinateType": "lake_center", "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Arnisee",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Arnisee (UR) - Gurtnellen"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Arnisee (UR) - Gurtnellen", "checkedAt": "2026-08-17"
   },
   {
     "index": 111, "id": "spot-golzerensee", "slug": "golzerensee", "name": "Golzerensee",
     "canton": "Uri", "region": "uri", "coordinates": { "lat": 46.77571, "lng": 8.73959 },
     "coordinateType": "lake_center", "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Golzerensee",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Golzerensee (UR) - Silenen"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Golzerensee (UR) - Silenen", "checkedAt": "2026-08-17"
   },
   {
     "index": 112, "id": "spot-lac-de-tseuzier", "slug": "lac-de-tseuzier", "name": "Lac de Tseuzier",
     "canton": "Valais", "region": "valais", "coordinates": { "lat": 46.35072, "lng": 7.43026 },
     "coordinateType": "lake_center", "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Lac%20de%20Tseuzier",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Lac de Tseuzier (VS) - Ayent,Icogne"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Lac de Tseuzier (VS) - Ayent,Icogne", "checkedAt": "2026-08-17"
   },
   {
     "index": 113, "id": "spot-aiguilles-de-baulmes", "slug": "aiguilles-de-baulmes", "name": "Aiguilles de Baulmes",
     "canton": "Vaud", "region": "vaud", "coordinates": { "lat": 46.79748, "lng": 6.48824 },
     "coordinateType": "viewpoint", "category": "viewpoint",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Aiguilles%20de%20Baulmes",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Ridge Aiguilles de Baulmes (VD) - Sainte-Croix"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Ridge Aiguilles de Baulmes (VD) - Sainte-Croix", "checkedAt": "2026-08-17"
   },
   {
     "index": 114, "id": "spot-chueebodensee", "slug": "chueebodensee", "name": "Chüebodensee",
     "canton": "Glarus", "region": "glarus", "coordinates": { "lat": 46.93655, "lng": 9.13458 },
     "coordinateType": "lake_center", "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Ch%C3%BCebodensee",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Chüebodensee (GL) - Glarus Süd"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Chüebodensee (GL) - Glarus Süd", "checkedAt": "2026-08-17"
   }
 ]

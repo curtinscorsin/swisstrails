@@ -135,32 +135,17 @@ launch, a human editor should open all 100 pages and confirm:
 - the correction email is monitored and corrections have an owner.
 
 The automated catalogue audit currently reports 100 unique published places,
-304 unique credited photographs, no placeholders and no duplicate routes. The
-following 16 destinations intentionally remain **destination references**, not
-verified hiking routes, until an editor can support the access and route fields
-with trustworthy sources:
+304 unique credited photographs, no placeholders and no duplicate routes. All
+100 places now have destination-specific context from an official tourism,
+transport or recognised hiking source. Seven places also have a separately
+verified access-point coordinate. The other 93 deliberately retain their
+destination map pin instead of presenting it as a trailhead.
 
-- Aiguilles de Baulmes
-- Arnisee
-- Cascade du Dar
-- Chüebodensee
-- Crestasee
-- Gasterntal
-- Golzerensee
-- Greina Plateau
-- Lac de Tseuzier
-- Lagh da Saoseo
-- Lai da Rims
-- Murgseen
-- Partnunsee
-- Seebergsee
-- Thur Waterfalls
-- Tine de Conflens
-
-These pages may remain published only with their existing unresolved labels.
-Do not turn destination coordinates into trailhead coordinates or add route
-figures without a source. For the strongest launch claim, verify these entries
-or temporarily exclude them from sales messaging after an editorial decision.
+Some route fields remain blank where the reviewed source did not support a
+precise value. Those omissions are intentional and are explained on the detail
+page; do not replace them with estimates. Tine de Conflens is retained with its
+current official closure warning. Seasonal services, closures and conditions
+still require a fresh check immediately before travel.
 
 Accuracy is a continuing process. Set a review interval and immediately mark a
 location under review when a credible correction is received.

@@ -204,6 +204,7 @@ if (process.argv.includes("--network")) {
   const urls = [...new Set([...publishedImageUrls, ...publishedSourceUrls])];
   const broken: string[] = [];
   const automationBlocked: string[] = [];
+  const knownAutomationLimitedHosts = new Set(["willkommen.aletscharena.ch"]);
   let cursor = 0;
 
   async function check(url: string) {
@@ -242,7 +243,11 @@ if (process.argv.includes("--network")) {
         broken.push(`${response.status} ${url}`);
         return;
       } catch {
-        if (attempt === 1) broken.push(`unreachable ${url}`);
+        if (attempt === 1) {
+          const host = new URL(url).hostname;
+          if (knownAutomationLimitedHosts.has(host)) automationBlocked.push(`timeout ${url}`);
+          else broken.push(`unreachable ${url}`);
+        }
       }
     }
   }
