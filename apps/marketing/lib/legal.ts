@@ -2,7 +2,7 @@ const APPROVED_LEGAL_DETAILS = {
   operatorName: "Corsin Curtins / SwissTrails",
   operatorAddress: "Gottfried-Kellerstrasse 22, 8192 Glattfelden, Zürich",
   operatorCountry: "Switzerland",
-  supportEmail: "admin@swisstrails.app",
+  supportEmail: "hello@swiss-trails.com",
   vatStatus: "Not registered for Swiss VAT (operator-declared turnover below CHF 100,000)",
   refundPolicySummary: "Full refund available on request within 14 calendar days of purchase; feedback is optional.",
 } as const;
