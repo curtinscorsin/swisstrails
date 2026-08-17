@@ -61,12 +61,16 @@ for (const file of [
 
 const marketingText = [
   read("apps/marketing/components/marketing/faq.tsx"),
+  read("apps/marketing/components/marketing/pricing.tsx"),
+  read("apps/marketing/app/terms/page.tsx"),
   read("apps/marketing/components/marketing/social-proof.tsx"),
   read("apps/marketing/data/categories.ts"),
 ].join("\n");
 check(!marketingText.includes("Sixty-one"), "Stale photograph count remains in marketing copy");
 check(!marketingText.includes("Separate destination and access coordinates"), "Over-broad access-coordinate claim remains");
 check(!marketingText.includes("New places only after manual verification"), "Unsupported manual-verification claim remains");
+check(!/visit 3 spots|identify the three locations/i.test(marketingText), "Retired three-location refund claim remains");
+check(marketingText.includes("14 calendar days"), "Approved 14-day refund policy is missing");
 
 const explorePage = read("apps/app/app/(app)/explore/page.tsx");
 check(

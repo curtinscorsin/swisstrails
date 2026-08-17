@@ -91,7 +91,7 @@ export function Pricing() {
                 <Shield className="h-3.5 w-3.5 text-stone-500" />
                 <p className="text-center text-xs text-stone-500">
                   {salesEnabled
-                    ? "Secured by Stripe · Visit 3 spots, love it or get refunded"
+                    ? "Secured by Stripe · 14-day voluntary refund policy"
                     : "Checkout stays closed until the production and legal review is complete"}
                 </p>
               </div>

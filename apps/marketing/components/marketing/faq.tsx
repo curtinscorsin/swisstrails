@@ -36,7 +36,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What's your refund policy?",
-    a: "If you visit three locations and genuinely do not find the guide useful, email us from the purchasing account and identify those locations. We will process the advertised full refund through Stripe; this does not limit any mandatory legal remedy.",
+    a: "Request a full refund within 14 calendar days of purchase by emailing us from the purchasing account. No reason is required. We may ask optional feedback so we can improve, but answering is not a condition of the refund.",
   },
   {
     q: "Are you adding more locations?",

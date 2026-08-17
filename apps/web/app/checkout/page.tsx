@@ -117,7 +117,7 @@ export default function CheckoutPage() {
             <div className="mt-4 flex items-center justify-center gap-2">
               <Shield className="w-3.5 h-3.5 text-fg-subtle" />
               <p className="text-fg-subtle text-xs">
-                Secured by Stripe · Visit 3 spots or get refunded
+                Secured by Stripe · 14-day voluntary refund policy
               </p>
             </div>
           </div>

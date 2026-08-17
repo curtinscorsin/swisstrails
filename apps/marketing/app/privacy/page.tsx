@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const LAST_UPDATED = "10 August 2026";
+const LAST_UPDATED = "17 August 2026";
 
 export default function PrivacyPage() {
   const sections = [

@@ -1,22 +1,21 @@
 # Swiss Trails launch setup
 
-This file lists the few production steps that require the product owner's
-accounts, legal identity, or business decision. Code changes alone cannot
-complete them.
+This file lists the production steps that require the product owner's accounts,
+identity, or business decision. Owner-approved legal details were supplied on
+17 August 2026; secret account values must still be configured outside Git.
 
 ## 1. Publish the legal operator
 
-Decide who is legally selling Swiss Trails: you personally, a sole
-proprietorship, or a company. Obtain professional Swiss legal/accounting advice
-where needed, then provide:
+The owner approved these public details on 17 August 2026:
 
-- full legal operator or registered company name;
-- complete postal address;
-- country;
-- support email that is actively monitored;
-- VAT status and whether CHF 29 is the total consumer price;
-- the refund period or confirmation that the advertised three-location promise
-  intentionally has no time limit.
+- operator: `Corsin Curtins / SwissTrails`;
+- address: `Gottfried-Kellerstrasse 22, 8192 Glattfelden, Zürich, Switzerland`;
+- support: `admin@swisstrails.app`;
+- VAT: not registered, based on the owner's statement that relevant annual
+  turnover is below CHF 100,000; reassess this when circumstances change;
+- refund: full refund on request within 14 calendar days of purchase. A reason
+  is not required; questions about inaccuracies or non-use are optional
+  feedback and cannot be a condition of the refund.
 
 Add the approved values to both Vercel projects as `LEGAL_OPERATOR_NAME`,
 `LEGAL_OPERATOR_ADDRESS`, `LEGAL_OPERATOR_COUNTRY`, and `SUPPORT_EMAIL`.
@@ -90,12 +89,12 @@ STRIPE_WEBHOOK_SECRET=...
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=...
 STRIPE_PRODUCT_ID=...
 STRIPE_PRICE_ID=...
-LEGAL_OPERATOR_NAME=...
-LEGAL_OPERATOR_ADDRESS=...
+LEGAL_OPERATOR_NAME=Corsin Curtins / SwissTrails
+LEGAL_OPERATOR_ADDRESS=Gottfried-Kellerstrasse 22, 8192 Glattfelden, Zürich
 LEGAL_OPERATOR_COUNTRY=Switzerland
-LEGAL_VAT_STATUS=...
-REFUND_POLICY_SUMMARY=...
-SUPPORT_EMAIL=hello@swiss-trails.com
+LEGAL_VAT_STATUS=Not registered for Swiss VAT (operator-declared turnover below CHF 100,000)
+REFUND_POLICY_SUMMARY=Full refund available on request within 14 calendar days of purchase; feedback is optional.
+SUPPORT_EMAIL=admin@swisstrails.app
 ```
 
 Keep `NEXT_PUBLIC_GOOGLE_AUTH_ENABLED=false` until the Google OAuth client is
@@ -110,12 +109,12 @@ Set:
 ```text
 NEXT_PUBLIC_APP_URL=https://app.swiss-trails.com
 NEXT_PUBLIC_SALES_ENABLED=false
-LEGAL_OPERATOR_NAME=...
-LEGAL_OPERATOR_ADDRESS=...
+LEGAL_OPERATOR_NAME=Corsin Curtins / SwissTrails
+LEGAL_OPERATOR_ADDRESS=Gottfried-Kellerstrasse 22, 8192 Glattfelden, Zürich
 LEGAL_OPERATOR_COUNTRY=Switzerland
-LEGAL_VAT_STATUS=...
-REFUND_POLICY_SUMMARY=...
-SUPPORT_EMAIL=hello@swiss-trails.com
+LEGAL_VAT_STATUS=Not registered for Swiss VAT (operator-declared turnover below CHF 100,000)
+REFUND_POLICY_SUMMARY=Full refund available on request within 14 calendar days of purchase; feedback is optional.
+SUPPORT_EMAIL=admin@swisstrails.app
 ```
 
 Redeploy both projects. Keep sales disabled while testing. Only after every item

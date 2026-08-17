@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const LAST_UPDATED = "10 August 2026";
+const LAST_UPDATED = "17 August 2026";
 
 const sections = [
   {
@@ -37,14 +37,16 @@ const sections = [
     title: "4. Price, access and availability",
     body: [
       "The advertised price is CHF 29 as a one-time payment. The checkout must display the total payable amount, including any non-optional charge, before purchase. No recurring fee is created by this product.",
+      `VAT status: ${LEGAL_DETAILS.vatStatus}. The operator must reassess registration if its circumstances or applicable thresholds change.`,
       "Lifetime access means access for the commercially reasonable lifetime of this Swiss Trails digital product, not the lifetime of a person or a promise that every feature, provider or location will remain unchanged forever. Planned maintenance, security incidents or third-party outages can temporarily affect availability.",
     ],
   },
   {
-    title: "5. Voluntary refund promise",
+    title: "5. Voluntary 14-day refund policy",
     body: [
-      `If you visit three locations and genuinely do not find the guide useful, email ${LEGAL_DETAILS.supportEmail} from the purchasing account and identify the three locations. We will process the advertised full refund through Stripe. This voluntary promise does not reduce any mandatory statutory remedy.`,
-      "A refunded purchase normally ends paid access. If only part of a charge is refunded, access remains active unless otherwise agreed.",
+      `You may request a full refund within 14 calendar days after purchase by emailing ${LEGAL_DETAILS.supportEmail} from the purchasing account. You do not need to give a reason. We may invite optional feedback—for example, whether information seemed inaccurate or the product was not used—but answering is not a condition of the refund.`,
+      "Approved refunds are returned through the original payment method. A full refund ends paid access. Requests after the voluntary 14-day period are assessed where required by mandatory law or where Swiss Trails agrees that the product was materially not as described.",
+      "Swiss law does not provide a general change-of-mind cancellation period for online purchases. This 14-day policy is an additional voluntary promise and does not reduce any mandatory statutory remedy.",
     ],
   },
   {
