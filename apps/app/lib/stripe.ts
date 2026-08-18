@@ -45,6 +45,11 @@ export async function createCheckoutSession(
       metadata: {
         userId,
       },
+      payment_intent_data: {
+        metadata: {
+          userId,
+        },
+      },
       success_url: STRIPE_CONFIG.SUCCESS_URL,
       cancel_url: STRIPE_CONFIG.CANCEL_URL,
       allow_promotion_codes: true,

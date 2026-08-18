@@ -18,7 +18,9 @@ export async function fulfillCompletedCheckout(session: Stripe.Checkout.Session)
   // production schema is managed by SQL migrations.
   const db = supabase as any;
   const paymentIntentId =
-    typeof session.payment_intent === "string" ? session.payment_intent : null;
+    typeof session.payment_intent === "string"
+      ? session.payment_intent
+      : session.payment_intent?.id ?? null;
 
   const { error: purchaseError } = await db.from("purchases").upsert({
     user_id: userId,
@@ -36,7 +38,9 @@ export async function fulfillCompletedCheckout(session: Stripe.Checkout.Session)
       has_purchased: true,
       purchased_at: new Date().toISOString(),
       stripe_customer_id:
-        typeof session.customer === "string" ? session.customer : null,
+        typeof session.customer === "string"
+          ? session.customer
+          : session.customer?.id ?? null,
     })
     .eq("id", userId);
   if (profileError) throw new Error(`Could not activate access: ${profileError.message}`);
@@ -47,24 +51,62 @@ export async function fulfillCompletedCheckout(session: Stripe.Checkout.Session)
 export async function revokeFullyRefundedPurchase(charge: Stripe.Charge) {
   if (charge.amount_refunded < charge.amount) return;
   const paymentIntentId =
-    typeof charge.payment_intent === "string" ? charge.payment_intent : null;
-  if (!paymentIntentId) throw new Error("Refunded charge has no payment intent");
+    typeof charge.payment_intent === "string"
+      ? charge.payment_intent
+      : charge.payment_intent?.id ?? null;
+  const customerId =
+    typeof charge.customer === "string"
+      ? charge.customer
+      : charge.customer?.id ?? null;
 
   const supabase = await createAdminClient();
   const db = supabase as any;
-  const { data: purchase, error: purchaseError } = await db
+  let userId: string | null = charge.metadata?.userId ?? null;
+
+  if (paymentIntentId) {
+    const { data: purchase, error: purchaseError } = await db
+      .from("purchases")
+      .update({ status: "refunded" })
+      .eq("stripe_payment_intent_id", paymentIntentId)
+      .select("user_id")
+      .maybeSingle();
+    if (purchaseError) throw new Error(`Could not record refund: ${purchaseError.message}`);
+    userId ??= purchase?.user_id ?? null;
+  }
+
+  // Managed Payments can deliver a charge without the same payment-intent
+  // representation stored by Checkout. The Stripe customer remains a stable
+  // way to identify the Swiss Trails profile.
+  if (!userId && customerId) {
+    const { data: profile, error: profileLookupError } = await db
+      .from("profiles")
+      .select("id")
+      .eq("stripe_customer_id", customerId)
+      .maybeSingle();
+    if (profileLookupError) {
+      throw new Error(`Could not match refunded customer: ${profileLookupError.message}`);
+    }
+    userId = profile?.id ?? null;
+  }
+
+  if (!userId) {
+    throw new Error(`Could not match fully refunded charge ${charge.id} to a Swiss Trails user`);
+  }
+
+  // Checkout prevents overlapping completed purchases. This fallback repairs
+  // the legacy purchase row when an earlier Stripe account stored a different
+  // payment-intent representation.
+  const { error: repairError } = await db
     .from("purchases")
     .update({ status: "refunded" })
-    .eq("stripe_payment_intent_id", paymentIntentId)
-    .select("user_id")
-    .maybeSingle();
-  if (purchaseError) throw new Error(`Could not record refund: ${purchaseError.message}`);
-  if (!purchase?.user_id) return;
+    .eq("user_id", userId)
+    .eq("status", "completed");
+  if (repairError) throw new Error(`Could not repair refunded purchase: ${repairError.message}`);
 
   const { count, error: countError } = await db
     .from("purchases")
     .select("id", { count: "exact", head: true })
-    .eq("user_id", purchase.user_id)
+    .eq("user_id", userId)
     .eq("status", "completed");
   if (countError) throw new Error(`Could not review remaining purchases: ${countError.message}`);
 
@@ -72,7 +114,7 @@ export async function revokeFullyRefundedPurchase(charge: Stripe.Charge) {
     const { error: profileError } = await db
       .from("profiles")
       .update({ has_purchased: false, purchased_at: null })
-      .eq("id", purchase.user_id);
+      .eq("id", userId);
     if (profileError) throw new Error(`Could not revoke refunded access: ${profileError.message}`);
   }
 }
