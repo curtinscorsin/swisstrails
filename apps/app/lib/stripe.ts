@@ -6,7 +6,9 @@ export function getStripe() {
   const secretKey = process.env.STRIPE_SECRET_KEY;
   if (!secretKey) throw new Error("Stripe is not configured");
   stripeClient ??= new Stripe(secretKey, {
-    apiVersion: "2024-06-20",
+    // Vercel's Stripe integration provisions Managed Payments keys, which
+    // require the Basil API release or newer.
+    apiVersion: "2025-03-31.basil" as Stripe.LatestApiVersion,
     typescript: true,
   });
   return stripeClient;
