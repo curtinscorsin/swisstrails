@@ -27,7 +27,7 @@ export async function createCheckoutSession(
   email: string,
   customerId?: string | null
 ): Promise<string> {
-  if (!STRIPE_CONFIG.PRICE_ID) throw new Error("Stripe price is not configured");
+  if (!STRIPE_CONFIG.PRODUCT_ID) throw new Error("Stripe product is not configured");
 
   const createSession = (existingCustomerId?: string | null) =>
     getStripe().checkout.sessions.create({
@@ -38,7 +38,14 @@ export async function createCheckoutSession(
       client_reference_id: userId,
       line_items: [
         {
-          price: STRIPE_CONFIG.PRICE_ID,
+          price_data: {
+            currency: "chf",
+            product: STRIPE_CONFIG.PRODUCT_ID,
+            unit_amount: 1990,
+            // Managed Payments calculates applicable tax inside this amount,
+            // keeping the customer-facing total at exactly CHF 19.90.
+            tax_behavior: "inclusive",
+          },
           quantity: 1,
         },
       ],
