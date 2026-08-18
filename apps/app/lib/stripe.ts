@@ -59,8 +59,7 @@ export async function createCheckoutSession(
     const missingCustomer =
       Boolean(customerId) &&
       error instanceof Stripe.errors.StripeInvalidRequestError &&
-      error.code === "resource_missing" &&
-      error.param === "customer";
+      error.code === "resource_missing";
     if (!missingCustomer) throw error;
     session = await createSession();
   }

@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
         ? {
             type: "type" in error && typeof error.type === "string" ? error.type : undefined,
             code: "code" in error && typeof error.code === "string" ? error.code : undefined,
+            param: "param" in error && typeof error.param === "string" ? error.param : undefined,
           }
         : undefined;
     return NextResponse.json(
