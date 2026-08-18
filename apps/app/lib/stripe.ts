@@ -27,24 +27,43 @@ export async function createCheckoutSession(
 ): Promise<string> {
   if (!STRIPE_CONFIG.PRICE_ID) throw new Error("Stripe price is not configured");
 
-  const session = await getStripe().checkout.sessions.create({
-    mode: "payment",
-    ...(customerId ? { customer: customerId } : { customer_email: email }),
-    client_reference_id: userId,
-    line_items: [
-      {
-        price: STRIPE_CONFIG.PRICE_ID,
-        quantity: 1,
+  const createSession = (existingCustomerId?: string | null) =>
+    getStripe().checkout.sessions.create({
+      mode: "payment",
+      ...(existingCustomerId
+        ? { customer: existingCustomerId }
+        : { customer_email: email }),
+      client_reference_id: userId,
+      line_items: [
+        {
+          price: STRIPE_CONFIG.PRICE_ID,
+          quantity: 1,
+        },
+      ],
+      metadata: {
+        userId,
       },
-    ],
-    metadata: {
-      userId,
-    },
-    success_url: STRIPE_CONFIG.SUCCESS_URL,
-    cancel_url: STRIPE_CONFIG.CANCEL_URL,
-    allow_promotion_codes: true,
-    billing_address_collection: "auto",
-  });
+      success_url: STRIPE_CONFIG.SUCCESS_URL,
+      cancel_url: STRIPE_CONFIG.CANCEL_URL,
+      allow_promotion_codes: true,
+      billing_address_collection: "auto",
+    });
+
+  let session: Stripe.Checkout.Session;
+  try {
+    session = await createSession(customerId);
+  } catch (error) {
+    // Customer IDs belong to one Stripe account. After changing the connected
+    // account, an ID stored by the old account is no longer valid. Retry with
+    // the signed-in email so Stripe can create a customer in the live account.
+    const missingCustomer =
+      Boolean(customerId) &&
+      error instanceof Stripe.errors.StripeInvalidRequestError &&
+      error.code === "resource_missing" &&
+      error.param === "customer";
+    if (!missingCustomer) throw error;
+    session = await createSession();
+  }
 
   return session.url!;
 }
