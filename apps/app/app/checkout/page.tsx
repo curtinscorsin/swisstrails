@@ -34,19 +34,26 @@ export default function CheckoutPage() {
         url?: string;
         error?: string;
         redirect?: string;
-        stripeFailure?: { type?: string; code?: string; param?: string };
+        stripeFailure?: {
+          type?: string;
+          code?: string;
+          param?: string;
+          message?: string;
+        };
       };
       if (payload.redirect) {
         window.location.href = payload.redirect;
         return;
       }
       if (!res.ok) {
-        const diagnostic = [
-          payload.stripeFailure?.code ?? payload.stripeFailure?.type,
-          payload.stripeFailure?.param,
-        ]
-          .filter(Boolean)
-          .join(": ");
+        const diagnostic =
+          payload.stripeFailure?.message ||
+          [
+            payload.stripeFailure?.code ?? payload.stripeFailure?.type,
+            payload.stripeFailure?.param,
+          ]
+            .filter(Boolean)
+            .join(": ");
         throw new Error(
           diagnostic
             ? `${payload.error || "Checkout failed"} (${diagnostic})`
