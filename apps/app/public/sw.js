@@ -1,4 +1,4 @@
-const CACHE_NAME = "swiss-trails-shell-v1";
+const CACHE_NAME = "swiss-trails-shell-v2";
 const SHELL_FILES = [
   "/offline",
   "/site.webmanifest",
@@ -8,8 +8,11 @@ const SHELL_FILES = [
 ];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL_FILES)));
-  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(SHELL_FILES))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener("activate", (event) => {
