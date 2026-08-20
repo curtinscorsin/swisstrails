@@ -65,7 +65,8 @@
     "category": "viewpoint",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Matterhorn&type=locations&origins=gazetteer&limit=20",
     "federalMatchStatus": "candidate_match",
-    "federalMatchLabel": "Glacier Matterhorngletscher (VS) - Zermatt"
+    "federalMatchLabel": "Glacier Matterhorngletscher (VS) - Zermatt",
+    "checkedAt": "2026-08-20"
   },
   {
     "index": 5,
@@ -1821,5 +1822,26 @@
     "coordinateType": "viewpoint", "category": "alpine-meadow",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=5&searchText=Berghotel%20Maderanertal",
     "federalMatchStatus": "candidate_match", "federalMatchLabel": "Building Berghotel Maderanertal (UR) - Silenen", "checkedAt": "2026-08-18"
+  },
+  {
+    "index": 118, "id": "spot-speer", "slug": "speer", "name": "Speer",
+    "canton": "St. Gallen", "region": "st-gallen", "coordinates": { "lat": 47.18583, "lng": 9.12278 },
+    "coordinateType": "summit", "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=5&searchText=Speer",
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Summit Speer (SG) - Amden", "checkedAt": "2026-08-20"
+  },
+  {
+    "index": 119, "id": "spot-santis", "slug": "santis", "name": "Säntis",
+    "canton": "Appenzell / St. Gallen", "region": "appenzell", "coordinates": { "lat": 47.24917, "lng": 9.34333 },
+    "coordinateType": "summit", "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=5&searchText=S%C3%A4ntis",
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Main summit Säntis (AI,AR,SG)", "checkedAt": "2026-08-20"
+  },
+  {
+    "index": 120, "id": "spot-monte-san-salvatore", "slug": "monte-san-salvatore", "name": "Monte San Salvatore",
+    "canton": "Ticino", "region": "ticino", "coordinates": { "lat": 45.97667, "lng": 8.94806 },
+    "coordinateType": "summit", "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=5&searchText=Monte%20San%20Salvatore",
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Main hill Monte San Salvatore (TI) - Lugano", "checkedAt": "2026-08-20"
   }
 ]

@@ -8,7 +8,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Named lakes with the destination point kept separate from access logistics.",
     icon: "💧",
-    count: 37,
+    count: 35,
     gradient: "from-sky-900/40 to-blue-950/40",
   },
   {
@@ -17,7 +17,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Summits and viewpoints with sourced destination references.",
     icon: "🏔",
-    count: 23,
+    count: 27,
     gradient: "from-alpine-900/40 to-trail-900/40",
   },
   {
@@ -50,7 +50,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Protected forests and nature areas presented without invented route claims.",
     icon: "🌲",
-    count: 3,
+    count: 2,
     gradient: "from-teal-900/40 to-trail-900/40",
   },
   {
@@ -67,7 +67,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Broad valleys and alpine landscapes where one pin cannot represent every route.",
     icon: "🌿",
-    count: 9,
+    count: 8,
     gradient: "from-orange-950/50 to-trail-900/40",
   },
 ];

@@ -797,8 +797,13 @@ const ARCHIVED_CATALOGUE_IDS = new Set([
   "spot-lauterbrunnen-valley",
   "spot-gornergrat",
   "spot-foroglio-waterfall",
+  // Replaced at the owner's request by four mountain destinations with
+  // destination-specific galleries and official route context.
+  "spot-lac-de-joux",
+  "spot-lac-des-chavonnes",
+  "spot-vallon-de-nant",
+  "spot-grande-caricaie",
   // Iconic or overlapping records replaced by quieter, route-specific hikes.
-  "spot-matterhorn",
   "spot-jungfraujoch",
   "spot-ascher-ebenalp",
 ]);
