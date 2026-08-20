@@ -31,6 +31,10 @@ pnpm-debug.log*
 *.pem
 .vercel
 
+# local database backups contain private customer data
+private-backups/
+*.dump
+
 # local Codex and package-manager caches
 .codex/
 .pnpm-store/

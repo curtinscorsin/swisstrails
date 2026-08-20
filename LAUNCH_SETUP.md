@@ -192,14 +192,22 @@ Last reviewed: 20 August 2026.
 - The production health endpoint returned `200`.
 - The Google sign-in button is hidden in production. Keep it hidden until a
   complete Google OAuth login and callback test succeeds.
-- Supabase reports the project as active and healthy, and every public table
+- Supabase administrator MFA is complete with two active authenticators.
+- Supabase reports the project as active and healthy, all five repository
+  migrations are applied in production, and every public table
   has Row Level Security enabled. Ownership policies restrict profiles,
   favourites and purchases to the signed-in user; a real two-account test is
   still required before public launch.
 - Supabase Security Advisor still reports leaked-password protection disabled.
-  The organization is on the Free plan, so retained production backups and
-  this protection have not been signed off. Upgrade and document a restore
-  test before launch.
+  The organization intentionally remains on the Free plan and uses passwordless
+  email codes. This warning is accepted for launch, provided CAPTCHA, short code
+  expiry and rate limits remain enabled.
+- Free-plan backup policy: create a private manual dump with
+  `scripts/manual-supabase-backup.sh` before each release and at least weekly.
+  The helper refuses to run without an explicitly supplied database URL, never
+  prints that URL, creates owner-only files and checks that the dump can be read.
+  Store a second encrypted copy outside this computer and perform a restore
+  rehearsal before launch.
 - The earlier live CHF 19.90 purchase/refund record is stored as refunded.
 - Tomasee was rechecked against the regional tourism notice dated 13 July
   2026: the replacement trail is open, takes approximately 30–40 minutes
