@@ -1750,7 +1750,7 @@
     "canton": "Vaud", "region": "vaud", "coordinates": { "lat": 46.65489, "lng": 6.49763 },
     "coordinateType": "attraction", "category": "waterfall",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Tine%20de%20Conflens",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Local name Tine de Conflens (VD) - La Sarraz", "checkedAt": "2026-08-17"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Local name Tine de Conflens (VD) - La Sarraz", "checkedAt": "2026-08-20"
   },
   {
     "index": 108, "id": "spot-cascade-du-dar", "slug": "cascade-du-dar", "name": "Cascade du Dar",
@@ -1806,7 +1806,7 @@
     "canton": "Graubünden", "region": "graubunden", "coordinates": { "lat": 46.63249206542969, "lng": 8.672351837158203 },
     "coordinateType": "lake_center", "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=5&searchText=Tomasee",
-    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Tomasee (GR) - Tujetsch", "checkedAt": "2026-08-18"
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Tomasee (GR) - Tujetsch", "checkedAt": "2026-08-20"
   },
   {
     "index": 116, "id": "spot-lac-de-salanfe", "slug": "lac-de-salanfe", "name": "Lac de Salanfe",

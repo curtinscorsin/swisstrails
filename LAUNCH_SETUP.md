@@ -10,7 +10,7 @@ The owner approved these public details on 17 August 2026:
 
 - operator: `Corsin Curtins / SwissTrails`;
 - address: `Gottfried-Kellerstrasse 22, 8192 Glattfelden, Zürich, Switzerland`;
-- support: `admin@swisstrails.app`;
+- support: `hello@swiss-trails.com`;
 - VAT: not registered, based on the owner's statement that relevant annual
   turnover is below CHF 100,000; reassess this when circumstances change;
 - refund: full refund on request within 14 calendar days of purchase. A reason
@@ -94,7 +94,7 @@ LEGAL_OPERATOR_ADDRESS=Gottfried-Kellerstrasse 22, 8192 Glattfelden, Zürich
 LEGAL_OPERATOR_COUNTRY=Switzerland
 LEGAL_VAT_STATUS=Not registered for Swiss VAT (operator-declared turnover below CHF 100,000)
 REFUND_POLICY_SUMMARY=Full refund available on request within 14 calendar days of purchase; feedback is optional.
-SUPPORT_EMAIL=admin@swisstrails.app
+SUPPORT_EMAIL=hello@swiss-trails.com
 ```
 
 Keep `NEXT_PUBLIC_GOOGLE_AUTH_ENABLED=false` until the Google OAuth client is
@@ -114,7 +114,7 @@ LEGAL_OPERATOR_ADDRESS=Gottfried-Kellerstrasse 22, 8192 Glattfelden, Zürich
 LEGAL_OPERATOR_COUNTRY=Switzerland
 LEGAL_VAT_STATUS=Not registered for Swiss VAT (operator-declared turnover below CHF 100,000)
 REFUND_POLICY_SUMMARY=Full refund available on request within 14 calendar days of purchase; feedback is optional.
-SUPPORT_EMAIL=admin@swisstrails.app
+SUPPORT_EMAIL=hello@swiss-trails.com
 ```
 
 Redeploy both projects. Keep sales disabled while testing. Only after every item
@@ -184,3 +184,35 @@ have succeeded in live mode.
 Use `https://app.swiss-trails.com/api/health` for an uptime monitor. A `200`
 response means both the application configuration and Supabase Auth health
 check succeeded; a `503` means the service needs attention.
+
+## 7. Production verification record
+
+Last reviewed: 20 August 2026.
+
+- The production health endpoint returned `200`.
+- The Google sign-in button is hidden in production. Keep it hidden until a
+  complete Google OAuth login and callback test succeeds.
+- Supabase reports the project as active and healthy, and every public table
+  has Row Level Security enabled. Ownership policies restrict profiles,
+  favourites and purchases to the signed-in user; a real two-account test is
+  still required before public launch.
+- Supabase Security Advisor still reports leaked-password protection disabled.
+  The organization is on the Free plan, so retained production backups and
+  this protection have not been signed off. Upgrade and document a restore
+  test before launch.
+- The earlier live CHF 19.90 purchase/refund record is stored as refunded.
+- Tomasee was rechecked against the regional tourism notice dated 13 July
+  2026: the replacement trail is open, takes approximately 30–40 minutes
+  longer than the former alignment, and current signs must be followed.
+- Tine de Conflens was rechecked against Morges Region Tourism and the Commune
+  of Chevilly: access remains closed until further notice because of falling
+  tree and rock danger. Visitors must not pass barriers or approach the cirque.
+- No Sentry SDK or Sentry production project is currently configured. The
+  health endpoint provides uptime status, but detailed application-error
+  alerts remain a launch task.
+- Physical installation and offline checks still require a real iPhone and
+  Android device. Browser emulation is not recorded as physical-device proof.
+- The 304-photo catalogue has passed automated URL, credit, licence and
+  resolution checks plus an AI-assisted visual pass. Accountable human
+  destination-identity approval is still required and must not be inferred
+  from the automated result.
