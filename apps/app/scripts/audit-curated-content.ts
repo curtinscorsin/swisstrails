@@ -204,7 +204,13 @@ if (process.argv.includes("--network")) {
   const urls = [...new Set([...publishedImageUrls, ...publishedSourceUrls])];
   const broken: string[] = [];
   const automationBlocked: string[] = [];
-  const knownAutomationLimitedHosts = new Set(["willkommen.aletscharena.ch"]);
+  const knownAutomationLimitedHosts = new Set([
+    "willkommen.aletscharena.ch",
+    // Commons intermittently rate-limits or drops large automated HEAD/Range
+    // batches even though the same files load through Next's image proxy.
+    "commons.wikimedia.org",
+    "upload.wikimedia.org",
+  ]);
   let cursor = 0;
 
   async function check(url: string) {
