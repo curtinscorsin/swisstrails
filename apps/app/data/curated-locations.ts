@@ -797,6 +797,10 @@ const ARCHIVED_CATALOGUE_IDS = new Set([
   "spot-lauterbrunnen-valley",
   "spot-gornergrat",
   "spot-foroglio-waterfall",
+  // Iconic or overlapping records replaced by quieter, route-specific hikes.
+  "spot-matterhorn",
+  "spot-jungfraujoch",
+  "spot-ascher-ebenalp",
 ]);
 
 export const CURATED_LOCATIONS: Location[] = (masterCatalogue as MasterCatalogueEntry[])

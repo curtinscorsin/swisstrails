@@ -35,56 +35,66 @@ if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
   }
 }
 
-// 44px transparent hit area wrapping a category-tinted dot with a white ring
-// so it stays legible on satellite tiles. The selected dot scales up and pops
-// in via a CSS keyframe (see .leaflet-marker-pop in app globals.css).
+// Category-coloured map pins remain readable on both satellite and dark tiles.
+// Their 46px hit area meets the mobile touch-target requirement.
 function createLocationIcon(location: Location, isSelected: boolean) {
   const tint = categoryConfig[location.category]?.color ?? "#FFFFFF";
-  const dot = isSelected ? 20 : 14;
-  const ring = isSelected ? 2.5 : 2;
-  const shadow = isSelected
-    ? `0 0 0 5px rgba(107,120,255,0.28), 0 3px 14px rgba(0,0,0,0.6)`
-    : `0 2px 8px rgba(0,0,0,0.55)`;
+  const size = isSelected ? 46 : 40;
   const popClass = isSelected ? " leaflet-marker-pop" : "";
 
   return L.divIcon({
-    html: `<div style="
-      width:44px;height:44px;
-      display:flex;align-items:center;justify-content:center;
-      cursor:pointer;
-    "><div class="leaflet-marker-dot${popClass}" style="
-      width:${dot}px;height:${dot}px;
-      border-radius:50%;
-      background:${tint};
-      border:${ring}px solid rgba(255,255,255,0.95);
-      box-shadow:${shadow};
-    "></div></div>`,
+    html: `<div class="leaflet-location-pin${popClass}" style="width:46px;height:46px;display:flex;align-items:flex-start;justify-content:center;cursor:pointer">
+      <svg width="${size}" height="${size}" viewBox="0 0 40 44" aria-hidden="true" style="filter:drop-shadow(0 4px 7px rgba(0,0,0,.48))">
+        <path d="M20 42C17.8 37.8 5 27.1 5 17.4C5 8.9 11.7 2 20 2s15 6.9 15 15.4C35 27.1 22.2 37.8 20 42Z" fill="${tint}" stroke="rgba(255,255,255,.96)" stroke-width="2.3"/>
+        <circle cx="20" cy="17" r="6.5" fill="rgba(9,15,24,.82)" stroke="rgba(255,255,255,.55)" stroke-width="1"/>
+        <circle cx="20" cy="17" r="2.3" fill="white"/>
+      </svg>
+    </div>`,
     className: "",
-    iconSize: [44, 44],
-    iconAnchor: [22, 22],
-    popupAnchor: [0, -22],
+    iconSize: [46, 46],
+    iconAnchor: [23, 43],
+    popupAnchor: [0, -40],
   });
 }
 
 function createClusterIcon(cluster: L.MarkerCluster) {
   const count = cluster.getChildCount();
-  const size = count >= 100 ? 48 : count >= 10 ? 40 : 32;
+  const size = count >= 50 ? 54 : count >= 10 ? 48 : 42;
+  const colours = cluster.getAllChildMarkers().map((marker) =>
+    (marker.options as L.MarkerOptions & { categoryColour?: string }).categoryColour ?? "#8FA3B8"
+  );
+  const totals = new Map<string, number>();
+  colours.forEach((colour) => totals.set(colour, (totals.get(colour) ?? 0) + 1));
+  let cursor = 0;
+  const segments = [...totals.entries()].map(([colour, total]) => {
+    const start = cursor;
+    cursor += (total / colours.length) * 100;
+    return `${colour} ${start.toFixed(2)}% ${cursor.toFixed(2)}%`;
+  });
+  const ring = `conic-gradient(${segments.join(",")})`;
   return L.divIcon({
     html: `<div style="
       width:${size}px;height:${size}px;
-      background:rgba(255,255,255,0.88);
+      background:${ring};
       border-radius:50%;
       display:flex;align-items:center;justify-content:center;
-      box-shadow:0 3px 14px rgba(0,0,0,0.45);
-      backdrop-filter:blur(8px);
+      border:2px solid rgba(255,255,255,.92);
+      box-shadow:0 4px 16px rgba(0,0,0,.5);
     "><span style="
-      color:#0b0f1c;
-      font-size:${count >= 100 ? 11 : 12}px;
+      width:${size - 13}px;height:${size - 13}px;
+      background:rgba(9,15,24,.9);
+      border:1px solid rgba(255,255,255,.38);
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      backdrop-filter:blur(7px);
+    "><span style="
+      color:#fff;
+      font-size:${count >= 100 ? 11 : 13}px;
       font-weight:700;
       font-family:inherit;
       line-height:1;
       letter-spacing:-0.3px;
-    ">${count}</span></div>`,
+    ">${count}</span></span></div>`,
     className: "",
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
@@ -147,9 +157,16 @@ function ClusterLayer({ locations }: { locations: Location[] }) {
     });
 
     locations.forEach((loc) => {
-      const marker = L.marker([loc.coordinates.lat, loc.coordinates.lng], {
+      const markerOptions: L.MarkerOptions & { categoryColour: string } = {
         icon: createLocationIcon(loc, false),
-      });
+        title: loc.name,
+        alt: `${loc.name}, ${categoryConfig[loc.category]?.label ?? "location"}`,
+        categoryColour: categoryConfig[loc.category]?.color ?? "#8FA3B8",
+      };
+      const marker = L.marker(
+        [loc.coordinates.lat, loc.coordinates.lng],
+        markerOptions
+      );
       marker.on("click", () => {
         haptics.tap();
         openBottomSheet(loc.id);

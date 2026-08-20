@@ -1800,5 +1800,26 @@
     "coordinateType": "lake_center", "category": "hidden-lake",
     "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=20&searchText=Ch%C3%BCebodensee",
     "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Chüebodensee (GL) - Glarus Süd", "checkedAt": "2026-08-17"
+  },
+  {
+    "index": 115, "id": "spot-tomasee", "slug": "tomasee-lai-da-tuma", "name": "Tomasee (Lai da Tuma)",
+    "canton": "Graubünden", "region": "graubunden", "coordinates": { "lat": 46.63249206542969, "lng": 8.672351837158203 },
+    "coordinateType": "lake_center", "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=5&searchText=Tomasee",
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Tomasee (GR) - Tujetsch", "checkedAt": "2026-08-18"
+  },
+  {
+    "index": 116, "id": "spot-lac-de-salanfe", "slug": "lac-de-salanfe", "name": "Lac de Salanfe",
+    "canton": "Valais", "region": "valais", "coordinates": { "lat": 46.1407470703125, "lng": 6.958555221557617 },
+    "coordinateType": "lake_center", "category": "hidden-lake",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=5&searchText=Lac%20de%20Salanfe",
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Lake Lac de Salanfe (VS) - Evionnaz", "checkedAt": "2026-08-18"
+  },
+  {
+    "index": 117, "id": "spot-maderanertal-high-trail", "slug": "maderanertal-high-trail", "name": "Maderanertal High Trail",
+    "canton": "Uri", "region": "uri", "coordinates": { "lat": 46.78192901611328, "lng": 8.772137641906738 },
+    "coordinateType": "viewpoint", "category": "alpine-meadow",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&origins=gazetteer&limit=5&searchText=Berghotel%20Maderanertal",
+    "federalMatchStatus": "candidate_match", "federalMatchLabel": "Building Berghotel Maderanertal (UR) - Silenen", "checkedAt": "2026-08-18"
   }
 ]

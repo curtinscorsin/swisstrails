@@ -14,7 +14,8 @@ import { filterLocations, countActiveFilters } from "@/lib/filters";
 import { sortLocations, type SortMode } from "@/lib/sort";
 import { SortControl } from "@/components/app/sort-control";
 import { TripPill } from "@/components/app/trip-pill";
-import { cn } from "@/lib/utils";
+import { categoryConfig, cn } from "@/lib/utils";
+import type { LocationCategory } from "@/types";
 import { haptics } from "@/lib/haptics";
 
 const MapView = dynamic(
@@ -55,6 +56,13 @@ export default function MapPage() {
   const activeFilterCount = useMemo(
     () => countActiveFilters(activeFilters),
     [activeFilters]
+  );
+
+  const visibleCategories = useMemo(
+    () =>
+      [...new Set(filteredLocations.map((location) => location.category))]
+        .sort((a, b) => categoryConfig[a].label.localeCompare(categoryConfig[b].label)) as LocationCategory[],
+    [filteredLocations]
   );
 
   const filterKey = `${searchQuery}-${JSON.stringify(activeFilters)}-${sortMode}-${userPosition ? "geo" : "nogeo"}`;
@@ -100,6 +108,30 @@ export default function MapPage() {
               )}{" "}
               locations
             </p>
+          </div>
+        </div>
+
+        {/* Category key — horizontally scrollable on phones, fully visible on desktop. */}
+        <div
+          className="absolute bottom-14 left-3 right-3 z-[1100] flex justify-center pointer-events-none"
+          aria-label="Map pin category colours"
+        >
+          <div className="pointer-events-auto max-w-full overflow-x-auto rounded-xl border border-white/10 bg-trail-950/82 px-2 py-2 shadow-[0_4px_20px_rgba(0,0,0,.42)] backdrop-blur-xl [scrollbar-width:none]">
+            <div className="flex w-max items-center gap-1.5">
+              {visibleCategories.map((category) => (
+                <span
+                  key={category}
+                  className="flex h-7 items-center gap-1.5 rounded-lg bg-white/[0.06] px-2.5 text-[11px] font-medium text-fg-muted"
+                >
+                  <span
+                    className="h-2.5 w-2.5 rounded-full border border-white/70 shadow-sm"
+                    style={{ backgroundColor: categoryConfig[category].color }}
+                    aria-hidden="true"
+                  />
+                  {categoryConfig[category].label}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

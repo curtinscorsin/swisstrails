@@ -85,7 +85,16 @@
   /* Selected-marker pop. The inner dot animates its own transform; this is a
      child of Leaflet's positioned .leaflet-marker-icon, so it never fights
      the map's translate. */
-  .leaflet-marker-dot { transform-origin: center; }
+  .leaflet-location-pin {
+    transform-origin: 50% 92%;
+    transition: transform 160ms ease, filter 160ms ease;
+  }
+  .leaflet-location-pin:hover { transform: translateY(-2px) scale(1.06); }
+  .leaflet-location-pin:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 2px;
+    border-radius: 999px;
+  }
   .leaflet-marker-pop {
     animation: leaflet-marker-pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
@@ -95,5 +104,6 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .leaflet-marker-pop { animation: none; }
+    .leaflet-location-pin { transition: none; }
   }
 }
