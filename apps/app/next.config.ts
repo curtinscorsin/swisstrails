@@ -3,9 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   transpilePackages: ["@swiss-trails/ui", "@swiss-trails/types"],
   images: {
-    // Wikimedia URLs are already emitted as appropriately sized thumbnails.
-    // Serving them directly avoids unnecessary Vercel image transforms.
-    unoptimized: true,
+    // Proxy, resize and cache remote destination photography through Next.js.
+    // Loading hundreds of files directly from Wikimedia can trigger its
+    // rate-limit and leave valid catalogue images blank for visitors.
     remotePatterns: [
       { protocol: "https", hostname: "upload.wikimedia.org" },
       { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" },
