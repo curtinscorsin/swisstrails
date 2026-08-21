@@ -5,7 +5,7 @@
 ───────────────────────────────────────────── */
 @theme {
   --font-heading: "Alcyone", Georgia, "Times New Roman", serif;
-  --font-body: "Aeonik Pro", var(--font-sans), -apple-system, "Helvetica Neue", sans-serif;
+  --font-body: var(--font-dm-sans), -apple-system, "Helvetica Neue", sans-serif;
 
   /* ── TRAIL (fir, bark and deep shadow) ── */
   --color-trail-950: #0B0D0A;
@@ -140,6 +140,8 @@
 
   html {
     font-family: var(--font-body);
+    /* DM Sans stylistic set 03 uses the friendlier single-storey lowercase g. */
+    font-feature-settings: "ss03" 1;
     background-color: var(--color-bg);
     color: var(--color-fg);
     -webkit-font-smoothing: antialiased;
@@ -157,6 +159,7 @@
     background-color: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-body);
+    font-feature-settings: "ss03" 1;
     overflow-x: hidden;
     overscroll-behavior-y: none;
     letter-spacing: -0.005em;

@@ -1,7 +1,14 @@
 import type { Metadata, Viewport } from "next";
+import { DM_Sans } from "next/font/google";
 import { MockBanner } from "@/components/shared/mock-banner";
 import { ServiceWorkerRegistration } from "@/components/app/service-worker-registration";
 import "./globals.css";
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://app.swiss-trails.com"),
@@ -54,7 +61,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={dmSans.variable}>
       <body className="bg-trail-950 text-fg antialiased">
         {children}
         <ServiceWorkerRegistration />

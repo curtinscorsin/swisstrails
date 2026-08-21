@@ -17,9 +17,9 @@
    SWISS TRAILS DESIGN SYSTEM
 ───────────────────────────────────────────── */
 @theme {
-  /* Space Grotesk is injected by next/font as --font-space-grotesk */
+  /* DM Sans is injected and self-hosted by next/font. */
   --font-heading: "Alcyone", Georgia, "Times New Roman", serif;
-  --font-body: var(--font-space-grotesk), -apple-system, "Helvetica Neue", sans-serif;
+  --font-body: var(--font-dm-sans), -apple-system, "Helvetica Neue", sans-serif;
 
   /* ── TRAIL (near-black navy backgrounds) ── */
   --color-trail-950: #06080F;
@@ -127,6 +127,8 @@
 
   html {
     font-family: var(--font-body);
+    /* DM Sans stylistic set 03 uses the friendlier single-storey lowercase g. */
+    font-feature-settings: "ss03" 1;
     background-color: var(--color-bg);
     color: var(--color-fg);
     -webkit-font-smoothing: antialiased;
@@ -138,6 +140,7 @@
     background-color: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-body);
+    font-feature-settings: "ss03" 1;
     overflow-x: hidden;
   }
 
@@ -192,7 +195,7 @@
     letter-spacing: -0.02em;
   }
 
-  /* h3–h4: Space Grotesk for tighter UI use */
+  /* h3–h4: DM Sans for tighter UI use */
   .t-h3 {
     font-family: var(--font-body);
     font-weight: 600;
