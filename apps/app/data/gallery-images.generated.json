@@ -2237,11 +2237,21 @@
       "credit": "Engie · CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hundstein_oberhalb_Faelensee.JPG",
       "isHero": false
+    },
+    {
+      "id": "img-falensee-corsin-shore",
+      "url": "/images/locations/faelensee/corsin-faelensee-shore.jpg",
+      "alt": "Fälensee and the surrounding Alpstein cliffs viewed from the lakeshore",
+      "width": 768,
+      "height": 1024,
+      "credit": "Corsin Curtins · Original photography",
+      "sourceUrl": "https://swiss-trails.com/#about-corsin",
+      "isHero": false
     }
   ],
   "spot-schafler": [
     {
-      "id": "img-schafler-gallery-1",
+      "id": "img-schafler-gallery-west",
       "url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Sch%C3%A4fler_Hoher_Kasten.jpg",
       "alt": "Schäfler",
       "width": 1600,
@@ -2268,6 +2278,16 @@
       "height": 3040,
       "credit": "Valentinfriedli · CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crazy_night_up_in_the_Swiss_Mountains.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-schafler-corsin-trail",
+      "url": "/images/locations/schaefler/corsin-schaefler-trail.jpg",
+      "alt": "The approach trail below Schäfler with Berggasthaus Schäfler and the Alpstein cliffs",
+      "width": 768,
+      "height": 1024,
+      "credit": "Corsin Curtins · Original photography",
+      "sourceUrl": "https://swiss-trails.com/#about-corsin",
       "isHero": false
     }
   ],
@@ -3068,6 +3088,36 @@
       "height": 1664,
       "credit": "Adrian Michael · CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Saoseo3.jpg",
+      "isHero": false
+    },
+    {
+      "id": "img-lagh-da-saoseo-corsin-approach",
+      "url": "/images/locations/lagh-da-saoseo/corsin-val-da-camp-approach.jpg",
+      "alt": "Alpine pasture and wood shelter on the Val da Camp approach to Lagh da Saoseo",
+      "width": 1024,
+      "height": 768,
+      "credit": "Corsin Curtins · Original photography",
+      "sourceUrl": "https://swiss-trails.com/#about-corsin",
+      "isHero": false
+    },
+    {
+      "id": "img-lagh-da-saoseo-corsin-lake-1",
+      "url": "/images/locations/lagh-da-saoseo/corsin-lagh-da-saoseo-1.jpg",
+      "alt": "Clear turquoise water and larch forest at Lagh da Saoseo",
+      "width": 768,
+      "height": 1024,
+      "credit": "Corsin Curtins · Original photography",
+      "sourceUrl": "https://swiss-trails.com/#about-corsin",
+      "isHero": false
+    },
+    {
+      "id": "img-lagh-da-saoseo-corsin-lake-2",
+      "url": "/images/locations/lagh-da-saoseo/corsin-lagh-da-saoseo-2.jpg",
+      "alt": "Mountain stream entering the clear water of Lagh da Saoseo",
+      "width": 768,
+      "height": 1024,
+      "credit": "Corsin Curtins · Original photography",
+      "sourceUrl": "https://swiss-trails.com/#about-corsin",
       "isHero": false
     }
   ],

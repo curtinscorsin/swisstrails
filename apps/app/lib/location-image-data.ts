@@ -5,8 +5,9 @@ import type { Location, LocationImage } from "@/types";
  * Returns only destination-verified images.
  *
  * `SOURCED_IMAGES` contains manually reviewed Wikimedia files whose description
- * identifies the exact published place. Inline gallery images are accepted only
- * when they are explicitly attached to the curated record. Generic landscape
+ * identifies the exact published place, plus clearly credited original Swiss
+ * Trails photographs supplied by the creator. Inline gallery images are accepted
+ * only when they are explicitly attached to the curated record. Generic landscape
  * substitutes are intentionally excluded.
  */
 export function resolveSourcedImages(location: Location): LocationImage[] {

@@ -4,8 +4,9 @@ import reviewedImages from "./reviewed-images.generated.json";
 import galleryImages from "./gallery-images.generated.json";
 
 /**
- * Photographs are selected only when the Commons file description identifies
- * the exact destination. Every entry keeps its author, licence and source page.
+ * Photographs are selected only when a Commons description identifies the exact
+ * destination or when the creator supplied and identified an original image.
+ * Every entry keeps its author, licence/provenance and source page.
  */
 const EDITORIALLY_REVIEWED_IMAGES: Record<string, LocationImage[]> = {
   "spot-oeschinensee": [

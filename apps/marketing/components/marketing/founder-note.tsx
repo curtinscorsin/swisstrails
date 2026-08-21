@@ -76,15 +76,15 @@ export function FounderNote() {
                 <figure className="overflow-hidden rounded-xl bg-white/[0.04]">
                   <div className="relative aspect-[4/5]">
                     <Image
-                      src="/images/founder/corsin-trailhead.jpg"
-                      alt="Corsin beginning an outdoor journey with a hiking backpack"
+                      src="/images/founder/corsin-schaefler-trail.jpg"
+                      alt="Corsin Curtins on the trail below Schäfler in the Alpstein"
                       fill
                       sizes="(min-width: 1024px) 25vw, 50vw"
                       className="object-cover"
                     />
                   </div>
                   <figcaption className="px-4 py-3 text-xs leading-relaxed text-fg-muted">
-                    At the start of another journey.
+                    On the trail below Schäfler in the Alpstein.
                   </figcaption>
                 </figure>
               </Reveal>
@@ -92,15 +92,15 @@ export function FounderNote() {
                 <figure className="mt-10 overflow-hidden rounded-xl bg-white/[0.04]">
                   <div className="relative aspect-[4/5]">
                     <Image
-                      src="/images/founder/corsin-glacier-fieldwork.jpg"
-                      alt="Corsin using a phone during a cold alpine outing"
+                      src="/images/founder/corsin-alpstein-dawn.jpg"
+                      alt="Corsin Curtins walking at an Alpstein viewpoint before sunrise"
                       fill
                       sizes="(min-width: 1024px) 25vw, 50vw"
-                      className="object-cover object-[42%_center]"
+                      className="object-cover object-[54%_center]"
                     />
                   </div>
                   <figcaption className="px-4 py-3 text-xs leading-relaxed text-fg-muted">
-                    Outside in the conditions that made this project matter to me.
+                    An early start above the Alpstein.
                   </figcaption>
                 </figure>
               </Reveal>

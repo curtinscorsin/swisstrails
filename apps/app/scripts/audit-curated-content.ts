@@ -4,6 +4,8 @@ import { CURATED_LOCATIONS } from "../data/curated-locations";
 import { CATEGORIES } from "../data/categories";
 import { resolveSourcedImages } from "../lib/location-image-data";
 import { CATALOGUE_METRICS } from "@swiss-trails/types";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 
 const failures: string[] = [];
 
@@ -138,16 +140,26 @@ for (const location of CURATED_LOCATIONS) {
     fallbackNames.push(location.name);
   }
   for (const photo of photos) {
+    const isCommonsPhoto = photo.url.startsWith("https://upload.wikimedia.org/");
+    const isOriginalPhoto =
+      photo.url.startsWith("/images/locations/") &&
+      photo.credit?.includes("Original photography") &&
+      photo.sourceUrl?.startsWith("https://swiss-trails.com/");
     assert(photo.alt === location.name, `${prefix}: photo alt and published name disagree`);
-    assert(photo.url.startsWith("https://upload.wikimedia.org/"), `${prefix}: non-Wikimedia published photo`);
+    assert(isCommonsPhoto || isOriginalPhoto, `${prefix}: photo source is neither verified Commons nor credited first-party photography`);
     assert(/\.(?:jpe?g|png|webp)(?:\?|$)/i.test(photo.url), `${prefix}: browser-unsafe image format`);
     assert(Boolean(photo.credit), `${prefix}: photo is missing creator/licence credit`);
     assert(
       !/unknown|no machine-readable|assumed|anonymous/i.test(photo.credit ?? ""),
       `${prefix}: photo creator is unresolved`
     );
-    assert(photo.sourceUrl?.startsWith("https://commons.wikimedia.org/wiki/File:"), `${prefix}: photo is missing a Commons source page`);
-    assert((photo.width ?? 0) >= 1000, `${prefix}: photo is under 1000px wide`);
+    if (isCommonsPhoto) {
+      assert(photo.sourceUrl?.startsWith("https://commons.wikimedia.org/wiki/File:"), `${prefix}: photo is missing a Commons source page`);
+    }
+    if (isOriginalPhoto) {
+      assert(existsSync(resolve("public", photo.url.slice(1))), `${prefix}: first-party photo file is missing`);
+    }
+    assert(Math.max(photo.width ?? 0, photo.height ?? 0) >= 1000, `${prefix}: photo is under 1000px on its longest side`);
     if ((photo.width ?? 0) / (photo.height ?? 1) >= 1.15) landscapeImageCount += 1;
     publishedImageUrls.push(photo.url);
     if (photo.sourceUrl) publishedSourceUrls.push(photo.sourceUrl);
@@ -201,7 +213,7 @@ console.log(`- ${landscapeImageCount} source photographs are natively landscape;
 console.log(`- ${CURATED_LOCATIONS.length} unique /location/[slug] detail routes are generated`);
 
 if (process.argv.includes("--network")) {
-  const urls = [...new Set([...publishedImageUrls, ...publishedSourceUrls])];
+  const urls = [...new Set([...publishedImageUrls.filter((url) => url.startsWith("https://")), ...publishedSourceUrls])];
   const broken: string[] = [];
   const automationBlocked: string[] = [];
   const knownAutomationLimitedHosts = new Set([

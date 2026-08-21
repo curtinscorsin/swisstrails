@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowUpRight, BadgeCheck, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,13 +12,10 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-trail-950">
-      <Image
-        src="/images/founder/corsin-alpine-selfie.jpg"
-        alt="Corsin Curtins on an early alpine outing in Switzerland"
-        fill
-        priority
-        sizes="100vw"
-        className="scale-[1.02] object-cover object-[56%_center] sm:object-[50%_center]"
+      <div
+        className="marketing-sunset-hero absolute inset-0 scale-[1.02]"
+        role="img"
+        aria-label="Sunset light over a Swiss mountain valley"
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,20,0.18)_0%,rgba(5,11,20,0.08)_32%,rgba(5,11,20,0.48)_60%,rgba(5,11,20,0.98)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,transparent_0%,rgba(6,16,29,0.16)_46%,rgba(5,11,20,0.72)_100%)]" />
@@ -110,9 +106,14 @@ export function Hero() {
           </span>
           Meet the person behind it
         </motion.a>
-        <p className="absolute bottom-8 right-5 hidden text-[10px] uppercase tracking-[0.14em] text-white/45 sm:block lg:right-12">
-          From Corsin’s outdoor archive
-        </p>
+        <a
+          href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
+          target="_blank"
+          rel="noreferrer"
+          className="absolute bottom-8 right-5 hidden text-[10px] uppercase tracking-[0.14em] text-white/45 transition-colors hover:text-white/75 sm:block lg:right-12"
+        >
+          Hero photograph · Unsplash
+        </a>
       </div>
     </section>
   );
