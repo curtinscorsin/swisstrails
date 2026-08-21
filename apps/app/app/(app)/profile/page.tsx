@@ -316,9 +316,9 @@ export default function ProfilePage() {
               CC
             </div>
             <div>
-              <p className="text-sm font-medium text-fg">Corsin Curtins</p>
+              <p className="text-sm font-medium text-fg">Corsin Curtins · 19 · Swiss</p>
               <p className="mt-1 text-xs leading-relaxed text-fg-muted">
-                I build and edit Swiss Trails in Switzerland. If a place has changed or something looks wrong, please tell me.
+                I created Swiss Trails to make outdoor planning more honest and useful. If a place has changed or something looks wrong, please tell me.
               </p>
               <a
                 href="mailto:hello@swiss-trails.com"

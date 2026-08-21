@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowUpRight, Camera, MapPinned, SearchCheck } from "lucide-react";
 import { Reveal } from "@/components/shared/reveal";
 
@@ -23,17 +24,21 @@ export function FounderNote() {
   return (
     <section id="about-corsin" className="scroll-mt-20 border-b border-white/[0.08] bg-trail-950 py-20 lg:scroll-mt-24 lg:py-32">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
+        <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:gap-20">
           <Reveal>
-            <div className="lg:sticky lg:top-32">
+            <div className="lg:sticky lg:top-28">
               <p className="t-eyebrow mb-5">A note from the founder</p>
-              <div className="flex items-center gap-4">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gold-200/30 bg-gold-200/10 font-heading text-xl text-gold-100">
-                  CC
-                </span>
-                <div>
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-white/[0.04]">
+                <Image
+                  src="/images/founder/corsin-sunrise-portrait.jpg"
+                  alt="Corsin Curtins outdoors in the Swiss mountains at sunrise"
+                  fill
+                  sizes="(min-width: 1024px) 38vw, 100vw"
+                  className="object-cover object-[48%_center]"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-trail-950 via-trail-950/70 to-transparent px-5 pb-5 pt-20">
                   <p className="font-medium text-fg">Corsin Curtins</p>
-                  <p className="mt-0.5 text-sm text-fg-muted">Founder and editor, Swiss Trails</p>
+                  <p className="mt-0.5 text-sm text-stone-300">19 · Swiss creator and editor</p>
                 </div>
               </div>
               <a
@@ -49,19 +54,57 @@ export function FounderNote() {
           <div>
             <Reveal delay={0.08}>
               <h2 className="max-w-4xl font-heading text-[clamp(2.8rem,5.4vw,5.8rem)] leading-[0.94] tracking-[-0.04em] text-fg">
-                I would rather share 100 useful places than 500 vague ones.
+                I’m 19, Swiss, and building the outdoor guide I wanted to have.
               </h2>
             </Reveal>
             <Reveal delay={0.14}>
               <div className="mt-8 max-w-3xl space-y-5 text-base leading-relaxed text-fg-muted sm:text-lg">
                 <p>
-                  I’m building Swiss Trails because a beautiful photograph and a pin are not enough to plan a day outside. The image, place name, route and access information need to belong together.
+                  I’m Corsin Curtins, the creator and editor of Swiss Trails. I started this project because I love being outside, but I kept finding beautiful places online with photographs that did not match, vague map pins or practical details I could not trust.
                 </p>
                 <p>
-                  This is an independent guide, edited place by place. I keep original sources visible, record when information was checked and leave uncertain details clearly marked. It is not a claim that I have personally walked every route.
+                  My goal is simple: build a smaller Swiss guide that is genuinely useful. I would rather publish 100 carefully presented places than fill a database with 500 vague ones. I keep original sources visible, record when information was checked and leave uncertain details clearly marked.
+                </p>
+                <p>
+                  I’m still learning and improving the guide place by place. These photographs show me outdoors, but they are not a claim that I have personally walked every route in the catalogue. If you notice something that has changed, you can write directly to me.
                 </p>
               </div>
             </Reveal>
+
+            <div className="mt-10 grid grid-cols-2 gap-3">
+              <Reveal delay={0.16}>
+                <figure className="overflow-hidden rounded-xl bg-white/[0.04]">
+                  <div className="relative aspect-[4/5]">
+                    <Image
+                      src="/images/founder/corsin-trailhead.jpg"
+                      alt="Corsin beginning an outdoor journey with a hiking backpack"
+                      fill
+                      sizes="(min-width: 1024px) 25vw, 50vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <figcaption className="px-4 py-3 text-xs leading-relaxed text-fg-muted">
+                    At the start of another journey.
+                  </figcaption>
+                </figure>
+              </Reveal>
+              <Reveal delay={0.22}>
+                <figure className="mt-10 overflow-hidden rounded-xl bg-white/[0.04]">
+                  <div className="relative aspect-[4/5]">
+                    <Image
+                      src="/images/founder/corsin-glacier-fieldwork.jpg"
+                      alt="Corsin using a phone during a cold alpine outing"
+                      fill
+                      sizes="(min-width: 1024px) 25vw, 50vw"
+                      className="object-cover object-[42%_center]"
+                    />
+                  </div>
+                  <figcaption className="px-4 py-3 text-xs leading-relaxed text-fg-muted">
+                    Outside in the conditions that made this project matter to me.
+                  </figcaption>
+                </figure>
+              </Reveal>
+            </div>
 
             <div className="mt-12 grid border-t border-white/10 md:grid-cols-3">
               {PRINCIPLES.map(({ icon: Icon, title, body }, index) => (

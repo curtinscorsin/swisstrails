@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowUpRight, BadgeCheck, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,9 +13,16 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-trail-950">
-      <div className="marketing-sunset-hero absolute inset-0 scale-[1.02]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,20,0.18)_0%,rgba(5,11,20,0.03)_34%,rgba(5,11,20,0.38)_58%,rgba(5,11,20,0.96)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_24%,transparent_0%,rgba(6,16,29,0.18)_48%,rgba(5,11,20,0.64)_100%)]" />
+      <Image
+        src="/images/founder/corsin-alpine-selfie.jpg"
+        alt="Corsin Curtins on an early alpine outing in Switzerland"
+        fill
+        priority
+        sizes="100vw"
+        className="scale-[1.02] object-cover object-[56%_center] sm:object-[50%_center]"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,11,20,0.18)_0%,rgba(5,11,20,0.08)_32%,rgba(5,11,20,0.48)_60%,rgba(5,11,20,0.98)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,transparent_0%,rgba(6,16,29,0.16)_46%,rgba(5,11,20,0.72)_100%)]" />
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-trail-950" />
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1440px] flex-col px-5 pb-8 pt-28 sm:px-8 lg:px-12 lg:pb-12 lg:pt-36">
@@ -26,7 +34,7 @@ export function Hero() {
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-stone-100 backdrop-blur-md">
             <MapPin className="h-3 w-3 text-gold-200" />
-            Independent Swiss guide
+            Corsin Curtins · Swiss Trails
           </span>
           <span className="hidden text-[11px] uppercase tracking-[0.18em] text-white/60 sm:block">
             {CATALOGUE_METRICS.publishedLocations} carefully researched outdoor places
@@ -41,7 +49,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduce ? 0 : 0.7, delay: reduce ? 0 : 0.08, ease: EASE }}
             >
-              100 places, edited by one person
+              Built independently in Switzerland
             </motion.p>
             <motion.h1
               className="max-w-5xl font-heading text-[clamp(3.75rem,8.6vw,8.75rem)] leading-[0.82] tracking-[-0.055em] text-fg"
@@ -49,9 +57,9 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduce ? 0 : 0.9, delay: reduce ? 0 : 0.12, ease: EASE }}
             >
-              A Swiss guide
+              The Swiss guide
               <br />
-              I’d use myself.
+              I kept looking for.
             </motion.h1>
           </div>
 
@@ -102,14 +110,9 @@ export function Hero() {
           </span>
           Meet the person behind it
         </motion.a>
-        <a
-          href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
-          target="_blank"
-          rel="noreferrer"
-          className="absolute bottom-8 right-5 hidden text-[10px] uppercase tracking-[0.14em] text-white/45 transition-colors hover:text-white/80 sm:block lg:right-12"
-        >
-          Hero photograph · Unsplash
-        </a>
+        <p className="absolute bottom-8 right-5 hidden text-[10px] uppercase tracking-[0.14em] text-white/45 sm:block lg:right-12">
+          From Corsin’s outdoor archive
+        </p>
       </div>
     </section>
   );
