@@ -26,7 +26,7 @@ export function Hero() {
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-stone-100 backdrop-blur-md">
             <MapPin className="h-3 w-3 text-gold-200" />
-            Made for Switzerland
+            Independent Swiss guide
           </span>
           <span className="hidden text-[11px] uppercase tracking-[0.18em] text-white/60 sm:block">
             {CATALOGUE_METRICS.publishedLocations} carefully researched outdoor places
@@ -41,7 +41,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduce ? 0 : 0.7, delay: reduce ? 0 : 0.08, ease: EASE }}
             >
-              A clearer way to explore Switzerland
+              100 places, edited by one person
             </motion.p>
             <motion.h1
               className="max-w-5xl font-heading text-[clamp(3.75rem,8.6vw,8.75rem)] leading-[0.82] tracking-[-0.055em] text-fg"
@@ -49,9 +49,9 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduce ? 0 : 0.9, delay: reduce ? 0 : 0.12, ease: EASE }}
             >
-              Find your next
+              A Swiss guide
               <br />
-              Swiss escape.
+              I’d use myself.
             </motion.h1>
           </div>
 
@@ -62,26 +62,26 @@ export function Hero() {
             transition={{ duration: reduce ? 0 : 0.8, delay: reduce ? 0 : 0.25, ease: EASE }}
           >
             <p className="text-base leading-relaxed text-stone-200 sm:text-lg">
-              Discover hikes, quiet lakes and viewpoints with real photographs,
-              practical details and source links—all in one calm guide.
+              I’m Corsin. I built Swiss Trails to bring photographs, map points,
+              practical details and original sources together without pretending every unknown is a fact.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col">
               <Button asChild variant="gold" size="xl" className="justify-between gap-5 lg:w-full">
-                <a href="#solution">
-                  See how the guide works
+                <a href="#about-corsin">
+                  Why I built Swiss Trails
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </Button>
               <Button asChild variant="outline" size="xl" className="lg:w-full">
-                <a href="#whats-inside">Browse the collection</a>
+                <a href="#whats-inside">See what is inside</a>
               </Button>
             </div>
 
             <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-stone-300">
               <span className="flex items-center gap-1.5 text-gold-200">
                 <BadgeCheck className="h-4 w-4" />
-                Sources shown for every place
+                Every source stays visible
               </span>
               <span className="h-1 w-1 rounded-full bg-stone-400" />
               <span>CHF 19.90 once</span>
@@ -100,7 +100,7 @@ export function Hero() {
           <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15">
             <ArrowDown className="h-3.5 w-3.5" />
           </span>
-          Discover the collection
+          Meet the person behind it
         </motion.a>
         <a
           href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
@@ -108,7 +108,7 @@ export function Hero() {
           rel="noreferrer"
           className="absolute bottom-8 right-5 hidden text-[10px] uppercase tracking-[0.14em] text-white/45 transition-colors hover:text-white/80 sm:block lg:right-12"
         >
-          Archived hero · Unsplash
+          Hero photograph · Unsplash
         </a>
       </div>
     </section>

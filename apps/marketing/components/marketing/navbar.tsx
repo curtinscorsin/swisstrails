@@ -26,9 +26,9 @@ export function Navbar() {
   }, [isMenuOpen]);
 
   const navLinks = [
+    { label: "About Corsin", href: "#about-corsin" },
     { label: "The guide", href: "#solution" },
     { label: "Locations", href: "#whats-inside" },
-    { label: "Standards", href: "#stats" },
     { label: "Access", href: "#pricing" },
   ];
 

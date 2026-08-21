@@ -11,7 +11,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://swiss-trails.com"),
   title: {
-    default: "Swiss Trails — Discover Switzerland's Hidden Gems",
+    default: "Swiss Trails — An independent Swiss outdoor guide",
     template: "%s | Swiss Trails",
   },
   description:
@@ -25,21 +25,21 @@ export const metadata: Metadata = {
     "Swiss adventures",
     "hidden gems Switzerland",
   ],
-  authors: [{ name: "Swiss Trails" }],
-  creator: "Swiss Trails",
+  authors: [{ name: "Corsin Curtins" }],
+  creator: "Corsin Curtins",
   openGraph: {
     type: "website",
     locale: "en_CH",
     url: "https://swiss-trails.com",
     siteName: "Swiss Trails",
-    title: "Swiss Trails — Your Best Summer, Already Planned",
+    title: "Swiss Trails — Fewer places, better checked",
     description:
       "A deliberately small, source-checked guide to Swiss places with authentic photographs and transparent visitor information.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Swiss Trails — Your wildest weekends, found" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Swiss Trails, an independent Swiss outdoor guide" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Swiss Trails — Your Best Summer, Already Planned",
+    title: "Swiss Trails — Fewer places, better checked",
     description: "Source-checked Swiss places with authentic photographs and transparent visitor information.",
     images: ["/og.png"],
   },

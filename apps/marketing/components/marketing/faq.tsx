@@ -11,6 +11,10 @@ import { CATALOGUE_METRICS } from "@swiss-trails/types";
 
 const FAQ_ITEMS = [
   {
+    q: "Who is behind Swiss Trails?",
+    a: "Swiss Trails is an independent guide built and edited by Corsin Curtins in Switzerland. Corsin reviews the catalogue, keeps the original sources visible and welcomes corrections at hello@swiss-trails.com. The guide does not claim that every route has been personally checked on location.",
+  },
+  {
     q: "What exactly do I get?",
     a: `You get access to ${CATALOGUE_METRICS.publishedLocations} Swiss destination pages. Every page includes a sourced map record and uncertainty labels. The catalogue currently contains ${CATALOGUE_METRICS.creditedPhotographs} credited, location-linked photographs; ${CATALOGUE_METRICS.locationsWithThreePhotographs} destinations have galleries of at least three. ${CATALOGUE_METRICS.placeholderLocations} use an honest branded placeholder until a suitable image is approved.`,
   },
@@ -63,7 +67,7 @@ export function FAQ() {
             </Reveal>
             <Reveal delay={0.2}>
               <p className="t-body text-fg-muted max-w-sm">
-                Everything you need to know before unlocking your best Swiss summer.
+                Straight answers about the guide, its sources and what your purchase includes.
               </p>
             </Reveal>
             <Reveal delay={0.3}>

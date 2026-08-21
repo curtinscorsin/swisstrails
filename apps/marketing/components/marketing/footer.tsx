@@ -60,8 +60,8 @@ export function Footer() {
               />
             </Link>
             <p className="text-fg-muted text-sm max-w-xs">
-              A curated collection of Swiss places with dated sources,
-              authentic photography and transparent uncertainty.
+              An independent Swiss outdoor guide built and edited by Corsin Curtins,
+              with dated sources and transparent uncertainty.
             </p>
           </div>
 
@@ -91,7 +91,7 @@ export function Footer() {
             © {currentYear} Swiss Trails. All rights reserved.
           </p>
           <p className="text-fg-muted text-xs">
-            Made for curious weekends in Switzerland
+            Built and edited by Corsin Curtins in Switzerland
           </p>
         </div>
       </div>

@@ -306,6 +306,30 @@ export default function ProfilePage() {
           </div>
         </div>
 
+        {/* A visible human contact makes the product feel accountable. */}
+        <div className="card-solid rounded-xl p-5 mb-6">
+          <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-fg-muted">
+            Behind the guide
+          </p>
+          <div className="mt-4 flex items-start gap-3">
+            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-alpine-700/35 text-sm font-semibold text-fg">
+              CC
+            </div>
+            <div>
+              <p className="text-sm font-medium text-fg">Corsin Curtins</p>
+              <p className="mt-1 text-xs leading-relaxed text-fg-muted">
+                I build and edit Swiss Trails in Switzerland. If a place has changed or something looks wrong, please tell me.
+              </p>
+              <a
+                href="mailto:hello@swiss-trails.com"
+                className="mt-3 inline-flex min-h-10 items-center text-xs font-medium text-alpine-400 hover:text-alpine-300"
+              >
+                hello@swiss-trails.com
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Sign out */}
         <Button
           variant="ghost"

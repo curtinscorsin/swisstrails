@@ -20,15 +20,15 @@ export function Pricing() {
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="t-h1 mb-4">
-              One small payment.
+              Buy the guide once.
               <br />
-              <span className="text-stone-500">A very large Switzerland.</span>
+              <span className="text-stone-500">Help me keep improving it.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="t-body text-fg-muted max-w-md mx-auto">
-              No subscription, upgrade tier or recurring charge. Buy the guide once
-              and every future source-checked location is included too.
+              Your purchase supports the time it takes to research, correct and maintain
+              an independent guide. There is no subscription or recurring charge.
             </p>
           </Reveal>
         </div>
@@ -101,7 +101,7 @@ export function Pricing() {
           {/* Editorial promise under card */}
           <Reveal delay={0.3}>
             <p className="mt-7 text-center text-sm text-fg-muted">
-              <span className="text-stone-200">No invented detail:</span> uncertainty stays visible
+              <span className="text-stone-200">Edited by Corsin:</span> corrections and honest feedback are welcome
             </p>
           </Reveal>
         </div>

@@ -180,13 +180,13 @@ export default function ExplorePage() {
               <div className="max-w-2xl">
                 <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-alpine-300">
                   <BadgeCheck className="h-4 w-4" />
-                  Source-linked collection
+                  A note from Corsin
                 </p>
                 <h2 id="editorial-standard" className="font-heading text-3xl leading-[1.05] text-fg sm:text-4xl">
-                  {CATALOGUE_METRICS.publishedLocations} outdoor places, honestly scoped.
+                  Fewer places. Better checked.
                 </h2>
                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-fg-muted sm:text-base">
-                  Every page links its destination sources. Route and access details appear only when supported; unresolved information is labelled clearly.
+                  I keep this guide intentionally focused. Every page shows where its information came from, and I leave details unresolved when I cannot support them properly. As I revisit locations, I’ll add more of my own photography and field notes.
                 </p>
               </div>
               <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-0 lg:w-80">
@@ -199,14 +199,14 @@ export default function ExplorePage() {
                   <p className="mt-1 text-xs leading-snug text-fg-muted">with sourced route or visit context</p>
                 </div>
                 <p className="col-span-2 px-1 pt-1 text-[11px] leading-relaxed text-stone-500">
-                  {CATALOGUE_METRICS.verifiedAccessPoints} separate access points verified · {CATALOGUE_METRICS.creditedPhotographs} credited photographs · catalogue updated {new Date(`${CATALOGUE_METRICS.lastEditorialCheck}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
+                  Built and edited by Corsin Curtins · {CATALOGUE_METRICS.verifiedAccessPoints} separate access points verified · {CATALOGUE_METRICS.creditedPhotographs} credited photographs · updated {new Date(`${CATALOGUE_METRICS.lastEditorialCheck}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
                 </p>
               </div>
             </div>
             <div className="flex items-end justify-between pb-1 pt-6">
               <div>
                 <p className="t-eyebrow">Published collection</p>
-                <p className="mt-1 text-sm text-fg-muted">Select a place to see its sources, known details and open questions.</p>
+                <p className="mt-1 text-sm text-fg-muted">Open a place to see the route notes, photographs, sources and anything that still needs checking.</p>
               </div>
               <span className="hidden text-xs text-stone-500 sm:block">{CURATED_LOCATIONS.length} places</span>
             </div>
