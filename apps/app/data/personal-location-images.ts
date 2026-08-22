@@ -64,14 +64,14 @@ export const PERSONAL_LOCATION_IMAGES: Record<string, LocationImage[]> = {
     original("img-blausee-corsin-2", "/images/locations/blausee/corsin-blausee-2.jpg", 2400, 1800),
   ],
   "spot-oeschinensee": [
-    original(
-      "img-oeschinensee-corsin-cover",
-      "/images/locations/oeschinensee/corsin-oeschinensee-5.jpg",
-      2400,
-      1800,
-      true
-    ),
-    ...[1, 2, 3, 4, 6, 7, 8, 9, 10].map((number) =>
+      original(
+        "img-oeschinensee-corsin-cover",
+        "/images/locations/oeschinensee/corsin-oeschinensee-4.jpg",
+        2400,
+        1800,
+        true
+      ),
+      ...[1, 2, 3, 5, 6, 7, 8, 9, 10].map((number) =>
       original(
         `img-oeschinensee-corsin-${number}`,
         `/images/locations/oeschinensee/corsin-oeschinensee-${number}.jpg`,
