@@ -15,7 +15,10 @@ interface FavoritesStore {
   clearFavorites: () => void;
 }
 
-const pendingWrites = new Map<string, Promise<boolean>>();
+// Supabase Auth metadata is updated as one account object, so writes for
+// different locations must also be serialized to avoid one fast tap
+// overwriting another.
+let favoriteWriteQueue: Promise<boolean> = Promise.resolve(true);
 
 async function writeFavorite(id: string, shouldBeFavorite: boolean) {
   const response = await fetch("/api/favorites", {
@@ -27,8 +30,7 @@ async function writeFavorite(id: string, shouldBeFavorite: boolean) {
 }
 
 function queueFavoriteWrite(id: string): Promise<boolean> {
-  const previous = pendingWrites.get(id) ?? Promise.resolve(true);
-  const next = previous
+  const next = favoriteWriteQueue
     .catch(() => false)
     .then(async () => {
       while (true) {
@@ -46,11 +48,8 @@ function queueFavoriteWrite(id: string): Promise<boolean> {
         return { pendingIds };
       });
       return true;
-    })
-    .finally(() => {
-      if (pendingWrites.get(id) === next) pendingWrites.delete(id);
     });
-  pendingWrites.set(id, next);
+  favoriteWriteQueue = next;
   return next;
 }
 
