@@ -15,11 +15,15 @@ export async function GET() {
     .select("location_id")
     .eq("user_id", user.id);
 
-  if (error || !data) {
-    return NextResponse.json({ favoriteIds: [] });
+  if (error) {
+    console.error("Failed to load favourites", error);
+    return NextResponse.json({ error: "Failed to load favourites" }, { status: 500 });
   }
 
-  return NextResponse.json({ favoriteIds: data.map((f: FavoriteRow) => f.location_id) });
+  return NextResponse.json({
+    userId: user.id,
+    favoriteIds: (data ?? []).map((f: FavoriteRow) => f.location_id),
+  });
 }
 
 export async function POST(req: NextRequest) {
@@ -42,8 +46,9 @@ export async function POST(req: NextRequest) {
   if (error) {
     const err = error as { code?: string };
     if (err.code === "23505") {
-      return NextResponse.json({ message: "Already favorited" });
+      return NextResponse.json({ message: "Already favourited" });
     }
+    console.error("Failed to save favourite", error);
     return NextResponse.json({ error: "Failed to save" }, { status: 500 });
   }
 
@@ -64,6 +69,9 @@ export async function DELETE(req: NextRequest) {
     .eq("user_id", user.id)
     .eq("location_id", locationId);
 
-  if (error) return NextResponse.json({ error: "Failed to remove" }, { status: 500 });
+  if (error) {
+    console.error("Failed to remove favourite", error);
+    return NextResponse.json({ error: "Failed to remove" }, { status: 500 });
+  }
   return NextResponse.json({ success: true });
 }

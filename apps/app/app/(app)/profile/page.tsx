@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { useFavoritesStore } from "@/store/favorites-store";
+import { flushPendingFavoriteWrites, useFavoritesStore } from "@/store/favorites-store";
 import { useVisitedStore } from "@/store/visited-store";
 import { useMapPrefStore } from "@/store/map-pref-store";
 import { CURATED_LOCATIONS } from "@/data/curated-locations";
@@ -99,7 +99,9 @@ function CountUp({ value }: { value: number }) {
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { favoriteIds } = useFavoritesStore();
+  const { favoriteIds, clearFavorites } = useFavoritesStore();
+  const [signOutError, setSignOutError] = useState<string | null>(null);
+  const [isSigningOut, setIsSigningOut] = useState(false);
   const { visitedIds } = useVisitedStore();
   const mapApp = useMapPrefStore((s) => s.preferredMapApp);
   const setMapApp = useMapPrefStore((s) => s.setPreferredMapApp);
@@ -145,7 +147,16 @@ export default function ProfilePage() {
 
   const handleSignOut = async () => {
     haptics.tap();
+    setIsSigningOut(true);
+    setSignOutError(null);
+    const favoritesSaved = await flushPendingFavoriteWrites();
+    if (!favoritesSaved) {
+      setSignOutError("Your favourites could not be saved. Check your connection and try signing out again.");
+      setIsSigningOut(false);
+      return;
+    }
     await createClient().auth.signOut();
+    clearFavorites();
     router.replace("/login");
     router.refresh();
   };
@@ -330,14 +341,21 @@ export default function ProfilePage() {
           </div>
         </div>
 
+        {signOutError && (
+          <p role="alert" className="mb-3 text-sm text-red-300">
+            {signOutError}
+          </p>
+        )}
+
         {/* Sign out */}
         <Button
           variant="ghost"
           onClick={handleSignOut}
+          disabled={isSigningOut}
           className="w-full text-fg-muted hover:text-fg"
         >
           <LogOut className="w-4 h-4" />
-          Sign out
+          {isSigningOut ? "Saving favourites…" : "Sign out"}
         </Button>
       </motion.div>
     </div>

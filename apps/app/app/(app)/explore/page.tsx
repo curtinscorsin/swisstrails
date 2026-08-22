@@ -29,6 +29,12 @@ export default function ExplorePage() {
   const [showFilters, setShowFilters] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>("featured");
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const catalogueReviewDate = new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${CATALOGUE_METRICS.lastEditorialCheck}T12:00:00Z`));
 
   const filteredLocations = useMemo(
     () =>
@@ -191,7 +197,9 @@ export default function ExplorePage() {
                 <p className="text-sm font-medium text-white">The collection</p>
                 <p className="mt-1 text-xs leading-relaxed text-white/45 sm:text-sm">Open a place for access, route notes, photographs and sources.</p>
               </div>
-              <span className="hidden text-xs tabular-nums text-white/40 sm:block">{CURATED_LOCATIONS.length} places</span>
+              <span className="hidden text-right text-xs tabular-nums text-white/40 sm:block">
+                {CURATED_LOCATIONS.length} places<br />Reviewed {catalogueReviewDate}
+              </span>
             </div>
           </section>
         )}
