@@ -35,6 +35,36 @@ const EDITORIALLY_REVIEWED_IMAGES: Record<string, LocationImage[]> = {
       isHero: true,
     },
   ],
+  "spot-hoher-kasten": [
+    {
+      id: "img-hoher-kasten-summit-cover",
+      url: "https://upload.wikimedia.org/wikipedia/commons/8/80/HoherKasten_02.jpg",
+      alt: "Hoher Kasten in the Alpstein",
+      width: 4912,
+      height: 3264,
+      credit: "Albinfo · CC BY-SA 3.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:HoherKasten_02.jpg",
+      isHero: true,
+    },
+    {
+      id: "img-hoher-kasten-from-aescher",
+      url: "https://upload.wikimedia.org/wikipedia/commons/b/bd/HoherKasten_01.jpg",
+      alt: "Hoher Kasten seen from Äscher",
+      width: 4912,
+      height: 3264,
+      credit: "Albinfo · CC BY-SA 3.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:HoherKasten_01.jpg",
+    },
+    {
+      id: "img-hoher-kasten-from-ebenalp",
+      url: "https://upload.wikimedia.org/wikipedia/commons/d/df/Ebenalpbahn_und_Hoher_Kasten.jpg",
+      alt: "Hoher Kasten and its summit station seen from the Ebenalp area",
+      width: 4632,
+      height: 3088,
+      credit: "Chme82 · CC BY-SA 4.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Ebenalpbahn_und_Hoher_Kasten.jpg",
+    },
+  ],
   "spot-chapel-bridge": [
     {
       id: "img-chapel-bridge-commons",

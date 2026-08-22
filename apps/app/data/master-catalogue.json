@@ -752,20 +752,21 @@
   },
   {
     "index": 45,
-    "id": "spot-etang-de-la-gruere",
-    "slug": "etang-de-la-gruere",
-    "name": "Étang de la Gruère",
-    "canton": "Jura",
-    "region": "jura",
+    "id": "spot-hoher-kasten",
+    "slug": "hoher-kasten",
+    "name": "Hoher Kasten",
+    "canton": "Appenzell Innerrhoden / St. Gallen",
+    "region": "appenzell",
     "coordinates": {
-      "lat": 47.2381,
-      "lng": 7.048
+      "lat": 47.283695220947266,
+      "lng": 9.485029220581055
     },
-    "coordinateType": "lake_center",
-    "category": "hidden-lake",
-    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=%C3%89tang+de+la+Gru%C3%A8re&type=locations&origins=gazetteer&limit=20",
+    "coordinateType": "summit",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Hoher+Kasten&type=locations&origins=gazetteer&limit=20",
     "federalMatchStatus": "candidate_match",
-    "federalMatchLabel": "Lake Etang de la Gruère (JU) - Saignelégier"
+    "federalMatchLabel": "Main summit Hoher Kasten (SG) - Altstätten",
+    "checkedAt": "2026-08-22"
   },
   {
     "index": 46,
