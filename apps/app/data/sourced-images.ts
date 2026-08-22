@@ -2,6 +2,7 @@ import type { LocationImage } from "@/types";
 import generatedImages from "./sourced-images.generated.json";
 import reviewedImages from "./reviewed-images.generated.json";
 import galleryImages from "./gallery-images.generated.json";
+import { PERSONAL_LOCATION_IMAGES } from "./personal-location-images";
 
 /**
  * Photographs are selected only when a Commons description identifies the exact
@@ -310,6 +311,7 @@ const EDITORIALLY_REVIEWED_IMAGES: Record<string, LocationImage[]> = {
  * Hand-reviewed entries win when both datasets contain the same location.
  */
 const IMAGE_SETS = [
+  PERSONAL_LOCATION_IMAGES,
   EDITORIALLY_REVIEWED_IMAGES,
   generatedImages as Record<string, LocationImage[]>,
   reviewedImages as Record<string, LocationImage[]>,
