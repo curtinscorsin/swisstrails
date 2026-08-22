@@ -25,7 +25,7 @@ export const CATEGORIES: Category[] = [
     name: "Waterfalls",
     description: "Named waterfalls with access questions and current-status checks kept visible.",
     icon: "🌊",
-    count: 9,
+    count: 8,
     gradient: "from-cyan-900/40 to-trail-900/40",
   },
   {
@@ -33,7 +33,7 @@ export const CATEGORIES: Category[] = [
     name: "Gorges",
     description: "Gorges and dramatic river-cut landscapes with clearly scoped map points.",
     icon: "🪨",
-    count: 8,
+    count: 7,
     gradient: "from-stone-800/50 to-trail-900/40",
   },
   {
@@ -41,7 +41,7 @@ export const CATEGORIES: Category[] = [
     name: "Outdoor Curiosities",
     description: "Distinctive outdoor places that complement the hiking and nature collection.",
     icon: "📸",
-    count: 9,
+    count: 11,
     gradient: "from-rose-950/50 to-trail-900/40",
   },
   {

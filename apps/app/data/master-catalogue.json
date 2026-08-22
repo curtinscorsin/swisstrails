@@ -667,20 +667,21 @@
   },
   {
     "index": 40,
-    "id": "spot-engstligen-falls",
-    "slug": "engstligen-falls",
-    "name": "Engstligen Falls",
-    "canton": "Bern",
-    "region": "bern",
+    "id": "spot-kropfenstein-castle",
+    "slug": "kropfenstein-castle",
+    "name": "Kropfenstein Castle",
+    "canton": "Graubünden",
+    "region": "graubunden",
     "coordinates": {
-      "lat": 46.4503,
-      "lng": 7.57
+      "lat": 46.77012634277344,
+      "lng": 9.102193832397461
     },
     "coordinateType": "attraction",
-    "category": "waterfall",
-    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Engstligen+Falls&type=locations&origins=gazetteer&limit=20",
-    "federalMatchStatus": "manual_review",
-    "federalMatchLabel": "Populated Place Engstligenalp (BE) - Adelboden"
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ruina+Grotta&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Ruin Ruina Grotta (Kropfenstein) (GR) - Breil/Brigels",
+    "checkedAt": "2026-08-22"
   },
   {
     "index": 41,
@@ -787,20 +788,21 @@
   },
   {
     "index": 47,
-    "id": "spot-chasseral",
-    "slug": "chasseral",
-    "name": "Chasseral",
+    "id": "spot-grindelwald",
+    "slug": "grindelwald",
+    "name": "Grindelwald",
     "canton": "Bern",
     "region": "bern",
     "coordinates": {
-      "lat": 47.1325,
-      "lng": 7.0592
+      "lat": 46.624755859375,
+      "lng": 8.028841018676758
     },
-    "coordinateType": "summit",
-    "category": "viewpoint",
-    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chasseral&type=locations&origins=gazetteer&limit=20",
+    "coordinateType": "village",
+    "category": "photo-spot",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Grindelwald&type=locations&origins=gazetteer&limit=20",
     "federalMatchStatus": "candidate_match",
-    "federalMatchLabel": "Main peak Chasseral (BE) - Nods"
+    "federalMatchLabel": "Populated Place Grindelwald (BE) - Grindelwald",
+    "checkedAt": "2026-08-22"
   },
   {
     "index": 48,
@@ -1384,20 +1386,21 @@
   },
   {
     "index": 82,
-    "id": "spot-viamala-gorge",
-    "slug": "viamala-gorge",
-    "name": "Viamala Gorge",
-    "canton": "Graubünden",
-    "region": "graubunden",
+    "id": "spot-chapf-viewpoint",
+    "slug": "chapf-viewpoint",
+    "name": "Chapf Viewpoint",
+    "canton": "St. Gallen",
+    "region": "st-gallen",
     "coordinates": {
-      "lat": 46.6608,
-      "lng": 9.4482
+      "lat": 47.1423225402832,
+      "lng": 9.161337852478027
     },
-    "coordinateType": "attraction",
-    "category": "gorge",
-    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Viamala+Gorge&type=locations&origins=gazetteer&limit=20",
-    "federalMatchStatus": "manual_review",
-    "federalMatchLabel": "Ditch Viamala (GR) - Sils im Domleschg,Thusis,Rongellen,Zillis-Reischen,Muntogna da Schons"
+    "coordinateType": "viewpoint",
+    "category": "viewpoint",
+    "federalSearchUrl": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chapf+Amden&type=locations&origins=gazetteer&limit=20",
+    "federalMatchStatus": "candidate_match",
+    "federalMatchLabel": "Viewpoint Chapf (SG) - Amden",
+    "checkedAt": "2026-08-22"
   },
   {
     "index": 83,
