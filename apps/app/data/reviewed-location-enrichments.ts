@@ -198,7 +198,7 @@ export const REVIEWED_LOCATION_ENRICHMENTS: Record<string, ReviewedLocationEnric
   },
   "spot-verzasca-valley": {
     tagline: "A broad Ticino valley with a long official river path",
-    description: "Verzasca Valley contains villages, bridges, bathing areas and multiple trail stages. The cited regional map identifies the long Sentierone valley route.",
+    description: "The Valley of Verzasca contains villages, bridges, bathing areas and multiple trail stages. The cited regional map identifies the long Sentierone valley route.",
     longDescription: "The valley point is not a trailhead. The official regional material describes a 24.3 km river path to Sonogno, but the exact selected start and ascent were not unambiguously stated in the reviewed source, so they remain unresolved.",
     difficulty: "not-rated", bestSeason: ["spring", "summer", "autumn"],
     highlights: ["Verzasca river", "Stone villages and bridges", "Long valley path"],

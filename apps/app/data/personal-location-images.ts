@@ -39,6 +39,18 @@ function originals(
  * available in the gallery.
  */
 export const PERSONAL_LOCATION_IMAGES: Record<string, LocationImage[]> = {
+  "spot-pilatus": originals("pilatus", "Sunset views from Pilatus above Lake Lucerne", [
+    ["corsin-pilatus-img_1810.jpg", 1350, 1800],
+    ["corsin-pilatus-img_1800.jpg", 1500, 2000],
+    ["corsin-pilatus-img_1814.jpg", 1350, 1800],
+    ["corsin-pilatus-img_1826.jpg", 1350, 1800],
+    ["corsin-pilatus-img_1843.jpg", 828, 1792],
+  ]),
+  "spot-aletsch-glacier": originals(
+    "aletsch-glacier",
+    "The Great Aletsch Glacier seen from the high-alpine trail",
+    [["corsin-aletsch-glacier-img_6662.jpg", 1800, 1350]]
+  ),
   "spot-schafler": [
     original(
       "img-schafler-corsin-cover",
