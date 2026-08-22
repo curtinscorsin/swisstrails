@@ -4,8 +4,8 @@
   "description": "Source-backed Swiss hikes with transparent route details",
   "start_url": "/explore",
   "display": "standalone",
-  "background_color": "#0B0D0A",
-  "theme_color": "#0B0D0A",
+  "background_color": "#050B14",
+  "theme_color": "#050B14",
   "icons": [
     {
       "src": "/icon-192x192.png",

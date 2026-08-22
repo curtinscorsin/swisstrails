@@ -7,51 +7,51 @@
   --font-heading: "Alcyone", Georgia, "Times New Roman", serif;
   --font-body: var(--font-dm-sans), -apple-system, "Helvetica Neue", sans-serif;
 
-  /* ── TRAIL (fir, bark and deep shadow) ── */
-  --color-trail-950: #0B0D0A;
-  --color-trail-900: #11140F;
-  --color-trail-800: #181C16;
-  --color-trail-700: #22281F;
-  --color-trail-600: #30382B;
+  /* ── TRAIL (blue hour and deep alpine shadow) ── */
+  --color-trail-950: #050B14;
+  --color-trail-900: #081321;
+  --color-trail-800: #0D1C2D;
+  --color-trail-700: #14283D;
+  --color-trail-600: #213A52;
 
-  /* ── ALPINE (moss, lichen and high meadow) ── */
-  --color-alpine-950: #121A12;
-  --color-alpine-900: #1E2A1D;
-  --color-alpine-800: #2F412E;
-  --color-alpine-700: #435A3F;
-  --color-alpine-600: #5C7555;
-  --color-alpine-500: #78916E;
-  --color-alpine-400: #98AA8B;
-  --color-alpine-300: #B7C4AA;
-  --color-alpine-200: #D2DACB;
-  --color-alpine-100: #E5E9E0;
-  --color-alpine-50:  #F2F4EF;
+  /* ── ALPINE (one restrained blue family across both websites) ── */
+  --color-alpine-950: #08182A;
+  --color-alpine-900: #0D2741;
+  --color-alpine-800: #153A5D;
+  --color-alpine-700: #245276;
+  --color-alpine-600: #3C6D91;
+  --color-alpine-500: #5B89AA;
+  --color-alpine-400: #7FA7C2;
+  --color-alpine-300: #A5C3D6;
+  --color-alpine-200: #C7DBE7;
+  --color-alpine-100: #E0EBF2;
+  --color-alpine-50:  #F1F6F9;
 
-  /* ── SUNSTONE (warm CTA and summit-light accent) ── */
-  --color-gold-950: #21170D;
-  --color-gold-900: #3A2817;
-  --color-gold-800: #5B3E22;
-  --color-gold-700: #7C5631;
-  --color-gold-600: #A27545;
-  --color-gold-500: #C4935B;
-  --color-gold-400: #D7AA70;
-  --color-gold-300: #E5C08D;
-  --color-gold-200: #EFD4AF;
-  --color-gold-100: #F6E6D0;
-  --color-gold-50:  #FCF6EC;
+  /* ── SUMMIT LIGHT (cool white-blue accent, retained as a legacy token name) ── */
+  --color-gold-950: #081625;
+  --color-gold-900: #102A43;
+  --color-gold-800: #1B4466;
+  --color-gold-700: #2E638B;
+  --color-gold-600: #4D83A8;
+  --color-gold-500: #73A2C0;
+  --color-gold-400: #9ABDD2;
+  --color-gold-300: #BCD2DF;
+  --color-gold-200: #D5E3EB;
+  --color-gold-100: #E9F0F4;
+  --color-gold-50:  #F7FAFC;
 
-  /* ── STONE (warm mineral neutrals) ── */
-  --color-stone-950: #0D0D0B;
-  --color-stone-900: #1B1B17;
-  --color-stone-800: #302F29;
-  --color-stone-700: #4A4840;
-  --color-stone-600: #6B685F;
-  --color-stone-500: #8E8A80;
-  --color-stone-400: #B0ACA2;
-  --color-stone-300: #CCC7BD;
-  --color-stone-200: #DFDAD0;
-  --color-stone-100: #EEE9DF;
-  --color-stone-50:  #F7F3EA;
+  /* ── STONE (cool mineral neutrals) ── */
+  --color-stone-950: #07101B;
+  --color-stone-900: #111C28;
+  --color-stone-800: #253342;
+  --color-stone-700: #3D4C5C;
+  --color-stone-600: #607080;
+  --color-stone-500: #82909D;
+  --color-stone-400: #A6B1BA;
+  --color-stone-300: #C4CCD2;
+  --color-stone-200: #D9DFE4;
+  --color-stone-100: #E9EDF0;
+  --color-stone-50:  #F5F7F8;
 
   /* ── SEMANTIC ALIASES ── */
   --color-bg:             var(--color-trail-950);
@@ -59,20 +59,20 @@
   --color-bg-overlay:     var(--color-trail-800);
   --color-bg-surface:     var(--color-trail-700);
 
-  --color-border:         rgba(241,236,224,0.10);
-  --color-border-subtle:  rgba(241,236,224,0.055);
-  --color-border-strong:  rgba(241,236,224,0.20);
+  --color-border:         rgba(205,224,238,0.12);
+  --color-border-subtle:  rgba(205,224,238,0.07);
+  --color-border-strong:  rgba(205,224,238,0.23);
 
   /* ── SURFACE ELEVATION (white overlays on the dark base) ──
      A 3-step ramp replacing ~150 ad-hoc bg-white/[0.0x] fills. Generates
      bg-surface-1/2/3, border-surface-*, etc. surface-hover is the +1 step
      a row/chip moves to on hover. */
-  --color-surface-1:      rgba(247,243,234,0.035);
-  --color-surface-2:      rgba(247,243,234,0.065);
-  --color-surface-3:      rgba(247,243,234,0.105);
-  --color-surface-hover:  rgba(247,243,234,0.085);
+  --color-surface-1:      rgba(185,213,232,0.04);
+  --color-surface-2:      rgba(185,213,232,0.07);
+  --color-surface-3:      rgba(185,213,232,0.11);
+  --color-surface-hover:  rgba(185,213,232,0.095);
 
-  --color-fg:             #F3EFE5;
+  --color-fg:             #F3F6F8;
   --color-fg-muted:       var(--color-stone-400);
   --color-fg-subtle:      var(--color-stone-600);
   --color-fg-faint:       var(--color-stone-700);
@@ -80,19 +80,19 @@
   --color-accent:         var(--color-alpine-500);
   --color-accent-dim:     var(--color-alpine-700);
   --color-accent-deep:    var(--color-alpine-900);
-  --color-accent-glow:    rgba(120, 145, 110, 0.28);
+  --color-accent-glow:    rgba(91, 137, 170, 0.30);
 
   --color-gold:           var(--color-gold-400);
   --color-gold-dim:       var(--color-gold-600);
-  --color-gold-glow:      rgba(215, 170, 112, 0.28);
+  --color-gold-glow:      rgba(154, 189, 210, 0.24);
 
   /* ── SHADOWS ── */
   --shadow-sm:   0 2px 8px rgba(0,0,0,0.28);
   --shadow-md:   0 12px 32px rgba(0,0,0,0.34);
   --shadow-lg:   0 24px 56px rgba(0,0,0,0.42);
   --shadow-xl:   0 36px 96px rgba(0,0,0,0.55);
-  --shadow-glow-alpine: 0 16px 48px rgba(63, 82, 57, 0.22);
-  --shadow-glow-gold:   0 16px 48px rgba(164, 117, 69, 0.22);
+  --shadow-glow-alpine: 0 18px 54px rgba(36, 82, 118, 0.28);
+  --shadow-glow-gold:   0 16px 48px rgba(73, 123, 157, 0.20);
 
   /* ── RADIUS ── */
   --radius-sm:   4px;
@@ -302,14 +302,14 @@
   }
 
   .card-glass {
-    background: rgba(17, 20, 15, 0.72);
+    background: rgba(8, 19, 33, 0.74);
     backdrop-filter: blur(var(--blur));
     -webkit-backdrop-filter: blur(var(--blur));
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
   }
   .card-glass-strong {
-    background: rgba(17, 20, 15, 0.91);
+    background: rgba(8, 19, 33, 0.92);
     backdrop-filter: blur(calc(var(--blur) * 1.6));
     -webkit-backdrop-filter: blur(calc(var(--blur) * 1.6));
     border: 1px solid var(--color-border-strong);
@@ -371,7 +371,7 @@
     background-clip: text;
   }
   .text-gradient-hero {
-    background: linear-gradient(155deg, #FFFFFF 0%, #F1EAD9 48%, var(--color-gold-200) 100%);
+    background: linear-gradient(155deg, #FFFFFF 0%, #EAF2F7 52%, var(--color-alpine-200) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -379,9 +379,9 @@
 
   .hero-gradient {
     background:
-      radial-gradient(ellipse at 74% 16%, rgba(96, 118, 85, 0.22) 0%, transparent 43%),
-      radial-gradient(ellipse at 18% 72%, rgba(133, 105, 61, 0.12) 0%, transparent 42%),
-      linear-gradient(155deg, #11160f 0%, #0b0e0a 50%, #070907 100%);
+      radial-gradient(ellipse at 74% 16%, rgba(50, 101, 143, 0.25) 0%, transparent 43%),
+      radial-gradient(ellipse at 18% 72%, rgba(72, 123, 158, 0.10) 0%, transparent 42%),
+      linear-gradient(155deg, #0D1C2D 0%, #081321 50%, #050B14 100%);
   }
 
   .marketing-sunset-hero {

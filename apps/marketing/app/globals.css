@@ -13,9 +13,8 @@
 
 @import "../../../packages/ui/src/globals.css";
 
-/* Marketing-only colour direction.
-   The product app keeps the shared forest palette; the public site uses a
-   colder alpine-night system inspired by blue hour in the Swiss mountains. */
+/* Both websites share the same alpine-night tokens. Marketing adds only a
+   restrained atmospheric background so the brand still feels photographic. */
 .marketing-theme {
   --color-trail-950: #050b14;
   --color-trail-900: #081321;

@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertTriangle, BadgeCheck, Clock, Gauge, MapPin, Ruler, Search, SlidersHorizontal, X } from "lucide-react";
+import { AlertTriangle, BadgeCheck, Clock, Gauge, Ruler, Search, SlidersHorizontal, X } from "lucide-react";
 import { useMapStore } from "@/store/map-store";
 import { useGeoStore } from "@/store/geo-store";
 import { CURATED_LOCATIONS } from "@/data/curated-locations";
@@ -86,11 +86,11 @@ export default function ExplorePage() {
       <div className="z-20 flex-shrink-0 border-b border-white/[0.07] bg-trail-950/92 px-3 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur-2xl sm:px-5 lg:px-7 lg:pb-4 lg:pt-5">
         <div className="mb-4 hidden items-end justify-between lg:flex">
           <div>
-            <p className="t-eyebrow mb-2">Curated Switzerland</p>
-            <h1 className="font-heading text-4xl leading-none text-fg">Places worth knowing.</h1>
+            <p className="t-eyebrow mb-2">Corsin’s Swiss collection</p>
+            <h1 className="font-heading text-4xl leading-none text-fg">Find a quieter way out.</h1>
           </div>
           <p className="max-w-sm text-right text-sm leading-relaxed text-fg-muted">
-            A focused outdoor collection with source links and visible uncertainty instead of invented details.
+            One hundred places, selected for real days outside—not for a longer list.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -176,37 +176,29 @@ export default function ExplorePage() {
       <div ref={scrollRef} className="flex-1 overflow-y-auto overscroll-contain">
         {!searchQuery && activeFilterCount === 0 && (
           <section className="px-3 pt-4 sm:px-5 lg:px-7 lg:pt-6" aria-labelledby="editorial-standard">
-            <div className="overflow-hidden rounded-[1.4rem] border border-white/[0.08] bg-gradient-to-br from-alpine-950 via-trail-900 to-trail-950 p-5 sm:p-6 lg:flex lg:items-end lg:justify-between lg:gap-8 lg:p-8">
-              <div className="max-w-2xl">
-                <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-alpine-300">
+            <div className="overflow-hidden rounded-[1.25rem] border border-white/[0.09] bg-trail-900 p-5 shadow-md sm:p-6 lg:flex lg:items-center lg:justify-between lg:gap-8 lg:p-7">
+              <div className="max-w-xl">
+                <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-alpine-200">
                   <BadgeCheck className="h-4 w-4" />
-                  A note from Corsin
+                  Selected by Corsin
                 </p>
-                <h2 id="editorial-standard" className="font-heading text-3xl leading-[1.05] text-fg sm:text-4xl">
-                  Fewer places. Better checked.
+                <h2 id="editorial-standard" className="font-heading text-3xl leading-[1.05] text-fg sm:text-[2.15rem]">
+                  Places I would send a friend.
                 </h2>
-                <p className="mt-3 max-w-xl text-sm leading-relaxed text-fg-muted sm:text-base">
-                  I keep this guide intentionally focused. Every page shows where its information came from, and I leave details unresolved when I cannot support them properly. As I revisit locations, I’ll add more of my own photography and field notes.
+                <p className="mt-3 max-w-lg text-sm leading-relaxed text-fg-muted sm:text-[15px]">
+                  I built Swiss Trails to make choosing a day outside simpler. Open any place for practical notes, photographs and the sources I used.
                 </p>
               </div>
-              <div className="mt-5 grid grid-cols-2 gap-2 lg:mt-0 lg:w-80">
-                <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
-                  <p className="font-heading text-3xl text-fg">{CATALOGUE_METRICS.publishedLocations}</p>
-                  <p className="mt-1 text-xs leading-snug text-fg-muted">published places</p>
-                </div>
-                <div className="rounded-2xl border border-white/[0.08] bg-black/15 p-4">
-                  <p className="font-heading text-3xl text-fg">{CATALOGUE_METRICS.sourcedContextLocations}</p>
-                  <p className="mt-1 text-xs leading-snug text-fg-muted">with sourced route or visit context</p>
-                </div>
-                <p className="col-span-2 px-1 pt-1 text-[11px] leading-relaxed text-stone-500">
-                  Built and edited by Corsin Curtins · {CATALOGUE_METRICS.verifiedAccessPoints} separate access points verified · {CATALOGUE_METRICS.creditedPhotographs} credited photographs · updated {new Date(`${CATALOGUE_METRICS.lastEditorialCheck}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
-                </p>
+              <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/[0.08] pt-4 lg:mt-0 lg:w-auto lg:border-l lg:border-t-0 lg:pl-7 lg:pt-0">
+                <p className="text-sm text-fg"><span className="font-semibold">{CATALOGUE_METRICS.publishedLocations}</span> places</p>
+                <p className="text-sm text-fg"><span className="font-semibold">{CATALOGUE_METRICS.creditedPhotographs}</span> credited photos</p>
+                <p className="w-full text-[11px] text-stone-500">Sources and last-check dates are shown on every page.</p>
               </div>
             </div>
             <div className="flex items-end justify-between pb-1 pt-6">
               <div>
-                <p className="t-eyebrow">Published collection</p>
-                <p className="mt-1 text-sm text-fg-muted">Open a place to see the route notes, photographs, sources and anything that still needs checking.</p>
+                <p className="t-eyebrow">Explore Switzerland</p>
+                <p className="mt-1 text-sm text-fg-muted">Tap a place for the route, access, photographs and practical notes.</p>
               </div>
               <span className="hidden text-xs text-stone-500 sm:block">{CURATED_LOCATIONS.length} places</span>
             </div>
@@ -355,15 +347,9 @@ function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardPr
         </div>
       )}
 
-      <span className="absolute right-2.5 top-2.5 z-[3] inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/45 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.08em] text-white/75 backdrop-blur-md">
-        <MapPin className="h-3 w-3" />
-        <span className="sm:hidden">Pin</span>
-        <span className="hidden sm:inline">Destination pin</span>
-      </span>
-
       <div className="absolute bottom-0 left-0 right-0 z-[3] p-3 text-left sm:p-4">
         <p className="line-clamp-2 text-sm font-medium leading-tight text-white sm:text-base">{location.name}</p>
-        <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.12em] text-gold-200/85">{regionConfig[location.region].label}</p>
+        <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.12em] text-alpine-100/90">{regionConfig[location.region].label}</p>
         <div className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[10px] font-medium text-white/75 sm:text-[11px]">
           <span className="inline-flex items-center gap-1">
             <Gauge className="h-3 w-3" />
