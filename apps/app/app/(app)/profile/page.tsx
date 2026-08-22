@@ -149,14 +149,23 @@ export default function ProfilePage() {
     haptics.tap();
     setIsSigningOut(true);
     setSignOutError(null);
-    const favoritesSaved = await flushPendingFavoriteWrites();
-    if (!favoritesSaved) {
-      setSignOutError("Your favourites could not be saved. Check your connection and try signing out again.");
+
+    // Give queued favourite changes a brief chance to reach the account, but
+    // never trap someone in the app when the network or database is offline.
+    // Failed changes remain in local storage and are retried on the next login.
+    const favoritesSaved = await Promise.race([
+      flushPendingFavoriteWrites(),
+      new Promise<false>((resolve) => window.setTimeout(() => resolve(false), 3_000)),
+    ]);
+
+    const { error } = await createClient().auth.signOut({ scope: "local" });
+    if (error) {
+      setSignOutError("We couldn't sign you out. Please try again.");
       setIsSigningOut(false);
       return;
     }
-    await createClient().auth.signOut();
-    clearFavorites();
+
+    if (favoritesSaved) clearFavorites();
     router.replace("/login");
     router.refresh();
   };
@@ -355,7 +364,7 @@ export default function ProfilePage() {
           className="w-full text-fg-muted hover:text-fg"
         >
           <LogOut className="w-4 h-4" />
-          {isSigningOut ? "Saving favourites…" : "Sign out"}
+          {isSigningOut ? "Signing out…" : "Sign out"}
         </Button>
       </motion.div>
     </div>
