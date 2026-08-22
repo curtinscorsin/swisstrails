@@ -168,4 +168,24 @@ export const PERSONAL_LOCATION_IMAGES: Record<string, LocationImage[]> = {
     ["corsin-speer-img_8879.jpg", 1500, 2000],
     ["corsin-speer-img_8887.jpg", 1500, 2000],
   ]),
+  "spot-monte-san-salvatore": originals("monte-san-salvatore", "Views over Lake Lugano from Monte San Salvatore", [
+    ["corsin-monte-san-salvatore-img_7225.jpg", 1500, 2000],
+    ["corsin-monte-san-salvatore-img_7301.jpg", 1500, 2000],
+    ["corsin-monte-san-salvatore-img_7316.jpg", 1500, 2000],
+    ["corsin-monte-san-salvatore-img_7275.jpg", 1500, 2000],
+    ["corsin-monte-san-salvatore-img_7247.jpg", 1500, 2000],
+    ["corsin-monte-san-salvatore-img_7307.jpg", 1500, 2000],
+    ["corsin-monte-san-salvatore-img_7183.jpg", 1500, 2000],
+    ["corsin-monte-san-salvatore-img_7182.jpg", 1500, 2000],
+  ]),
+  "spot-hoher-kasten": originals("hoher-kasten", "Sunrise and mountain views from Hoher Kasten", [
+    ["corsin-hoher-kasten-img_3505.jpg", 1500, 2000],
+    ["corsin-hoher-kasten-img_1844.jpg", 1125, 2000],
+    ["corsin-hoher-kasten-img_1802.jpg", 1500, 2000],
+    ["corsin-hoher-kasten-img_1793.jpg", 2000, 1500],
+  ]),
+  "spot-saxer-lucke": originals("saxer-lucke", "The Saxer Lücke gap and Alpstein trail", [
+    ["corsin-saxer-lucke-img_1871.jpg", 1125, 2000],
+    ["corsin-saxer-lucke-img_3545.jpg", 1500, 2000],
+  ]),
 };
