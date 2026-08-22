@@ -175,10 +175,10 @@ export const PERSONAL_LOCATION_IMAGES: Record<string, LocationImage[]> = {
     ["corsin-caumasee-img_7697.jpg", 1500, 2000],
   ]),
   "spot-speer": originals("speer", "Hiking the grassy Speer ridge", [
-    ["corsin-speer-img_8868.jpg", 1500, 2000],
+    ["corsin-speer-img_8887.jpg", 1500, 2000],
     ["corsin-speer-img_8858.jpg", 1125, 2000],
     ["corsin-speer-img_8879.jpg", 1500, 2000],
-    ["corsin-speer-img_8887.jpg", 1500, 2000],
+    ["corsin-speer-img_8868.jpg", 1500, 2000],
   ]),
   "spot-monte-san-salvatore": originals("monte-san-salvatore", "Views over Lake Lugano from Monte San Salvatore", [
     ["corsin-monte-san-salvatore-img_7225.jpg", 1500, 2000],
