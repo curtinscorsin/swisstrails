@@ -18,9 +18,7 @@ import { haptics } from "@/lib/haptics";
 import type { Location } from "@/types";
 import { CATALOGUE_METRICS } from "@swiss-trails/types";
 
-const ASPECT_RATIOS = ["3/4", "4/5", "2/3", "4/5", "3/4", "1/1", "4/5", "3/5"];
-
-// Infinite-scroll page size for the masonry — keeps the DOM light and avoids
+// Infinite-scroll page size for the gallery — keeps the DOM light and avoids
 // mounting every card (and fetching its images) up front, which would
 // fetch destination photos the user may never scroll to.
 const MASONRY_PAGE = 24;
@@ -84,13 +82,13 @@ export default function ExplorePage() {
   return (
     <div className="relative flex h-full w-full flex-col">
       <div className="z-20 flex-shrink-0 border-b border-white/[0.07] bg-trail-950/92 px-3 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur-2xl sm:px-5 lg:px-7 lg:pb-4 lg:pt-5">
-        <div className="mb-4 hidden items-end justify-between lg:flex">
+        <div className="mb-5 hidden items-end justify-between lg:flex">
           <div>
-            <p className="t-eyebrow mb-2">Corsin’s Swiss collection</p>
-            <h1 className="font-heading text-4xl leading-none text-fg">Find a quieter way out.</h1>
+            <p className="t-eyebrow mb-2 text-alpine-200">Explore Switzerland</p>
+            <h1 className="font-heading text-[2.65rem] leading-none text-white">Places worth the walk.</h1>
           </div>
-          <p className="max-w-sm text-right text-sm leading-relaxed text-fg-muted">
-            One hundred places, selected for real days outside—not for a longer list.
+          <p className="max-w-md text-right text-sm leading-relaxed text-white/60">
+            A personal collection of lakes, ridges and quiet viewpoints, with the practical details beside every photograph.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -175,32 +173,25 @@ export default function ExplorePage() {
       {/* Curated collection */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto overscroll-contain">
         {!searchQuery && activeFilterCount === 0 && (
-          <section className="px-3 pt-4 sm:px-5 lg:px-7 lg:pt-6" aria-labelledby="editorial-standard">
-            <div className="overflow-hidden rounded-[1.25rem] border border-white/[0.09] bg-trail-900 p-5 shadow-md sm:p-6 lg:flex lg:items-center lg:justify-between lg:gap-8 lg:p-7">
-              <div className="max-w-xl">
-                <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-alpine-200">
-                  <BadgeCheck className="h-4 w-4" />
-                  Selected by Corsin
-                </p>
-                <h2 id="editorial-standard" className="font-heading text-3xl leading-[1.05] text-fg sm:text-[2.15rem]">
-                  Places I would send a friend.
-                </h2>
-                <p className="mt-3 max-w-lg text-sm leading-relaxed text-fg-muted sm:text-[15px]">
-                  I built Swiss Trails to make choosing a day outside simpler. Open any place for practical notes, photographs and the sources I used.
-                </p>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/[0.08] pt-4 lg:mt-0 lg:w-auto lg:border-l lg:border-t-0 lg:pl-7 lg:pt-0">
-                <p className="text-sm text-fg"><span className="font-semibold">{CATALOGUE_METRICS.publishedLocations}</span> places</p>
-                <p className="text-sm text-fg"><span className="font-semibold">{CATALOGUE_METRICS.creditedPhotographs}</span> credited photos</p>
-                <p className="w-full text-[11px] text-stone-500">Sources and last-check dates are shown on every page.</p>
-              </div>
+          <section className="px-4 pt-8 sm:px-6 lg:px-8 lg:pt-10" aria-labelledby="editorial-standard">
+            <div className="max-w-2xl">
+              <p className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-alpine-200">
+                <BadgeCheck className="h-3.5 w-3.5" />
+                Selected by Corsin
+              </p>
+              <h2 id="editorial-standard" className="font-heading text-[2rem] leading-[1.05] text-white sm:text-[2.6rem]">
+                {CATALOGUE_METRICS.publishedLocations} places. Chosen one by one.
+              </h2>
+              <p className="mt-4 max-w-xl text-sm leading-6 text-white/60 sm:text-[15px]">
+                No endless database. Just places I find worth knowing, with honest access notes, original photography and sources you can open yourself.
+              </p>
             </div>
-            <div className="flex items-end justify-between pb-1 pt-6">
+            <div className="mt-8 flex items-end justify-between border-t border-white/[0.08] pb-1 pt-5">
               <div>
-                <p className="t-eyebrow">Explore Switzerland</p>
-                <p className="mt-1 text-sm text-fg-muted">Tap a place for the route, access, photographs and practical notes.</p>
+                <p className="text-sm font-medium text-white">The collection</p>
+                <p className="mt-1 text-xs leading-relaxed text-white/45 sm:text-sm">Open a place for access, route notes, photographs and sources.</p>
               </div>
-              <span className="hidden text-xs text-stone-500 sm:block">{CURATED_LOCATIONS.length} places</span>
+              <span className="hidden text-xs tabular-nums text-white/40 sm:block">{CURATED_LOCATIONS.length} places</span>
             </div>
           </section>
         )}
@@ -222,12 +213,11 @@ export default function ExplorePage() {
             </p>
           </div>
         ) : (
-            <div className="columns-2 px-3 pb-24 pt-3 [column-gap:10px] sm:px-5 sm:[column-gap:14px] lg:columns-3 lg:px-7 lg:pb-10 xl:columns-4">
+            <div className="grid grid-cols-2 gap-x-2.5 gap-y-5 px-3 pb-24 pt-4 sm:gap-x-4 sm:gap-y-7 sm:px-6 lg:grid-cols-3 lg:px-8 lg:pb-12 xl:grid-cols-4">
             {visibleLocations.map((loc, i) => (
-              <MasonryCard
+              <EditorialCard
                 key={loc.id}
                 location={loc}
-                aspectRatio={ASPECT_RATIOS[i % ASPECT_RATIOS.length]}
                 priority={i < 4}
                 onClick={() => setSelectedLocation(loc)}
               />
@@ -256,14 +246,13 @@ export default function ExplorePage() {
   );
 }
 
-interface MasonryCardProps {
+interface EditorialCardProps {
   location: Location;
-  aspectRatio: string;
   priority: boolean;
   onClick: () => void;
 }
 
-function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardProps) {
+function EditorialCard({ location, priority, onClick }: EditorialCardProps) {
   const routeType = location.verification?.routeType.replace(/^Reviewed:\s*/, "") ?? "";
   const isSourcedRoute = location.verification?.routeType.startsWith("Reviewed:") ?? false;
   const isDestinationOnly = location.verification?.routeType === "Destination reference only";
@@ -281,89 +270,63 @@ function MasonryCard({ location, aspectRatio, priority, onClick }: MasonryCardPr
 
   return (
     <motion.button
-      className="relative mb-2.5 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/[0.07] bg-surface-1 shadow-sm sm:mb-3.5"
-      style={{ aspectRatio }}
+      className="group block min-w-0 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-alpine-300 focus-visible:ring-offset-4 focus-visible:ring-offset-trail-950"
       onClick={onClick}
-      whileTap={{ scale: 0.97 }}
+      whileTap={{ scale: 0.985 }}
       aria-label={`Open ${location.name}. ${hasVerifiedStart ? "Access point verified." : isSourcedRoute ? (isVisitContext ? "Visit context sourced." : "Route context sourced.") : "Destination identity sourced; route logistics unverified."} Map marker is a destination pin.`}
     >
-      <ResolvedLocationPhoto
-        location={location}
-        className="relative z-[1] object-cover transition-transform duration-700 hover:scale-[1.025]"
-        sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 25vw"
-        priority={priority}
-      />
+      <div className="relative aspect-[4/5] overflow-hidden rounded-[0.7rem] bg-trail-900 sm:aspect-[3/4] sm:rounded-xl">
+        <ResolvedLocationPhoto
+          location={location}
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+          sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 25vw"
+          priority={priority}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06101f]/45 via-transparent to-black/5 transition-opacity group-hover:opacity-80" />
 
-      <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/85 via-black/5 to-transparent" />
-
-      {location.verification && (
-        <div className="absolute left-2.5 top-2.5 z-[3]">
+        {(isClosed || hasAdvisory || isDestinationOnly) && (
+          <div className="absolute left-2 top-2 sm:left-3 sm:top-3">
           <span
             className={cn(
               "inline-flex items-center gap-1 rounded-full border px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.08em] backdrop-blur-md",
               isClosed
                 ? "border-red-500/40 bg-red-950/80 text-red-100"
-                : hasAdvisory || isDestinationOnly
-                  ? "border-amber-500/35 bg-amber-950/75 text-amber-200"
-                  : "border-white/15 bg-black/45 text-white/85"
+                : "border-amber-300/25 bg-[#172338]/85 text-amber-100"
             )}
           >
-            {isClosed || hasAdvisory || isDestinationOnly ? (
-              <AlertTriangle className="h-3 w-3" />
-            ) : (
-              <BadgeCheck className="h-3 w-3" />
-            )}
-            <span className="sm:hidden">
-              {isClosed
-                ? "Closed"
-                : hasAdvisory
-                  ? "Advisory"
-                : isDestinationOnly
-                  ? "Unverified"
-                : hasVerifiedStart
-                  ? "Access"
-                  : isSourcedRoute
-                    ? isVisitContext
-                      ? "Visit"
-                      : "Route"
-                    : "Source"}
-            </span>
-            <span className="hidden sm:inline">
-              {isClosed
-                ? "Closed"
-                : hasAdvisory
-                  ? "Specific advisory"
-                : isDestinationOnly
-                  ? "Logistics unverified"
-                : hasVerifiedStart
-                  ? "Access verified"
-                  : isSourcedRoute
-                  ? isVisitContext
-                    ? "Visit sourced"
-                    : "Route sourced"
-                  : "Source linked"}
-            </span>
+            <AlertTriangle className="h-3 w-3" />
+            {isClosed ? "Closed" : hasAdvisory ? "Advisory" : "Access unverified"}
           </span>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
 
-      <div className="absolute bottom-0 left-0 right-0 z-[3] p-3 text-left sm:p-4">
-        <p className="line-clamp-2 text-sm font-medium leading-tight text-white sm:text-base">{location.name}</p>
-        <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.12em] text-alpine-100/90">{regionConfig[location.region].label}</p>
-        <div className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[10px] font-medium text-white/75 sm:text-[11px]">
+      <div className="px-0.5 pt-3 sm:pt-3.5">
+        <div className="flex min-w-0 items-start justify-between gap-2">
+          <div className="min-w-0">
+            <p className="truncate text-sm font-medium leading-tight text-white sm:text-[15px]">{location.name}</p>
+            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-alpine-200/80 sm:text-[11px]">
+              {regionConfig[location.region].label}
+            </p>
+          </div>
+          {!isClosed && !hasAdvisory && !isDestinationOnly && (
+            <BadgeCheck className="mt-0.5 h-3.5 w-3.5 flex-none text-white/35" aria-label="Source reviewed" />
+          )}
+        </div>
+        <div className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[10px] text-white/50 sm:text-[11px]">
           <span className="inline-flex items-center gap-1">
-            <Gauge className="h-3 w-3" />
+            <Gauge className="h-3 w-3 text-white/35" />
             {difficulty.label}
           </span>
           {routeDistance != null && (
             <span className="inline-flex items-center gap-1">
-              <Ruler className="h-3 w-3" />
+              <Ruler className="h-3 w-3 text-white/35" />
               {routeDistance} km
             </span>
           )}
           {routeDuration != null && (
             <span className="inline-flex items-center gap-1">
-              <Clock className="h-3 w-3" />
+              <Clock className="h-3 w-3 text-white/35" />
               {formatDuration(routeDuration)}
             </span>
           )}
